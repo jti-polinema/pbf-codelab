@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-02-21T14:08:54Z",
+  "id": "03-konsep-reactjs",
+  "duration": 70,
+  "title": "#03 | Konsep ReactJs",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang dasar-dasar dalam penggunaan ReactJS.",
+  "source": "1s4I3XIEOjtH1reIT0NvyiykqplFdeti_5O06dg5YjLg",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "konsep",
+    "pemrograman-berbasis-framework",
+    "reactjs",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "03-konsep-reactjs"
+}

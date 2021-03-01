@@ -502,13 +502,41 @@ ReactDOM.render(
 </ol>
 <aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum6,</code> lalu rename menjadi <code>index-select.js</code>. Screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
-<p>Bersambung ...</p>
+<p>Secara keseluruhan, cara kerja dari elemen <code>input text</code>, <code>textarea</code>, dan <code>select</code> hampir sama, yaitu menerima masukan dari atribut value yang bisa diterapkan menggunakan <strong>controlled component</strong>.</p>
+<h3 is-upgraded><strong>Membuat multiple select</strong></h3>
+<ol type="1" start="11">
+<li>Melanjutkan dari kode select sebelumnya terkait memilih buah. Sekarang kita akan membuat <code>multiple select</code>. Kembali ke file <code>src/index.js</code> pada project React Anda, lalu ubah pada bagian <code>constructor</code> seperti kode berikut:</li>
+</ol>
+<pre><code>this.state = { value: [&#39;semangka&#39;, &#39;mangga&#39;] };</code></pre>
+<ol type="1" start="12">
+<li>Kemudian pada bagian <code>handleChange</code> ubah menjadi kode berikut. Silakan pahami maksud kode berikut ini:</li>
+</ol>
+<pre><code>  handleChange = (e) =&gt; {
+    var options = e.target.options;
+    var value = [];
+    for (var i = 0, l = options.length; i &lt; l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    this.setState({ value: value });
+  }</code></pre>
+<ol type="1" start="13">
+<li>Lalu tambahkan atribut <code>multiple={true}</code> pada komponen <code>select</code> seperti kode berikut:</li>
+</ol>
+<pre><code>&lt;select multiple={true} value={this.state.value} onChange={this.handleChange}&gt;</code></pre>
+<ol type="1" start="14">
+<li>Save dan lihat hasilnya di browser. Tampilan secara default akan terpilih buah semangka dan mangga. Karena pada langkah 11 sudah kita set di <code>constructor</code>. Multiple select menggunakan data array untuk menyimpan pilihannya. Untuk memilih secara multiple, kita bisa gunakan tombol <strong>Shift </strong>atau <strong>Ctrl </strong>pada keyboard ditahan (<em>hold</em>) lalu klik pilihan buah yang ingin ditambahkan.</li>
+</ol>
+<p class="image-container"><img style="width: 336.00px" src="img/27756efc69a2a10f.png"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum6,</code> lalu rename menjadi <code>index-multiple-select.js</code>. Screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Selamat" duration="0">
-        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Beberapa konsep ReactJS yang lain akan dipelajari pada pertemuan berikutnya.</p>
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapat ilmu yang bermanfaat.</p>
 <h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
 <p>Silakan cek beberapa sumber belajar lainnya...</p>
 <ul>
@@ -519,10 +547,10 @@ ReactDOM.render(
 </ul>
 <h2 is-upgraded><strong>Referensi</strong></h2>
 <ul>
-<li><a href="https://reactjs.org/docs/introducing-jsx.html" target="_blank">Introducing JSX</a></li>
-<li><a href="https://reactjs.org/docs/rendering-elements.html" target="_blank">Rendering Elements</a></li>
-<li><a href="https://reactjs.org/docs/components-and-props.html" target="_blank">Components and Props</a></li>
-<li><a href="https://reactjs.org/docs/state-and-lifecycle.html" target="_blank">State and Lifecycle</a></li>
+<li><a href="https://reactjs.org/docs/handling-events.html" target="_blank">Handling Events</a></li>
+<li><a href="https://reactjs.org/docs/conditional-rendering.html" target="_blank">Conditional Rendering</a></li>
+<li><a href="https://reactjs.org/docs/lists-and-keys.html" target="_blank">Lists and Keys</a></li>
+<li><a href="https://reactjs.org/docs/forms.html" target="_blank">Forms</a></li>
 </ul>
 
 

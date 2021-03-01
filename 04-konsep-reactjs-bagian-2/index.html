@@ -1,0 +1,540 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#04 | Konsep ReactJs - Bagian 2</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="04-konsep-reactjs-bagian-2"
+                  title="#04 | Konsep ReactJs - Bagian 2"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-02-21</p>
+<h2 is-upgraded><strong>Konsep ReactJS - Bagian 2</strong></h2>
+<p>Codelab ini adalah lanjutan materi dari codelab sebelumnya tentang <a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a>. Pada codelab ini Anda akan melanjutkan untuk mempelajari cara menangani event, kondisional rendering, penggunaan list dan key, serta penggunaan forms.</p>
+<p>Materi praktikum ini dibagi menjadi dua pertemuan, yang sebelumnya berjudul Konsep ReactJS Bagian 1. Untuk codelab ini meliputi materi tentang JSX, rendering element, component, props, state dan lifecycle.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Pengenalan tentang JSX (JavaScript XML) (Codelab sebelumnya)</li>
+<li>Rendering elements (Codelab sebelumnya)</li>
+<li>Penggunaan component dan props (Codelab sebelumnya)</li>
+<li>State dan lifecycle (Codelab sebelumnya)</li>
+<li>Menangani events </li>
+<li>Conditional rendering</li>
+<li>Penggunaan Lists dan Keys</li>
+<li>Penggunaan Forms</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Menangani Events" duration="15">
+        <p>Menangani events dengan elements React hampir mirip caranya dengan menangani events pada elements DOM. Ada beberapa perbedaan sintaks, yaitu:</p>
+<ul>
+<li>Untuk events di React menggunakan penamaan camelCase.</li>
+<li>React menggunakan JSX untuk menangani event.</li>
+</ul>
+<p>Contoh dalam kode HTML:</p>
+<pre><code>&lt;button onclick=&#34;aktivasiAkun()&#34;&gt;
+  Aktivasi Akun
+&lt;/button&gt;</code></pre>
+<p>Jika ditulis dalam sintaks React seperti berikut:</p>
+<pre><code>&lt;button onclick={aktivasiAkun}&gt;
+  Aktivasi Akun
+&lt;/button&gt;</code></pre>
+<p>React tidak dapat menggunakan <code>return false</code> untuk mencegah dari default behavior pada suatu elemen HTML. Dalam React, Anda harus memanggil fungsi <code>preventDefault</code> secara eksplisit. Contohnya pada kode HTML, jika Anda ingin membuat link agar tidak membuka halaman baru, Anda dapat menulisnya seperti berikut ini:</p>
+<pre><code>&lt;a href=&#34;#&#34; onclick=&#34;console.log(&#39;Link sudah diklik.&#39;); return false&#34;&gt;
+  Klik Saya
+&lt;/a&gt;</code></pre>
+<p>Jika ditulis dalam kode React, maka Anda harus menulisnya seperti ini:</p>
+<pre><code>function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log(&#39;Link sudah diklik.&#39;);
+  }
+
+  return (
+    &lt;a href=&#34;#&#34; onClick={handleClick}&gt;
+      Klik Saya
+    &lt;/a&gt;
+  );
+}</code></pre>
+<p>Dari kode tersebut, variabel <code>e</code> adalah <em>synthetic event</em>. React mendefinisikan <em>synthetic events</em> sesuai spesifikasi dari <a href="https://www.w3.org/TR/DOM-Level-3-Events/" target="_blank">W3C</a>. Sehingga Anda tidak perlu khawatir terkait dengan kompabilitas antar browser. React events tidak sama cara kerjanya dengan native events. Silakan baca referensi <a href="https://reactjs.org/docs/events.html" target="_blank"><code>SyntheticEvent</code></a> untuk mempelajarinya lebih lanjut.</p>
+<p>Dalam kode React secara umum Anda tidak perlu memanggil fungsi <code>addEventListener</code> untuk menambahkan listeners pada sebuah elemen DOM setelah dibuat. Anda cukup menyediakan listener ketika elemen tersebut telah diinisialisasi untuk di-render.</p>
+<h2 is-upgraded><strong>Praktikum 1: Menangani events pada toggle button</strong></h2>
+<p>Ketika Anda mendefinisikan sebuah component menggunakan ES6 class, sebuah pola umum akan terbentuk untuk menangani event menjadi sebuah method dalam class itu. Sebagai contoh, Anda akan membuat komponen toggle button yang dapat diklik oleh user menjadi &#34;ON&#34; dan &#34;OFF&#34; dengan <strong>tiga cara berbeda</strong>. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<h3 is-upgraded><strong>Cara 1: Membuat toggle button dengan binding this</strong></h3>
+<ol type="1" start="1">
+<li>Buka project React di VS Code yang sebelumnya telah dibuat.</li>
+<li>Buka file di <code>src/index.js</code>. Copy kode berikut dan paste di <code>src/index.js</code> lalu sesuaikan NIM dan Nama Anda.</li>
+</ol>
+<pre><code>// Cara 1: membuat toggle button
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+
+    // binding ini dibutuhkan agar dapat bekerja ketika pemanggilan
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick () {
+    this.setState(state =&gt; ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render () {
+    return (
+      &lt;button onClick={this.handleClick}&gt;
+        {this.state.isToggleOn ? &#39;ON - NIM Anda&#39; : &#39;OFF - Nama Anda&#39;}
+      &lt;/button&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;Toggle /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="3">
+<li>Save file <code>src/index.js</code> tersebut, lalu <code>npm start</code> untuk melihat hasilnya di browser. Maka akan tampil tombol yang bisa diklik dengan berubah teks button-nya.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke folder laporan <code>src/04_konsep_reactjs_part2/praktikum1,</code> lalu rename menjadi <code>index-cara1.js</code> dan screenshot hasil di browser serta dibuat laporan, kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<p>Dari kode di atas, Anda harus berhati-hati ketika menggunakan <code>this</code> dalam pemanggilan JSX. Dalam JavaScript, method dalam class tidak <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind" target="_blank">bound</a> (terikat) secara default. Sehingga jika Anda lupa menggunakan <code>this.handleClick</code>, maka akan ada error <code>undefined</code>.</p>
+<h3 is-upgraded><strong>Cara 2: Membuat toggle button dengan class field dan arrow function</strong></h3>
+<p>Selanjutnya lakukan langkah-langkah berikut untuk <strong>cara kedua</strong>:</p>
+<ol type="1" start="1">
+<li>Dari kode sebelumnya di file <code>src/index.js</code>, silakan hapus pada baris kode ini:</li>
+</ol>
+<pre><code>    this.handleClick = this.handleClick.bind(this);</code></pre>
+<ol type="1" start="2">
+<li>Kemudian ganti cara penulisan method <code>handleClick</code> dengan kode berikut:</li>
+</ol>
+<pre><code>  handleClick = () =&gt; {
+    this.setState(state =&gt; ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }</code></pre>
+<ol type="1" start="3">
+<li>Save hasil modifikasi kode tersebut, lalu coba lihat hasilnya di browser. Seharusnya toggle button tetap berfungsi seperti sebelumnya. Hanya saja, berbeda cara membuatnya dalam kode program.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke folder laporan <code>src/04_konsep_reactjs_part2/praktikum1,</code> lalu rename menjadi <strong><code>index-cara2.js</code></strong> dan screenshot hasil di browser serta dibuat laporan, kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h3 is-upgraded><strong>Cara 3: Membuat toggle button dengan arrow function saat pemanggilan</strong></h3>
+<p>Dari kode cara kedua tersebut, secara default telah aktif dengan <a href="https://github.com/facebookincubator/create-react-app" target="_blank">Create React App</a>. Anda bisa melakukan cara ketiga, yaitu menggunakan <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow function</a> saat pemanggilan. Silakan lakukan langkah-langkah berikut untuk <strong>cara ketiga</strong>:</p>
+<ol type="1" start="1">
+<li>Pada file <code>src/index.js</code> dari cara kedua, silakan ganti penulisan method <code>handleClick()</code> dan <code>render()</code> dengan kode berikut:</li>
+</ol>
+<pre><code>  handleClick () {
+    this.setState(state =&gt; ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render () {
+    return (
+      &lt;button onClick={() =&gt; this.handleClick()}&gt;
+        {this.state.isToggleOn ? &#39;ON - NIM Anda&#39; : &#39;OFF - Nama Anda&#39;}
+      &lt;/button&gt;
+    );
+  }</code></pre>
+<ol type="1" start="2">
+<li>Save hasil modifikasi kode tersebut, lalu coba lihat hasilnya di browser. Seharusnya toggle button tetap berfungsi seperti sebelumnya. Hanya saja, berbeda cara membuatnya dalam kode program.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke folder laporan <code>src/04_konsep_reactjs_part2/praktikum1,</code> lalu rename menjadi <strong><code>index-cara3.js</code></strong> dan screenshot hasil di browser serta dibuat laporan, kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<p>Untuk mempelajari lebih lanjut terkait penanganan event, silakan dapat dibaca <a href="https://reactjs.org/docs/handling-events.html" target="_blank">di sini</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Rendering Secara Kondisional" duration="15">
+        <p>Di React, Anda dapat membuat components terpisah yang dienkapsulasi sesuai kebutuhan. Kemudian Anda dapat me-render hanya satu atau beberapa components yang diperlukan, tergantung isi nilai state dalam aplikasi.</p>
+<p>Rendering secara kondisional dalam React sama saja dengan kondisional di dalam JavaScript. Gunakan operator <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else" target="_blank">if</a> atau <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank">conditional operator</a> untuk membuat elements yang dapat merepresentasikan state saat ini, sehingga React akan secara otomatis memperbarui UI sesuai component dan element yang digunakan.</p>
+<h2 is-upgraded><strong>Praktikum 2: Rendering login secara kondisional</strong></h2>
+<ol type="1" start="1">
+<li>Buka file <code>src/index.js</code> pada project React Anda di VS code.</li>
+<li>Copy dan pastekan pada file <code>src/index.js</code> kode dua components berikut:</li>
+</ol>
+<pre><code>function SambutanUser (props) {
+  return &lt;h1&gt;Selamat Datang NIM - Nama!&lt;/h1&gt;;
+}
+
+function SambutanTamu (props) {
+  return &lt;h1&gt;Mohon melakukan sign up terlebih dahulu.&lt;/h1&gt;;
+}</code></pre>
+<ol type="1" start="3">
+<li>Kemudian dari dua component yang telah dibuat itu, yaitu <code>SambutanUser</code> dan <code>SambutanTamu</code>, akan ditampilkan ketika user telah login atau belum. Silakan tambahkan kode berikut:</li>
+</ol>
+<pre><code>function Sambutan (props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return &lt;SambutanUser /&gt;;
+  }
+  return &lt;SambutanTamu /&gt;;
+}
+
+ReactDOM.render(
+  // Silakan coba ganti nilai isLoggedIn={false}
+  &lt;Sambutan isLoggedIn={true} /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="4">
+<li>Silakan save lalu run <code>npm start</code> untuk melihat hasilnya di browser. Jika nilai <code>prop isLoggedIn</code> sama dengan <code>false</code>, maka komponen yang akan ditampilkan adalah <code>SambutanTamu</code>. Sebaliknya jika nilai <code>prop isLoggedIn</code> sama dengan <code>true</code>, maka komponen yang akan ditampilkan adalah <code>SambutanUser</code>. Buat dua screenshot untuk dua tampilan tersebut sebagai laporan praktikum.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum2,</code> lalu buat dua screenshot hasil dari modifikasi prop <code>isLoggedIn</code> serta dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h2 is-upgraded><strong>Praktikum 3: Menyimpan elements dengan variabel</strong></h2>
+<p>Anda dapat menggunakan variabel untuk menyimpan elements. Hal ini dapat membantu Anda ketika melakukan render secara kondisional pada bagian component yang diperlukan. Silakan lakukan langkah-langkah praktikum berikut ini:</p>
+<ol type="1" start="1">
+<li>Melanjutkan hasil kode dari praktikum 2, Anda tetap berada di file <code>src/index.js</code>.</li>
+<li>Tambahkan dua komponen button berikut:</li>
+</ol>
+<pre><code>function LoginButton(props) {
+  return (
+    &lt;button onClick={props.onClick}&gt;
+      Login
+    &lt;/button&gt;
+  );
+}
+
+function LogoutButton(props) {
+  return (
+    &lt;button onClick={props.onClick}&gt;
+      Logout
+    &lt;/button&gt;
+  );
+}</code></pre>
+<ol type="1" start="3">
+<li>Selanjutnya membuat <a href="https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class" target="_blank">stateful component</a> dengan nama <code>LoginControl</code>, yang akan menentukan me-render <code>LoginButton</code> atau <code>LogoutButton</code> sesuai nilai state saat itu. Komponen yang sebelumnya telah dibuat yaitu <code>Sambutan</code> juga akan ditampilkan. Tambahkan kode berikut pada file <code>src/index.js</code> :</li>
+</ol>
+<pre><code>class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLoggedIn: false };
+  }
+
+  handleLoginClick = () =&gt; {
+    this.setState({ isLoggedIn: true });
+  }
+
+  handleLogoutClick = () =&gt; {
+    this.setState({ isLoggedIn: false });
+  }
+
+  render () {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = &lt;LogoutButton onClick={this.handleLogoutClick} /&gt;;
+    } else {
+      button = &lt;LoginButton onClick={this.handleLoginClick} /&gt;;
+    }
+
+    return (
+      &lt;div&gt;
+        &lt;Sambutan isLoggedIn={isLoggedIn} /&gt;
+        {button}
+      &lt;/div&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;LoginControl /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="4">
+<li>Save lalu perhatikan hasilnya di browser. Seharusnya tampil teks dan tombol login. Ketika ditekan tombol login, akan berubah menjadi tombol logout dan teks berubah dengan menampilkan NIM dan Nama Anda.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum3,</code> lalu buat dua screenshot hasil dari menekan tombol login dan logout serta dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<p>Untuk mempelajari lebih lanjut tentang rendering kondisional dapat mengakses <a href="https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator" target="_blank">logical if secara inline dengan operator &amp;&amp;</a> dan <a href="https://reactjs.org/docs/conditional-rendering.html#inline-if-else-with-conditional-operator" target="_blank">inline if-else</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lists dan Keys" duration="20">
+        <h2 is-upgraded><strong>Lists</strong></h2>
+<p>Di React, mengubah array menjadi list elemen hampir sama caranya, yaitu menggunakan fungsi <code>map()</code> seperti di JavaScript. Untuk lebih memahaminya, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<h3 is-upgraded><strong>Praktikum 4: Komponen list dasar</strong></h3>
+<p>Biasanya Anda melakukan render list di dalam sebuah component. Berikut langkah-langkah praktikumnya:</p>
+<ol type="1" start="1">
+<li>Buka file <code>src/index.js</code> pada project React Anda.</li>
+<li>Hapus kode dari praktikum sebelumnya dan ganti dengan kode berikut ini:</li>
+</ol>
+<pre><code>function NumberList(props) {
+  const nim = props.nim;
+  const listItems = nim.map((number) =&gt;
+    &lt;li&gt;{number}&lt;/li&gt;
+  );
+  return (
+    &lt;ul&gt;{listItems}&lt;/ul&gt;
+  );
+}
+
+const nim = [1, 7, 2, 2, 2, 3]; // &lt;-- Ubah sesuai NIM Anda
+ReactDOM.render(
+  &lt;NumberList nim={nim} /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="3">
+<li>Ketika Anda menjalankan kode tersebut, Anda akan melihat warning di console browser bahwa setiap item list harus diberi key. </li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/63dccd6297d60711.png"></p>
+<aside class="special"><p><strong>Catatan:</strong> Sebuah &#34;key&#34; adalah atribut khusus berupa string yang harus ada ketika membuat elemen list. Nanti akan dibahas mengapa key itu penting.</p>
+</aside>
+<ol type="1" start="4">
+<li>Kita perbaiki warning tersebut dengan menambah key pada <code>const listItems</code> seperti pada kode berikut:</li>
+</ol>
+<pre><code>const listItems = nim.map((number) =&gt;
+    &lt;li key={number.toString()}&gt;
+      {number}
+    &lt;/li&gt;
+  );</code></pre>
+<ol type="1" start="5">
+<li>Selanjutnya save dan coba refresh browser. Seharusnya warning tidak muncul, jika masih muncul kemungkinan ada angka yang sama. Karena <strong>&#34;key&#34;</strong> harus unique, boleh dihapus angka yang sama agar warning tidak muncul.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum4,</code> lalu buat dua screenshot hasil dari warning langkah 3 dan langkah 5 yang sudah tidak ada warning. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h2 is-upgraded><strong>Keys</strong></h2>
+<p>Keys membantu React untuk mengidentifikasi item mana yang berubah, bertambah, atau telah dihapus. Keys harus diletakkan di elemen dalam array. Jika kasusnya ID tidak unique atau tidak stabil seperti langkah 5 dari praktikum 4, maka dapat menggunakan index dari data array tersebut seperti pada kode berikut:</p>
+<pre><code>const listItems = nim.map((number, index) =&gt;
+    &lt;li key={index.toString()}&gt;
+      {number}
+    &lt;/li&gt;
+  );</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Tidak direkomendasikan menggunakan index array sebagai keys jika urutan item akan berubah-ubah. Hal ini dapat berdampak buruk terhadap performa dan menyebabkan isu terhadap state pada component. Silakan dapat membaca artikel dari Robin Pokorny&#39;s terkait <a href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318" target="_blank">penjelasan dampak buruk menggunakan index sebagai key</a>.</p>
+<p>Aturan penulisan key harus di dalam fungsi <code>map()</code> yang menentukan isi data-data array yang akan di-render.</p>
+</aside>
+<h3 is-upgraded><strong>Praktikum 5: Membuat unique keys</strong></h3>
+<p>Keys digunakan bersama dengan data array yang harus unique. Tidak harus unique secara global atau di seluruh halaman. Kita dapat menggunakan key yang sama pada dua data array yang berbeda. Untuk memahaminya, silakan lakukan praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Buka file <code>src/index.js</code> pada project React Anda.</li>
+<li>Hapus kode dari praktikum sebelumnya dan ganti dengan kode berikut ini. Silakan sesuaikan NIM dan Nama Anda.</li>
+</ol>
+<pre><code>function Blog (props) {
+  const sidebar = (
+    &lt;ul&gt;
+      {props.posts.map((post) =&gt;
+        &lt;li key={post.id}&gt;
+          {post.title}
+        &lt;/li&gt;
+      )}
+    &lt;/ul&gt;
+  );
+  const content = props.posts.map((post) =&gt;
+    &lt;div key={post.id}&gt;
+      &lt;h3&gt;{post.title}&lt;/h3&gt;
+      &lt;p&gt;{post.content}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+  return (
+    &lt;div&gt;
+      {sidebar}
+      &lt;hr /&gt;
+      {content}
+    &lt;/div&gt;
+  );
+}
+
+const posts = [
+  { id: 1, title: &#39;Biodata Saya&#39;, content: &#39;NIM: 123456 - Nama: Habibie&#39; },
+  { id: 2, title: &#39;Alamat Rumah&#39;, content: &#39;Alamat rumah saya di Jl xxx Kota Malang&#39; }
+];
+ReactDOM.render(
+  &lt;Blog posts={posts} /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="3">
+<li>Kemudian save dan lihat hasilnya di browser. Jangan lupa untuk mengaksesnya, web server harus aktif. Jika web server belum aktif, seperti biasa run <code>npm start</code>.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum5,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<p>Untuk mempelajari lebih lanjut terkait Lists dan Keys dapat mengaksesnya <a href="https://reactjs.org/docs/lists-and-keys.html" target="_blank">di sini</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Penggunaan Forms" duration="20">
+        <p>Elemen form HTML bekerja sedikit berbeda di dalam React, karena elemen form secara natural tetap menyimpan beberapa state internal. Sebagai contoh, berikut kode HTML biasa yang menerima inputan nama:</p>
+<pre><code>&lt;form&gt;
+  &lt;label&gt;
+    Nama:
+    &lt;input type=&#34;text&#34; name=&#34;nama&#34; /&gt;
+  &lt;/label&gt;
+  &lt;input type=&#34;submit&#34; value=&#34;Submit&#34; /&gt;
+&lt;/form&gt;</code></pre>
+<p>Kode tersebut juga bekerja di React. Namun karena menggunakan JavaScript, maka harus ada fungsi yang menangani submit form tersebut. Untuk melakukan itu, teknik ini disebut <strong>&#34;controlled components&#34;</strong>.</p>
+<p>Dalam form HTML elemen seperti <code>input</code>, <code>textarea</code>, dan <code>select</code> biasanya diatur oleh state-nya sendiri, sehingga dapat update sesuai yang user inputkan. Di React, mutable state biasanya tetap tersimpan di properti state dari komponen itu, dan hanya bisa di-update dengan fungsi <code>setState()</code>.</p>
+<h2 is-upgraded><strong>Praktikum 6: Membuat form dengan controlled components</strong></h2>
+<ol type="1" start="1">
+<li>Buka file <code>src/index.js</code> pada project React Anda di VS Code.</li>
+<li>Ganti dengan kode program berikut ini:</li>
+</ol>
+<pre><code>class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: &#39;&#39; };
+  }
+
+  handleChange = (event) =&gt; {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit = (event) =&gt; {
+    alert(&#39;Halo, &#39; + this.state.value + &#39; !&#39;);
+    event.preventDefault();
+  }
+
+  render () {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Nama:
+          &lt;input type=&#34;text&#34; value={this.state.value} onChange={this.handleChange} /&gt;
+        &lt;/label&gt;
+        &lt;input type=&#34;submit&#34; value=&#34;Submit&#34; /&gt;
+      &lt;/form&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;NameForm /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="3">
+<li>Save lalu coba lihat hasilnya di browser. Masukkan sesuai nama Anda lalu screenshot.</li>
+<li>Pahami kode tersebut, terutama pada bagian <code>handleChange</code> dan <code>handleSubmit</code>.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum6,</code> lalu rename menjadi <code>index-form.js</code>. Screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h3 is-upgraded><strong>Membuat textarea pada form</strong></h3>
+<ol type="1" start="5">
+<li>Kembali ke file <code>src/index.js</code> pada project React Anda. Selanjutnya kita coba dengan menampilkan form <code>textarea</code>. Ubah nilai value pada state di constructor seperti kode berikut:</li>
+</ol>
+<pre><code>this.state = { value: &#39;Tulis biodata lengkap Anda di sini&#39; };</code></pre>
+<aside class="special"><p><strong>Catatan:</strong> Kode tersebut berada di constructor yang berfungsi untuk mendefinisikan nilai awal saat komponen tersebut di-render.</p>
+</aside>
+<ol type="1" start="6">
+<li>Lalu ganti isi fungsi <code>render()</code> dengan kode berikut:</li>
+</ol>
+<pre><code>render () {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Biodata:
+          &lt;textarea value={this.state.value} onChange={this.handleChange} /&gt;
+        &lt;/label&gt;
+        &lt;input type=&#34;submit&#34; value=&#34;Submit&#34; /&gt;
+      &lt;/form&gt;
+    );
+  }</code></pre>
+<ol type="1" start="7">
+<li>Save dan lihat hasilnya di browser. Silakan isi <code>textarea</code> tersebut dengan biodata Anda.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum6,</code> lalu rename menjadi <code>index-textarea.js</code>. Screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h3 is-upgraded><strong>Membuat select pada form</strong></h3>
+<ol type="1" start="8">
+<li>Kita akan membuat drop-down list nama-nama buah dengan <code>select</code>. Kembali ke file <code>src/index.js</code> pada project React Anda. Ubah nilai value pada state di constructor seperti kode berikut:</li>
+</ol>
+<pre><code>this.state = { value: &#39;semangka&#39; };</code></pre>
+<ol type="1" start="9">
+<li>Lalu ganti isi fungsi <code>render()</code> dengan kode berikut:</li>
+</ol>
+<pre><code>render () {
+    return (
+      &lt;form onSubmit={this.handleSubmit}&gt;
+        &lt;label&gt;
+          Pilih buah favorit Anda:
+          &lt;select value={this.state.value} onChange={this.handleChange}&gt;
+            &lt;option value=&#34;anggur&#34;&gt;Anggur&lt;/option&gt;
+            &lt;option value=&#34;jeruk&#34;&gt;Jeruk&lt;/option&gt;
+            &lt;option value=&#34;semangka&#34;&gt;Semangka&lt;/option&gt;
+            &lt;option value=&#34;mangga&#34;&gt;Mangga&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/label&gt;
+        &lt;input type=&#34;submit&#34; value=&#34;Submit&#34; /&gt;
+      &lt;/form&gt;
+    );
+  }</code></pre>
+<ol type="1" start="10">
+<li>Save kode tersebut dan lihat hasilnya di browser. Seharusnya pilihan <code>semangka</code> secara default terpilih saat di-render.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>index.js</code> tersebut ke repo folder laporan <code>src/04_konsep_reactjs_part2/praktikum6,</code> lalu rename menjadi <code>index-select.js</code>. Screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<p>Bersambung ...</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Beberapa konsep ReactJS yang lain akan dipelajari pada pertemuan berikutnya.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://reactjs.org/community/courses.html" target="_blank">Free Courses and Paid Courses</a></li>
+<li><a href="https://reactfordesigners.com/" target="_blank">React for Designers</a></li>
+<li><a href="https://www.robinwieruch.de/javascript-fundamentals-react-requirements" target="_blank">JavaScript fundamentals before learning React</a></li>
+<li><a href="https://www.taniarascia.com/getting-started-with-react/" target="_blank">React Tutorial: An Overview and Walkthrough</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://reactjs.org/docs/introducing-jsx.html" target="_blank">Introducing JSX</a></li>
+<li><a href="https://reactjs.org/docs/rendering-elements.html" target="_blank">Rendering Elements</a></li>
+<li><a href="https://reactjs.org/docs/components-and-props.html" target="_blank">Components and Props</a></li>
+<li><a href="https://reactjs.org/docs/state-and-lifecycle.html" target="_blank">State and Lifecycle</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

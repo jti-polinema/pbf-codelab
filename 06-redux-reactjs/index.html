@@ -1,0 +1,397 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#06 | React Redux</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="06-redux-reactjs"
+                  title="#06 | React Redux"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-03-22</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Redux di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang penggunaan library Redux di ReactJS, apa itu Redux, kegunaannya, dan kapan waktu yang tepat untuk menggunakan Redux tersebut.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 2</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep Redux dan manfaatnya</li>
+<li>Instalasi dan konfigurasi Redux di ReactJS</li>
+<li>Membuat aplikasi sederhana dengan Redux di ReactJS</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Redux" duration="30">
+        <p>Anda akan bingung tentang Redux jika membaca dari berbagai sumber di internet. Namun, dalam codelab ini akan disampaikan secara jelas kegunaan Redux dan kapan waktu yang tepat untuk memanfaatkan Redux dalam aplikasi kita.</p>
+<h2 is-upgraded><strong>Mengapa menggunakan Redux ?</strong></h2>
+<p>Pertanyaan terbaik untuk memulai adalah dengan mengetahui alasannya mengapa kita harus menggunakan Redux ? dan jawabannya bukan karena semua orang atau developer menggunakan Redux juga.</p>
+<p>Alasan utama menggunakan Redux adalah karena dapat menyelesaikan suatu masalah. Tapi, masalah apa itu sebenarnya ?</p>
+<p>Masalahnya bukan karena &#34;state management&#34;, karena React sendiri sudah menangani soal state. Redux membantu untuk menangani atau mengelola state, tetapi bukan masalah itu yang akan dihadapi. Mari kita lanjutkan dengan penjelasan berikut ini.</p>
+<h2 is-upgraded>Tentang Aliran Data (<em>Data Flow</em><strong>)</strong></h2>
+<p>Pada <a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs/#3" target="_blank">codelab sebelumnya</a> Anda telah mempelajari <code>props</code> dan aliran data searah. Data dikirim ke komponen melalui <code>props</code>. Sebagai contoh, perhatikan komponen berikut:</p>
+<p class="image-container"><img style="width: 446.00px" src="img/1f81c9fd38d30b39.png"></p>
+<p>Variabel <code>count</code> disimpan dalam <code>state</code> aplikasi, kemudian dikirim melalui <code>props</code> untuk melakukan update nilai variabel tersebut.</p>
+<p class="image-container"><img style="width: 404.00px" src="img/7efbd5b00363b026.png"></p>
+<p>Agar data dapat mengalir dari bawah ke atas (maksudnya dari variabel <code>props</code> menjadi <code>state</code> aplikasi), maka diperlukan <code>callback function</code> sehingga data dapat di-<em>update</em> atau manipulasi oleh sebuah komponen <code>button</code> seperti pada ilustrasi berikut.</p>
+<p class="image-container"><img style="width: 292.00px" src="img/1f38bd4c9ffa3391.png"></p>
+<p>Anda dapat mengimajinasikan data seperti komponen elektronik yang saling terhubung dengan kabel yang memiliki warna-warna berbeda. Data mengalir melalui kabel-kabel tersebut antar komponen yang bisa saling bertukar data antar komponen tersebut.</p>
+<h2 is-upgraded><strong>Lapisan dalam Aliran Data</strong></h2>
+<p>Cepat atau lambat Anda akan dihadapkan pada situasi di mana saat membuat aplikasi React membutuhkan lapisan data yang sama pada beberapa letak di halaman web. Perhatikan ilustrasi halaman web Twitter berikut yang menampilkan avatar (foto profil) pada 3 posisi berbeda, namun sumber datanya tetap sama.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/9b2c0bf56045b491.png"></p>
+<p>Kita anggap avatar user merupakan bagian dari data profil user, yang disimpan dalam komponen <code>App</code> sebagai variabel <code>user</code>. Untuk mengirimkan data <code>user</code> ke tiga komponen <code>avatar</code> tersebut, data <code>user</code> perlu melewati beberapa komponen yang sebenarnya komponen-komponen tersebut tidak membutuhkannya. Perhatikan ilustrasi berikut ini.</p>
+<p class="image-container"><img style="width: 569.00px" src="img/b0b35e73393a59e6.png"></p>
+<p>Dari ilustrasi di atas, kita perhatikan data <code>user</code> melakukan perjalanan yang cukup rumit antar komponen-komponen yang berada dibawahnya. Model perancangan komponen seperti ini tidak baik untuk software design. Untuk melakukan refactoring dan reusing komponen cukup sulit jika berdasarkan ilustrasi tersebut. Karena setiap komponen memiliki <code>state</code> dan <code>props</code>-nya masing-masing.</p>
+<p>Nah, itu merupakan salah satu masalah yang diselesaikan oleh Redux. Mari kita lanjutkan materi berikut ini.</p>
+<h2 is-upgraded><strong>Mudahnya Pasang Data ke Komponen dengan Redux</strong></h2>
+<p>Redux menyelesaikan masalah ini. Redux memberikan kemudahan untuk memasang data yang dibutuhkan ke komponen apapun secara langsung (<em>direct access</em>).</p>
+<p>Menggunakan fungsi <code>connect</code> yang ada dalam Redux, Anda dapat mengaitkan dengan komponen ke dalam <code>data store</code> milik Redux. Komponen dapat menggunakan data yang diperlukan saja. Perhatikan ilustrasi berikut ini.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/6df3d403ea5111ce.png"></p>
+<p>Itulah alasan menggunakan Redux.</p>
+<p>Selain itu, Redux memiliki manfaat lain yaitu:</p>
+<ol type="1" start="1">
+<li><strong>Redux DevTools</strong>, membuat proses debugging lebih mudah untuk melakukan inspeksi setiap perubahan <code>state</code> yang terjadi.</li>
+<li><strong>Time-travel debugging</strong>, berfungsi untuk kembali ke masa lalu (perubahan <code>state</code> sebelumnya) dan dapat dilihat data <code>state</code> sebelumnya seperti apa.</li>
+<li>Kode aplikasi lebih mudah dikelola atau manajemen dalam jangka waktu yang lama, selain itu mengajarkan kepada Anda tentang <em>functional programming</em>.</li>
+</ol>
+<p>Kemudahan memasang data ke berbagai komponen merupakan fungsi utama Redux, jika Anda tidak membutuhkan fitur tersebut, maka kemungkinan besar Anda tidak perlu untuk menggunakan Redux.</p>
+<h2 is-upgraded><strong>Kapan menggunakan Redux ?</strong></h2>
+<p>Beberapa kondisi yang perlu dipertimbangkan ketika akan menggunakan Redux adalah sebagai berikut.</p>
+<ol type="1" start="1">
+<li>Jika memiliki struktur komponen seperti ilustrasi sebelumnya yang telah dijelaskan, maka diperlukan Redux karena data <code>props</code> akan diteruskan ke berbagai komponen berbeda.</li>
+<li>Jika Anda membutuhkan cache data antar views atau UI, maka diperlukan Redux. Contohnya, memuat data ketika user mengklik halaman detail, beberapa data perlu disimpan untuk akses yang lebih cepat.</li>
+<li>Jika aplikasi React berskala besar dengan mengelola data yang banyak dan performa yang baik, maka diperlukan Redux. Namun, bisa dimulai membuat aplikasi React tanpa Redux terlebih dahulu, kemudian jika dihadapkan pada situasi yang sulit untuk mengelola data <code>state</code> aplikasi, maka saat itu bisa menambahkan library Redux.</li>
+</ol>
+<h2 is-upgraded><strong>Diagram Konsep Redux</strong></h2>
+<p>Untuk memahami tentang konsep Redux, perhatikan diagram berikut:</p>
+<p class="image-container"><img style="width: 466.00px" src="img/ea480636a08eb47c.png"></p>
+<p>Keterangan diagram:</p>
+<ol type="1" start="1">
+<li><strong>Action</strong>: merupakan objek JavaScript (&#34;{  }&#34;) yang memberitahu <code>reducer</code> untuk memodifikasi data. Syaratnya, <code>action</code> harus memiliki properti <code>type</code> berupa <code>String</code>.</li>
+<li><strong>Reducer</strong>: sebuah function yang memiliki kembalian data (return some data).</li>
+<li><strong>State</strong>: merupakan data yang digunakan oleh aplikasi. Misalnya, value dari input field, data list, gambar, seluruh data aplikasi yang dikumpulkan menjadi <code>state</code>.</li>
+<li><strong>Store</strong>: sebuah container yang menyimpan <code>reducer</code> dan <code>state</code> aplikasi.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum: Membuat Aplikasi Counter Sederhana" duration="50">
+        <p>Pada praktikum 1 ini, kita akan membuat program counter sederhana seperti pada gambar berikut ini.</p>
+<p class="image-container"><img style="width: 262.00px" src="img/63e880b34efa0332.png"></p>
+<p>Tampilan mungkin tidak semenarik pada gambar di atas, karena saat ini kita tidak fokus pada CSS-nya. Untuk membuat aplikasi tersebut, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Buka project React di VS Code yang sebelumnya telah dibuat atau bisa membuat project React baru dengan perintah di console: <code>npx create-react-app counter-app</code></li>
+<li>Buka file di <code>src/App.js</code>. Hapus kode program dari praktikum sebelumnya dan buatlah sebuah komponen bernama <code>Counter</code></li>
+</ol>
+<pre><code>import React from &#39;react&#39;;
+
+class Counter extends React.Component {
+  state = { count: 0 }
+
+  increment = () =&gt; {
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
+
+  decrement = () =&gt; {
+    this.setState({
+      count: this.state.count - 1
+    });
+  }
+
+  render () {
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Counter&lt;/h2&gt;
+        &lt;div&gt;
+          &lt;button onClick={this.decrement}&gt;-&lt;/button&gt;
+          &lt;span&gt;{this.state.count}&lt;/span&gt;
+          &lt;button onClick={this.increment}&gt;+&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}</code></pre>
+<ol type="1" start="3">
+<li>Kemudian buat komponen utama <code>App()</code> di file <code>src/App.js</code> untuk diexport ke file <code>index.js</code></li>
+</ol>
+<pre><code>export default function App(){
+  return (
+    &lt;div&gt;
+      &lt;Counter /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+<ol type="1" start="4">
+<li>Pastikan isi pada file <code>src/index.js</code> seperti kode berikut ini.</li>
+</ol>
+<pre><code>import ReactDOM from &#39;react-dom&#39;;
+import App from &#39;./App.js&#39;;
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="5">
+<li>Kemudian lihatlah hasilnya di browser, jangan lupa untuk menjalankan web server dengan perintah <code>npm start</code></li>
+</ol>
+<h2 is-upgraded><strong>Menambahkan Redux ke Project React</strong></h2>
+<p>Seperti yang telah dijelaskan pada materi sebelumnya bahwa Redux menyimpan <code>state</code> pada sebuah <code>store</code>. Kemudian Anda dapat mengambil <code>state</code> dari <code>store</code> untuk dikirim ke komponen melalui <code>props</code>. <code>Store</code> dapat diakses secara global pada aplikasi, sehingga memudahkan kita untuk menset data di halaman apapun pada aplikasi.</p>
+<aside class="special"><p><strong>Catatan:</strong> Anda akan selalu menemui kata <strong><code>state</code></strong> dan <strong><code>store</code></strong> ketika bekerja dengan Redux. Secara teknis, <code>state</code> adalah <strong>data </strong>dan <code>store</code> adalah tempat untuk kita <strong>menyimpan data</strong> secara global.</p>
+</aside>
+<ol type="1" start="6">
+<li>Untuk menambah Redux pada project kita, ketik perintah berikut di console (pastikan ketika run perintah ini berada di folder project React):</li>
+</ol>
+<pre><code>npm install redux react-redux --save</code></pre>
+<p>Perintah di atas akan memasang 2 library, yaitu <strong>redux</strong> dan <strong>react-redux</strong>. Sintaks <code>--save</code> berfungsi untuk menambahkan dependencies ke <code>package.json</code>.</p>
+<p>Apa bedanya <a href="https://redux.js.org/" target="_blank">redux</a> dan <a href="https://react-redux.js.org/" target="_blank">react-redux</a> ? redux menyediakan fitur <code>store</code>, yaitu untuk mengelola <code>state</code> saat dibutuhkan dan saat terjadi perubahan <code>state</code>. Sedangkan react-redux berfungsi untuk menghubungkan <code>state</code> ke komponen React. Sehingga bisa dikatakan library redux tidak mengetahui bagian-bagian dalam komponen React. Nah, redux dan react-redux bekerja sama untuk bisa mengelola <code>state</code> dan menyimpan di <code>store</code>.</p>
+<ol type="1" start="7">
+<li>Selanjutnya hapus <code>state</code> dari komponen <code>Counter</code> di file <code>src/App.js</code>, karena nanti akan digantikan oleh Redux. Kemudian ganti <code>this.state.count</code> dengan <code>this.props.count</code> karena nanti kita akan injeksi dengan <code>redux</code>.</li>
+</ol>
+<pre><code>  class Counter extends React.Component {
+  increment = () =&gt; {
+    // di isi nanti
+  }
+
+  decrement = () =&gt; {
+    // di isi nanti
+  }
+
+  render () {
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Counter&lt;/h2&gt;
+        &lt;div&gt;
+          &lt;button onClick={this.decrement}&gt;-&lt;/button&gt;
+          &lt;span&gt;{this.props.count}&lt;/span&gt;
+          &lt;button onClick={this.increment}&gt;+&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}</code></pre>
+<ol type="1" start="8">
+<li>Tambahkan fungsi <code>connect</code> dengan import dari <code>react-redux</code></li>
+</ol>
+<pre><code>import { connect } from &#39;react-redux&#39;;</code></pre>
+<ol type="1" start="9">
+<li>Hapus fungsi <code>export default function App()</code> kemudian ganti dengan kode berikut:</li>
+</ol>
+<pre><code>function mapStateToProps (state) {
+  return {
+    count: state.count
+  };
+}
+
+export default connect(mapStateToProps)(Counter);</code></pre>
+<ol type="1" start="10">
+<li>Selanjutnya pada file <code>src/index.js</code> ubah menjadi kode berikut ini:</li>
+</ol>
+<pre><code>import ReactDOM from &#39;react-dom&#39;;
+import Counter from &#39;./App.js&#39;;
+import { Provider } from &#39;react-redux&#39;;
+
+const App = () =&gt; (
+  &lt;Provider&gt;
+    &lt;Counter /&gt;
+  &lt;/Provider&gt;
+);
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="11">
+<li>Kemudian kita buat <code>store</code> dari <code>redux</code>, sehingga perlu <code>import createStore</code> dan menambahkan variabel <code>store</code> ke komponen <code>Provider</code></li>
+</ol>
+<pre><code>import ReactDOM from &#39;react-dom&#39;;
+import Counter from &#39;./App.js&#39;;
+import { Provider } from &#39;react-redux&#39;;
+import { createStore } from &#39;redux&#39;;
+
+const store = createStore();
+
+const App = () =&gt; (
+  &lt;Provider store={store}&gt;
+    &lt;Counter /&gt;
+  &lt;/Provider&gt;
+);
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="12">
+<li>Coba lihat hasilnya di browser, seharusnya muncul error seperti pada gambar berikut</li>
+</ol>
+<p class="image-container"><img style="width: 463.00px" src="img/c989027867830a65.png"></p>
+<p>Artinya kita membutuhkan sebuah fungsi <code>reducer</code>. Fungsinya untuk menyimpan dan mengelola <code>state</code>.</p>
+<ol type="1" start="13">
+<li>Selanjutnya kita buat fungsi <code>reducer</code> dengan nilai default <code>count = 42</code></li>
+</ol>
+<pre><code>import ReactDOM from &#39;react-dom&#39;;
+import Counter from &#39;./App.js&#39;;
+import { Provider } from &#39;react-redux&#39;;
+import { createStore } from &#39;redux&#39;;
+
+function reducer () {
+  return {
+    count: 42
+  };
+}
+
+const store = createStore(reducer);
+
+const App = () =&gt; (
+  &lt;Provider store={store}&gt;
+    &lt;Counter /&gt;
+  &lt;/Provider&gt;
+);
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="14">
+<li>Sampai dengan langkah ini, jika Anda coba jalankan di browser, maka sudah tidak ada error. Namun, angka 42 tidak akan pernah berubah walaupun tombol diklik. Mengapa ? karena fungsi <code>reducer</code> belum melakukan manipulasi pada nilai <code>count</code> terhadap aksi yang dilakukan oleh button. Selanjutnya tambahkan variabel <code>initialState</code> dan ganti paramater serta isi fungsi <code>reducer</code> seperti berikut:</li>
+</ol>
+<pre><code>const initialState = {
+  count: 0
+};
+
+function reducer(state = initialState, action) {
+  return state;
+}</code></pre>
+<aside class="special"><p><strong>Catatan: </strong><code>action</code> berfungsi untuk mendeskripsikan perubahan yang akan terjadi pada <code>state</code>. Dibutuhkan properti <code>type</code> dan nilainya harus berupa <code>string</code>. </p>
+</aside>
+<ol type="1" start="15">
+<li>Ubah isi fungsi <code>reducer</code> menjadi seperti kode berikut:</li>
+</ol>
+<pre><code>function reducer(state = initialState, action) {
+  switch(action.type) {
+    case &#39;INCREMENT&#39;:
+      return {
+        count: state.count + 1
+      };
+    case &#39;DECREMENT&#39;:
+      return {
+        count: state.count - 1
+      };
+    default:
+      return state;
+  }
+}</code></pre>
+<ol type="1" start="16">
+<li>Lalu pindah ke file <code>src/App.js</code> ubah isi fungsi <code>increment</code> dan <code>decrement</code> seperti kode berikut:</li>
+</ol>
+<pre><code>  increment = () =&gt; {
+    this.props.dispatch({ type: &#39;INCREMENT&#39; });
+  }
+
+  decrement = () =&gt; {
+    this.props.dispatch({ type: &#39;DECREMENT&#39; });
+  }</code></pre>
+<ol type="1" start="17">
+<li>Save semua file, lalu lihat hasilnya di browser. Seharusnya aplikasi counter sudah berjalan dengan normal menggunakan Redux. Mungkin terlihat tidak ada bedanya tanpa menggunakan Redux, karena aplikasi yang kita buat masih sederhana.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file <code>App.js</code> dan <code>index.js</code> tersebut ke folder laporan <code>src/06_redux,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas (Pertanyaan Praktikum)" duration="50">
+        <p>Berdasarkan pada praktikum sebelumnya yang telah dilakukan, beberapa pertanyaan terkait praktikum perlu diselesaikan yaitu sebagai berikut.</p>
+<ol type="1" start="1">
+<li>Jelaskan maksud sintaks <code>this.props.dispatch</code> pada praktikum langkah 16 sebelumnya!</li>
+<li>Jelaskan maksud istilah yang ada dalam Redux berikut ini:</li>
+</ol>
+<ol type="1" start="1">
+<li>Actions</li>
+<li>Reducers</li>
+<li>Action creators</li>
+<li>Middleware</li>
+<li>Pure functions</li>
+<li>Immutability</li>
+</ol>
+<ol type="1" start="3">
+<li>Jelaskan maksud <code>sintaks export default connect(mapStateToProps)(Counter)</code> pada praktikum langkah 9 sebelumnya!</li>
+<li>Carilah sebuah studi kasus aplikasi yang cukup kompleks di GitHub yang memanfaatkan Redux! Kemudian screenshot bagian kode program mana yang merupakan proses Redux dan jelaskan prosesnya! (cantumkan link repository GitHub yang Anda temukan)</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Jawablah pertanyaan praktikum di atas pada laporan praktikum Anda di <code>docs/06_redux/06.md</code>. Cantumkan sumber referensi yang Anda gunakan sebagai jawaban tersebut.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://app.egghead.io/playlists/fundamentals-of-redux-course-from-dan-abramov-bd5cc867" target="_blank">Fundamentals of Redux Course from Dan Abramov</a></li>
+<li><a href="https://github.com/markerikson/react-redux-links" target="_blank">React/Redux Links List</a></li>
+<li><a href="https://redux.js.org/introduction/learning-resources" target="_blank">Learning Resources</a></li>
+<li><a href="https://github.com/reduxjs/redux-devtools" target="_blank">Redux DevTools</a></li>
+<li><a href="http://www.reactiflux.com" target="_blank">www.reactiflux.com</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://redux.js.org/introduction/getting-started" target="_blank">Getting started with Redux</a></li>
+<li><a href="https://react-redux.js.org/introduction/quick-start" target="_blank">Quick Start with React Redux</a></li>
+<li><a href="https://daveceddia.com/what-does-redux-do/" target="_blank">What Does Redux Do? (and when should you use it?)</a></li>
+<li><a href="https://daveceddia.com/how-does-redux-work/" target="_blank">How Redux Works: A Counter-Example</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

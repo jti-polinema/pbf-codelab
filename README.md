@@ -11,6 +11,10 @@ Penulis: Habibie Ed Dien
 
 [04 - Konsep ReactJS - Bagian 2](04-konsep-reactjs-bagian-2/)
 
+[05 - API dan Router ReactJS](05-api-router-reactjs/)
+
+[06 - React Redux](06-redux-reactjs/)
+
 <hr>
 
 Dibuat dengan [Google Codelab Tools](https://github.com/googlecodelabs/tools)

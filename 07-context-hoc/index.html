@@ -1,0 +1,285 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#07 | Context dan HOC</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="07-context-hoc"
+                  title="#07 | Context dan HOC"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-03-29</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Context dan HOC di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang penggunaan Context dan Higher-Order Components (HOC) di ReactJS.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 2</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep Context dan manfaatnya</li>
+<li>Konsep HOC di ReactJS</li>
+<li>Penggunaan HOC dengan Redux di ReactJS</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Context" duration="30">
+        <h2 is-upgraded><strong>Apa itu Context ?</strong></h2>
+<p>Di ReactJS, context merupakan fitur yang menyediakan cara untuk mengirim data melalui pohon komponen tanpa harus melalui props secara manual pada setiap level atau tingkatan.</p>
+<p>Biasanya aplikasi React mengirim data dengan formasi <em>top-down</em> (parent ke child) melalui <code>props</code>, tetapi penggunaannya dapat menjadi rumit untuk beberapa jenis props (seperti pengaturan bahasa, tema UI) yang melibatkan banyak komponen dalam sebuah aplikasi. Context menyediakan cara untuk berbagi value antar komponen tanpa melalui props pada setiap level dari komponen.</p>
+<h2 is-upgraded><strong>Kapan menggunakan Context ?</strong></h2>
+<p>Context dirancang untuk berbagi data secara &#34;global&#34; ke berbagai komponen React, seperti data autentikasi pengguna yang sedang aktif, tema, atau pengaturan bahasa. </p>
+<h2 is-upgraded><strong>Perhatikan, Sebelum Anda menggunakan Context</strong></h2>
+<p>Context terutama digunakan ketika beberapa data dibutuhkan untuk diakses oleh <strong>banyak</strong> komponen pada setiap tingkatan (<em>nesting levels</em>). Gunakanlah dengan bijak karena itu akan mempersulit penggunaan kembali (<em>reuse</em>) komponen yang ada.</p>
+<h2 is-upgraded><strong>Context API</strong></h2>
+<h3 is-upgraded><strong><code>React.createContext</code></strong></h3>
+<pre><code>const MyContext = React.createContext(defaultValue);</code></pre>
+<p>Membuat sebuah objek Context yang berguna ketika melakukan render komponen yang terikat dengan komponen lain. Objek context akan membaca context value yang terdekat di dalam tag Provider yang ada diatasnya.</p>
+<p>Argumen <code>defaultValue</code> hanya digunakan ketika sebuah komponen tidak menemukan yang cocok terhadap tag Provider yang berada diatasnya. </p>
+<h3 is-upgraded><strong><code>Context.Provider</code></strong></h3>
+<pre><code>&lt;MyContext.Provider value={/* some value */}&gt;</code></pre>
+<p>Setiap objek Context terbentuk karena ada komponen Provider React yang mengizinkan untuk menggunakan komponen lain yang terikat terhadap perubahan context.</p>
+<p>Komponen Provider menerima value dari prop untuk diteruskan ke komponen lain yang merupakan turunan dari Provider ini. Satu Provider dapat terkoneksi dengan banyak consumers. Provider dapat diletakkan secara bersarang untuk nilai yang di-<em>override</em> terhadap komponen lain yang ada didalamnya.</p>
+<h3 is-upgraded><strong><code>Class.contextType</code></strong></h3>
+<pre><code>class MyClass extends React.Component {
+  componentDidMount() {
+    let value = this.context;
+    /* perform a side-effect at mount using the value of MyContext */
+  }
+  componentDidUpdate() {
+    let value = this.context;
+    /* ... */
+  }
+  componentWillUnmount() {
+    let value = this.context;
+    /* ... */
+  }
+  render() {
+    let value = this.context;
+    /* render something based on the value of MyContext */
+  }
+}
+
+MyClass.contextType = MyContext;</code></pre>
+<p>Properti <code>contextType</code> pada sebuah class dapat dibuat sebuah objek Context dengan <code>React.createContext()</code>. Properti ini bermanfaat untuk menggunakan value terdekat saat ini pada jenis Context dengan <code>this.context</code>. Bisa diletakkan pada method lifecycle apapun termasuk di dalam fungsi <code>render</code>.</p>
+<h3 is-upgraded><strong><code>Context.Consumer</code></strong></h3>
+<pre><code>&lt;MyContext.Consumer&gt;
+  {value =&gt; /* render something based on the context value */}
+&lt;/MyContext.Consumer&gt;</code></pre>
+<p>Komponen react yang terikat akan berubah sesuai nilai context. Consumer ini berguna untuk mengikat context komponen yang ada didalamnya.</p>
+<h3 is-upgraded><strong><code>Context.displayName</code></strong></h3>
+<p>Objek context memiliki properti <code>displayName</code> berupa string. React DevTools menggunakan nilai string ini untuk menentukan nilai context mana yang perlu untuk ditampilkan.</p>
+<p>Contohnya, komponen berikut akan menampilkan <code>MyDisplayName</code> di DevTools:</p>
+<pre><code>const MyContext = React.createContext(/* some value */);
+MyContext.displayName = &#39;MyDisplayName&#39;;
+
+&lt;MyContext.Provider&gt; // &#34;MyDisplayName.Provider&#34; in DevTools
+&lt;MyContext.Consumer&gt; // &#34;MyDisplayName.Consumer&#34; in DevTools</code></pre>
+<p>Untuk mempelajari lebih lanjut tentang Context dapat membaca <a href="https://reactjs.org/docs/context.html" target="_blank">di sini</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Higher-Order Components (HOC)" duration="15">
+        <p>HOC adalah teknik lanjutan untuk membuat komponen baru dari komponen yang sudah ada. Jadi, kita bisa membuat komponen baru yang memiliki fitur atau fungsi tambahan dengan cara komposisi yaitu satu atau lebih komponen yang digabung dan dibungkus dengan komponen lain menjadi sebuah komponen baru.</p>
+<p>Contohnya ada komponen A dan B. HOC dapat membuat komponen C yang berisi komponen A dan B ditambah fitur dan komponen lain. Sebagai ilustrasi, perhatikan gambar berikut ini.</p>
+<p class="image-container"><img style="width: 387.00px" src="img/30ce8ff34784f89c.png"></p>
+<p>Untuk mempelajari lebih lanjut tentang HOC dapat membaca <a href="https://reactjs.org/docs/higher-order-components.html" target="_blank">di sini</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum: Membuat Tema Aplikasi Sederhana" duration="50">
+        <p>Pada praktikum 1 ini, kita akan membuat aplikasi sederhana yang dapat mengubah warna sesuai warna button yang diklik seperti pada gambar berikut ini.</p>
+<p class="image-container"><img style="width: 510.00px" src="img/c46898241128fa9f.png"></p>
+<p>Untuk membuat aplikasi tersebut, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Buka project React di VS Code yang sebelumnya telah dibuat atau bisa membuat project React baru dengan perintah di console: <code>npx create-react-app theme-app</code></li>
+<li>Buatlah folder baru bernama <code>ThemeContext</code> di dalam folder <code>src</code>, sehingga menjadi <code>src/ThemeContext</code>.</li>
+<li>Buatlah file <code>theme-context.js</code> di <code>src/ThemeContext</code>, kemudian isi kodenya adalah sebagai berikut.</li>
+</ol>
+<pre><code>import React from &#34;react&#34;;
+
+export const ThemeContext = React.createContext(
+// default values digunakan oleh Consumer ketika tidak ada  
+// yang cocok dengan Provider yang berada diatasnya
+  {
+    themeContext: {
+       color: &#39;blue&#39;,
+       setColor: () =&gt; {}
+    }
+  }
+)</code></pre>
+<ol type="1" start="4">
+<li>Lalu buatlah file <code>withTheme.js</code> di <code>src/ThemeContext</code> dan isi kode programnya adalah sebagai berikut:</li>
+</ol>
+<pre><code>import { ThemeContext } from &#39;./theme-context&#39;;
+
+export function withTheme (Component) {
+  return function ThemeComponent (props) {
+    return (
+      &lt;ThemeContext.Consumer&gt;
+        {
+          (contexts) =&gt; &lt;Component {...props} {...contexts} /&gt;
+        }
+      &lt;/ThemeContext.Consumer&gt;
+    )
+  }
+}</code></pre>
+<aside class="special"><p><strong>Catatan: </strong><code>withTheme.js</code> adalah <em>Higher-Order Components (HOC)</em> yang nanti akan dijelaskan di codelab ini pada tahap berikutnya. Fungsi <code>withTheme(Component)</code> bisa digunakan untuk injeksi tema (props <code>themeContext</code>) dengan komponen apa pun.</p>
+</aside>
+<ol type="1" start="5">
+<li>Kemudian buatlah file <code>ThemeProvider.js</code> di <code>src/ThemeContext</code> dengan isi kode sebagai berikut:</li>
+</ol>
+<pre><code>import React from &#39;react&#39;;
+import { ThemeContext } from &#39;./theme-context&#39;;
+
+export default class ThemeProvider extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      setColor: this.setColor.bind(this),
+      color: &#34;yellow&#34;
+    };
+  }
+
+  setColor (color) {
+    this.setState({ color });
+  }
+
+  render () {
+    return (
+      &lt;ThemeContext.Provider value=&#123;&#123;
+        themeContext: {
+          ...this.state
+        }
+      }}&gt;
+        {this.props.children}
+      &lt;/ThemeContext.Provider&gt;
+    )
+  }
+}</code></pre>
+<ol type="1" start="6">
+<li>Selanjutnya buatlah file di <code>src/Menu.js</code> dengan kode berikut ini.</li>
+</ol>
+<pre><code>import { withTheme } from &#34;./ThemeContext/withTheme&#34;;
+
+const Menu = props =&gt; (
+  &lt;div style=&#123;&#123; backgroundColor: props.themeContext.color }}&gt;
+    Menu
+  &lt;/div&gt;
+);
+
+export default withTheme(Menu);</code></pre>
+<ol type="1" start="7">
+<li>Lalu buatlah file di <code>src/SetColor.js</code> dengan kode berikut ini.</li>
+</ol>
+<pre><code>import { withTheme } from &#34;./ThemeContext/withTheme&#34;;
+
+const SetColor = props =&gt; (
+  &lt;div&gt;
+    &lt;button onClick={() =&gt; props.themeContext.setColor(&#34;red&#34;)}&gt;Red&lt;/button&gt;
+    &lt;button onClick={() =&gt; props.themeContext.setColor(&#34;blue&#34;)}&gt;Blue&lt;/button&gt;
+  &lt;/div&gt;
+);
+
+export default withTheme(SetColor);</code></pre>
+<ol type="1" start="8">
+<li>Akhirnya file <code>src/App.js</code> kita edit dengan kode berikut ini.</li>
+</ol>
+<pre><code>import ThemeProvider from &#34;./ThemeContext/ThemeProvider&#34;;
+import Menu from &#34;./Menu&#34;;
+import SetColor from &#34;./SetColor&#34;;
+
+export default function App () {
+  return (
+    &lt;ThemeProvider&gt;
+      &lt;Menu /&gt;
+      &lt;br /&gt;
+      &lt;SetColor /&gt;
+    &lt;/ThemeProvider&gt;
+  )
+}</code></pre>
+<p>Untuk melihat hasilnya di browser, silakan run <code>npm start</code> di console atau terminal. Seharusnya tombol sudah berfungsi untuk mengubah warna tema. Jangan lupa untuk file <code>src/index.js</code> sudah melakukan render <code>App</code>.</p>
+<p>Struktur file dan folder Anda di folder <code>src</code> seperti berikut:</p>
+<pre><code>index.js
+App.js
+SetColor.js
+Menu.js
+ThemeContext/</code></pre>
+<ul>
+<li><pre><code>theme-context.js</code></pre>
+</li>
+<li><pre><code>withTheme.js</code></pre>
+</li>
+<li><pre><code>ThemeProvider.js</code></pre>
+</li>
+</ul>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder yang ada di struktur tersebut ke folder laporan <code>src/07_context_hoc/praktikum1,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://medium.com/@niwaa/simple-and-reusable-react-context-api-example-hoc-e1e50c0390ec" target="_blank">Simple and reusable React Context API example (HOC)</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://reactjs.org/docs/context.html" target="_blank">Context - React</a></li>
+<li><a href="https://reactjs.org/docs/higher-order-components.html" target="_blank">Higher-Order Components (HOC) React</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

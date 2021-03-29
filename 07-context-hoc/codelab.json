@@ -1,0 +1,31 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-03-29T05:24:21Z",
+  "id": "07-context-hoc",
+  "duration": 95,
+  "title": "#07 | Context dan HOC",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang contex dan HOC di ReactJS.",
+  "source": "1C34puRuk4FIbRRrSNgNb3yFZjHHRK8lbkn3k_IGiRiU",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "api",
+    "context",
+    "hoc",
+    "pemrograman-berbasis-framework",
+    "reactjs",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "07-context-hoc"
+}

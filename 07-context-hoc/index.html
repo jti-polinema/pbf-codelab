@@ -45,7 +45,6 @@
 <ul>
 <li>Konsep Context dan manfaatnya</li>
 <li>Konsep HOC di ReactJS</li>
-<li>Penggunaan HOC dengan Redux di ReactJS</li>
 </ul>
 <h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
 <ul>
@@ -126,7 +125,7 @@ MyContext.displayName = &#39;MyDisplayName&#39;;
       </google-codelab-step>
     
       <google-codelab-step label="Praktikum: Membuat Tema Aplikasi Sederhana" duration="50">
-        <p>Pada praktikum 1 ini, kita akan membuat aplikasi sederhana yang dapat mengubah warna sesuai warna button yang diklik seperti pada gambar berikut ini.</p>
+        <p>Pada praktikum ini, kita akan membuat aplikasi sederhana yang dapat mengubah warna sesuai warna button yang diklik seperti pada gambar berikut ini.</p>
 <p class="image-container"><img style="width: 510.00px" src="img/c46898241128fa9f.png"></p>
 <p>Untuk membuat aplikasi tersebut, silakan lakukan langkah-langkah praktikum berikut ini.</p>
 <ol type="1" start="1">
@@ -162,7 +161,7 @@ export function withTheme (Component) {
     )
   }
 }</code></pre>
-<aside class="special"><p><strong>Catatan: </strong><code>withTheme.js</code> adalah <em>Higher-Order Components (HOC)</em> yang nanti akan dijelaskan di codelab ini pada tahap berikutnya. Fungsi <code>withTheme(Component)</code> bisa digunakan untuk injeksi tema (props <code>themeContext</code>) dengan komponen apa pun.</p>
+<aside class="special"><p><strong>Catatan: </strong><code>withTheme.js</code> adalah <em>Higher-Order Components (HOC)</em> yang telah dijelaskan di codelab ini. Fungsi <code>withTheme(Component)</code> bisa digunakan untuk injeksi tema (props <code>themeContext</code>) dengan komponen apa pun.</p>
 </aside>
 <ol type="1" start="5">
 <li>Kemudian buatlah file <code>ThemeProvider.js</code> di <code>src/ThemeContext</code> dengan isi kode sebagai berikut:</li>
@@ -237,21 +236,16 @@ export default function App () {
   )
 }</code></pre>
 <p>Untuk melihat hasilnya di browser, silakan run <code>npm start</code> di console atau terminal. Seharusnya tombol sudah berfungsi untuk mengubah warna tema. Jangan lupa untuk file <code>src/index.js</code> sudah melakukan render <code>App</code>.</p>
-<p>Struktur file dan folder Anda di folder <code>src</code> seperti berikut:</p>
+<p>Struktur file dan folder Anda di folder <code>src</code> seharusnya seperti berikut:</p>
 <pre><code>index.js
 App.js
 SetColor.js
 Menu.js
-ThemeContext/</code></pre>
-<ul>
-<li><pre><code>theme-context.js</code></pre>
-</li>
-<li><pre><code>withTheme.js</code></pre>
-</li>
-<li><pre><code>ThemeProvider.js</code></pre>
-</li>
-</ul>
-<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder yang ada di struktur tersebut ke folder laporan <code>src/07_context_hoc/praktikum1,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+ThemeContext/
+theme-context.js
+withTheme.js
+ThemeProvider.js</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder yang ada di struktur tersebut ke folder laporan <code>src/07_context_hoc,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
 
 
@@ -263,6 +257,7 @@ ThemeContext/</code></pre>
 <p>Silakan cek beberapa sumber belajar lainnya...</p>
 <ul>
 <li><a href="https://medium.com/@niwaa/simple-and-reusable-react-context-api-example-hoc-e1e50c0390ec" target="_blank">Simple and reusable React Context API example (HOC)</a></li>
+<li><a href="https://itnext.io/combining-hocs-with-the-new-reacts-context-api-9d3617dccf0b" target="_blank">Combining HOCs with the new React&#39;s Context API</a></li>
 </ul>
 <h2 is-upgraded><strong>Referensi</strong></h2>
 <ul>

@@ -1,0 +1,279 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#09 | Global API dan Hooks</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="09-global-api-hooks"
+                  title="#09 | Global API dan Hooks"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-04-19</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Global API dan Hooks di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang penggunaan Global API dan Hooks di ReactJS.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 2</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep dan implementasi Global API</li>
+<li>Konsep dan implementasi Hooks</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Global API" duration="30">
+        <h2 is-upgraded><strong>Apa itu Global API ?</strong></h2>
+<p>Pada <a href="https://jti-polinema.github.io/pbf-codelab/05-api-router-reactjs/#1" target="_blank">Codelab 5</a> kita pernah mempelajari tentang interaksi dengan API. Kita dihadapkan dengan mengelola banyak daftar alamat API yang disediakan dan mengumpulkannya menjadi satu kelompok. Sehingga kita dapat menambah, mengurangi, ataupun memperbaiki daftar API pada satu tempat.</p>
+<p>Salah satu caranya adalah dengan mengelola/mengatur pemanggilan API secara GLOBAL, sehingga kita tidak perlu melakukan &#34;coding ulang&#34; API yang memiliki karakter yang sama. Contoh saat kita memanggil API (GET) untuk mendapatkan list Artikel, list komentar, dan list pengguna. API untuk ketiga proses tersebut sebenarnya sama, yang membedakan hanya alamat url API yang dituju, sehingga kita bisa meletakkan list API pada satu tempat untuk mempermudah dalam pengelolaannya.</p>
+<p>Pada codelab ini, kita menggunakan materi dari <a href="https://jti-polinema.github.io/pbf-codelab/05-api-router-reactjs/#1" target="_blank">Codelab 5 – API di ReactJS</a>. Sehingga kita dapat memahami perbedaan antara <a href="https://jti-polinema.github.io/pbf-codelab/05-api-router-reactjs/#1" target="_blank">Codelab 5</a> yang hanya melakukan interaksi satu API dengan codelab ini yang mengelola daftar list API ke dalam satu tempat, sehingga proses manajemen API lebih mudah dan cepat.</p>
+<h2 is-upgraded><strong>Kelebihan menggunakan Global API</strong></h2>
+<p><strong>Terpusat</strong>. API yang dibuat atau yang akan dipanggil terpusat pada satu tempat.</p>
+<p><strong>Kustomisasi</strong>. Mudah dan efisien saat melakukan kustomisasi maupun perbaikan alamat API.</p>
+<p><strong>Mudah dikelola</strong>. Berhubung list API berada pada satu tempat, sehingga proses mengelola daftar API baik penambahan, pengurangan, maupun memperbaiki API (perubahan alamat API) bisa dilakukan dengan mudah.</p>
+<p><strong>Terhindar dari proses yang sama (redundansi)</strong>. Berhubung daftar API dalam satu tempat sehingga kita bisa memantau dan meminimalisir proses yang sama atau pembuatan API yang sama persis.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Membuat Global API" duration="40">
+        <p>Pada praktikum ini, dibagi menjadi beberapa bagian praktikum yaitu membuat global API untuk service GET, POST, Delete, dan manajemennya. Kita mulai dengan membuat global API untuk service GET sebagai berikut.</p>
+<h2 is-upgraded><strong>Membuat Global API Service GET</strong></h2>
+<ol type="1" start="1">
+<li>Anda dapat membuat project baru React atau melanjutkan praktikum dari Codelab 5 tentang interaksi dengan API.</li>
+<li>Buatlah folder <code>services</code> dalam folder <code>src</code>, lalu buat file <code>index.js</code> di dalam folder <code>services</code> seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 141.00px" src="img/ea816f0468300a4f.png"></p>
+<ol type="1" start="3">
+<li>Buat konstanta <code>baseUrlApi</code> di <code>src/services/index.js</code> sebagai alamat url utama API yang digunakan. Anda dapat mengaturnya secara terpusat di variabel <code>baseUrlApi</code> ini.</li>
+</ol>
+<pre><code>const baseUrlApi = &#39;http://localhost:3001&#39;;</code></pre>
+<ol type="1" start="4">
+<li>Kemudian buat konstanta <code>GetAPI</code> untuk service GET.</li>
+</ol>
+<pre><code>const GetAPI = (path) =&gt; {
+  const promise = new Promise((resolve, reject) =&gt; {
+    fetch(`${baseUrlApi}/${path}`)
+      .then(response =&gt; response.json())
+      .then((result) =&gt; {
+        resolve(result);
+      }, (err) =&gt; {
+        reject(err);
+      })
+  })
+  return promise;
+}</code></pre>
+<ol type="1" start="5">
+<li>Lalu buat konstanta <code>getNewsBlog</code> untuk mendapatkan isi artikel. Dalam konstanta ini terdapat fungsi yang memanggil <code>GetAPI</code> berisi parameter <code>posts</code> yang diurutkan secara descending berdasarkan atribut <code>id</code>.</li>
+</ol>
+<pre><code>const getNewsBlog = () =&gt; GetAPI(&#39;posts?_sort=id&amp;_order=desc&#39;);</code></pre>
+<ol type="1" start="6">
+<li>Selanjutnya buat konstanta API yang nanti akan diisi service GET, POST, dan DELETE.</li>
+</ol>
+<pre><code>const API = {
+  getNewsBlog
+}
+
+export default API;</code></pre>
+<ol type="1" start="7">
+<li>Lalu pindah ke <code>src/App.js</code> lalu import API yang tadi sudah dibuat.</li>
+</ol>
+<pre><code>import React from &#39;react&#39;;
+import API from &#39;../services&#39;;</code></pre>
+<ol type="1" start="8">
+<li>Buat komponen <code>DaftarArtikel</code> untuk menampilkan isi artikel.</li>
+</ol>
+<pre><code>function DaftarArtikel(props){
+  return(
+    &lt;div&gt;
+      &lt;h3&gt;{props.judul}&lt;/h3&gt;
+      &lt;div&gt;{props.isiArtikel}&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<ol type="1" start="9">
+<li>Kemudian buat class <code>BlogPost</code></li>
+</ol>
+<pre><code>export default class BlogPost extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      dataArtikel: []      // untuk menampung data API
+    };
+  }
+
+  ambilDataDariServerAPI = () =&gt; {
+    API.getNewsBlog().then(result =&gt; {
+      this.setState({
+        dataArtikel: result
+      })
+    })
+  }
+
+  componentDidMount () {
+    this.ambilDataDariServerAPI()
+  }
+
+  render(){
+    const { dataArtikel } = this.state;
+
+    return (
+      &lt;div&gt;
+        &lt;h2&gt;Daftar Artikel&lt;/h2&gt;
+        {
+          dataArtikel.map(artikel =&gt; {
+            return &lt;DaftarArtikel key={artikel.id} judul={artikel.title} isiArtikel={artikel.body} /&gt;
+          })
+        }
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+<ol type="1" start="10">
+<li>Selanjutnya pindah ke <code>src/index.js</code> seperti biasa kita render.</li>
+</ol>
+<pre><code>import ReactDOM from &#39;react-dom&#39;;
+import App from &#39;./App.js&#39;;
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.getElementById(&#39;root&#39;)
+);</code></pre>
+<ol type="1" start="11">
+<li>Kemudian save semua dan run <code>npm start</code> untuk melihat hasilnya di browser. Apa yang terjadi ? Apakah tampil data artikel tersebut ?</li>
+</ol>
+<h2 is-upgraded><strong>Membuat Restful API Lokal</strong></h2>
+<ol type="1" start="12">
+<li>Dari praktikum sebelumnya, tentu data artikel belum tampil karena server API belum kita jalankan di alamat <a href="http://localhost:3001" target="_blank">http://localhost:3001</a> . Kita siapkan server API dengan membuat file <code>listArtikel.json</code> di root project React kita.</li>
+</ol>
+<p class="image-container"><img style="width: 161.00px" src="img/13dbc885fde9b299.png"></p>
+<ol type="1" start="13">
+<li>Buka file <code>listArtikel.json</code> lalu isi datanya dengan copy dari <a href="https://jsonplaceholder.typicode.com/posts" target="_blank">https://jsonplaceholder.typicode.com/posts</a> </li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img/9eaf66cfb36a5c6a.png"></p>
+<aside class="special"><p><strong>Catatan:</strong> Bagian terluar data API harus berupa objek dengan tanda kurung kurawal <code>{ ... }</code> lalu didalamnya terdapat data <code>"posts"</code> yang isinya berupa array objek.</p>
+</aside>
+<ol type="1" start="14">
+<li>Setelah itu save, lalu buka tab terminal baru di vs-code (agar server <code>npm start</code> milik react tadi tetap running) dengan cara klik icon + seperti di gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 217.00px" src="img/5636bb5b461b1195.png"></p>
+<ol type="1" start="15">
+<li>Ketikkan perintah berikut dan pastikan Anda berada di root project <code>listArtikel.json</code> berada.</li>
+</ol>
+<pre><code>json-server --watch listArtikel.json --port 3001</code></pre>
+<ol type="1" start="16">
+<li>Sekarang Anda dapat merefresh halaman react di browser dan seharusnya data artikel sudah tampil sesuai isi dari <code>listArtikel.json</code>.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/09_global_api_hooks,</code> lalu screenshot hasil dbrowser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h2 is-upgraded><strong>Membuat Global API Service POST</strong></h2>
+<ol type="1" start="1">
+<li>Buka file <code>src/services/index.js</code> dan tambahkan kode POST berikut ini.</li>
+</ol>
+<pre><code>const PostAPI = (path, data) =&gt; {
+  const promise = new Promise((resolve, reject) =&gt; {
+    fetch(`${baseUrlApi}/${path}`, {
+      method: &#39;post&#39;,
+      headers: {
+        &#39;Accept&#39;: &#39;application/json&#39;,
+        &#39;Content-Type&#39;: &#39;application/json&#39;
+      },
+      body: JSON.stringify(data)
+    })
+      .then((result) =&gt; {
+        resolve(result);
+      }, (err) =&gt; {
+        reject(err);
+      })
+  })
+  return promise;
+}</code></pre>
+<ol type="1" start="2">
+<li>Kemudian tambahkan konstanta <code>postNewsBlog</code> untuk data yang dikirim.</li>
+</ol>
+<pre><code>const postNewsBlog = (dataYgDikirim) =&gt; PostAPI(&#39;posts&#39;, dataYgDikirim);</code></pre>
+<ol type="1" start="3">
+<li>Lalu bagian konstanta API kita tambahkan method di atas seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 118.00px" src="img/805209e02c42b05.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Hooks" duration="15">
+        <p>Untuk mempelajari lebih lanjut tentang Hooks dapat membaca <a href="https://id.reactjs.org/docs/hooks-intro.html" target="_blank">di sini</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: ..." duration="50">
+        <aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder yang ada di struktur tersebut ke folder laporan <code>src/07_context_hoc,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://dev.to/mmcshinsky/a-simple-approach-to-managing-api-calls-1lo6" target="_blank">A Simple Approach to Managing API Calls</a></li>
+<li><a href="https://github.com/ryanmcdermott/clean-code-javascript" target="_blank">Clean Code concepts adapted for JavaScript</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://id.reactjs.org/docs/hooks-intro.html" target="_blank">Dokumentasi resmi React Hooks</a></li>
+<li><a href="https://www.smashingmagazine.com/2020/04/react-hooks-best-practices/" target="_blank">Best Practices With React Hooks</a></li>
+<li><a href="https://medium.com/codelabs-unikom/mengenal-react-hooks-63aafde79da0" target="_blank">Mengenal React Hooks</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

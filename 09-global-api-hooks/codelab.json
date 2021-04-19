@@ -1,0 +1,31 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-04-19T05:32:55Z",
+  "id": "09-global-api-hooks",
+  "duration": 135,
+  "title": "#09 | Global API dan Hooks",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Global API dan Hooks di ReactJS.",
+  "source": "1pulZHwB9NORNqNVtOewj9CMezPxzij6b7-pB0ATgPh8",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "api",
+    "global api",
+    "hooks",
+    "pemrograman-berbasis-framework",
+    "reactjs",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "09-global-api-hooks"
+}

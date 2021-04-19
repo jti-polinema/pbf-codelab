@@ -58,7 +58,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Global API" duration="30">
+      <google-codelab-step label="Global API" duration="15">
         <h2 is-upgraded><strong>Apa itu Global API ?</strong></h2>
 <p>Pada <a href="https://jti-polinema.github.io/pbf-codelab/05-api-router-reactjs/#1" target="_blank">Codelab 5</a> kita pernah mempelajari tentang interaksi dengan API. Kita dihadapkan dengan mengelola banyak daftar alamat API yang disediakan dan mengumpulkannya menjadi satu kelompok. Sehingga kita dapat menambah, mengurangi, ataupun memperbaiki daftar API pada satu tempat.</p>
 <p>Salah satu caranya adalah dengan mengelola/mengatur pemanggilan API secara GLOBAL, sehingga kita tidak perlu melakukan &#34;coding ulang&#34; API yang memiliki karakter yang sama. Contoh saat kita memanggil API (GET) untuk mendapatkan list Artikel, list komentar, dan list pengguna. API untuk ketiga proses tersebut sebenarnya sama, yang membedakan hanya alamat url API yang dituju, sehingga kita bisa meletakkan list API pada satu tempat untuk mempermudah dalam pengelolaannya.</p>
@@ -72,14 +72,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Praktikum 1: Membuat Global API" duration="40">
+      <google-codelab-step label="Praktikum 1: Membuat Global API" duration="50">
         <p>Pada praktikum ini, dibagi menjadi beberapa bagian praktikum yaitu membuat global API untuk service GET, POST, Delete, dan manajemennya. Kita mulai dengan membuat global API untuk service GET sebagai berikut.</p>
 <h2 is-upgraded><strong>Membuat Global API Service GET</strong></h2>
 <ol type="1" start="1">
 <li>Anda dapat membuat project baru React atau melanjutkan praktikum dari Codelab 5 tentang interaksi dengan API.</li>
 <li>Buatlah folder <code>services</code> dalam folder <code>src</code>, lalu buat file <code>index.js</code> di dalam folder <code>services</code> seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 141.00px" src="img/ea816f0468300a4f.png"></p>
+<p class="image-container"><img style="width: 141.00px" src="img\ea816f0468300a4f.png"></p>
 <ol type="1" start="3">
 <li>Buat konstanta <code>baseUrlApi</code> di <code>src/services/index.js</code> sebagai alamat url utama API yang digunakan. Anda dapat mengaturnya secara terpusat di variabel <code>baseUrlApi</code> ini.</li>
 </ol>
@@ -112,12 +112,12 @@
 
 export default API;</code></pre>
 <ol type="1" start="7">
-<li>Lalu pindah ke <code>src/App.js</code> lalu import API yang tadi sudah dibuat.</li>
+<li>Buat folder <code>src/components</code> dan isi file baru dengan nama <code>BlogPost.js</code>.</li>
 </ol>
 <pre><code>import React from &#39;react&#39;;
 import API from &#39;../services&#39;;</code></pre>
 <ol type="1" start="8">
-<li>Buat komponen <code>DaftarArtikel</code> untuk menampilkan isi artikel.</li>
+<li>Buat komponen <code>DaftarArtikel</code> di <code>src/components/BlogPost.js</code> untuk menampilkan isi artikel.</li>
 </ol>
 <pre><code>function DaftarArtikel(props){
   return(
@@ -166,6 +166,24 @@ import API from &#39;../services&#39;;</code></pre>
   }
 }</code></pre>
 <ol type="1" start="10">
+<li>Kemudian pindah ke file <code>src/App.js</code> kita panggil class <code>BlogPost</code> untuk dirender.</li>
+</ol>
+<pre><code>import React from &#39;react&#39;;
+import BlogPost from &#39;./components/BlogPost&#39;;
+
+class App extends React.Component {
+
+  render () {
+    return (
+      &lt;div&gt;
+        &lt;BlogPost /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;</code></pre>
+<ol type="1" start="11">
 <li>Selanjutnya pindah ke <code>src/index.js</code> seperti biasa kita render.</li>
 </ol>
 <pre><code>import ReactDOM from &#39;react-dom&#39;;
@@ -175,29 +193,29 @@ ReactDOM.render(
   &lt;App /&gt;,
   document.getElementById(&#39;root&#39;)
 );</code></pre>
-<ol type="1" start="11">
+<ol type="1" start="12">
 <li>Kemudian save semua dan run <code>npm start</code> untuk melihat hasilnya di browser. Apa yang terjadi ? Apakah tampil data artikel tersebut ?</li>
 </ol>
 <h2 is-upgraded><strong>Membuat Restful API Lokal</strong></h2>
-<ol type="1" start="12">
+<ol type="1" start="13">
 <li>Dari praktikum sebelumnya, tentu data artikel belum tampil karena server API belum kita jalankan di alamat <a href="http://localhost:3001" target="_blank">http://localhost:3001</a> . Kita siapkan server API dengan membuat file <code>listArtikel.json</code> di root project React kita.</li>
 </ol>
-<p class="image-container"><img style="width: 161.00px" src="img/13dbc885fde9b299.png"></p>
-<ol type="1" start="13">
+<p class="image-container"><img style="width: 161.00px" src="img\13dbc885fde9b299.png"></p>
+<ol type="1" start="14">
 <li>Buka file <code>listArtikel.json</code> lalu isi datanya dengan copy dari <a href="https://jsonplaceholder.typicode.com/posts" target="_blank">https://jsonplaceholder.typicode.com/posts</a> </li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img/9eaf66cfb36a5c6a.png"></p>
-<aside class="special"><p><strong>Catatan:</strong> Bagian terluar data API harus berupa objek dengan tanda kurung kurawal <code>{ ... }</code> lalu didalamnya terdapat data <code>"posts"</code> yang isinya berupa array objek.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\9eaf66cfb36a5c6a.png"></p>
+<aside class="special"><p><strong>Catatan:</strong> Bagian terluar data API harus berupa objek dengan tanda kurung kurawal <code>{ ... }</code> lalu didalamnya terdapat data <code>&#34;posts&#34;</code> yang isinya berupa array objek.</p>
 </aside>
-<ol type="1" start="14">
+<ol type="1" start="15">
 <li>Setelah itu save, lalu buka tab terminal baru di vs-code (agar server <code>npm start</code> milik react tadi tetap running) dengan cara klik icon + seperti di gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 217.00px" src="img/5636bb5b461b1195.png"></p>
-<ol type="1" start="15">
+<p class="image-container"><img style="width: 217.00px" src="img\5636bb5b461b1195.png"></p>
+<ol type="1" start="16">
 <li>Ketikkan perintah berikut dan pastikan Anda berada di root project <code>listArtikel.json</code> berada.</li>
 </ol>
 <pre><code>json-server --watch listArtikel.json --port 3001</code></pre>
-<ol type="1" start="16">
+<ol type="1" start="17">
 <li>Sekarang Anda dapat merefresh halaman react di browser dan seharusnya data artikel sudah tampil sesuai isi dari <code>listArtikel.json</code>.</li>
 </ol>
 <aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/09_global_api_hooks,</code> lalu screenshot hasil dbrowser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
@@ -231,7 +249,79 @@ ReactDOM.render(
 <ol type="1" start="3">
 <li>Lalu bagian konstanta API kita tambahkan method di atas seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 118.00px" src="img/805209e02c42b05.png"></p>
+<p class="image-container"><img style="width: 118.00px" src="img\805209e02c42b05.png"></p>
+<ol type="1" start="4">
+<li>Selanjutnya pindah ke file <code>src/components/BlogPost.js</code> tambahkan variabel <code>postArtikel</code> untuk menampung data artikel yang akan dikirim melalui method POST.</li>
+</ol>
+<p class="image-container"><img style="width: 451.00px" src="img\467e620cec9f8b4b.png"></p>
+<ol type="1" start="5">
+<li>Kemudian bagian <code>render()</code> kita tambahkan form untuk submit artikel seperti kode berikut.</li>
+</ol>
+<pre><code>render () {
+    const { dataArtikel, postArtikel } = this.state;
+
+    return (
+      &lt;div&gt;
+        &lt;div&gt;
+          &lt;form onSubmit={this.handleTombolSimpan}&gt;
+            &lt;label&gt;
+              Judul Artikel:
+              &lt;input type=&#34;text&#34; name=&#34;title&#34; defaultValue={postArtikel.title} onChange={this.handleOnChange} /&gt;
+            &lt;/label&gt;
+            &lt;label&gt;
+              Isi Artikel:
+              &lt;input type=&#34;text&#34; name=&#34;body&#34; defaultValue={postArtikel.body} onChange={this.handleOnChange} /&gt;
+            &lt;/label&gt;
+            &lt;input type=&#34;submit&#34; value=&#34;Simpan&#34; /&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;hr&gt;&lt;/hr&gt;
+        &lt;h2&gt;Daftar Artikel&lt;/h2&gt;
+        {
+          dataArtikel.map(artikel =&gt; {
+            return &lt;DaftarArtikel key={artikel.id} judul={artikel.title} isiArtikel={artikel.body} /&gt;
+          })
+        }
+      &lt;/div&gt;
+    );
+  }</code></pre>
+<ol type="1" start="6">
+<li>Selanjutnya kita buat fungsi <code>handleTombolSimpan</code> di dalam class <code>BlogPost</code>.</li>
+</ol>
+<pre><code>handleTombolSimpan = (e) =&gt; {
+    e.preventDefault();
+
+    API.postNewsBlog(this.state.postArtikel)
+      .then((response) =&gt; {
+        this.ambilDataDariServerAPI();    // refresh data
+        alert(&#39;Data berhasil disimpan!&#39;);
+      });
+  }</code></pre>
+<ol type="1" start="7">
+<li>Lalu buat fungsi <code>handleOnChange</code></li>
+</ol>
+<pre><code>handleOnChange = (e) =&gt; {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState(prevState =&gt; {
+      prevState.postArtikel[name] = value;
+      return {
+        postArtikel: prevState.postArtikel
+      };
+    });
+  }</code></pre>
+<ol type="1" start="8">
+<li>Save semua pekerjaan dan silakan refresh di browser. Apakah sudah bisa menambahkan data artikel baru ?</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/09_global_api_hooks,</code> lalu screenshot hasil dbrowser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+<h2 is-upgraded><strong>Membuat Global API Service DELETE</strong></h2>
+<ol type="1" start="1">
+<li>XX</li>
+<li>XX</li>
+<li>XX</li>
+</ol>
+<h2 is-upgraded><strong>Mengelola Global API Service</strong></h2>
 
 
       </google-codelab-step>

@@ -317,25 +317,144 @@ ReactDOM.render(
 </aside>
 <h2 is-upgraded><strong>Membuat Global API Service DELETE</strong></h2>
 <ol type="1" start="1">
-<li>XX</li>
-<li>XX</li>
-<li>XX</li>
+<li>Buka file <code>src/services/index.js</code> dan tambahkan kode DELETE berikut ini.</li>
 </ol>
+<pre><code>const DeleteAPI = (path, data) =&gt; {
+  const promise = new Promise((resolve, reject) =&gt; {
+    fetch(`${baseUrlApi}/${path}/${data}`, { method: &#39;DELETE&#39; })
+      .then((result) =&gt; {
+        resolve(result);
+      }, (err) =&gt; {
+        reject(err);
+      })
+  })
+  return promise;
+}</code></pre>
+<ol type="1" start="2">
+<li>Kemudian tambahkan konstanta <code>deleteNewsBlog</code> untuk data yang dikirim.</li>
+</ol>
+<pre><code>const deleteNewsBlog = (dataYgDihapus) =&gt; DeleteAPI(&#39;posts&#39;, dataYgDihapus);</code></pre>
+<ol type="1" start="3">
+<li>Lalu bagian konstanta API kita tambahkan method di atas seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 136.00px" src="img\9e8c9bcb219b9d8a.png"></p>
+<ol type="1" start="4">
+<li>Selanjutnya pindah ke file <code>src/components/BlogPost.js</code> bagian fungsi <code>render()</code> tambahkan tombol <code>Hapus</code>.</li>
+</ol>
+<pre><code>&lt;h2&gt;Daftar Artikel&lt;/h2&gt;
+        {
+          dataArtikel.map(artikel =&gt; {
+            return (
+              &lt;div key={artikel.id}&gt;
+                &lt;DaftarArtikel judul={artikel.title} isiArtikel={artikel.body} /&gt;
+                &lt;Button variant=&#34;danger&#34; value={artikel.id} onClick={this.handleTombolHapus}&gt;Hapus&lt;/Button&gt;
+                &lt;hr&gt;&lt;/hr&gt;
+              &lt;/div&gt;
+            )
+          })
+        }</code></pre>
+<aside class="special"><p><strong>Catatan:</strong> Komponen <code>Button</code> adalah dari <code>react-bootstrap</code>. Anda dapat menggantinya dengan <code>button</code> HTML biasa jika tidak menggunakan <code>react-bootstrap</code>.</p>
+</aside>
+<ol type="1" start="5">
+<li>Terakhir buat fungsi <code>handleTombolHapus</code> yang berisi kode berikut.</li>
+</ol>
+<pre><code>handleTombolHapus = (e) =&gt; {
+    e.preventDefault();
+
+    API.deleteNewsBlog(e.target.value)
+      .then((response) =&gt; {
+        this.ambilDataDariServerAPI();    // refresh data
+        alert(&#39;Data berhasil dihapus!&#39;);
+      });
+  }</code></pre>
+<ol type="1" start="6">
+<li>Silakan coba refresh aplikasi react Anda di browser, seharusnya sudah muncul tombol untuk menghapus artikel yang dipilih.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/09_global_api_hooks,</code> lalu screenshot hasil dbrowser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
 <h2 is-upgraded><strong>Mengelola Global API Service</strong></h2>
+<p>Pada global API yang telah kita lakukan pada praktikum di atas. Kita mengetahui bahwa saat kita benar-benar melakukan coding untuk membuat API, kita akan dihadapkan pada banyak URL API yang akan kita sediakan. Sehingga kita butuh mengelola Global API untuk lebih teratur.</p>
+<p>Salah satu cara untuk mengelola Global API adalah dengan memisahkan API berdasarkan <em>action</em>-nya (GET, POST, DELETE). Sehingga jika terjadi error pada DELETE API, kita cukup akan membuka Global API bagian DELETE yang akan kita perbaiki.</p>
+<p>Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Buat folder baru di <code>src/services/API</code> dan <code>src/services/Artikel</code> beserta file baru didalamnya seperti pada struktur di bawah ini.</li>
+</ol>
+<p class="image-container"><img style="width: 153.00px" src="img\458236ac51bcaa4f.png"></p>
+<aside class="special"><p><strong>Penjelasan:</strong> Folder <code>API</code> berisi konfigurasi dan method service yang dapat digunakan secara dinamis dengan data apapun. Sedangkan folder <code>Artikel</code> berisi method service yang khusus mengelola data artikel.</p>
+</aside>
+<ol type="1" start="2">
+<li>Isi file <code>src/services/API/Config.js</code> adalah sebagai berikut. File <code>Config.js</code> ini bisa menampung variabel global yang digunakan selama proses API.</li>
+</ol>
+<p class="image-container"><img style="width: 555.00px" src="img\687787372cc94ff5.png"></p>
+<ol type="1" start="3">
+<li>Isi file <code>src/services/API/Get.js</code> adalah sebagai berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 468.00px" src="img\82a5c266a856d07.png"></p>
+<ol type="1" start="4">
+<li>Selanjutnya file <code>Post.js</code> dan <code>Delete.js</code> isinya sesuai dengan praktikum sebelumnya, hanya saja dipindah di file terpisah. Silakan disesuaikan seperti pada file <code>Get.js</code>!</li>
+<li>Kemudian pada file <code>src/services/Artikel/index.js</code> berubah menjadi seperti berikut ini.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\b9a4d9598506b625.png"></p>
+<ol type="1" start="6">
+<li>Terakhir menyesuaikan <code>import</code> pada bagian komponen <code>BlogPost.js</code> dengan memanggil API pada bagian folder <code>Artikel</code>.</li>
+</ol>
+<p class="image-container"><img style="width: 363.00px" src="img\7167c6b8594406f5.png"></p>
+<ol type="1" start="7">
+<li>Simpan semua pekerjaan dan lihat hasilnya di browser. Seharusnya aplikasi react tetap berjalan normal seperti sebelumnya. Hanya saja struktur folder API yang telah kita buat menjadi lebih teratur dan mudah untuk dikelola.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/09_global_api_hooks,</code> lalu screenshot hasil dbrowser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum 1" duration="50">
+        <p>Buatlah folder baru di <code>src/services/</code><strong><code>Komentar</code></strong> yang digunakan untuk mengelola data komentar. Buatlah komponen baru dengan nama <code>Komentar.js</code> di folder components yang berfungsi untuk mengelola data komentar berdasarkan API yang telah dibuat!</p>
+<p>Jangan lupa menambahkan objek di database json &#34;<code>comment</code>&#34; untuk menampung data komentar. Atribut bisa terdiri dari userId, nama, komentar, dan id.</p>
+<p class="image-container"><img style="width: 441.00px" src="img\3791634deb93e7e8.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Hooks" duration="15">
-        <p>Untuk mempelajari lebih lanjut tentang Hooks dapat membaca <a href="https://id.reactjs.org/docs/hooks-intro.html" target="_blank">di sini</a>.</p>
+        <p>Hook dalam bahasa inggris jika diterjemahkan ke bahasa indonesia mempunyai arti &#34;menghubungkan&#34; atau &#34;mengaitkan&#34;. Dalam bentuk plural hooks berarti banyak yang dihubungkan.</p>
+<p>Hooks merupakan fungsi yang memungkinkan Anda untuk &#34;mengaitkan&#34; state dan fitur-fitur lifecycle React dari function component. Hooks tidak dapat berfungsi didalam kelas — Hooks memungkinkan menggunakan React tanpa kelas. (tidak direkomendasikan membuat ulang komponen yang sudah ada tetapi Anda dapat menggunakan Hooks untuk komponen yang baru jika diinginkan.)</p>
+<p>Hooks merupakan fitur baru di React sejak versi 16.8. Dengan Hooks, kita dapat menggunakan state dan fitur React yang lain tanpa perlu menulis sebuah kelas baru. Perhatikan contoh kode di bawah ini.</p>
+<pre><code>import React, { useState } from &#39;react&#39;;
+
+function ContohHook () {
+  // Mendeklarasikan variabel state baru, yaitu &#34;count&#34;
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Anda mengklik {count} kali&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Klik aku
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default ContohHook;</code></pre>
+<p><code>useState</code> adalah fungsi baru yang akan kita pelajari di sini. Kode diatas dapat merender tampilan counter dengan button yang bisa melalukan increment. Anda dapat mencobanya langsung pada aplikasi react Anda.</p>
+<h2 is-upgraded><strong>Hooks Tidak Merusak Struktur Komponen yang Sudah Ada</strong></h2>
+<p>Sebelum  kita melanjutkan, perlu diingat bahwa hooks itu:</p>
+<ul>
+<li><strong>Bersifat opsional</strong>. Artinya hooks tidak wajib Anda gunakan pada aplikasi React. Anda dapat mencoba Hooks di beberapa komponen tanpa perlu menulis ulang kode. Tapi Anda tidak harus belajar atau menggunakan Hooks jika belum ingin menggunakannya.</li>
+<li><strong>100% kompatibel dengan versi react sebelumnya</strong>. Tidak perlu khawatir jika menggunakan hooks pada aplikasi react yang sudah Anda miliki.</li>
+<li><strong>Tersedia sekarang sejak versi 16.8.0</strong>.</li>
+</ul>
+<p>Selain itu ada beberapa hal yang perlu diperhatikan terkait hooks, yaitu:</p>
+<p><strong>Fitur Class tidak akan dihapus dari React</strong>. Hadirnya fitur hooks bukan berarti menggantikan fitur class yang telah Anda pelajari sebelumnya. Untuk strategi penggunaan hooks secara bertahap, dapat dibaca pada link <a href="https://reactjs.org/docs/hooks-intro.html#gradual-adoption-strategy" target="_blank">ini</a>.</p>
+<p><strong>Hooks tidak akan menggantikan pengetahuan tentang konsep React yang telah Anda pelajari</strong>. Justru fitur Hooks menyediakan akses langsung API ke konsep React yang sudah dipelajari seperti props, state, context, refs, dan lifecycle. </p>
+<p>Untuk mempelajari lebih lanjut tentang Hooks dapat membaca <a href="https://id.reactjs.org/docs/hooks-intro.html" target="_blank">di sini</a>.</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Praktikum 2: ..." duration="50">
-        <aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder yang ada di struktur tersebut ke folder laporan <code>src/07_context_hoc,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
-</aside>
-
+        
 
       </google-codelab-step>
     

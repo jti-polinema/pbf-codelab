@@ -1,4 +1,5 @@
 # Codelab: Pemrograman Berbasis Framework
+
 Codelab Pemrograman Berbasis Framework (ReactJS) | Semester Genap 2020/2021
 
 Penulis: Habibie Ed Dien
@@ -14,6 +15,12 @@ Penulis: Habibie Ed Dien
 [05 - API dan Router ReactJS](05-api-router-reactjs/)
 
 [06 - React Redux](06-redux-reactjs/)
+
+[07 - Context dan HOC](07-context-hoc/)
+
+[08 - UTS](#)
+
+[09 - Global API dan Hooks](09-global-api-hooks/)
 
 <hr>
 

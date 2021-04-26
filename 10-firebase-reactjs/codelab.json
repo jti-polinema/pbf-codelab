@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-04-26T06:21:44Z",
+  "id": "10-firebase-reactjs",
+  "duration": 165,
+  "title": "#10 | Firebase di ReactJS",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Firebase di ReactJS.",
+  "source": "1_JfgWj7UK_5hUUdNVDFWzLicnd4ojvACjLeYu1mcBME",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "firebase",
+    "pemrograman-berbasis-framework",
+    "reactjs",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "10-firebase-reactjs"
+}

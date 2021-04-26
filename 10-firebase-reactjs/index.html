@@ -1,0 +1,348 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#10 | Firebase di ReactJS</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="10-firebase-reactjs"
+                  title="#10 | Firebase di ReactJS"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-04-26</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Firebase di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang penggunaan Firebase di ReactJS.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 2</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep dan implementasi Firebase di ReactJS</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Firebase" duration="5">
+        <h2 is-upgraded><strong>Apa itu Firebase ?</strong></h2>
+<p>Firebase adalah produk dari Google yang menyediakan fasilitas untuk berbagai platform mulai dari autentikasi, penyimpanan, machine learning, dan lain sebagainya.</p>
+<p>Pada codelab kali ini, kita akan belajar untuk mengintegrasikan aplikasi React dengan firebase. Kita akan membuat fitur Register dan Login menggunakan fasilitas yang disediakan oleh firebase.</p>
+<p>Silakan lanjutkan ke langkah berikutnya untuk memulai praktikum pada codelab ini.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Membuat Form Register" duration="50">
+        <p>Pada praktikum ini, kita akan membuat form register yang nantinya akan dihubungkan langsung dengan firebase. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Anda dapat membuat project baru React atau melanjutkan praktikum dari Codelab sebelumnya.</li>
+<li>Buatlah komponen <code>Register.js</code> dalam folder <code>src/components</code>, lalu buat <code>function Register</code>.</li>
+</ol>
+<pre><code>function Register(){
+ ...
+}</code></pre>
+<ol type="1" start="3">
+<li>Buat tiga variabel hooks dan menggunakan context di dalam <code>function Register()</code> seperti berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 356.00px" src="img\48fdf403b7c9c479.png"></p>
+<ol type="1" start="4">
+<li>Kemudian kita import bagian yang dibutuhkan di file <code>Register.js</code>.</li>
+</ol>
+<p class="image-container"><img style="width: 408.00px" src="img\e4431dafa29fce94.png"></p>
+<ol type="1" start="5">
+<li>Buat konstanta <code>AuthContext</code> di <code>src/App.js</code> seperti berikut.</li>
+</ol>
+<pre><code>export const AuthContext = React.createContext(null);</code></pre>
+<ol type="1" start="6">
+<li>Selanjutnya buat return form Register pada komponen <code>function Register()</code>.</li>
+</ol>
+<pre><code>return (
+    &lt;div&gt;
+      &lt;h1&gt;Register&lt;/h1&gt;
+      &lt;form onSubmit={e =&gt; handleForm(e)}&gt;
+        &lt;input
+          value={email}
+          onChange={e =&gt; setEmail(e.target.value)}
+          name=&#34;email&#34;
+          type=&#34;email&#34;
+          placeholder=&#34;email&#34;
+        /&gt;
+        &lt;input
+          value={password}
+          onChange={e =&gt; setPassword(e.target.value)}
+          name=&#34;password&#34;
+          type=&#34;password&#34;
+          placeholder=&#34;password&#34;
+        /&gt;
+        &lt;hr /&gt;
+        &lt;button className=&#34;googleBtn&#34; type=&#34;button&#34;&gt;
+          &lt;img
+            src=&#34;https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg&#34;
+            alt=&#34;logo&#34;
+          /&gt;
+          Register With Google
+        &lt;/button&gt;
+        &lt;button type=&#34;submit&#34;&gt;Register&lt;/button&gt;
+        &lt;span&gt;{error}&lt;/span&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );</code></pre>
+<ol type="1" start="7">
+<li>Buat fungsi <code>handleForm</code> pada komponen Register yang sementara isinya seperti berikut. Nanti kita akan ganti dengan fungsi firebase.</li>
+</ol>
+<p class="image-container"><img style="width: 239.00px" src="img\721e850e712a9c57.png"></p>
+<ol type="1" start="8">
+<li>Jangan lupa di luar <code>function Register()</code> perlu ditambahkan sintaks export agar dapat digunakan pada file <code>App.js</code> nantinya.</li>
+</ol>
+<pre><code>export default Register;</code></pre>
+<h2 is-upgraded><strong>Membuat Komponen Header</strong></h2>
+<ol type="1" start="9">
+<li>Kita buat komponen <code>Header</code> yang berfungsi untuk menampilkan menu Register dan Login. Buat file <code>Header.js</code> di <code>src/components</code>. Isinya sebagai berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 444.00px" src="img\8b5140aacf792bc5.png"></p>
+<ol type="1" start="10">
+<li>Kemudian buat file <code>routes.js</code> di folder <code>src/components</code>.</li>
+</ol>
+<p class="image-container"><img style="width: 610.00px" src="img\d1ac4bc07501e926.png"></p>
+<h2 is-upgraded><strong>Membuat App Utama</strong></h2>
+<ol type="1" start="11">
+<li>Kita pindah ke file  <code>src/App.js</code> yang menentukan tampilan render pada aplikasi React kita.</li>
+</ol>
+<p class="image-container"><img style="width: 492.00px" src="img\51b035fb6cd84e4.png"></p>
+<ol type="1" start="12">
+<li>Jangan lupa import yang diperlukan pada file <code>src/App.js</code></li>
+</ol>
+<pre><code>import React, { useState } from &#39;react&#39;;
+import { Route, BrowserRouter as Router, Switch } from &#39;react-router-dom&#39;;
+import Header from &#39;./components/Header&#39;;
+import routes from &#39;./components/routes&#39;;
+import &#39;./App.css&#39;;</code></pre>
+<aside class="special"><p><strong>Catatan:</strong> Kita menggunakan <code>react-router-dom</code> seperti yang telah dilakukan pada praktikum codelab sebelumnya.</p>
+</aside>
+<ol type="1" start="13">
+<li>Selanjutnya perlu disesuaikan style pada <code>App.css</code>.</li>
+</ol>
+<pre><code>.App {
+  font-family: sans-serif;
+  padding: 50px;
+}
+
+h1 {
+  margin: 0 0 25px 0;
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  max-width: 450px;
+  width: auto;
+  border: none;
+  margin: 0 0 25px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding: 10px;
+}
+
+button {
+  max-width: 450px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border: none;
+  padding: 7px;
+  text-align: center;
+  cursor: pointer;
+}
+
+button[type=&#34;submit&#34;] {
+  background-color: #4c566a;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  border-radius: 5px;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.googleBtn img {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0 5px;
+  vertical-align: middle;
+}
+
+.nav {
+  display: flex;
+  text-decoration: none;
+  list-style-type: none;
+  justify-content: flex-start;
+  margin: 0 0 50px;
+  padding: 0;
+}
+
+.nav li {
+  margin: 0 10px;
+}</code></pre>
+<ol type="1" start="14">
+<li>Simpan semua pekerjaan lalu lihat hasilnya di browser. Seharusnya form register sudah tampil seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 544.00px" src="img\eb84bbdaf91fc61f.png"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/10_firebase_reactjs,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Membuat Form Login" duration="10">
+        <p>Melanjutkan dari praktikum 1, kita akan membuat form login. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Buat komponen login di <code>src/components/Login.js</code> yang isinya sama persis dengan komponen <code>Register.js</code> hanya saja berbeda teks pada bagian <code>return</code>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\3f44e2f139774a44.png"></p>
+<ol type="1" start="2">
+<li>Kemudian pada file <code>src/components/routes.js</code> kita tambahkan komponen <code>Login</code></li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\e0a0532e581dd982.png"></p>
+<ol type="1" start="3">
+<li>Terakhir save semua file, lalu lihat hasilnya di browser. Seharusnya sudah tampil menu dan form login seperti pada gambar berikut ini.</li>
+</ol>
+<p class="image-container"><img style="width: 543.00px" src="img\70ac241a00607600.png"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/10_firebase_reactjs,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 3: Membuat Koneksi ke Firebase" duration="50">
+        <p>Pada praktikum kali ini, kita akan menghubungkan form Registerd dan Login dengan Firebase. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Silakan buka terminal atau command prompt untuk memasang library pada project React kita dengan perintah berikut.</li>
+</ol>
+<pre><code>npm install --save firebase</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Jika terjadi npm error saat pemasangan firebase, maka Anda dapat menjalankan perintah <code>npm cache clean --force</code> dengan menjalankan terminal atau CMD sebagai administrator.</p>
+</aside>
+<ol type="1" start="2">
+<li>Sembari menunggu proses instalasi firebase selesai, silakan buka web firebase di <a href="https://console.firebase.google.com/" target="_blank">https://console.firebase.google.com/</a> </li>
+<li>Buat project baru dengan pilih <strong>Add project</strong></li>
+</ol>
+<p class="image-container"><img style="width: 548.00px" src="img\93639600d866a202.jpeg"></p>
+<ol type="1" start="4">
+<li>Kemudian beri nama project, misalnya <strong>Belajar React</strong></li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\45be44d068d508fb.jpeg"></p>
+<ol type="1" start="5">
+<li>Langkah selanjutnya dapat mengaktifkan Google Analytics yang berfungsi untuk melacak pengguna yang mengakses aplikasi React kita. Fungsi ini juga dapat dimatikan jika hanya untuk latihan saja, bukan untuk aplikasi sesungguhnya.</li>
+</ol>
+<p class="image-container"><img style="width: 616.00px" src="img\7c5d3ab4b4c8d254.jpeg"></p>
+<ol type="1" start="6">
+<li>Jika kita memilih untuk mengaktifkan Google Analytics, maka akan tampil seperti pada gambar berikut untuk memilih pada akun mana akan diterapkan.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\b4826aadbd5f7ab2.jpeg"></p>
+<ol type="1" start="7">
+<li>Selanjutnya, klik <strong>Create project</strong> untuk membuat project baru pada firebase. Tunggu hingga proses pembuatan project firebase selesai.</li>
+</ol>
+<p class="image-container"><img style="width: 307.00px" src="img\3be8e38be36b058d.jpeg"></p>
+<ol type="1" start="8">
+<li>Selanjutnya pilih jenis aplikasi web untuk aplikasi React kita.</li>
+</ol>
+<p class="image-container"><img style="width: 381.00px" src="img\ed0802fe6535a92c.jpeg"></p>
+<ol type="1" start="9">
+<li>Setelah itu kita akan mendapatkan script konfigurasi yang akan menjadi penghubung dengan project React kita. Salin script tersebut lalu tempel pada file baru di dalam folder <code>src</code> yang kita beri nama <code>firebase.config.js</code> (gambar dibawah adalah contoh, sesuaikan script yang anda dapat dari firebase).</li>
+</ol>
+<p class="image-container"><img style="width: 568.00px" src="img\94763a1b24ddc637.png"></p>
+<p>Paste di <code>src/firebase.config.js</code></p>
+<p class="image-container"><img style="width: 466.00px" src="img\103004da87838074.png"></p>
+<ol type="1" start="10">
+<li>Kembali ke web firebase lalu pilih <strong>Authentication &gt; get started</strong>, lalu bagian <strong>Sign-in method</strong> aktifkan untuk <strong>Email/Password</strong> dan <strong>Google sign-in</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\e1d7d18cdc011dce.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\e87eaf060fcc47cf.jpeg"></p>
+<ol type="1" start="11">
+<li>Jika sudah aktif kedua method sign-in tersebut, maka akan ada tanda enabled seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 617.00px" src="img\69cca6a454986839.jpeg"></p>
+<ol type="1" start="12">
+<li>Selanjutnya kita pindah ke project React di vs-code. Jika telah berhasil memasang firebase, maka perlu kita import library tersebut di file <code>src/App.js</code> lalu inisiasi dengan konfigurasi firebase yang sudah didapat dari web firebase tadi. </li>
+</ol>
+<p class="image-container"><img style="width: 403.00px" src="img\6780c696e58641c4.png"></p>
+<ol type="1" start="13">
+<li>Lalu buka komponen Register di <code>src/components/Register.js</code> lakukan tambahan <code>import firebase</code> dan ubah isi <code>handleForm</code> seperti berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 430.00px" src="img\584bd9b3dc786f99.png"></p>
+<ol type="1" start="14">
+<li>Save lalu coba untuk registrasi di browser seperti pada gambar berikut. Jika berhasil registrasi, maka status <em>Is logged in?</em> menjadi <strong>true</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 547.00px" src="img\67a1dd7458ee706a.jpeg"></p>
+<p>Kemudian ada tambahan data di web firebase seperti berikut.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\ec68ad8df342fd45.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="50">
+        <p>Buatlah </p>
+<aside class="warning"><p><strong>Perhatian:</strong> Jawaban Tugas Praktikum copy file dan folder satu project React tersebut ke folder laporan <code>src/10_firebase_reactjs,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://firebase.google.com/docs" target="_blank">Ringkasan Firebase</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

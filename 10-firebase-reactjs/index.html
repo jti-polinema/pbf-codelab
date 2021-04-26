@@ -298,6 +298,7 @@ button[type=&#34;submit&#34;] {
 <li>Jika sudah aktif kedua method sign-in tersebut, maka akan ada tanda enabled seperti pada gambar berikut.</li>
 </ol>
 <p class="image-container"><img style="width: 617.00px" src="img\69cca6a454986839.jpeg"></p>
+<h2 is-upgraded><strong>Membuat Koneksi Firebase di Form Register</strong></h2>
 <ol type="1" start="12">
 <li>Selanjutnya kita pindah ke project React di vs-code. Jika telah berhasil memasang firebase, maka perlu kita import library tersebut di file <code>src/App.js</code> lalu inisiasi dengan konfigurasi firebase yang sudah didapat dari web firebase tadi. </li>
 </ol>
@@ -312,12 +313,26 @@ button[type=&#34;submit&#34;] {
 <p class="image-container"><img style="width: 547.00px" src="img\67a1dd7458ee706a.jpeg"></p>
 <p>Kemudian ada tambahan data di web firebase seperti berikut.</p>
 <p class="image-container"><img style="width: 624.00px" src="img\ec68ad8df342fd45.jpeg"></p>
+<h2 is-upgraded><strong>Membuat Koneksi Firebase di Form Login</strong></h2>
+<ol type="1" start="1">
+<li>Buka komponen Login di <code>src/components/Login.js</code> lalu tambahkan <code>import firebase</code> dan isi <code>handleForm</code> diganti seperti berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 391.00px" src="img\26227bc7edf802ba.png"></p>
+<ol type="1" start="2">
+<li>Save lalu lihat hasilnya di browser. Silakan coba untuk login dengan email dan password yang tadi telah didaftarkan.</li>
+</ol>
+<p class="image-container"><img style="width: 533.00px" src="img\c33ae257ffa7baea.jpeg"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/10_firebase_reactjs,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Tugas Praktikum" duration="50">
-        <p>Buatlah </p>
+        <ol type="1" start="1">
+<li>Dari praktikum sebelumnya, tambahkan aksi pada tombol &#34;Login with Google&#34; dan &#34;Logout&#34; agar bisa melakukan login dan logout dengan akun Google yang sudah kita miliki.</li>
+<li>Tambahkan animasi loading saat melakukan registrasi dan login. Boleh menggunakan dari tema boostrap atau lainnya.</li>
+</ol>
 <aside class="warning"><p><strong>Perhatian:</strong> Jawaban Tugas Praktikum copy file dan folder satu project React tersebut ke folder laporan <code>src/10_firebase_reactjs,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
 
@@ -328,6 +343,10 @@ button[type=&#34;submit&#34;] {
         <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
 <h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
 <p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://dev.to/sivaneshs/add-google-login-to-your-react-apps-in-10-mins-4del" target="_blank">Add Google Login to your React Apps in 10 mins</a></li>
+<li><a href="https://firebase.google.com/docs/auth/web/google-signin?hl=id" target="_blank">Melakukan Autentikasi Menggunakan Login dengan Google pada JavaScript</a></li>
+</ul>
 <h2 is-upgraded><strong>Referensi</strong></h2>
 <ul>
 <li><a href="https://firebase.google.com/docs" target="_blank">Ringkasan Firebase</a></li>

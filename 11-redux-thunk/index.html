@@ -1,0 +1,562 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#11 | Redux Thunk</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="11-redux-thunk"
+                  title="#11 | Redux Thunk"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-05-03</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Redux-Thunk dan Firebase Login di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang penggunaan Redux-Thunk dan penerapannya dengan Firebase Login di ReactJS.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 2</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/05-api-router-reactjs" target="_blank">API dan Router di ReactJS</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/06-redux-reactjs" target="_blank">React Redux</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep dan implementasi Redux-Thunk di ReactJS</li>
+<li>Konsep dan implementasi Firebase Login dengan Redux-Thunk di ReactJS</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Redux Thunk" duration="5">
+        <h2 is-upgraded><strong>Apa itu &#34;Thunk&#34; ?</strong></h2>
+<p>Istilah &#34;thunk&#34; merupakan humoris atau candaan kata past tense dari &#34;think&#34;. Sebenarnya Redux Thunk adalah middleware yang memungkinkan Anda memanggil pembuat aksi yang mengembalikan fungsi sebagai ganti objek aksi. Fungsi itu menerima metode pengiriman penyimpanan, yang kemudian digunakan untuk mengirim aksi sinkron di dalam isi fungsi setelah operasi asinkron selesai.</p>
+<p>Kita mengetahui bahwa Redux mengembalikan dalam bentuk props actions yang didefinisikan oleh Reducers, namun masalahnya jika kita ingin mengembalikan sebuah function, Redux tidak dapat menanganinya. Oleh karena itu, kita membutuhkan middleware yang berfungsi untuk mengembalikan action. Jadi, Redux Thunk adalah sebuah middleware yang memungkinkan untuk menulis Action yang mengembalikan function, bukan action.</p>
+<p>Sebuah &#34;thunk&#34; adalah sebuah fungsi yang membungkus suatu ekspresi untuk dilakukan evaluasi nanti. Perhatikan contoh kode JavaScript berikut ini.</p>
+<pre><code>// calculation of 1 + 2 is immediate
+// x === 3
+let x = 1 + 2;
+ 
+// calculation of 1 + 2 is delayed
+// foo can be called later to perform the calculation
+// foo is a thunk!
+let foo = () =&gt; 1 + 2;</code></pre>
+<h2 is-upgraded><strong>Cara Menggunakan Redux Thunk</strong></h2>
+<p>Untuk menggunakan library ini, perlu kita install terlebih dahulu di project React kita. Caranya lakukan perintah berikut pada terminal atau console.</p>
+<pre><code>npm install --save redux-thunk</code></pre>
+<p>Kemudian untuk mengaktifkan Redux Thunk, gunakan fungsi <code>applyMiddleware()</code>:</p>
+<pre><code>import { createStore, applyMiddleware } from &#39;redux&#39;;
+import thunk from &#39;redux-thunk&#39;;
+import rootReducer from &#39;./reducers/index&#39;;
+ 
+// Note: this API requires redux@&gt;=3.1.0
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum: Membuat Login dengan Firebase dan Redux Thunk" duration="50">
+        <p>Pada praktikum ini, kita dapat melanjutkan dari codelab sebelumnya (<a href="https://jti-polinema.github.io/pbf-codelab/10-firebase-reactjs/" target="_blank">Codelab 10 - Firebase di ReactJS</a>). Praktikum ini akan membuat form login yang dapat mengarahkan ke halaman yang dilindungi dengan password. Jadi, halaman tersebut tidak akan bisa diakses kecuali user telah melakukan login. Untuk membuatnya, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Anda dapat membuat project baru React atau melanjutkan praktikum dari Codelab sebelumnya.</li>
+<li>Ubahlah isi kode <code>firebase.config.js</code> seperti berikut.</li>
+</ol>
+<pre><code>import firebase from &#34;firebase/app&#34;;
+import &#34;firebase/auth&#34;;
+
+export const firebaseConfig = {
+  apiKey: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  authDomain: &#34;belajar-react-a5c41.firebaseapp.com&#34;,
+  projectId: &#34;belajar-react-a5c41&#34;,
+  storageBucket: &#34;belajar-react-a5c41.appspot.com&#34;,
+  messagingSenderId: &#34;89033072745&#34;,
+  appId: &#34;1:89033072745:web:c89c3f385de98e527382f8&#34;,
+  measurementId: &#34;G-GG23TD3EDH&#34;
+};
+
+export const myFirebase = firebase.initializeApp(firebaseConfig);</code></pre>
+<ol type="1" start="3">
+<li>Buatlah folder dan file baru di <code>src/</code><strong><code>redux/actions/auth.js</code></strong> lalu isi dengan kode berikut.</li>
+</ol>
+<pre><code>import { myFirebase } from &#34;../../firebase.config&#34;;
+
+export const LOGIN_REQUEST = &#34;LOGIN_REQUEST&#34;;
+export const LOGIN_SUCCESS = &#34;LOGIN_SUCCESS&#34;;
+export const LOGIN_FAILURE = &#34;LOGIN_FAILURE&#34;;
+
+export const LOGOUT_REQUEST = &#34;LOGOUT_REQUEST&#34;;
+export const LOGOUT_SUCCESS = &#34;LOGOUT_SUCCESS&#34;;
+export const LOGOUT_FAILURE = &#34;LOGOUT_FAILURE&#34;;
+
+export const VERIFY_REQUEST = &#34;VERIFY_REQUEST&#34;;
+export const VERIFY_SUCCESS = &#34;VERIFY_SUCCESS&#34;;</code></pre>
+<ol type="1" start="4">
+<li>Kemudian tambahkan fungsi action dibawahnya.</li>
+</ol>
+<pre><code>const requestLogin = () =&gt; {
+  return {
+    type: LOGIN_REQUEST
+  };
+};
+
+const receiveLogin = user =&gt; {
+  return {
+    type: LOGIN_SUCCESS,
+    user
+  };
+};
+
+const loginError = () =&gt; {
+  return {
+    type: LOGIN_FAILURE
+  };
+};
+
+const requestLogout = () =&gt; {
+  return {
+    type: LOGOUT_REQUEST
+  };
+};
+
+const receiveLogout = () =&gt; {
+  return {
+    type: LOGOUT_SUCCESS
+  };
+};
+
+const logoutError = () =&gt; {
+  return {
+    type: LOGOUT_FAILURE
+  };
+};
+
+const verifyRequest = () =&gt; {
+  return {
+    type: VERIFY_REQUEST
+  };
+};
+
+const verifySuccess = () =&gt; {
+  return {
+    type: VERIFY_SUCCESS
+  };
+};</code></pre>
+<ol type="1" start="5">
+<li>Lalu tambahkan juga dibawahnya fungsi untuk login, logout, dan verifikasi akun dengan firebase seperti berikut.</li>
+</ol>
+<pre><code>export const loginUser = (email, password) =&gt; dispatch =&gt; {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(user =&gt; {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error =&gt; {
+      //Do something with the error if you want!
+      dispatch(loginError());
+    });
+}
+
+export const logoutUser = () =&gt; dispatch =&gt; {
+  dispatch(requestLogout());
+  myFirebase
+    .auth()
+    .signOut()
+    .then(() =&gt; {
+      dispatch(receiveLogout());
+    })
+    .catch(error =&gt; {
+      //Do something with the error if you want!
+      dispatch(logoutError());
+    });
+};
+
+export const verifyAuth = () =&gt; dispatch =&gt; {
+  dispatch(verifyRequest());
+  myFirebase.auth().onAuthStateChanged(user =&gt; {
+    if (user !== null) {
+      dispatch(receiveLogin(user));
+    }
+    dispatch(verifySuccess());
+  });
+};</code></pre>
+<ol type="1" start="6">
+<li>Selanjutnya buat folder dan file baru di <code>src/redux/</code><strong><code>reducers/auth.js</code></strong>.</li>
+</ol>
+<pre><code>import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
+  VERIFY_REQUEST,
+  VERIFY_SUCCESS
+} from &#34;../actions/auth&#34;;
+
+export default (
+  state = {
+    isLoggingIn: false,
+    isLoggingOut: false,
+    isVerifying: false,
+    loginError: false,
+    logoutError: false,
+    isAuthenticated: false,
+    user: {}
+  },
+  action
+) =&gt; {
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        isLoggingIn: true,
+        loginError: false
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isAuthenticated: true,
+        user: action.user
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isAuthenticated: false,
+        loginError: true
+      };
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        isLoggingOut: true,
+        logoutError: false
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isLoggingOut: false,
+        isAuthenticated: false,
+        user: {}
+      };
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isLoggingOut: false,
+        logoutError: true
+      };
+    case VERIFY_REQUEST:
+      return {
+        ...state,
+        isVerifying: true,
+        verifyingError: false
+      };
+    case VERIFY_SUCCESS:
+      return {
+        ...state,
+        isVerifying: false
+      };
+    default:
+      return state;
+  }
+};</code></pre>
+<ol type="1" start="7">
+<li>Buat file baru <code>index.js</code> di folder <code>reducers</code> tersebut yang isinya seperti berikut.</li>
+</ol>
+<pre><code>import { combineReducers } from &#34;redux&#34;;
+import auth from &#34;./auth&#34;;
+
+export default combineReducers({ auth });</code></pre>
+<ol type="1" start="8">
+<li>Buat file baru di <code>src/redux/</code><strong><code>configureStore.js</code></strong> untuk mengonfigurasi store kita dengan Redux Thunk. Jangan lupa library Redux Thunk diinstall seperti pada langkah materi sebelumnya pada codelab ini. Isi kode dari file <code>configureStore.js</code> adalah sebagai berikut.</li>
+</ol>
+<pre><code>import { applyMiddleware, createStore } from &#34;redux&#34;;
+import thunkMiddleware from &#34;redux-thunk&#34;;
+
+import { verifyAuth } from &#34;./actions/auth&#34;;
+import rootReducer from &#34;./reducers&#34;;
+
+export default function configureStore (persistedState) {
+  const store = createStore(
+    rootReducer,
+    persistedState,
+    applyMiddleware(thunkMiddleware)
+  );
+  store.dispatch(verifyAuth());
+  return store;
+}</code></pre>
+<h2 is-upgraded><strong>Membuat Form Login dan Halaman Home</strong></h2>
+<ol type="1" start="9">
+<li>Kita buat komponen form <code>Login</code> atau dapat menggunakan komponen Login dari <a href="https://jti-polinema.github.io/pbf-codelab/10-firebase-reactjs/#3" target="_blank">Codelab 10</a>. Buka file <code>Login.js</code> di <code>src/components</code>. Sesuaikan Isi kodenya seperti berikut.</li>
+</ol>
+<pre><code>import { useState } from &#34;react&#34;;
+import { connect } from &#34;react-redux&#34;;
+import { Redirect } from &#34;react-router-dom&#34;;
+import { loginUser } from &#34;../redux/actions/auth&#34;;
+
+function Login (props) {
+  const [email, setEmail] = useState(&#34;&#34;);
+  const [password, setPassword] = useState(&#34;&#34;);
+
+  const handleForm = e =&gt; {
+    e.preventDefault();
+
+    const { dispatch } = props;
+    dispatch(loginUser(email, password));
+  };
+
+  const { isLoggingIn, loginError, isAuthenticated } = props;
+
+  if (isAuthenticated) {
+    return &lt;Redirect to=&#34;/&#34; /&gt;
+  } else {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Login&lt;/h1&gt;
+        &lt;form onSubmit={e =&gt; handleForm(e)}&gt;
+          &lt;input
+            value={email}
+            onChange={e =&gt; setEmail(e.target.value)}
+            name=&#34;email&#34;
+            type=&#34;email&#34;
+            placeholder=&#34;email&#34;
+            required
+          /&gt;
+          &lt;input
+            value={password}
+            onChange={e =&gt; setPassword(e.target.value)}
+            name=&#34;password&#34;
+            type=&#34;password&#34;
+            placeholder=&#34;password&#34;
+            required
+          /&gt;
+          &lt;hr /&gt;
+          &lt;button type=&#34;submit&#34;&gt;Login&lt;/button&gt;
+          &lt;hr /&gt;
+          &lt;span&gt;{loginError &amp;&amp; (&#34;Email atau Password Salah!&#34;)}&lt;/span&gt;
+          &lt;span&gt;{isLoggingIn &amp;&amp; (&#34;Sedang login ...&#34;)}&lt;/span&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    );
+  }
+  
+}
+
+function mapStateToProps(state){
+  return {
+    isLoggingIn: state.auth.isLoggingIn,
+    loginError: state.auth.loginError,
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps)(Login);</code></pre>
+<ol type="1" start="10">
+<li>Kemudian buat file <code>Home.js</code> di folder <code>src/components</code>.</li>
+</ol>
+<pre><code>import React from &#34;react&#34;;
+import { connect } from &#34;react-redux&#34;;
+import { logoutUser } from &#34;../redux/actions/auth&#34;;
+
+class Home extends React.Component {
+
+  handleLogout = () =&gt; {
+    const { dispatch } = this.props;
+    dispatch(logoutUser());
+  };
+
+  render () {
+    const { isLoggingOut, logoutError } = this.props;
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Halaman ini dilindungi dengan password.&lt;/h1&gt;
+        &lt;p&gt;Semua routes di sini akan dilindungi.&lt;/p&gt;
+        &lt;button onClick={this.handleLogout}&gt;Keluar&lt;/button&gt;
+        {isLoggingOut &amp;&amp; &lt;p&gt;Sedang proses logout...&lt;/p&gt;}
+        {logoutError &amp;&amp; &lt;p&gt;Terjadi galat saat logout!&lt;/p&gt;}
+      &lt;/div&gt;
+    );
+  }
+
+}
+
+function mapStateToProps (state) {
+  return {
+    isLoggingOut: state.auth.isLoggingOut,
+    logoutError: state.auth.logoutError
+  };
+}
+
+export default connect(mapStateToProps)(Home);</code></pre>
+<h2 is-upgraded><strong>Membuat Route yang Diproteksi</strong></h2>
+<ol type="1" start="11">
+<li>Buatlah folder dan file baru di <code>src/</code><strong><code>routes/protectedRoute.js</code></strong> yang isinya sebagai berikut.</li>
+</ol>
+<pre><code>import React from &#34;react&#34;;
+import { Route, Redirect } from &#34;react-router-dom&#34;;
+
+const ProtectedRoute = ({
+  component: Component,
+  isAuthenticated,
+  isVerifying,
+  ...rest
+}) =&gt; (
+  &lt;Route
+    {...rest}
+    render={props =&gt;
+      isVerifying ? (
+        &lt;div /&gt;
+      ) : isAuthenticated ? (
+        &lt;Component {...props} /&gt;
+      ) : (
+        &lt;Redirect
+          to=&#123;&#123;
+            pathname: &#34;/login&#34;,
+            state: { from: props.location }
+          }}
+        /&gt;
+      )
+    }
+  /&gt;
+);
+
+export default ProtectedRoute;</code></pre>
+<h2 is-upgraded><strong>Membuat App Utama</strong></h2>
+<ol type="1" start="12">
+<li>Kita buat komponen Root yang berfungsi untuk memverifikasi user yang sudah terautentikasi atau belum, sehingga bisa dilakukan kontrol terhadap route ke App kita. Buatlah file baru di <code>src/Root.js</code> dengan isi kode sebagai berikut.</li>
+</ol>
+<pre><code>import { Route, Switch } from &#34;react-router-dom&#34;;
+import { connect } from &#34;react-redux&#34;;
+import ProtectedRoute from &#34;./routes/protectedRoute&#34;;
+import Home from &#34;./components/Home&#34;;
+import Login from &#34;./components/Login&#34;;
+
+function Root (props) {
+  const { isAuthenticated, isVerifying } = props;
+  return (
+    &lt;Switch&gt;
+      &lt;ProtectedRoute
+        exact
+        path=&#34;/&#34;
+        component={Home}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      /&gt;
+      &lt;Route path=&#34;/login&#34; component={Login} /&gt;
+    &lt;/Switch&gt;
+  );
+}
+
+function mapStateToProps (state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    isVerifying: state.auth.isVerifying
+  };
+}
+
+export default connect(mapStateToProps)(Root);</code></pre>
+<ol type="1" start="13">
+<li>Kita pindah ke file  <code>src/App.js</code> yang menentukan tampilan render pada aplikasi React kita.</li>
+</ol>
+<p class="image-container"><img style="width: 244.00px" src="img\e6cdefae8eb227a0.png"></p>
+<ol type="1" start="14">
+<li>Jangan lupa import yang diperlukan pada file <code>src/App.js</code></li>
+</ol>
+<pre><code>import React from &#34;react&#34;;
+import { Provider } from &#34;react-redux&#34;;
+import { BrowserRouter as Router } from &#34;react-router-dom&#34;;
+
+import configureStore from &#34;./redux/configureStore&#34;;
+import Root from &#34;./Root&#34;;
+import &#39;./App.css&#39;;</code></pre>
+<aside class="special"><p><strong>Catatan:</strong> Kita menggunakan <code>react-router-dom</code> dan <code>react-redux</code> seperti yang telah dilakukan pada praktikum codelab sebelumnya. <code>App.css</code> merupakan style yang digunakan untuk form Login seperti pada <a href="https://jti-polinema.github.io/pbf-codelab/10-firebase-reactjs/#2" target="_blank">Codelab 10</a>.</p>
+</aside>
+<ol type="1" start="15">
+<li>Simpan semua pekerjaan lalu lihat hasilnya di browser. Seharusnya form login sudah tampil seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 516.00px" src="img\7876de2fcba2644b.png"></p>
+<p>Kemudian coba lakukan login dengan email dan password yang telah didaftarkan sebelumnya di Codelab 10. Jika login sukses, maka akan mengarah ke komponen Home seperti pada gambar berikut.</p>
+<p class="image-container"><img style="width: 580.00px" src="img\f13f6c6ea0e8d96d.png"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/11_redux_thunk,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="50">
+        <ol type="1" start="1">
+<li>Berdasarkan praktikum yang telah Anda lakukan, jelaskan perbedaan fitur yang ada dalam komponen Login dan Home! Mengapa komponen Login tidak menggunakan class seperti pada komponen Home ?</li>
+<li>Jelaskan kegunaan dan alur logika dari <strong><code>protectedRoute.js</code></strong> !</li>
+<li>Tambahkan menu Register pada form login sehingga user yang belum terdaftar dapat melakukan registrasi! Jika registrasi sukses, maka user langsung diarahkan ke halaman Home.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Jawaban Tugas Praktikum copy file dan folder satu project React tersebut ke folder laporan <code>src/11_redux_thunk,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://www.konsepkoding.com/2020/04/tutorial-react-native-redux-thunk-get-api.html" target="_blank">Tutorial React Native : Redux Thunk Get API</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/redux-redux-thunk-id" target="_blank">Memahami Aksi Redux Asinkron dengan Redux Thunk</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://firebase.google.com/docs" target="_blank">Ringkasan Firebase</a></li>
+<li><a href="https://www.npmjs.com/package/redux-thunk" target="_blank">NPM: Redux Thunk</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Thunk" target="_blank">Wikipedia: Thunk</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

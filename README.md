@@ -28,6 +28,10 @@ Akses codelab di github pages: [https://jti-polinema.github.io/pbf-codelab/](htt
 
 [09 - Global API dan Hooks](09-global-api-hooks/)
 
+[10 - Firebase di ReactJS](10-firebase-reactjs/)
+
+[11 - Firebase dan Redux Thunk](11-redux-thunk/)
+
 <hr>
 
 Dibuat dengan [Google Codelab Tools](https://github.com/googlecodelabs/tools)

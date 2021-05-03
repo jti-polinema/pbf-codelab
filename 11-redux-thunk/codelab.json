@@ -1,0 +1,30 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-03T01:05:14Z",
+  "id": "11-redux-thunk",
+  "duration": 105,
+  "title": "#11 | Redux Thunk",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Redux Thunk di ReactJS.",
+  "source": "1ntAPJnZINiY6zdM3CJ15MQeYpqGaijFg8KcgFB_9-Ds",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "firebase",
+    "pemrograman-berbasis-framework",
+    "reactjs",
+    "redux-thunk",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "11-redux-thunk"
+}

@@ -1,0 +1,396 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#12 | CRUD Firebase</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="12-crud-firebase"
+                  title="#12 | CRUD Firebase"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-05-24</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>CRUD dengan Firebase di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang <em>Create, Read, Update, </em>dan<em> Delete</em> (CRUD) dengan Firebase di ReactJS.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 1</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs" target="_blank">Konsep ReactJS Bagian 2</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/05-api-router-reactjs" target="_blank">API dan Router di ReactJS</a></li>
+<li><a href="https://jti-polinema.github.io/pbf-codelab/06-redux-reactjs" target="_blank">React Redux</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep dan implementasi CRUD dengan Firebase di ReactJS</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CRUD di Firebase" duration="15">
+        <h2 is-upgraded><strong>Memilih Database: Cloud Firestore atau Realtime Database ?</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang <em>Create, Read, Update, </em>dan<em> Delete</em> (CRUD) dengan Firebase di ReactJS. <a href="https://jti-polinema.github.io/pbf-codelab/09-global-api-hooks" target="_blank">Codelab 9</a> sebelumnya Anda telah membuat Global API untuk berinteraksi dengan database JSON secara lokal. Nah, codelab saat ini kita akan membuat interaksi dengan database yang disediakan oleh Firebase secara online.</p>
+<p>Firebase menawarkan dua solusi database berbasis cloud yang mendukung sinkronisasi data secara realtime, yaitu sebagai berikut:</p>
+<ul>
+<li><strong>Cloud Firestore</strong> adalah database terbaru dari Firebase untuk pengembangan aplikasi seluler. Database ini melanjutkan keberhasilan Realtime Database dengan model data baru yang lebih intuitif. Cloud Firestore juga memiliki fitur kueri yang lebih lengkap dan lebih cepat, serta penskalaan yang lebih mendalam dibandingkan dengan Realtime Database.</li>
+<li><strong>Realtime Database</strong> adalah database asli Firebase. Solusi ini berlatensi rendah dan efisien untuk aplikasi seluler yang membutuhkan status sinkron lintas klien secara real-time.</li>
+</ul>
+<p>Pilihan database yang kita akan gunakan tergantung oleh banyak faktor dan besarnya project aplikasi yang kita bangun. Namun jika berkaitan dengan fitur tertentu, maka Anda dapat menentukan memilih database dengan beberapa pertanyaan rekomendasi yang disediakan oleh Firebase <a href="https://firebase.google.com/docs/database/rtdb-vs-firestore#key_considerations" target="_blank">di sini</a>.</p>
+<p>Beberapa keunggulan yang dimiliki oleh kedua database Firebase tersebut adalah:</p>
+<ul>
+<li>SDK yang mengutamakan klien, tidak ada server untuk di-deploy dan dipelihara.</li>
+<li>Update dilakukan secara real-time.</li>
+<li>Ada paket gratis atau berbayar jika melebihi batas penggunaan</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Konfigurasi Database Firebase" duration="20">
+        <p>Pada praktikum ini, kita dapat melanjutkan dari codelab sebelumnya (<a href="https://jti-polinema.github.io/pbf-codelab/11-redux-thunk/#2" target="_blank">Codelab 11 - Redux Thunk</a>). Karena konfigurasi firebase yang akan digunakan masih tetap sama, namun ada tambahan URL database yang akan dikonfigurasi di sini. Untuk melakukan konfigurasi database Firebase, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Silakan buka <a href="https://console.firebase.google.com/" target="_blank">console Firebase</a> Anda dengan melanjutkan project dari codelab 10 dan 11. Lalu pilih menu <strong>Realtime Database</strong> di sidebar kiri &gt; klik <strong>Create Database</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\4e78d9133d6a6c18.jpeg"></p>
+<ol type="1" start="2">
+<li>Selanjutnya akan tampil untuk melakukan konfigurasi database seperti pada gambar berikut. Pilih lokasi server terdekat, yaitu <strong>Singapore</strong>. Karena lokasi kita berada di Indonesia, sehingga diharapkan dapat lebih cepat ketika mengakses data.</li>
+</ol>
+<p class="image-container"><img style="width: 494.00px" src="img\8ea8231fb43312fa.jpeg"></p>
+<ol type="1" start="3">
+<li>Lalu pada langkah kedua <strong>Security rules</strong>, kita pilih <strong>locked mode</strong>, artinya database kita masih dalam proteksi (tidak dapat dibaca dan ditulis). Nanti kita konfigurasi security rules ini agar dapat diakses oleh user yang terautentikasi saja.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\36df0b279cc98ec1.jpeg"></p>
+<ol type="1" start="4">
+<li>Selanjutnya masuk ke <strong>Project settings</strong> pada menu sidebar.</li>
+</ol>
+<p class="image-container"><img style="width: 422.00px" src="img\982822117c0e075f.jpeg"></p>
+<ol type="1" start="5">
+<li>Pilih <strong>Config </strong>pada bagian <strong>SDK setup and configuration</strong> untuk mendapatkan nilai konfigurasi Firebase yang akan kita gunakan pada aplikasi React.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\e59f95aeabf9c4d.jpeg"></p>
+<ol type="1" start="6">
+<li>Ubahlah isi kode <code>firebase.config.js</code> seperti berikut. Perbedaannya hanya penambahan variabel <code>databaseURL</code> pada <code>firebaseConfig</code> dan <code>import firebase/database</code>.</li>
+</ol>
+<pre><code>import firebase from &#34;firebase/app&#34;;
+import &#34;firebase/auth&#34;;
+import &#34;firebase/database&#34;;
+
+export const firebaseConfig = {
+  apiKey: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  authDomain: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  databaseURL: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  projectId: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  storageBucket: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  messagingSenderId: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  appId: &#34;isikan sesuai value dari console firebase Anda&#34;,
+  measurementId: &#34;isikan sesuai value dari console firebase Anda&#34;
+};
+
+export const myFirebase = firebase.initializeApp(firebaseConfig);
+export const DB = firebase.database();</code></pre>
+<ol type="1" start="7">
+<li>Lalu pada menu <strong>Realtime Database</strong> &gt; pilih tab <strong>Rules</strong>, kemudian <strong>Edit rules</strong> seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\970a9b15d3dc4b8c.jpeg"></p>
+<aside class="special"><p><strong>Catatan:</strong> Pengaturan rules tersebut berkaitan dengan keamanan untuk membaca dan menulis ke database. Bagian &#34;<code>articles</code>&#34; menunjukkan bahwa user hanya diperbolehkan menulis dan membaca untuk data atau path articles. Baca lebih lanjut terkait keamanan rules <a href="https://firebase.google.com/docs/database/security" target="_blank">di sini</a>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Membuat Fungsi Create Artikel" duration="30">
+        <p>Melanjutkan <a href="https://jti-polinema.github.io/pbf-codelab/09-global-api-hooks/#2" target="_blank">codelab 9</a> terdapat sebuah komponen bernama <code>BlogPost.js</code>. Nah, komponen ini kita akan modif sedikit untuk bisa terhubung dengan database firebase. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Pertama, pastikan variabel <code>DB</code> sudah kita import dari file <code>firebase.config</code>. Karena Global API sudah digantikan dengan firebase, maka boleh kita hapus atau comment saja.</li>
+</ol>
+<pre><code>//import API from &#39;../services/Artikel&#39;;
+import React from &#39;react&#39;;
+import { Button, Container, Form } from &#39;react-bootstrap&#39;;
+import { DB } from &#39;../firebase.config&#39;;</code></pre>
+<aside class="special"><p><strong>Catatan:</strong> Pada praktikum ini, kita menggunakan <code>react-bootstrap</code>. Jika belum terinstall, maka silakan di-install terlebih dahulu.</p>
+</aside>
+<ol type="1" start="2">
+<li>Kemudian fungsi <code>ambilDataDariServerAPI</code> diganti dengan kode berikut.</li>
+</ol>
+<pre><code>ambilDataDariServerAPI = () =&gt; {    
+    let ref = DB.ref(&#34;articles/&#34;);
+    ref.on(&#34;value&#34;, snapshot =&gt; {
+      if (snapshot.val() !== null)
+        this.setState({
+          dataArtikel: snapshot.val()
+        })
+    });
+  }</code></pre>
+<ol type="1" start="3">
+<li>Kita tambahkan fungsi baru untuk menyimpan data artikel ke database firebase.</li>
+</ol>
+<pre><code>simpanDataKeServerAPI = () =&gt; {
+    DB.ref(&#34;articles/&#34;).set(this.state.dataArtikel);
+  }</code></pre>
+<ol type="1" start="4">
+<li>Selanjutnya ganti isi fungsi <code>handleTombolSimpan</code> dengan kode berikut.</li>
+</ol>
+<pre><code>handleTombolSimpan = (e) =&gt; {
+    e.preventDefault();
+
+    const { dataArtikel, postArtikel } = this.state;
+
+    if (postArtikel.id &amp;&amp; postArtikel.title &amp;&amp; postArtikel.body) {
+      const indeksArtikel = dataArtikel.findIndex(data =&gt; {
+        return data.id === postArtikel.id
+      });
+
+      dataArtikel[indeksArtikel].title = postArtikel.title;
+      dataArtikel[indeksArtikel].body = postArtikel.body;
+      this.setState({ dataArtikel });
+    } else if (postArtikel.title &amp;&amp; postArtikel.body) {
+      console.log(dataArtikel);
+      const id = new Date().getTime().toString();
+      let userId = 1; // TODO: set to username/email
+      let title = postArtikel.title;
+      let body = postArtikel.body;
+      dataArtikel.push({ id, userId, title, body });
+      this.setState({ dataArtikel });
+    }
+
+    postArtikel.id = &#39;&#39;;
+    postArtikel.title = &#39;&#39;;
+    postArtikel.body = &#39;&#39;;
+    this.setState({ postArtikel });
+  }</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> variabel <code>userId</code> bisa digunakan untuk menyimpan username/email pengguna yang sedang login.</p>
+</aside>
+<ol type="1" start="5">
+<li>Lalu tambahkan fungsi <code>componentDidUpdate</code> seperti berikut.</li>
+</ol>
+<pre><code>componentDidUpdate (prevProps, prevState) {
+    if (prevState !== this.state.dataArtikel) {
+      this.simpanDataKeServerAPI();
+    }
+  }</code></pre>
+<ol type="1" start="6">
+<li>Terakhir kita sesuaikan fungsi <code>render</code> seperti berikut dengan komponen dari <code>react-bootstrap</code>.</li>
+</ol>
+<pre><code>render () {
+    const { dataArtikel } = this.state;
+
+    return (
+      &lt;div&gt;
+        &lt;Container&gt;
+          &lt;Form onSubmit={this.handleTombolSimpan}&gt;
+            &lt;Form.Group controlId=&#34;inputJudul&#34;&gt;
+              &lt;Form.Label&gt;Judul Artikel&lt;/Form.Label&gt;
+              &lt;Form.Control required type=&#34;text&#34; name=&#34;title&#34; placeholder=&#34;judul artikel&#34; onChange={this.handleOnChange} /&gt;
+            &lt;/Form.Group&gt;
+            &lt;Form.Group controlId=&#34;inputIsiArtikel&#34;&gt;
+              &lt;Form.Label&gt;Isi Artikel&lt;/Form.Label&gt;
+              &lt;Form.Control required name=&#34;body&#34; onChange={this.handleOnChange} as=&#34;textarea&#34; rows={3} /&gt;
+            &lt;/Form.Group&gt;
+            &lt;Button variant=&#34;primary&#34; type=&#34;submit&#34;&gt;
+              Simpan Artikel
+            &lt;/Button&gt;
+          &lt;/Form&gt;
+        &lt;/Container&gt;
+
+        &lt;hr /&gt;
+        &lt;h2&gt;Daftar Artikel&lt;/h2&gt;
+        {
+          (dataArtikel || []).map(artikel =&gt; {
+            return (
+              &lt;div key={artikel.id}&gt;
+                &lt;DaftarArtikel judul={artikel.title} isiArtikel={artikel.body} /&gt;
+                &lt;Button variant=&#34;danger&#34; value={artikel.id} onClick={this.handleTombolHapus}&gt;Hapus&lt;/Button&gt;
+                &lt;hr&gt;&lt;/hr&gt;
+              &lt;/div&gt;
+            )
+          })
+        }
+      &lt;/div&gt;
+    );
+  }</code></pre>
+<p>Lalu kita import komponen <code>BlogPost</code> ke komponen <code>Home</code> (dari <a href="https://jti-polinema.github.io/pbf-codelab/11-redux-thunk/#2" target="_blank">Codelabs 11</a>), agar komponen artikel hanya dapat diakses oleh akun yang telah login seperti pada gambar berikut.</p>
+<p class="image-container"><img style="width: 517.00px" src="img\8f26dab7a2826fd0.jpeg"></p>
+<p>Save semua pekerjaan Anda, lalu run <code>npm start</code>. Seharusnya tampil seperti pada gambar berikut. Silakan coba isi data artikel, maka data berhasil tersimpan di database firebase. Namun, tombol <code>Hapus</code> belum kita sesuaikan.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\b693b28b50b6d7c1.jpeg"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/12_crud_firebase,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 3: Membuat Fungsi Hapus Artikel" duration="10">
+        <p>Melanjutkan dari praktikum sebelumnya, kita sesuaikan tombol Hapus agar dapat menghapus data artikel dari database firebase. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Kembali ke komponen <code>BlogPost</code>, ganti isi fungsi <code>handleTombolHapus</code> seperti berikut.</li>
+</ol>
+<pre><code>handleTombolHapus = (e) =&gt; {
+    e.preventDefault();
+
+    const { dataArtikel } = this.state;
+
+    const newState = dataArtikel.filter(data =&gt; {
+      return data.id !== e.target.value;
+    });
+    
+    this.setState({ dataArtikel: newState });
+    alert(&#39;Data berhasil dihapus!&#39;);
+  }</code></pre>
+<ol type="1" start="2">
+<li>Simpan hasil pekerjaan Anda, lalu lihat hasilnya di browser. Seharusnya artikel sudah bisa dihapus dengan menekan tombol <code>Hapus</code>. Kemudian cek data artikel di database pada console Firebase.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/12_crud_firebase,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 4: Membuat Fungsi Edit (Update) Artikel" duration="20">
+        <p>Melanjutkan dari praktikum sebelumnya, kita tambahkan tombol Edit untuk melakukan update pada data artikel. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Kembali ke komponen <code>BlogPost</code>, kita buat form edit-nya terlebih dahulu di bagian fungsi <code>render()</code>. Bisa diletakkan dipaling bawah setelah daftar artikel. Di sini kita menggunakan <code>Modal</code> dari <code>react-bootstrap</code>. Jangan lupa untuk <code>import Modal</code> dari <code>react-bootstrap</code>.</li>
+</ol>
+<pre><code>       &lt;Modal
+          show={showEdit}
+          onHide={() =&gt; this.setState({ showEdit: false })}
+          size=&#34;lg&#34;
+          aria-labelledby=&#34;contained-modal-title-vcenter&#34;
+          centered
+        &gt;
+          &lt;Modal.Header closeButton&gt;
+            &lt;Modal.Title id=&#34;contained-modal-title-vcenter&#34;&gt;
+              Edit Artikel
+            &lt;/Modal.Title&gt;
+          &lt;/Modal.Header&gt;
+          &lt;Modal.Body&gt;
+            &lt;Container&gt;
+              &lt;Form onSubmit={this.handleTombolSimpan}&gt;
+                &lt;Form.Group controlId=&#34;inputJudul&#34;&gt;
+                  &lt;Form.Label&gt;Judul Artikel&lt;/Form.Label&gt;
+                  &lt;Form.Control required type=&#34;text&#34; name=&#34;title&#34; value={postArtikel.title} placeholder=&#34;judul artikel&#34; onChange={this.handleOnChange} /&gt;
+                &lt;/Form.Group&gt;
+                &lt;Form.Group controlId=&#34;inputIsiArtikel&#34;&gt;
+                  &lt;Form.Label&gt;Isi Artikel&lt;/Form.Label&gt;
+                  &lt;Form.Control required name=&#34;body&#34; value={postArtikel.body} placeholder=&#34;isi artikel&#34; onChange={this.handleOnChange} as=&#34;textarea&#34; rows={3} /&gt;
+                &lt;/Form.Group&gt;
+                &lt;Button variant=&#34;primary&#34; type=&#34;submit&#34;&gt;
+                  Update Artikel
+            &lt;/Button&gt;
+              &lt;/Form&gt;
+            &lt;/Container&gt;
+          &lt;/Modal.Body&gt;
+          &lt;Modal.Footer&gt;
+            &lt;Button variant=&#34;danger&#34; onClick={() =&gt; this.setState({ showEdit: false })}&gt;Batal&lt;/Button&gt;
+          &lt;/Modal.Footer&gt;
+        &lt;/Modal&gt;</code></pre>
+<ol type="1" start="2">
+<li>Lalu pada bagian state <code>class BlogPost</code>, kita perlu tambahkan <code>showEdit</code> seperti berikut.</li>
+</ol>
+<pre><code>    this.state = {
+      showEdit: false,
+      dataArtikel: [],
+      postArtikel: {
+        id: &#39;&#39;,
+        userId: 1,
+        title: &#39;&#39;,
+        body: &#39;&#39;
+      }
+    };</code></pre>
+<ol type="1" start="3">
+<li>Selanjutnya tambahkan tombol <code>Edit</code> pada Daftar Artikel sebelah tombol <code>Hapus</code> seperti berikut.</li>
+</ol>
+<pre><code>&lt;Button variant=&#34;info&#34; value={artikel.id} onClick={this.handleTombolEdit} &gt;Edit&lt;/Button&gt;</code></pre>
+<ol type="1" start="4">
+<li>Save pekerjaan Anda, lalu lihat hasil tampilannya di browser. Seharusnya sudah tampil tombol <code>Edit</code> seperti berikut. Namun, tombol tersebut belum berfungsi.</li>
+</ol>
+<p class="image-container"><img style="width: 473.00px" src="img\d0c23fb960b78e50.jpeg"></p>
+<ol type="1" start="5">
+<li>Buat fungsi <code>handleTombolEdit</code> pada komponen <code>BlogPost</code> seperti berikut. Namun, Anda diminta untuk melengkapi kode program berikut agar artikel yang telah dilakukan update dapat berubah pada halaman maupun di database Firebase.</li>
+</ol>
+<pre><code>  handleTombolEdit = (e) =&gt; {
+    e.preventDefault();
+
+    const { dataArtikel, postArtikel } = this.state;
+
+    // ... silakan lengkapi kode di sini ... 
+
+    this.setState({ postArtikel, showEdit: true });
+  }</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/12_crud_firebase,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="30">
+        <ol type="1" start="1">
+<li>Berdasarkan praktikum 1 yang telah Anda lakukan, jelaskan perbedaan fungsi <strong>locked mode</strong> dan <strong>test mode</strong> pada langkah 3 saat Anda konfigurasi database Firebase?</li>
+<li>Buatlah variabel <code>userId</code> pada praktikum 2 langkah 4 agar dapat menyimpan email dari user yang sedang login, sehingga dapat tersimpan di database!</li>
+<li>Jelaskan maksud kode ini <code>(dataArtikel || [])</code> pada praktikum 2 langkah 6! Mengapa berbeda dari codelabs sebelumnya untuk menampilkan daftar artikel?</li>
+<li>Lengkapilah kode pada praktikum 4 langkah 5 agar dapat melakukan update artikel! Mengapa setelah klik tombol <code>Update Artikel</code>, form <code>Modal</code> tidak hilang? Bagaimana Anda mengatasi hal tersebut?</li>
+<li>Ketika Anda menekan tombol <code>Edit</code>, lalu menekan tombol <code>Batal</code> pada form Modal update artikel. Kemudian coba tambah artikel baru, maka artikel yang tadi kita klik tombol <code>Edit</code> akan berubah jadi data yang artikel baru ditambahkan. Mengapa demikian? Silakan diperbaiki.</li>
+</ol>
+<aside class="warning"><p><strong>Perhatian:</strong> Jawaban Tugas Praktikum copy file dan folder satu project React tersebut ke folder laporan <code>src/12_crud_firebase,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://firebase.google.com/docs/database/security" target="_blank">Memahami Aturan Firabase Realtime Database</a></li>
+<li><a href="https://bezkoder.com/react-firebase-crud/" target="_blank">React Firebase CRUD with Realtime Database</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://firebase.google.com/docs" target="_blank">Ringkasan Firebase</a></li>
+<li><a href="https://firebase.google.com/docs/database/rtdb-vs-firestore" target="_blank">Realtime Database vs Cloud Firestore</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

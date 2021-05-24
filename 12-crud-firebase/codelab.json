@@ -1,0 +1,30 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-24T07:07:27Z",
+  "id": "12-crud-firebase",
+  "duration": 125,
+  "title": "#12 | CRUD Firebase",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang CRUD dengan firebase di ReactJS.",
+  "source": "1HEIM8yV3Fe5QhnZQJy_b4Pvpn0jMYxj5pgzgl-zbX9I",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "crud",
+    "firebase",
+    "pemrograman-berbasis-framework",
+    "reactjs",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "12-crud-firebase"
+}

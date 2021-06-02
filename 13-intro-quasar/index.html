@@ -1,0 +1,280 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#13 | Pengenalan Quasar Framework</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="13-intro-quasar"
+                  title="#13 | Pengenalan Quasar Framework"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-05-31</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Pengenalan Quasar Framework</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang pengenalan <em>Quasar Framework</em>.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Mengenal perintah dasar <code>npm</code>, <code>yarn</code>, atau <code>npx</code></li>
+<li>Mengenal tentang <a href="https://vuejs.org/v2/guide/" target="_blank">Vue.js</a></li>
+<li>Mengenal fitur-fitur <a href="http://es6-features.org/#Constants" target="_blank">ECMAScript 6</a> (<a href="https://github.com/lukehoban/es6features" target="_blank">ES6</a>)</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Pengenalan dan instalasi Quasar Framework</li>
+<li>Sekilas tentang Vue.js</li>
+<li>Hasil survei Quasar 2020</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js dan Yarn telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Quasar Framework" duration="30">
+        <h2 is-upgraded><strong>Mengapa Quasar Framework ?</strong></h2>
+<p>Karena Quasar dapat menghemat biaya pengembangan perangkat lunak dengan sangat drastis. Hanya Quasar yang dapat melakukan ini, lihat video berikut:</p>
+<iframe class="youtube-video" src="https://www.youtube.com/embed/GV-D85D9KJQ?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>Selain itu, Quasar merupakan:</p>
+<ul>
+<li>Berbasis Vue.js</li>
+<li>Mendukung pedoman UI Material untuk web dan app</li>
+<li>Sangat baik mendukung aplikasi desktop dan mobile browser (termasuk iOS Safari)</li>
+<li>Sangat mendukung pengembangan multiplatform seperti mode SPA, SSR, PWA, Mobile app, desktop app dan browser extension</li>
+<li>Sangat mudah mengelola library CSS dan JS</li>
+<li>Framework yang fokus terhadap performa sistem</li>
+<li>Dan masih banyak kelebihan lainnya (baca lebih lanjut <a href="https://quasar.dev/introduction-to-quasar#introduction" target="_blank">di sini</a>)</li>
+</ul>
+<p>Quasar merupakan solusi nomor satu berbasis Vue yang mendukung untuk membangun aplikasi desktop, web, mobile, atau bahkan semuanya sekaligus.</p>
+<h2 is-upgraded><strong>Apa itu Quasar ?</strong></h2>
+<p>Quasar (baca /ˈkweɪ.zɑɹ/) adalah sebuah framework dengan lisensi open-source dari MIT yang berbasis Vue.js, mendukung seorang web developer untuk membuat web/app secara responsive++ dengan cepat dalam berbagai platform:</p>
+<ul>
+<li>SPA (Single Page App)</li>
+<li>SSR (Server-side Rendered App) (+opsional PWA client)</li>
+<li>PWA (Progressive Web App)</li>
+<li>BEX (Browser Extension)</li>
+<li>Mobile apps (Android, iOS) dengan Cordova atau Capacitor</li>
+<li>Multi-platform desktop apps (menggunakan Electron)</li>
+</ul>
+<p>Moto Quasar adalah <strong>&#34;menulis kode sekali dan secara simultan di deploy&#34;</strong> sebagai sebuah web, mobile app dan/atau Electron App.</p>
+<p>Ketika menggunakan Quasar, kita tidak perlu lagi menambah library seperti Hammer.js, Moment.js atau Bootstrap. Karena semua itu sudah tersedia di dalam Quasar.</p>
+<h2 is-upgraded><strong>Apa lagi yang didapat ?</strong></h2>
+<p>Karena kemudahan dalam penggunaan dan powerfull, Quasar tersedia dalam paket full fitur, yang dibangun untuk kemudahan bagi developer. Beberapa fitur yang dimiliki oleh Quasar adalah sebagai berikut:</p>
+<h3 is-upgraded><strong>Semua Platform dalam Satu Portal</strong></h3>
+<p>Satu sumber kode otoritatif untuk semua platform secara simultan: aplikasi web responsive untuk desktop/mobile (SPA, SSR+SPA, SSR+PWA), PWA, mobile app, dan multi-platform desktop app (Electron).</p>
+<h3 is-upgraded><strong>Paket Komponen Terbesar dan Terbaik di kelasnya, cepat, dan responsif</strong></h3>
+<p>Ada sebuah komponen yang hampir setiap pengembangan web dibutuhkan dalam Quasar. Setiap komponen Quasar dibuat dengan hati-hati agar dapat memberikan pengalaman pengguna yang terbaik. Quasar dirancang dengan performa dan dukungan responsif yang sangat baik. Perhatian terhadap kinerja dan desain yang baik adalah sesuatu yang membuat bangga Quasar itu dibuat.</p>
+<h3 is-upgraded><strong>Praktik Terbaik Diintegrasikan Secara Default</strong></h3>
+<p>Quasar juga dibangun untuk mendorong pengembang mengikuti praktik terbaik pengembangan web. Untuk melakukan ini, Quasar dikemas penuh dengan fitur-fitur hebat.</p>
+<ul>
+<li>HTML/CSS/JS minification</li>
+<li>Cache busting</li>
+<li>Tree shaking</li>
+<li>Source-mapping</li>
+<li>Code-splitting with lazy loading</li>
+<li>ES6 transpiling</li>
+<li>Linting code</li>
+<li>Accessibility features</li>
+</ul>
+<p>Quasar menangani semua praktik terbaik pengembangan web dan lainnya - tanpa perlu konfigurasi.</p>
+<p>Silakan baca lebih lanjut <a href="https://quasar.dev/introduction-to-quasar#app-extensions-support" target="_blank">di sini</a> untuk fitur-fitur menarik lainnya.</p>
+<p>Anda bisa mencoba untuk mengakses <a href="https://quasar.dev/" target="_blank">quasar.dev</a> lalu klik pada bagian kanan address bar browser Anda agar tersedia secara offline atau menjadi aplikasi desktop.</p>
+<p class="image-container"><img style="width: 325.00px" src="img\aa9d4b226b241208.jpeg">             <img style="width: 89.00px" src="img\24a42c5ea583c93e.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Memulai Quasar Framework" duration="20">
+        <p>Pada praktikum ini, kita mulai menggunakan Quasar Framework. Ada tiga cara untuk memulai menggunakan Quasar, yaitu:</p>
+<ul>
+<li>Menggunakan UMD/Standalone (melakukan embed kode ke project yang sudah kita punya dengan link CDN, sehingga terintegrasi secara progresif)</li>
+<li>Menggunakan Quasar CLI (Command Line Interface), cara kedua ini adalah yang paling direkomendasikan</li>
+<li>Menggunakan plugin Vue CLI 3</li>
+</ul>
+<p>Untuk membaca lebih lanjut terkait perbandingan ketiga cara tersebut, dapat membacanya <a href="https://quasar.dev/start/pick-quasar-flavour#introduction" target="_blank">di sini</a>.</p>
+<p>Kita akan memulai menggunakan Quasar Framework dengan cara kedua, yaitu Quasar CLI, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Buka CMD atau terminal pada OS Anda, lalu ketik perintah berikut untuk install Quasar CLI.</li>
+</ol>
+<aside class="special"><p><strong>Catatan:</strong> Sebaiknya <code>yarn</code> sudah terinstall pada komputer Anda. <code>yarn</code> merupakan package manager seperti <code>npm</code>, namun memiliki performa yang lebih baik. Baca lebih lanjut terkait <a href="https://www.whitesourcesoftware.com/free-developer-tools/blog/npm-vs-yarn-which-should-you-choose/" target="_blank">NPM vs Yarn</a>. Cara <a href="https://yarnpkg.com/getting-started/install" target="_blank">install</a> <code>yarn</code> adalah sebagai berikut:</p>
+<p><code>npm install -g yarn</code></p>
+</aside>
+<pre><code>yarn global add @quasar/cli
+# atau
+npm install -g @quasar/cli</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Versi <code>Node &gt;= 10</code> dan <code>npm &gt;= 5</code> harus sudah terpasang pada komputer Anda. Jangan menggunakan <code>Node &gt; 14</code>, karena Quasar masih menggunakan Webpack 4, belum diuji untuk versi yang lebih tinggi.</p>
+</aside>
+<ol type="1" start="2">
+<li>Setelah proses instalasi <code>Yarn</code> dan <code>Quasar</code> berhasil, selanjutnya kita buat folder project Quasar baru pada lokasi dokumen sesuai keinginan kita dengan perintah berikut.</li>
+</ol>
+<pre><code>quasar create belajar_quasar</code></pre>
+<ol type="1" start="3">
+<li>Pada saat proses pembuatan project Quasar, maka akan tampil beberapa pertanyaan untuk kita konfigurasi pada project Quasar seperti berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\eecacd31093feff8.jpeg"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Perhatikan teks berwarna hijau tosca pada gambar di atas. Teks tersebut merupakan inputan dari kita. Mulai dari <em>project name</em> hingga akhir pemilihan <em>package manager</em> menggunakan <code>yarn</code>.</p>
+</aside>
+<ol type="1" start="4">
+<li>Tunggu hingga proses pembuatan project folder sampai selesai. Jika prosesnya sudah selesai, maka akan tampil seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\95c7b5b4ad96c12b.jpeg"></p>
+<ol type="1" start="5">
+<li>Selanjutnya buka folder project Quasar tersebut &#34;<strong>belajar_quasar</strong>&#34; dengan VS code, lalu buka terminal dan jalankan perintah berikut untuk melihat hasil aplikasi di browser.</li>
+</ol>
+<pre><code>quasar dev</code></pre>
+<p>Tunggu hingga proses kompilasi selesai, maka akan tampil server sudah running dan tampil di browser.</p>
+<p class="image-container"><img style="width: 444.00px" src="img\c852566eed58b79c.jpeg"></p>
+<ol type="1" start="6">
+<li>Kemudian silakan pelajari dan pahami maksud struktur folder dan file yang ada dalam project Quasar.</li>
+</ol>
+<p class="image-container"><img style="width: 240.00px" src="img\1970e607f8c78b33.jpeg"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project Quasar tersebut ke folder laporan <code>src/13_quasar,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Membuat Aplikasi Pertama" duration="30">
+        <p>Melanjutkan praktikum sebelumnya, kita akan belajar tentang struktur project Quasar agar dapat membuat aplikasi pertama kita. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Pertama, sebelum kita memulai menggunakan Quasar Framework, sebaiknya kita memiliki pengetahuan dasar terkait <a href="https://github.com/lukehoban/es6features" target="_blank">ES6</a> dan cara kerja <a href="https://vuejs.org/v2/guide/" target="_blank">Vue</a>.</li>
+</ol>
+<p>Setelah Anda mempelajari fitur-fitur ES6 dan Vue.js, Anda akan lebih mudah memahami menggunakan komponen Quasar dan mengonfigurasinya. Beberapa hal dasar yang perlu diketahui adalah cara penggunaan komponen Quasar, properti yang ada di Vue, dan beberapa method dan event yang bisa digunakan.</p>
+<aside class="special"><p><strong>Catatan:</strong> Silakan pelajari terlebih dahulu fitur-fitur ES6 dan Vue.js walaupun tidak secara menyeluruh dan mendalam, namun setidaknya Anda sudah membacanya sekilas sehingga memiliki pengetahuan dasar.</p>
+</aside>
+<h2 is-upgraded><strong>Vue Single File Components (SFC)</strong></h2>
+<ol type="1" start="2">
+<li>Anda akan membangun aplikasi Quasar menggunakan file <code>*.vue</code> yang berisi beberapa bagian, yaitu:</li>
+</ol>
+<ul>
+<li><code>template</code> (HTML)</li>
+<li><code>script</code> (Javascript)</li>
+<li><code>style</code> (CSS/Stylus/SASS/SCSS/Less)</li>
+</ul>
+<p>Semua bagian tersebut akan berada dalam satu file yang sama. Untuk template kode Quasar dapat dilihat pada kode berikut ini.</p>
+<pre><code>&lt;template&gt;
+  &lt;!-- you define your Vue template here --&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+// This is where your Javascript goes
+// to define your Vue component, which
+// can be a Layout, a Page or your own
+// component used throughout the app.
+
+export default {
+  //
+}
+&lt;/script&gt;
+
+&lt;style&gt;
+/* This is where your CSS goes */
+&lt;/style&gt;</code></pre>
+<ol type="1" start="3">
+<li>Sekarang kita coba buat kode pertama dengan buka file <code>src &gt; pages &gt; Index.vue</code></li>
+</ol>
+<pre><code>&lt;template&gt;
+  &lt;q-page class=&#34;flex flex-center&#34;&gt;
+    &lt;h3&gt;&#123;&#123; hello }}&lt;/h3&gt;
+  &lt;/q-page&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  name: &#39;PageIndex&#39;,
+  data() {
+    return {
+      hello: &#34;Halo, Nama Saya Habibie dengan NIM 12345&#34;
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Silakan sesuaikan nama dan NIM dengan milik Anda.</p>
+</aside>
+<ol type="1" start="4">
+<li>Save file <code>Index.vue</code> dan langsung lihat hasilnya di browser tanpa harus kita refresh, maka tampilan akan langsung update, karena Quasar memiliki fitur Hot Reloaded.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\eed98c230e66543a.jpeg"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project Quasar tersebut ke folder laporan <code>src/13_quasar,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 3: Mengenal Quasar Directives" duration="10">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 4: ...." duration="20">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="30">
+        <ol type="1" start="1">
+<li>Berdasarkan praktikum 1 yang telah Anda lakukan, jelaskan kegunaan file quasar.conf.js ?</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://www.mindk.com/blog/react-vs-vue/" target="_blank">React vs Vue: What is the best choice for 2020?</a></li>
+<li><a href="https://cdn.quasar.dev/statistics/survey_2020.pdf" target="_blank">2020 Quasar Survey</a></li>
+<li><a href="https://www.whitesourcesoftware.com/free-developer-tools/blog/npm-vs-yarn-which-should-you-choose/" target="_blank">NPM vs. Yarn: Which Package Manager Should You Choose?</a></li>
+<li><a href="https://www.matawebsite.com/blog/npm-vs-yarn-package-manager-mana-yang-harus-anda-gunakan" target="_blank">npm vs Yarn - Package Manager mana yang harus Anda gunakan?</a></li>
+<li><a href="https://github.com/lukehoban/es6features" target="_blank">ECMAScript 6 Features</a> (Quick overview of ES6)</li>
+<li><a href="http://es6-features.org/#Constants" target="_blank">ES6 complete list of features</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://quasar.dev/introduction-to-quasar#introduction" target="_blank">Introduction to Quasar</a></li>
+<li><a href="https://quasar.dev/start/how-to-use-vue#introduction" target="_blank">How to use Vue</a></li>
+<li><a href="https://262.ecma-international.org/6.0/" target="_blank">ECMAScript® 2015 Language Specification (ES6)</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

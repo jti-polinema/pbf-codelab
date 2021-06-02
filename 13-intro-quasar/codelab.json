@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-06-02T05:58:05Z",
+  "id": "13-intro-quasar",
+  "duration": 140,
+  "title": "#13 | Pengenalan Quasar Framework",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Quasar Framework",
+  "source": "1rTfdcqZrQGyO4kSAaTxqeIHihQkuoPpKwbG34bJ3LvY",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "framework",
+    "pemrograman-berbasis-framework",
+    "quasar",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "13-intro-quasar"
+}

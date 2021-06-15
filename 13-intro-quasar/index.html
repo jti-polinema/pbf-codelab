@@ -105,8 +105,8 @@
 </ul>
 <p>Quasar menangani semua praktik terbaik pengembangan web dan lainnya - tanpa perlu konfigurasi.</p>
 <p>Silakan baca lebih lanjut <a href="https://quasar.dev/introduction-to-quasar#app-extensions-support" target="_blank">di sini</a> untuk fitur-fitur menarik lainnya.</p>
-<p>Anda bisa mencoba untuk mengakses <a href="https://quasar.dev/" target="_blank">quasar.dev</a> lalu klik pada bagian kanan address bar browser Anda agar tersedia secara offline atau menjadi aplikasi desktop.</p>
-<p class="image-container"><img style="width: 325.00px" src="img\aa9d4b226b241208.jpeg">             <img style="width: 89.00px" src="img\24a42c5ea583c93e.jpeg"></p>
+<p>Anda bisa mencoba untuk mengakses <a href="https://quasar.dev/" target="_blank">quasar.dev</a> lalu klik <code>install</code> pada bagian kanan address bar browser Anda agar tersedia secara <em>offline</em> atau menjadi aplikasi desktop.</p>
+<p class="image-container"><img style="width: 337.00px" src="img\\3c7265d674180a9b.png">            <img style="width: 89.00px" src="img\\24a42c5ea583c93e.jpeg"></p>
 
 
       </google-codelab-step>
@@ -129,7 +129,7 @@
 <pre><code>yarn global add @quasar/cli
 # atau
 npm install -g @quasar/cli</code></pre>
-<aside class="warning"><p><strong>Perhatian:</strong> Versi <code>Node &gt;= 10</code> dan <code>npm &gt;= 5</code> harus sudah terpasang pada komputer Anda. Jangan menggunakan <code>Node &gt; 14</code>, karena Quasar masih menggunakan Webpack 4, belum diuji untuk versi yang lebih tinggi.</p>
+<aside class="warning"><p><strong>Perhatian:</strong> Versi <code>Node >= 10</code> dan <code>npm >= 5</code> harus sudah terpasang pada komputer Anda. Jangan menggunakan <code>Node > 14</code>, karena Quasar masih menggunakan Webpack 4, belum diuji untuk versi yang lebih tinggi.</p>
 </aside>
 <ol type="1" start="2">
 <li>Setelah proses instalasi <code>Yarn</code> dan <code>Quasar</code> berhasil, selanjutnya kita buat folder project Quasar baru pada lokasi dokumen sesuai keinginan kita dengan perintah berikut.</li>
@@ -138,23 +138,23 @@ npm install -g @quasar/cli</code></pre>
 <ol type="1" start="3">
 <li>Pada saat proses pembuatan project Quasar, maka akan tampil beberapa pertanyaan untuk kita konfigurasi pada project Quasar seperti berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\eecacd31093feff8.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\eecacd31093feff8.jpeg"></p>
 <aside class="warning"><p><strong>Perhatian:</strong> Perhatikan teks berwarna hijau tosca pada gambar di atas. Teks tersebut merupakan inputan dari kita. Mulai dari <em>project name</em> hingga akhir pemilihan <em>package manager</em> menggunakan <code>yarn</code>.</p>
 </aside>
 <ol type="1" start="4">
 <li>Tunggu hingga proses pembuatan project folder sampai selesai. Jika prosesnya sudah selesai, maka akan tampil seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\95c7b5b4ad96c12b.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\95c7b5b4ad96c12b.jpeg"></p>
 <ol type="1" start="5">
 <li>Selanjutnya buka folder project Quasar tersebut &#34;<strong>belajar_quasar</strong>&#34; dengan VS code, lalu buka terminal dan jalankan perintah berikut untuk melihat hasil aplikasi di browser.</li>
 </ol>
 <pre><code>quasar dev</code></pre>
 <p>Tunggu hingga proses kompilasi selesai, maka akan tampil server sudah running dan tampil di browser.</p>
-<p class="image-container"><img style="width: 444.00px" src="img\c852566eed58b79c.jpeg"></p>
+<p class="image-container"><img style="width: 444.00px" src="img\\c852566eed58b79c.jpeg"></p>
 <ol type="1" start="6">
 <li>Kemudian silakan pelajari dan pahami maksud struktur folder dan file yang ada dalam project Quasar.</li>
 </ol>
-<p class="image-container"><img style="width: 240.00px" src="img\1970e607f8c78b33.jpeg"></p>
+<p class="image-container"><img style="width: 240.00px" src="img\\1970e607f8c78b33.jpeg"></p>
 <aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project Quasar tersebut ke folder laporan <code>src/13_quasar,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
 
@@ -198,7 +198,7 @@ export default {
 /* This is where your CSS goes */
 &lt;/style&gt;</code></pre>
 <ol type="1" start="3">
-<li>Sekarang kita coba buat kode pertama dengan buka file <code>src &gt; pages &gt; Index.vue</code></li>
+<li>Sekarang kita coba buat kode pertama dengan buka file <code>src > pages > Index.vue</code></li>
 </ol>
 <pre><code>&lt;template&gt;
   &lt;q-page class=&#34;flex flex-center&#34;&gt;
@@ -221,26 +221,18 @@ export default {
 <ol type="1" start="4">
 <li>Save file <code>Index.vue</code> dan langsung lihat hasilnya di browser tanpa harus kita refresh, maka tampilan akan langsung update, karena Quasar memiliki fitur Hot Reloaded.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\eed98c230e66543a.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\eed98c230e66543a.jpeg"></p>
 <aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project Quasar tersebut ke folder laporan <code>src/13_quasar,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Praktikum 3: Mengenal Quasar Directives" duration="10">
-        
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Praktikum 4: ...." duration="20">
-        
-
-      </google-codelab-step>
-    
       <google-codelab-step label="Tugas Praktikum" duration="30">
         <ol type="1" start="1">
-<li>Berdasarkan praktikum 1 yang telah Anda lakukan, jelaskan kegunaan file quasar.conf.js ?</li>
+<li>Berdasarkan praktikum 1 yang telah Anda lakukan, jelaskan kegunaan file <code>quasar.conf.js</code> ?</li>
+<li>Jelaskan maksud istilah SPA, SSR, PWA, BEX, Electron app, Cordova, dan Linting code!</li>
+<li>Jelaskan maksud dan perbedaan ES6, ECMAScript 6, dan ECMAScript 2015 !</li>
 </ol>
 
 

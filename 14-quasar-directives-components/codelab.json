@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-06-19T06:32:35Z",
+  "id": "14-quasar-directives-components",
+  "duration": 80,
+  "title": "#14 | Quasar Directives dan Components",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Quasar Directives dan Components",
+  "source": "1ptankAMtqpSO7XRJnVQ-9_ahzaJKDxgpVPcS39omOOQ",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "framework",
+    "pemrograman-berbasis-framework",
+    "quasar",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "14-quasar-directives-components"
+}

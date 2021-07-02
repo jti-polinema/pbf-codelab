@@ -1,0 +1,239 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#15 | Quasar Plugins dan Vue Properties</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="15-quasar-plugins-vue-properties"
+                  title="#15 | Quasar Plugins dan Vue Properties"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2021-06-16</p>
+<p><strong>Penulis</strong>: Habibie Ed Dien, S.Kom., M.T.</p>
+<h2 is-upgraded><strong>Quasar Plugins dan Vue Properties</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang <em>Quasar Plugins </em>dan <em>Vue Properties</em>.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Mengenal perintah dasar <code>npm</code>, <code>yarn</code>, atau <code>npx</code></li>
+<li>Mengenal tentang <a href="https://vuejs.org/v2/guide/" target="_blank">Vue.js</a></li>
+<li>Mengenal fitur-fitur <a href="http://es6-features.org/#Constants" target="_blank">ECMAScript 6</a> (<a href="https://github.com/lukehoban/es6features" target="_blank">ES6</a>)</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Pengenalan Quasar Plugins</li>
+<li>Pengenalan Vue Properties</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js dan Yarn telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Quasar Plugins" duration="15">
+        <h2 is-upgraded><strong>Menggunakan Quasar Plugins</strong></h2>
+<p>Quasar menggunakan beberapa modifikasi dari <a href="https://vuejs.org/v2/guide/custom-directive.html" target="_blank">Vue Directives</a>. Directives tersebut dapat diterapkan hampir di semua elemen DOM atau komponen.</p>
+<p>Contoh Quasar directive:</p>
+<pre><code>&lt;div v-ripple&gt;Klik Saya&lt;/div&gt;</code></pre>
+<aside class="special"><p><strong>Catatan: </strong><em>Directive</em> berarti &#34;penunjuk&#34;. Vue directives selalu diawali dengan <code>v-</code> dan Quasar directive selalu diawali dengan <code>q-</code>. Hal ini untuk membedakan kepemilikan komponen dalam menggunakannya di templat HTML.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Menggunakan Quasar Plugins" duration="20">
+        <p>Kita akan memulai menggunakan Quasar Directives, silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Kita buat project quasar baru atau dapat melanjutkan dari codelabs 13 sebelumnya. Jika ingin membuat project baru, maka lakukan perintah berikut pada CMD atau terminal.</li>
+</ol>
+<pre><code>quasar create belajar-directives-components</code></pre>
+<ol type="1" start="2">
+<li>Setelah proses pembuatan project baru berhasil, selanjutnya kita definisikan directive <code>Ripple</code> yang akan digunakan pada file <code>quasar.conf.js</code></li>
+</ol>
+<p class="image-container"><img style="width: 610.00px" src="img\\e1b5ae207a30b6c3.png"></p>
+<aside class="special"><p><strong>Catatan:</strong> Semua directives yang akan digunakan, harus didefinisikan terlebih dahulu pada file <code>quasar.conf.js</code>.</p>
+</aside>
+<ol type="1" start="3">
+<li>Setelah itu masuk ke folder <code>src > pages</code> pilih file <code>Index.vue</code> ganti kode template seperti berikut.</li>
+</ol>
+<pre><code>&lt;template&gt;
+  &lt;div class=&#34;q-pa-md row justify-center&#34;&gt;
+    &lt;div
+      v-ripple
+      class=&#34;relative-position container flex flex-center text-white&#34;
+      :class=&#34;classes&#34;
+    &gt;
+      Klik/tap saya NIM - Nama
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Ganti NIM dan Nama Anda masing-masing.</p>
+</aside>
+<ol type="1" start="4">
+<li>Selanjutnya kode <code>script</code> seperti berikut.</li>
+</ol>
+<pre><code>&lt;script&gt;
+const colors = [
+  &#34;primary&#34;,
+  &#34;amber&#34;,
+  &#34;secondary&#34;,
+  &#34;orange&#34;,
+  &#34;accent&#34;,
+  &#34;lime&#34;,
+  &#34;cyan&#34;,
+  &#34;purple&#34;,
+  &#34;brown&#34;,
+  &#34;blue&#34;
+];
+
+export default {
+  data() {
+    return {
+      color: colors[0],
+      index: 0
+    };
+  },
+
+  computed: {
+    classes() {
+      return `bg-${this.color}`;
+    }
+  },
+
+  mounted() {
+    this.timer = setInterval(() =&gt; {
+      this.index = (this.index + 1) % colors.length;
+      this.color = colors[this.index];
+    }, 3000);
+  },
+
+  beforeDestroy() {
+    clearInterval(this.timer);
+  }
+};
+&lt;/script&gt;</code></pre>
+<ol type="1" start="5">
+<li>Untuk kode <code>style</code> ganti seperti berikut.</li>
+</ol>
+<pre><code>&lt;style lang=&#34;sass&#34; scoped&gt;
+.container
+  border-radius: 3px
+  cursor: pointer
+  transition: background 1.5s
+  height: 150px
+  width: 80%
+  max-width: 500px
+&lt;/style&gt;</code></pre>
+<ol type="1" start="6">
+<li>Kemudian silakan <em>save </em>dan <em>run </em>perintah <code>quasar dev</code> untuk melihat hasilnya di browser. Seharusnya tampil seperti pada gambar berikut. Jika area berwarna kuning di klik/tap, maka akan ada efek <em>Ripple</em>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\c0c4e13e10776302.png"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project Quasar tersebut ke folder laporan <code>src/14_quasar_directives_components/prak1,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Menangani Vue Properties" duration="15">
+        <p>Pada praktikum ini kita akan belajar tentang penggunaan Quasar Components. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Pertama, sebelum kita menggunakan <code>Button</code> dan <code>Icon</code>, perlu kita definisikan komponen yang dibutuhkan pada file <code>quasar.conf.js</code></li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\1d6643576cd6640d.png"></p>
+<aside class="special"><p><strong>Catatan:</strong> Setiap kita akan menggunakan komponen, directives, plugin, atau konfigurasi lain yang berkaitan dengan project Quasar kita, maka perlu didefinisikan semua pada file <code>quasar.conf.js</code>.</p>
+</aside>
+<ol type="1" start="2">
+<li>Selanjutnya kita buat kode HTML di <code>src > pages > Index.vue</code> seperti berikut.</li>
+</ol>
+<pre><code>&lt;template&gt;
+  &lt;div class=&#34;q-pa-md row justify-center&#34;&gt;
+    &lt;div class=&#34;q-pa-md q-gutter-sm&#34;&gt;
+      &lt;q-btn color=&#34;primary&#34; icon=&#34;mail&#34; label=&#34;On Left&#34; /&gt;
+      &lt;q-btn color=&#34;secondary&#34; icon-right=&#34;mail&#34; label=&#34;On Right&#34; /&gt;
+      &lt;q-btn color=&#34;red&#34; icon=&#34;mail&#34; icon-right=&#34;send&#34; label=&#34;On Left and Right&#34; /&gt;
+      &lt;br /&gt;
+      &lt;q-btn icon=&#34;phone&#34; label=&#34;Stacked&#34; stack glossy color=&#34;purple&#34;/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+<ol type="1" start="3">
+<li>Save file <code>quasar.conf.js</code> dan <code>Index.vue</code> tersebut, lalu lihat hasilnya di browser. Seharusnya tampil seperti gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 527.00px" src="img\\50204acc6c4ab377.png"></p>
+<aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project Quasar tersebut ke folder laporan <code>src/14_quasar_directives_components/prak2,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="30">
+        <ol type="1" start="1">
+<li>Berdasarkan praktikum 1 yang telah Anda lakukan, jelaskan maksud kode di template: <code>class="q-pa-md row justify-center"</code> ?</li>
+<li>Berdasarkan praktikum 1 pada langkah nomor 4, jelaskan maksud script tersebut seperti kegunaan konstanta <code>colors</code>, fungsi <code>data()</code>, <code>computed</code>, <code>mounted</code>, dan <code>beforeDestroy()</code> !</li>
+<li>Berdasarkan praktikum 2 pada langkah nomor 2, jelaskan maksud tiap kode HTML pada template yang mendefinisikan tiap button tersebut!</li>
+<li>Coba ganti kode template HTML pada praktikum 2 menjadi seperti berikut. Save file, lalu perhatikan apa yang terjadi ? Mengapa terjadi demikian, jelaskan!</li>
+</ol>
+<pre><code>&lt;template&gt;
+  &lt;div class=&#34;q-pa-md q-gutter-sm&#34;&gt;
+    &lt;q-btn color=&#34;primary&#34; icon=&#34;mail&#34; label=&#34;On Left&#34; /&gt;
+    &lt;q-btn color=&#34;secondary&#34; icon-right=&#34;mail&#34; label=&#34;On Right&#34; /&gt;
+    &lt;q-btn color=&#34;red&#34; icon=&#34;mail&#34; icon-right=&#34;send&#34; label=&#34;On Left and Right&#34; /&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;q-pa-md q-gutter-sm&#34;&gt;
+   &lt;q-btn icon=&#34;phone&#34; label=&#34;Stacked&#34; stack glossy color=&#34;purple&#34; /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://quasar.dev/start/how-to-use-vue#using-quasar-plugins" target="_blank">Using Quasar Plugins</a></li>
+<li><a href="https://quasar.dev/start/how-to-use-vue#handling-vue-properties" target="_blank">Handling Vue Properties</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -32,6 +32,16 @@ Akses codelab di github pages: [https://jti-polinema.github.io/pbf-codelab/](htt
 
 [11 - Firebase dan Redux Thunk](11-redux-thunk/)
 
+[12 - CRUD Firebase dengan ReactJS](12-crud-firebase/)
+
+[13 - Pengenalan Quasar Framework](13-intro-quasar/)
+
+[14 - Quasar Directives dan Components](14-quasar-directives-components/)
+
+[15 - Quasar Plugins dan Vue Properties](12-crud-firebase/)
+
+[16 - Vue Methods dan Vue Events](12-crud-firebase/)
+
 <hr>
 
 Dibuat dengan [Google Codelab Tools](https://github.com/googlecodelabs/tools)

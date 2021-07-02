@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-07-02T13:00:21Z",
+  "id": "15-quasar-plugins-vue-properties",
+  "duration": 80,
+  "title": "#15 | Quasar Plugins dan Vue Properties",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Quasar Plugins dan Vue Properties",
+  "source": "1ISIoIMez8WTWOd8WPB38OtlEH9Y5vlSOihU6i1hskUU",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "framework",
+    "pemrograman-berbasis-framework",
+    "quasar",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "15-quasar-plugins-vue-properties"
+}

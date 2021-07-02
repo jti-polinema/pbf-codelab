@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-07-02T13:30:45Z",
+  "id": "16-vue-methods-events",
+  "duration": 80,
+  "title": "#16 | Vue Methods dan Vue Events",
+  "authors": "Habibie Ed Dien",
+  "summary": "Pada codelab ini, Anda akan belajar tentang Vue Methods dan Vue Events",
+  "source": "1E9m_cPqV4ruNHvcV5qjyd23RFQxJI5p2r6z1zmKJUcE",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Web"
+  ],
+  "tags": [
+    "framework",
+    "pemrograman-berbasis-framework",
+    "quasar",
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "16-vue-methods-events"
+}

@@ -3,16 +3,16 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-02-19T14:53:39Z",
+  "updated": "2021-07-08T03:33:21Z",
   "id": "02-pengenalan-reactjs",
-  "duration": 24,
+  "duration": 12,
   "title": "02 | Pengenalan ReactJS",
   "authors": "Habibie Ed Dien",
   "summary": "Pada codelab ini Anda akan belajar tentang instalasi dan konfigurasi project ReactJS.",
   "source": "1HCvOoeYG0IdaI-3W8utiAlZZKjmuQSsdAao1thDoZZY",
   "theme": "web",
   "status": [
-    "draft"
+    "published"
   ],
   "category": [
     "Web"
@@ -22,5 +22,6 @@
     "web"
   ],
   "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
   "url": "02-pengenalan-reactjs"
 }

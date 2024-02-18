@@ -1,202 +1,341 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Codelabs: Pemrograman Berbasis Framework</title>
+  <meta content="Modul Praktikum Pemrograman Berbasis Framework dengan Codelabs" name="description">
+  <meta content="habibie ed dien, pemrograman berbasis framework, codelabs" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/jti-polinema-logo-min.png" rel="icon">
+  <link href="assets/img/jti-polinema-logo-min.png" rel="jti-polinema-logo-min">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: PhotoFolio
+  * Updated: Sep 18 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="card text-center">
-      <div class="card-header">
-        Codelabs
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="assets/img/jti-polinema-logo-min.png" alt="jti">
+        <!-- <i class="bi bi-camera"></i> -->
+        <h1>JTI Polinema</h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html" class="active">Modul Praktikum</a></li>
+          <li><a href="about.html">Tentang</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+      <div class="header-social-links">
+        <a target="_blank" href="https://github.com/jti-polinema/pbf-codelab" class="github"><i class="bi bi-github"></i></a>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Pemrograman Berbasis Framework | Semester Genap 2020/2021</h5>
-        <p class="card-text">Penulis: Habibie Ed Dien, <a href="http://jti.polinema.ac.id" target="_blank">JTI Polinema</a></p>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main" data-aos="fade" data-aos-delay="1500">
+
+    <!-- ======= End Page Header ======= -->
+    <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2>Codelabs: Pemrograman Berbasis Framework</h2>
+            <p>Modul praktikum digital berbasis codelabs untuk mata kuliah Pemrograman Berbasis Framework semester 6 Program Studi D4 Teknik Informatika, Jurusan Teknologi Informasi, Politeknik Negeri Malang</p>
+          </div>
+        </div>
       </div>
-      <div class="card-footer text-muted">
-        <a href="https://github.com/googlecodelabs/tools" target="_blank">Created with Google Codelabs Tools</a>
+    </div><!-- End Page Header -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-activity"></i>
+              <h4><a target="_blank" href="01-pengantar-pbf/" class="stretched-link">#01 Pengantar Pemrograman Pemrograman Berbasis Framework</a></h4>
+              <p>Mampu memahami konsep pemrograman modern javascript dan menerapkan teknik pengelolaan repositori proyek berbasis version control (Git).</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-bounding-box-circles"></i>
+              <h4><a target="_blank" href="02-pengenalan-reactjs/" class="stretched-link">#02 Pengenalan ReactJS</a></h4>
+              <p>Mampu memahami konsep framework ReactJS dan membuat project menggunakan ReactJS.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-calendar4-week"></i>
+              <h4><a target="_blank" href="#" class="stretched-link">#03 Stateless dan Stateful Components</a></h4>
+              <p>Mampu menerapkan komponen stateless dan stateful di ReactJS.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-broadcast"></i>
+              <h4><a target="_blank" href="#" class="stretched-link">#04 Interaksi API</a></h4>
+              <p>Mampu melakukan interaksi atau pemanggilan API di ReactJS.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+      <div class="container mb-4"></div>
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-activity"></i>
+              <h4><a href="05-api-router-reactjs/" class="stretched-link">#05 React Router</a></h4>
+              <p>Mampu memahami konsep react router dan penerapannya.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-bounding-box-circles"></i>
+              <h4><a target="_blank" href="06-redux-reactjs/" class="stretched-link">#06 State Management (Redux)</a></h4>
+              <p>Mampu memahami konsep redux dan penerapannya.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-calendar4-week"></i>
+              <h4><a target="_blank" href="07-context-hoc/" class="stretched-link">#07 Provider dan Reducer</a></h4>
+              <p>Mampu memahami konsep provider dan reducer serta penerapannya dengan API.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-broadcast"></i>
+              <h4><a href="#" class="stretched-link">#08 Ujian Tengah Semester (UTS)</a></h4>
+              <p>Merancang dan membangun tampilan layout aplikasi sesuai dokumen RPP (Project Based Learning).</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+      <div class="container mb-4"></div>
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-activity"></i>
+              <h4><a target="_blank" href="09-global-api-hooks/" class="stretched-link">#09 Konsep Global API</a></h4>
+              <p>Mampu memahami konsep Global API, react hooks, dan penerapannya.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-camera"></i>
+              <h4><a target="_blank" href="" class="stretched-link">#10 Firebase dan Redux</a></h4>
+              <p>Mampu menggunakan Firebase dan setup redux pada project.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-calendar4-week"></i>
+              <h4><a target="_blank" href="11-basic-state/" class="stretched-link">#11 Redux Thunk dan Promise</a></h4>
+              <p>Mampu memahami dan menerapkan redux thunk.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-broadcast"></i>
+              <h4><a target="_blank" href="12-async/" class="stretched-link">#12 CRUD Firebase</a></h4>
+              <p>Mampu menerapkan transaksi CRUD ke basis data Firebase.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+      <div class="container mb-4"></div>
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-activity"></i>
+              <h4><a href="13-state-streams-bloc/" target="_blank" class="stretched-link">#13 CRUD di Laravel</a></h4>
+              <p>Mampu menerapkan transaksi CRUD di Laravel.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-bounding-box-circles"></i>
+              <h4><a href="" class="stretched-link">#14 Validasi dan Restful API di Laravel dan React</a></h4>
+              <p>Mampu memahami konsep validasi dan menerapkan restful api dengan perpaduan Laravel dan React.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-calendar4-week"></i>
+              <h4><a href="" class="stretched-link">#15-16 Proyek (Project Based Learning)</a></h4>
+              <p>Mampu menerapkan materi praktikum secara komprehensif ke proyek sesuai dokumen RPP.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="service-item position-relative">
+              <i class="bi bi-broadcast"></i>
+              <h4><a href="" class="stretched-link">#17 Project Demo/Presentation</a></h4>
+              <p>Mampu menyelesaikan final project secara berkelompok melalui Git.</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- End Services Section -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+
+        <div class="section-header">
+          <h2>Referensi</h2>
+          <p>Silakan akses untuk bahan tambahan materi</p>
+        </div>
+
+        <div class="row gy-4 gx-lg-5">
+
+          <div class="col-lg-6">
+            <div class="pricing-item d-flex justify-content-between">
+              <h3>Dokumentasi React versi Indonesia</h3>
+              <h4><a target="_blank" href="https://id.react.dev/">Akses situs</a></h4>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-6">
+            <div class="pricing-item d-flex justify-content-between">
+              <h3>Dokumentasi React versi English</h3>
+              <h4><a target="_blank" href="https://react.dev/">Akses situs</a></h4>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-6">
+            <div class="pricing-item d-flex justify-content-between">
+              <h3>The Complete Developer: Master the Full Stack with TypeScript, React, Next.js, MongoDB, and Docker | Martin Krause (2023)</h3>
+              <h4><a target="_blank" href="https://download.library.lol/main/4218000/a01eb641ddde34df8b4ae2e61da416d5/Martin%20Krause%20-%20The%20Complete%20Developer_%20Master%20the%20Full%20Stack%20with%20TypeScript%2C%20React%2C%20Next.js%2C%20MongoDB%2C%20and%20Docker-No%20Starch%20Press%20%282024%29.pdf">Akses e-book</a></h4>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-6">
+            <div class="pricing-item d-flex justify-content-between">
+              <h3>Learning javascript Design Patterns: A javascript and React Developer's Guide | Addy Osmani (2023)</h3>
+              <h4><a target="_blank" href="https://download.library.lol/main/3669000/cdc520452aa8d72020d22fb5ba88048d/Addy%20Osmani%20-%20Learning%20j%D0%B0vascript%20Design%20Patterns_%20A%20j%D0%B0vascript%20and%20React%20Developer%E2%80%99s%20Guide-O%E2%80%99Reilly%20Media%2C%20Inc.%20%282023%29.pdf">Akses e-book</a></h4>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-6">
+            <div class="pricing-item d-flex justify-content-between">
+              <h3>Full-Stack Development Using TypeScript, React, Node.js, Webpack, and Docker | Frank Zammetti (2020)</h3>
+              <h4><a target="_blank" href="https://drive.google.com/file/d/1TUDCyTckZHKqexDSB6QZxrolSLLoMbYs/view">Akses e-book</a></h4>
+            </div>
+          </div><!-- End Pricing Item -->
+
+          <div class="col-lg-6">
+            <div class="pricing-item d-flex justify-content-between">
+              <h3>Komunitas Developer ReactJS Indonesia</h3>
+              <h4><a target="_blank" href="https://reactjs.id/">Akses situs</a></h4>
+            </div>
+          </div><!-- End Pricing Item -->
+
+        </div>
+    </section><!-- End Pricing Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="copyright">
+        Tim Pengajar &copy; Copyright <strong><span>PhotoFolio</span></strong>. All Rights Reserved 2024
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
+  </footer><!-- End Footer -->
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">01 - Pengantar Pemrograman Berbasis Framework</h5>
-            <p class="card-text">Pengantar Pemrograman Berbasis Framework</p>
-            <a href="01-pengantar-pbf" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">02 - Pengenalan ReactJS</h5>
-            <p class="card-text">Pengenalan ReactJS</p>
-            <a href="02-pengenalan-reactjs" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">03 - Konsep ReactJS</h5>
-            <p class="card-text">Konsep ReactJS</p>
-            <a href="03-konsep-reactjs" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">04 - Konsep ReactJS - Bagian 2</h5>
-            <p class="card-text">04 - Konsep ReactJS - Bagian 2</p>
-            <a href="04-konsep-reactjs-bagian-2" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">05 - API dan Router di ReactJS</h5>
-            <p class="card-text">05 - API dan Router di ReactJS</p>
-            <a href="05-api-router-reactjs" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">06 - React Redux</h5>
-            <p class="card-text">06 - React Redux</p>
-            <a href="06-redux-reactjs" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">07 - Context dan HOC</h5>
-            <p class="card-text">07 - Context dan HOC</p>
-            <a href="07-context-hoc" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">08 - UTS</h5>
-            <p class="card-text">08 - UTS</p>
-            <a href="#LMS" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">09 - Global API dan Hooks</h5>
-            <p class="card-text">09 - Global API dan Hooks</p>
-            <a href="09-global-api-hooks" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">10 - Firebase di ReactJS</h5>
-            <p class="card-text">10 - Firebase di ReactJS</p>
-            <a href="10-firebase-reactjs" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">11 - Firebase dan Redux Thunk</h5>
-            <p class="card-text">11 - Firebase dan Redux Thunk</p>
-            <a href="11-redux-thunk" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">12 - CRUD di Firebase</h5>
-            <p class="card-text">12 - CRUD di Firebase</p>
-            <a href="12-crud-firebase" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">13 - Pengenalan Quasar Framework</h5>
-            <p class="card-text">13 - Pengenalan Quasar Framework</p>
-            <a href="13-intro-quasar" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">14 - Quasar Directives dan Components</h5>
-            <p class="card-text">14 - Quasar Directives dan Components</p>
-            <a href="14-quasar-directives-components" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">15 - Quasar Plugins dan Vue Properties</h5>
-            <p class="card-text">15 - Quasar Plugins dan Vue Properties</p>
-            <a href="15-quasar-plugins-vue-properties" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">16 - Vue Methods dan Vue Events</h5>
-            <p class="card-text">16 - Vue Methods dan Vue Events</p>
-            <a href="16-vue-methods-events" class="btn btn-primary">Mulai</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div id="preloader">
+    <div class="line"></div>
   </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
 
 </html>

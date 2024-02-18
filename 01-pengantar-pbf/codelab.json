@@ -3,9 +3,9 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-02-19T14:53:03Z",
+  "updated": "2024-02-18T14:23:01Z",
   "id": "01-pengantar-pbf",
-  "duration": 24,
+  "duration": 6,
   "title": "#01 | Pengantar Pemrograman Berbasis Framework",
   "authors": "Habibie Ed Dien",
   "summary": "Modul pertama ini berisi pengantar tentang Pemrograman Berbasis Framework dan persiapan perangkat lunak yang perlu dipasang pada komputer Anda.",
@@ -15,13 +15,12 @@
     "published"
   ],
   "category": [
-    "PBF"
+    "pbf"
   ],
   "tags": [
-    "pemrograman-berbasis-framework",
-    "reactjs",
     "web"
   ],
   "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
   "url": "01-pengantar-pbf"
 }

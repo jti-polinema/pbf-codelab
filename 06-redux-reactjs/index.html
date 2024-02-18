@@ -9,7 +9,7 @@
   <title>#06 | React Redux</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
   <style>
     .success {
       color: #1e8e3e;
@@ -67,23 +67,23 @@
 <p>Masalahnya bukan karena &#34;state management&#34;, karena React sendiri sudah menangani soal state. Redux membantu untuk menangani atau mengelola state, tetapi bukan masalah itu yang akan dihadapi. Mari kita lanjutkan dengan penjelasan berikut ini.</p>
 <h2 is-upgraded>Tentang Aliran Data (<em>Data Flow</em><strong>)</strong></h2>
 <p>Pada <a href="https://jti-polinema.github.io/pbf-codelab/03-konsep-reactjs/#3" target="_blank">codelab sebelumnya</a> Anda telah mempelajari <code>props</code> dan aliran data searah. Data dikirim ke komponen melalui <code>props</code>. Sebagai contoh, perhatikan komponen berikut:</p>
-<p class="image-container"><img style="width: 446.00px" src="img/1f81c9fd38d30b39.png"></p>
+<p class="image-container"><img style="width: 446.00px" src="img\\574eef42da4a7798.png"></p>
 <p>Variabel <code>count</code> disimpan dalam <code>state</code> aplikasi, kemudian dikirim melalui <code>props</code> untuk melakukan update nilai variabel tersebut.</p>
-<p class="image-container"><img style="width: 404.00px" src="img/7efbd5b00363b026.png"></p>
+<p class="image-container"><img style="width: 404.00px" src="img\\73a22397336748f1.png"></p>
 <p>Agar data dapat mengalir dari bawah ke atas (maksudnya dari variabel <code>props</code> menjadi <code>state</code> aplikasi), maka diperlukan <code>callback function</code> sehingga data dapat di-<em>update</em> atau manipulasi oleh sebuah komponen <code>button</code> seperti pada ilustrasi berikut.</p>
-<p class="image-container"><img style="width: 292.00px" src="img/1f38bd4c9ffa3391.png"></p>
+<p class="image-container"><img style="width: 292.00px" src="img\\563f6ab88c21a565.png"></p>
 <p>Anda dapat mengimajinasikan data seperti komponen elektronik yang saling terhubung dengan kabel yang memiliki warna-warna berbeda. Data mengalir melalui kabel-kabel tersebut antar komponen yang bisa saling bertukar data antar komponen tersebut.</p>
 <h2 is-upgraded><strong>Lapisan dalam Aliran Data</strong></h2>
 <p>Cepat atau lambat Anda akan dihadapkan pada situasi di mana saat membuat aplikasi React membutuhkan lapisan data yang sama pada beberapa letak di halaman web. Perhatikan ilustrasi halaman web Twitter berikut yang menampilkan avatar (foto profil) pada 3 posisi berbeda, namun sumber datanya tetap sama.</p>
-<p class="image-container"><img style="width: 624.00px" src="img/9b2c0bf56045b491.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\851c225758b99e2.png"></p>
 <p>Kita anggap avatar user merupakan bagian dari data profil user, yang disimpan dalam komponen <code>App</code> sebagai variabel <code>user</code>. Untuk mengirimkan data <code>user</code> ke tiga komponen <code>avatar</code> tersebut, data <code>user</code> perlu melewati beberapa komponen yang sebenarnya komponen-komponen tersebut tidak membutuhkannya. Perhatikan ilustrasi berikut ini.</p>
-<p class="image-container"><img style="width: 569.00px" src="img/b0b35e73393a59e6.png"></p>
+<p class="image-container"><img style="width: 569.00px" src="img\\611a57bb63ce9b40.png"></p>
 <p>Dari ilustrasi di atas, kita perhatikan data <code>user</code> melakukan perjalanan yang cukup rumit antar komponen-komponen yang berada dibawahnya. Model perancangan komponen seperti ini tidak baik untuk software design. Untuk melakukan refactoring dan reusing komponen cukup sulit jika berdasarkan ilustrasi tersebut. Karena setiap komponen memiliki <code>state</code> dan <code>props</code>-nya masing-masing.</p>
 <p>Nah, itu merupakan salah satu masalah yang diselesaikan oleh Redux. Mari kita lanjutkan materi berikut ini.</p>
 <h2 is-upgraded><strong>Mudahnya Pasang Data ke Komponen dengan Redux</strong></h2>
 <p>Redux menyelesaikan masalah ini. Redux memberikan kemudahan untuk memasang data yang dibutuhkan ke komponen apapun secara langsung (<em>direct access</em>).</p>
 <p>Menggunakan fungsi <code>connect</code> yang ada dalam Redux, Anda dapat mengaitkan dengan komponen ke dalam <code>data store</code> milik Redux. Komponen dapat menggunakan data yang diperlukan saja. Perhatikan ilustrasi berikut ini.</p>
-<p class="image-container"><img style="width: 624.00px" src="img/6df3d403ea5111ce.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\8f08c02e30f24e12.png"></p>
 <p>Itulah alasan menggunakan Redux.</p>
 <p>Selain itu, Redux memiliki manfaat lain yaitu:</p>
 <ol type="1" start="1">
@@ -101,7 +101,7 @@
 </ol>
 <h2 is-upgraded><strong>Diagram Konsep Redux</strong></h2>
 <p>Untuk memahami tentang konsep Redux, perhatikan diagram berikut:</p>
-<p class="image-container"><img style="width: 466.00px" src="img/ea480636a08eb47c.png"></p>
+<p class="image-container"><img style="width: 466.00px" src="img\\45c032fceb215967.png"></p>
 <p>Keterangan diagram:</p>
 <ol type="1" start="1">
 <li><strong>Action</strong>: merupakan objek JavaScript (&#34;{  }&#34;) yang memberitahu <code>reducer</code> untuk memodifikasi data. Syaratnya, <code>action</code> harus memiliki properti <code>type</code> berupa <code>String</code>.</li>
@@ -115,7 +115,7 @@
     
       <google-codelab-step label="Praktikum: Membuat Aplikasi Counter Sederhana" duration="50">
         <p>Pada praktikum 1 ini, kita akan membuat program counter sederhana seperti pada gambar berikut ini.</p>
-<p class="image-container"><img style="width: 262.00px" src="img/63e880b34efa0332.png"></p>
+<p class="image-container"><img style="width: 262.00px" src="img\\f143698143d6c418.png"></p>
 <p>Tampilan mungkin tidak semenarik pada gambar di atas, karena saat ini kita tidak fokus pada CSS-nya. Untuk membuat aplikasi tersebut, silakan lakukan langkah-langkah praktikum berikut ini.</p>
 <ol type="1" start="1">
 <li>Buka project React di VS Code yang sebelumnya telah dibuat atau bisa membuat project React baru dengan perintah di console: <code>npx create-react-app counter-app</code></li>
@@ -263,7 +263,7 @@ ReactDOM.render(
 <ol type="1" start="12">
 <li>Coba lihat hasilnya di browser, seharusnya muncul error seperti pada gambar berikut</li>
 </ol>
-<p class="image-container"><img style="width: 463.00px" src="img/c989027867830a65.png"></p>
+<p class="image-container"><img style="width: 463.00px" src="img\\5af7054887a90532.png"></p>
 <p>Artinya kita membutuhkan sebuah fungsi <code>reducer</code>. Fungsinya untuk menyimpan dan mengelola <code>state</code>.</p>
 <ol type="1" start="13">
 <li>Selanjutnya kita buat fungsi <code>reducer</code> dengan nilai default <code>count = 42</code></li>
@@ -385,10 +385,10 @@ function reducer(state = initialState, action) {
     
   </google-codelab>
 
-  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
   <script src="//support.google.com/inapp/api.js"></script>
 
 </body>

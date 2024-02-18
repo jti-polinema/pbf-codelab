@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-07-08T03:33:21Z",
+  "updated": "2024-02-18T08:04:39Z",
   "id": "02-pengenalan-reactjs",
   "duration": 12,
   "title": "02 | Pengenalan ReactJS",
@@ -15,7 +15,7 @@
     "published"
   ],
   "category": [
-    "Web"
+    "web"
   ],
   "tags": [
     "reactjs",

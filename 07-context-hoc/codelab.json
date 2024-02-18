@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-03-29T05:42:06Z",
+  "updated": "2024-02-18T15:07:26Z",
   "id": "07-context-hoc",
   "duration": 95,
   "title": "#07 | Context dan HOC",
@@ -15,7 +15,7 @@
     "published"
   ],
   "category": [
-    "Web"
+    "web"
   ],
   "tags": [
     "api",

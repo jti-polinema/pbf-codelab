@@ -2,8 +2,8 @@
   "environment": "web",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
-  "mainga": "G-H7507PFEJB",
-  "updated": "2021-02-21T14:08:54Z",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-06-24T23:14:36Z",
   "id": "03-konsep-reactjs",
   "duration": 70,
   "title": "#03 | Konsep ReactJs",
@@ -15,7 +15,7 @@
     "published"
   ],
   "category": [
-    "Web"
+    "web"
   ],
   "tags": [
     "konsep",

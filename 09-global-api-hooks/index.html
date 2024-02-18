@@ -9,7 +9,7 @@
   <title>#09 | Global API dan Hooks</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
   <style>
     .success {
       color: #1e8e3e;
@@ -79,7 +79,7 @@
 <li>Anda dapat membuat project baru React atau melanjutkan praktikum dari Codelab 5 tentang interaksi dengan API.</li>
 <li>Buatlah folder <code>services</code> dalam folder <code>src</code>, lalu buat file <code>index.js</code> di dalam folder <code>services</code> seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 141.00px" src="img\ea816f0468300a4f.png"></p>
+<p class="image-container"><img style="width: 141.00px" src="img\\23c8850ff7887235.png"></p>
 <ol type="1" start="3">
 <li>Buat konstanta <code>baseUrlApi</code> di <code>src/services/index.js</code> sebagai alamat url utama API yang digunakan. Anda dapat mengaturnya secara terpusat di variabel <code>baseUrlApi</code> ini.</li>
 </ol>
@@ -200,17 +200,17 @@ ReactDOM.render(
 <ol type="1" start="13">
 <li>Dari praktikum sebelumnya, tentu data artikel belum tampil karena server API belum kita jalankan di alamat <a href="http://localhost:3001" target="_blank">http://localhost:3001</a> . Kita siapkan server API dengan membuat file <code>listArtikel.json</code> di root project React kita.</li>
 </ol>
-<p class="image-container"><img style="width: 161.00px" src="img\13dbc885fde9b299.png"></p>
+<p class="image-container"><img style="width: 161.00px" src="img\\e16d78b17805c670.png"></p>
 <ol type="1" start="14">
 <li>Buka file <code>listArtikel.json</code> lalu isi datanya dengan copy dari <a href="https://jsonplaceholder.typicode.com/posts" target="_blank">https://jsonplaceholder.typicode.com/posts</a> </li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\9eaf66cfb36a5c6a.png"></p>
-<aside class="special"><p><strong>Catatan:</strong> Bagian terluar data API harus berupa objek dengan tanda kurung kurawal <code>{ ... }</code> lalu didalamnya terdapat data <code>&#34;posts&#34;</code> yang isinya berupa array objek.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\1179bc4d4f0e7eda.png"></p>
+<aside class="special"><p><strong>Catatan:</strong> Bagian terluar data API harus berupa objek dengan tanda kurung kurawal <code>{ ... }</code> lalu didalamnya terdapat data <code>"posts"</code> yang isinya berupa array objek.</p>
 </aside>
 <ol type="1" start="15">
 <li>Setelah itu save, lalu buka tab terminal baru di vs-code (agar server <code>npm start</code> milik react tadi tetap running) dengan cara klik icon + seperti di gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 217.00px" src="img\5636bb5b461b1195.png"></p>
+<p class="image-container"><img style="width: 217.00px" src="img\\3fa17e5a651f01d.png"></p>
 <ol type="1" start="16">
 <li>Ketikkan perintah berikut dan pastikan Anda berada di root project <code>listArtikel.json</code> berada.</li>
 </ol>
@@ -249,11 +249,11 @@ ReactDOM.render(
 <ol type="1" start="3">
 <li>Lalu bagian konstanta API kita tambahkan method di atas seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 118.00px" src="img\805209e02c42b05.png"></p>
+<p class="image-container"><img style="width: 118.00px" src="img\\4ace5a4f11efee11.png"></p>
 <ol type="1" start="4">
 <li>Selanjutnya pindah ke file <code>src/components/BlogPost.js</code> tambahkan variabel <code>postArtikel</code> untuk menampung data artikel yang akan dikirim melalui method POST.</li>
 </ol>
-<p class="image-container"><img style="width: 451.00px" src="img\467e620cec9f8b4b.png"></p>
+<p class="image-container"><img style="width: 451.00px" src="img\\27d270947798c1d7.png"></p>
 <ol type="1" start="5">
 <li>Kemudian bagian <code>render()</code> kita tambahkan form untuk submit artikel seperti kode berikut.</li>
 </ol>
@@ -337,7 +337,7 @@ ReactDOM.render(
 <ol type="1" start="3">
 <li>Lalu bagian konstanta API kita tambahkan method di atas seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 136.00px" src="img\9e8c9bcb219b9d8a.png"></p>
+<p class="image-container"><img style="width: 136.00px" src="img\\26b5919d45b4c784.png"></p>
 <ol type="1" start="4">
 <li>Selanjutnya pindah ke file <code>src/components/BlogPost.js</code> bagian fungsi <code>render()</code> tambahkan tombol <code>Hapus</code>.</li>
 </ol>
@@ -379,26 +379,26 @@ ReactDOM.render(
 <ol type="1" start="1">
 <li>Buat folder baru di <code>src/services/API</code> dan <code>src/services/Artikel</code> beserta file baru didalamnya seperti pada struktur di bawah ini.</li>
 </ol>
-<p class="image-container"><img style="width: 153.00px" src="img\458236ac51bcaa4f.png"></p>
+<p class="image-container"><img style="width: 153.00px" src="img\\fddbf62160a7fcc0.png"></p>
 <aside class="special"><p><strong>Penjelasan:</strong> Folder <code>API</code> berisi konfigurasi dan method service yang dapat digunakan secara dinamis dengan data apapun. Sedangkan folder <code>Artikel</code> berisi method service yang khusus mengelola data artikel.</p>
 </aside>
 <ol type="1" start="2">
 <li>Isi file <code>src/services/API/Config.js</code> adalah sebagai berikut. File <code>Config.js</code> ini bisa menampung variabel global yang digunakan selama proses API.</li>
 </ol>
-<p class="image-container"><img style="width: 555.00px" src="img\687787372cc94ff5.png"></p>
+<p class="image-container"><img style="width: 555.00px" src="img\\7acc66591007c07c.png"></p>
 <ol type="1" start="3">
 <li>Isi file <code>src/services/API/Get.js</code> adalah sebagai berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 468.00px" src="img\82a5c266a856d07.png"></p>
+<p class="image-container"><img style="width: 468.00px" src="img\\2772ae135e4461ad.png"></p>
 <ol type="1" start="4">
 <li>Selanjutnya file <code>Post.js</code> dan <code>Delete.js</code> isinya sesuai dengan praktikum sebelumnya, hanya saja dipindah di file terpisah. Silakan disesuaikan seperti pada file <code>Get.js</code>!</li>
 <li>Kemudian pada file <code>src/services/Artikel/index.js</code> berubah menjadi seperti berikut ini.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\b9a4d9598506b625.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\f738ebffcaac7652.png"></p>
 <ol type="1" start="6">
 <li>Terakhir menyesuaikan <code>import</code> pada bagian komponen <code>BlogPost.js</code> dengan memanggil API pada bagian folder <code>Artikel</code>.</li>
 </ol>
-<p class="image-container"><img style="width: 363.00px" src="img\7167c6b8594406f5.png"></p>
+<p class="image-container"><img style="width: 363.00px" src="img\\3f34f4c7fa276c5a.png"></p>
 <ol type="1" start="7">
 <li>Simpan semua pekerjaan dan lihat hasilnya di browser. Seharusnya aplikasi react tetap berjalan normal seperti sebelumnya. Hanya saja struktur folder API yang telah kita buat menjadi lebih teratur dan mudah untuk dikelola.</li>
 </ol>
@@ -411,7 +411,7 @@ ReactDOM.render(
       <google-codelab-step label="Tugas Praktikum 1" duration="50">
         <p>Buatlah folder baru di <code>src/services/</code><strong><code>Komentar</code></strong> yang digunakan untuk mengelola data komentar. Buatlah komponen baru dengan nama <code>Komentar.js</code> di folder components yang berfungsi untuk mengelola data komentar berdasarkan API yang telah dibuat!</p>
 <p>Jangan lupa menambahkan objek di database json &#34;<code>comment</code>&#34; untuk menampung data komentar. Atribut bisa terdiri dari <code>userId</code>, <code>nama</code>, <code>komentar</code>, dan <code>id</code>.</p>
-<p class="image-container"><img style="width: 441.00px" src="img\3791634deb93e7e8.png"></p>
+<p class="image-container"><img style="width: 441.00px" src="img\\93d04f45d607757d.png"></p>
 <aside class="warning"><p><strong>Perhatian:</strong> Jawaban Tugas Praktikum 1 copy file dan folder satu project React tersebut ke folder laporan <code>src/09_global_api_hooks,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
 
@@ -451,6 +451,9 @@ export default ContohHook;</code></pre>
 <p><strong>Fitur Class tidak akan dihapus dari React</strong>. Hadirnya fitur hooks bukan berarti menggantikan fitur class yang telah Anda pelajari sebelumnya. Untuk strategi penggunaan hooks secara bertahap, dapat dibaca pada link <a href="https://reactjs.org/docs/hooks-intro.html#gradual-adoption-strategy" target="_blank">ini</a>.</p>
 <p><strong>Hooks tidak akan menggantikan pengetahuan tentang konsep React yang telah Anda pelajari</strong>. Justru fitur Hooks menyediakan akses langsung API ke konsep React yang sudah dipelajari seperti props, state, context, refs, dan lifecycle. </p>
 <p>Untuk mempelajari lebih lanjut tentang Hooks dapat membaca <a href="https://id.reactjs.org/docs/hooks-intro.html" target="_blank">di sini</a>.</p>
+<h2 is-upgraded><strong>Mengapa ada Hooks ?</strong></h2>
+<p>Beberapa permasalahan yang dihadapi sebelum hadirnya fitur hooks adalah sebagai berikut.</p>
+<p><strong>Sulitnya menggunakan kembali stateful logic antar komponen</strong></p>
 
 
       </google-codelab-step>
@@ -480,10 +483,10 @@ export default ContohHook;</code></pre>
     
   </google-codelab>
 
-  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
   <script src="//support.google.com/inapp/api.js"></script>
 
 </body>

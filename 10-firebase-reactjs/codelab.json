@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-04-26T07:15:23Z",
+  "updated": "2024-02-18T15:10:04Z",
   "id": "10-firebase-reactjs",
   "duration": 165,
   "title": "#10 | Firebase di ReactJS",
@@ -15,7 +15,7 @@
     "published"
   ],
   "category": [
-    "Web"
+    "web"
   ],
   "tags": [
     "firebase",

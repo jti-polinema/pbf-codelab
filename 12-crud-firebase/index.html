@@ -9,7 +9,7 @@
   <title>#12 | CRUD Firebase</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
   <style>
     .success {
       color: #1e8e3e;
@@ -83,23 +83,23 @@
 <ol type="1" start="1">
 <li>Silakan buka <a href="https://console.firebase.google.com/" target="_blank">console Firebase</a> Anda dengan melanjutkan project dari codelab 10 dan 11. Lalu pilih menu <strong>Realtime Database</strong> di sidebar kiri &gt; klik <strong>Create Database</strong>.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\4e78d9133d6a6c18.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\2f07fb21537da811.jpeg"></p>
 <ol type="1" start="2">
 <li>Selanjutnya akan tampil untuk melakukan konfigurasi database seperti pada gambar berikut. Pilih lokasi server terdekat, yaitu <strong>Singapore</strong>. Karena lokasi kita berada di Indonesia, sehingga diharapkan dapat lebih cepat ketika mengakses data.</li>
 </ol>
-<p class="image-container"><img style="width: 494.00px" src="img\8ea8231fb43312fa.jpeg"></p>
+<p class="image-container"><img style="width: 494.00px" src="img\\4f153e80b5a2d94f.jpeg"></p>
 <ol type="1" start="3">
 <li>Lalu pada langkah kedua <strong>Security rules</strong>, kita pilih <strong>locked mode</strong>, artinya database kita masih dalam proteksi (tidak dapat dibaca dan ditulis). Nanti kita konfigurasi security rules ini agar dapat diakses oleh user yang terautentikasi saja.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\36df0b279cc98ec1.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\fd0131da79cfb608.jpeg"></p>
 <ol type="1" start="4">
 <li>Selanjutnya masuk ke <strong>Project settings</strong> pada menu sidebar.</li>
 </ol>
-<p class="image-container"><img style="width: 422.00px" src="img\982822117c0e075f.jpeg"></p>
+<p class="image-container"><img style="width: 422.00px" src="img\\2da2b23ee5c619a4.jpeg"></p>
 <ol type="1" start="5">
 <li>Pilih <strong>Config </strong>pada bagian <strong>SDK setup and configuration</strong> untuk mendapatkan nilai konfigurasi Firebase yang akan kita gunakan pada aplikasi React.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\e59f95aeabf9c4d.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\fffc8d3be7d7a9c1.jpeg"></p>
 <ol type="1" start="6">
 <li>Ubahlah isi kode <code>firebase.config.js</code> seperti berikut. Perbedaannya hanya penambahan variabel <code>databaseURL</code> pada <code>firebaseConfig</code> dan <code>import firebase/database</code>.</li>
 </ol>
@@ -123,7 +123,7 @@ export const DB = firebase.database();</code></pre>
 <ol type="1" start="7">
 <li>Lalu pada menu <strong>Realtime Database</strong> &gt; pilih tab <strong>Rules</strong>, kemudian <strong>Edit rules</strong> seperti pada gambar berikut.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img\970a9b15d3dc4b8c.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\d88a5a6e6382179c.jpeg"></p>
 <aside class="special"><p><strong>Catatan:</strong> Pengaturan rules tersebut berkaitan dengan keamanan untuk membaca dan menulis ke database. Bagian &#34;<code>articles</code>&#34; menunjukkan bahwa user hanya diperbolehkan menulis dan membaca untuk data atau path articles. Baca lebih lanjut terkait keamanan rules <a href="https://firebase.google.com/docs/database/security" target="_blank">di sini</a>.</p>
 </aside>
 
@@ -241,9 +241,9 @@ import { DB } from &#39;../firebase.config&#39;;</code></pre>
     );
   }</code></pre>
 <p>Lalu kita import komponen <code>BlogPost</code> ke komponen <code>Home</code> (dari <a href="https://jti-polinema.github.io/pbf-codelab/11-redux-thunk/#2" target="_blank">Codelabs 11</a>), agar komponen artikel hanya dapat diakses oleh akun yang telah login seperti pada gambar berikut.</p>
-<p class="image-container"><img style="width: 517.00px" src="img\8f26dab7a2826fd0.jpeg"></p>
+<p class="image-container"><img style="width: 517.00px" src="img\\f7532f40ebfdd1bd.jpeg"></p>
 <p>Save semua pekerjaan Anda, lalu run <code>npm start</code>. Seharusnya tampil seperti pada gambar berikut. Silakan coba isi data artikel, maka data berhasil tersimpan di database firebase. Namun, tombol <code>Hapus</code> belum kita sesuaikan.</p>
-<p class="image-container"><img style="width: 624.00px" src="img\b693b28b50b6d7c1.jpeg"></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\1295e3c7c6902b40.jpeg"></p>
 <aside class="warning"><p><strong>Perhatian:</strong> Copy file dan folder satu project React tersebut ke folder laporan <code>src/12_crud_firebase,</code> lalu screenshot hasil di browser dan dibuat laporan. Kemudian push ke repo Anda masing-masing.</p>
 </aside>
 
@@ -334,7 +334,7 @@ import { DB } from &#39;../firebase.config&#39;;</code></pre>
 <ol type="1" start="4">
 <li>Save pekerjaan Anda, lalu lihat hasil tampilannya di browser. Seharusnya sudah tampil tombol <code>Edit</code> seperti berikut. Namun, tombol tersebut belum berfungsi.</li>
 </ol>
-<p class="image-container"><img style="width: 473.00px" src="img\d0c23fb960b78e50.jpeg"></p>
+<p class="image-container"><img style="width: 473.00px" src="img\\836404537c0fd436.jpeg"></p>
 <ol type="1" start="5">
 <li>Buat fungsi <code>handleTombolEdit</code> pada komponen <code>BlogPost</code> seperti berikut. Namun, Anda diminta untuk melengkapi kode program berikut agar artikel yang telah dilakukan update dapat berubah pada halaman maupun di database Firebase.</li>
 </ol>
@@ -386,10 +386,10 @@ import { DB } from &#39;../firebase.config&#39;;</code></pre>
     
   </google-codelab>
 
-  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
   <script src="//support.google.com/inapp/api.js"></script>
 
 </body>

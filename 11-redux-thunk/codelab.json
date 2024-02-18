@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-05-03T01:15:46Z",
+  "updated": "2024-02-18T15:11:50Z",
   "id": "11-redux-thunk",
   "duration": 105,
   "title": "#11 | Redux Thunk",
@@ -15,7 +15,7 @@
     "published"
   ],
   "category": [
-    "Web"
+    "web"
   ],
   "tags": [
     "firebase",

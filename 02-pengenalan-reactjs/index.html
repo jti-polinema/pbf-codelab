@@ -54,9 +54,17 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Apa itu ReactJS ?" duration="10">
+      <google-codelab-step label="Apa itu ReactJS ?" duration="50">
         <h2 is-upgraded><strong>Pengenalan ReactJS Framework</strong></h2>
-<p>Berdasarkan web resmi React, definisi React adalah sebuah pustaka JavaScript untuk membangun User Interface. Beberapa fitur-fitur yang dimiliki React adalah sebagai berikut:</p>
+<p>React adalah sebuah library JavaScript yang dikembangkan dan dikelola oleh Facebook dan Instagram untuk menampilkan data dan membuat komponen-komponen User Interface. Menurut layanan analitik Libscore, saat ini React digunakan oleh Netflix, Imgur, Bleacher Report, Feedly, Airbnb, SeatGeek, HelloSign, Walmart, dan lain-lain (Wikipedia).</p>
+<p><strong>Konsep &#34;</strong></p>
+<p><strong><em>Atomic Design Methodology</em></strong></p>
+<p><strong>&#34;</strong></p>
+<aside class="special"><p><em>We&#39;re not designing pages, we&#39;re designing systems of components</em>. —Stephen Hay</p>
+</aside>
+<p>Dalam konsep ADM, komponen dapat diumpakan sebagai atom. Kita menggabunkan atom-atom menjadi molekul, molekul menjadi organisme, organisme menjadi template, template menjadi halaman-halaman. React sangat cocok diaplikasikan ke dalam konsep pengembangan ADM karena dalam React kita memulai dari mengembangkan komponen-komponen yang kita gabungkan untuk membentuk sebuah halaman.</p>
+<p>Keterangan lebih lanjut mengenai ADM dapat dibaca di <a href="https://bradfrost.com/blog/post/atomic-web-design/" target="_blank">tautan ini</a>.</p>
+<p>Beberapa fitur-fitur yang dimiliki React adalah sebagai berikut:</p>
 <ol type="1" start="1">
 <li><strong>Deklaratif</strong></li>
 </ol>
@@ -71,13 +79,100 @@
 <li><strong>Belajar sekali, tulis di mana saja</strong></li>
 </ol>
 <p>Kami tidak berasumsi mengenai teknologi yang Anda gunakan di dalam stak Anda, jadi Anda dapat mengembangkan fitur baru menggunakan React tanpa menulis ulang kode yang sudah ada.</p>
-<p>React juga dapat digunakan untuk me-render di server menggunakan Node dan menulis aplikasi telepon seluler menggunakan React Native.</p>
+<p>React juga dapat digunakan untuk me-<em>render</em> di server menggunakan Node dan membangun aplikasi mobile menggunakan React Native.</p>
+<h2 is-upgraded><strong>Memulai Proyek Baru dengan React</strong></h2>
+<p>Jika Anda ingin membuat aplikasi baru atau situs web baru dengan menggunakan React, <strong>kami merekomendasikan Anda untuk memilih salah satu dari framework berbasis React yang populer di komunitas</strong>. framework menyediakan fitur-fitur yang sebagian besar aplikasi dan situs web butuhkan, termasuk routing, pengambilan data, dan pembuatan halaman HTML.</p>
+<h2 is-upgraded><strong>Next.js</strong></h2>
+<p><a href="https://nextjs.org/" target="_blank">Next.js</a> adalah <strong>full-stack framework React</strong>. framework ini serbaguna dan memudahkan Anda untuk membuat aplikasi React dalam berbagai ukuran—mulai dari halaman blog statis hingga aplikasi dinamis yang kompleks.</p>
+<p>Jika Anda baru menggunakan Next.js, baca <a href="https://nextjs.org/learn/foundations/about-nextjs" target="_blank">panduan Next.js</a>.</p>
+<p>Next.js dikelola oleh <a href="https://vercel.com/" target="_blank">Vercel</a>. Anda dapat <a href="https://nextjs.org/docs/deployment" target="_blank">memasang aplikasi Next.js</a> ke semua ekosistem berbasis Node.js atau serverless hosting atau pada server Anda sendiri. <a href="https://nextjs.org/docs/advanced-features/static-html-export" target="_blank">Aplikasi statis Next.js</a> dapat dipasang pada layanan hosting statis apa pun.</p>
+<p>Untuk membuat proyek Next.js, jalankan di terminal Anda seperti berikut:</p>
+<pre><code>npx create-next-app</code></pre>
+<h2 is-upgraded><strong>Remix </strong></h2>
+<p><a href="https://remix.run/" target="_blank">Remix</a> adalah <strong>full-stack framework React yang menggunakan teknologi nested routing</strong>. framework ini membantu Anda untuk dapat memecah aplikasi Anda ke dalam bagian - bagian bersarang yang dapat memuat data secara paralel dan melakukan refresh sebagai bentuk respon dari aksi yang dilakukan oleh pengguna. </p>
+<p>Jika Anda baru menggunakan Remix, lihat <a href="https://remix.run/docs/en/main/tutorials/blog" target="_blank">panduan membuat blog dengan Remix</a> (pendek) dan <a href="https://remix.run/docs/en/main/tutorials/jokes" target="_blank">panduan membuat aplikasi dengan Remix</a> (panjang).</p>
+<p>Remix dikelola oleh <a href="https://www.shopify.com/" target="_blank">Shopify</a>. Saat Anda membuat proyek Remix, Anda perlu untuk <a href="https://remix.run/docs/en/main/guides/deployment" target="_blank">memilih target pemasangan Anda</a>. Anda dapat memasang aplikasi Remix ke semua hosting Node.js atau serverless dengan menggunanakan atau menuliskan sebuah <a href="https://remix.run/docs/en/main/other-api/adapter" target="_blank">adaptor</a>.</p>
+<p>Untuk membuat proyek Remix, jalankan perintah ini di terminal Anda seperti berikut:</p>
+<pre><code>npx create-remix</code></pre>
+<h2 is-upgraded><strong>Gatsby </strong></h2>
+<p><a href="https://www.gatsbyjs.com/" target="_blank">Gatsby </a>adalah <strong>framework React untuk situs web berbasis sistem manajemen konten cepat</strong>. Ekosistem plugin yang dimiliki serta lapisan data GraphQL dari Gatsby dapat memudahkan Anda dalam melakukan integrasi konten, API, dan layanan ke dalam satu situs web.</p>
+<p>Jika Anda baru menggunakan Gatsby, lihat <a href="https://www.gatsbyjs.com/docs/tutorial/" target="_blank">panduan Gatsby</a>.</p>
+<p>Gatsby dikelola oleh <a href="https://www.netlify.com/" target="_blank">Netlify</a>. Anda dapat <a href="https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting" target="_blank">memasang situs statis Gatsby</a> ke hosting statis apa pun. Jika Anda memilih untuk menggunakan fitur server-only, Anda perlu memastikan jika penyedia layanan hosting mendukung hal tersebut untuk Gatsby.</p>
+<p>Untuk membuat proyek Gatsby baru, jalankan perintah berikut di terminal:</p>
+<pre><code>npx create-gatsby</code></pre>
+<h2 is-upgraded><strong>Expo (untuk aplikasi native) </strong></h2>
+<p><a href="https://expo.dev/" target="_blank">Expo </a>adalah <strong>framework React yang membantu Anda untuk dapat membuat aplikasi universal untuk Android, iOS, dan web dengan menggunakan tampilan antarmuka pengguna yang asli bawaan dari platform tersebut (native)</strong>. Framework ini menyediakan kit pengembangan perangkat lunak (SDK) untuk <a href="https://reactnative.dev/" target="_blank">React Native</a> yang membuat komponen native dapat digunakan dengan mudah. Jika Anda baru menggunakan Expo, lihat <a href="https://docs.expo.dev/tutorial/introduction/" target="_blank">panduan Expo</a>.</p>
+<p>Expo dikelola oleh <a href="https://expo.dev/about" target="_blank">Expo (perusahaan)</a>. Anda dapat Membuat aplikasi menggunakan Expo secara gratis, dan Anda dapat mengirimkan aplikasi Anda ke Google Play Store dan Apple App Store tanpa syarat tertentu. Sebagai tambahan, Expo juga menyediakan pilihan layanan komputasi awan (cloud) berbayar.</p>
+<p>Untuk membuat proyek Expo baru, jalankan perintah berikut di terminal:</p>
+<pre><code>npx create-expo-app</code></pre>
+<p>Pertanyaan selanjutnya ...</p>
+<h2 is-upgraded><strong>Apakah bisa menggunakan React tanpa menggunakan framework?</strong></h2>
+<p>Anda dapat menggunakan React tanpa menggunakan framework—begitupun Anda dapat <a href="https://id.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page" target="_blank">menggunakan React untuk sebagian dari halaman proyek Anda</a>. <strong>Namun, jika Anda ingin membuat aplikasi atau situs baru sepenuhnya menggunakan React, kami merekomendasikan Anda untuk menggunakan framework</strong>.</p>
+<p>Berikut alasannya.</p>
+<p>Meskipun Anda tidak membutuhkan fungsi routing maupun pengambilan data di awal pembuatan proyek, suatu waktu Anda perlu menambahkan beberapa library baru untuk proyek tersebut. Semakin bertambahnya ukuran bundel JavaScript karena bertambahnya fitur baru, Anda perlu memikirkan bagaimana cara untuk memecah kode untuk setiap route secara individu. Dengan semakin kompleksnya kebutuhan pengambilan data, Anda mungkin akan menghadapi situasi semakin banyaknya permintaan jaringan antara server dan klien yang akan membuat aplikasi Anda terasa sangat lambat. Semakin banyak pengguna Anda dengan kondisi jaringan yang buruk dan perangkat dengan spesifikasi rendah serta fitur terbatas, Anda mungkin perlu untuk dapat membuat HTML dari komponen aplikasi Anda untuk bisa menampilkan konten aplikasi secara cepat—baik di server, atau saat waktu build. Mengubah susunan sistem untuk menjalankan kode di server atau saat waktu build sangatlah rumit.</p>
+<p><strong>Masalah ini tidak hanya terjadi di React. Itulah mengapa Svelte memiliki SvelteKit, Vue memiliki Nuxt, dan lain sebagainya</strong>. Untuk menyelesaikan masalah ini, Anda perlu untuk mengintegrasikan bundler Anda dengan router Anda dan dengan library pengambilan data Anda. Membuat pengaturan awal dapat bekerja bukanlah hal yang sulit, namun terdapat banyak seluk-beluk yang terlibat dalam pembuatan suatu aplikasi yang dapat memuat dengan cepat meskipun terus berkembang dari waktu ke waktu. Anda mungkin ingin mengirimkan kode aplikasi dalam jumlah seminimal mungkin namun dapat melakukannya dalam sekali jalan antara klien dan server pulang pergi, yang juga secara paralel dengan data apa pun yang dibutuhkan untuk halaman tersebut. Anda mungkin ingin membuat halaman menjadi interaktif bahkan sebelum kode JavaScript dijalankan, untuk dapat mendukung peningkatan progresif. Anda mungkin ingin membuat sebuah folder dengan semua berkas HTML statis untuk halaman marketing Anda yang dapat dipasang dimanapun dan dapat bekerja meskipun tanpa JavaScript. Membangun aplikasi dengan kemampuan seperti ini membutuhkan kerja keras dari Anda untuk mewujudkannya.</p>
+<p><strong>Secara umum, framework React dapat menyelesaikan masalah yang disebutkan sebelumnya, tanpa perlu usaha tambahan dari Anda</strong>. React membantu Anda untuk dapat mulai membuat proyek dengan sangat ringkas dan kemudian mengembangkan aplikasi Anda sesuai kebutuhan Anda. Setiap framework React memiliki komunitas yang aktif, sehingga Anda akan dengan mudah untuk menemukan jawaban atas pertanyaan serta informasi terkait peningkatan peralatan Anda. Framework juga membantu Anda dalam menstrukturkan kode, membantu Anda dan orang lain untuk memahami konteks dan keterampilan di antara berbagai proyek. Sebaliknya dengan menggunakan pengaturan sendiri, Anda akan mudah terjebak pada versi dependensi yang sudah tidak didukung, dan pada akhirnya Anda akan membuat framework Anda sendiri tanpa komunitas dan rencana peningkataan untuk membantu framework tersebut terus berkembang (mungkin framework tersebut pun mirip seperti yang pernah mereka buat di masa lalu, dengan desain yang lebih asal-asalan).</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Praktikum: Membuat Project Pertama ReactJS" duration="2">
-        
+      <google-codelab-step label="Praktikum: Membuat Project Pertama ReactJS" duration="60">
+        <p>Setelah dari codelab atau pertemuan pertama, Anda telah menyiapkan lingkungan pengembangan. Kali ini, Anda akan mencoba untuk mulai membuat project pertama. Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda pada setiap soal yang ada di beberapa langkah praktikum ini.</p>
+<aside class="warning"><p><strong>Perhatian:</strong> Diasumsikan Anda telah berhasil melakukan setup environment VS Code, Git dan NodeJS pada pertemuan pertama.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 1: Buat Folder Baru</strong></h2>
+<p>Buatlah folder baru bernama <code>belajar-react</code> lalu di dalam folder tersebut, jalankan terminal dengan mengetikkan perintah berikut:</p>
+<pre><code>npx create-next-app</code></pre>
+<h2 is-upgraded><strong>Langkah 2: Buat project baru</strong></h2>
+<p>Buatlah project baru bernama <code>hello-world</code> seperti pada gambar berikut ini:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\2a5b80db58e182e5.png"></p>
+<p>Tunggu proses instalasi dan pembuatan project baru react Anda hingga selesai.</p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 1</strong></h3>
+<p>Pada gambar tersebut, silakan Anda browsing apa yang dimaksud dengan:</p>
+<ul>
+<li>TypeScript</li>
+<li>ESLint</li>
+<li>Tailwind CSS</li>
+<li>App Router</li>
+<li>Import alias</li>
+</ul>
+</aside>
+<h2 is-upgraded><strong>Langkah 3: Buka dengan VS Code</strong></h2>
+<p>Setelah selesai proses langkah sebelumnya, ketik per baris di terminal seperti berikut untuk masuk ke folder project dan dibuka dengan VS Code.</p>
+<pre><code>cd hello-world</code></pre>
+<p> (enter)</p>
+<pre><code>code . </code></pre>
+<p>(enter)</p>
+<p>Maka VS Code akan membuka project react Anda yang telah dibuat bernama <code>hello-world</code>.</p>
+<p>Perhatikan struktur file dan folder project react yang telah kita buat ini. Terlihat bahwa inisial Git dalam project ini sudah termasuk, sehingga Anda cukup membuat repository di akun GitHub lalu mengonekkan dengan project ini. Silakan cari tau bagaimana setup link repository ke project ini.</p>
+<p class="image-container"><img style="width: 139.00px" src="img\\d0fee980aa403cc0.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 2</strong></h3>
+<p>Pada struktur project tersebut, jelaskan kegunaan folder dan file masing-masing tersebut!</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 4: Run</strong></h2>
+<p>Sekarang kita coba running project pertama kita dengan menjalankan perintah berikut di terminal VS Code.</p>
+<pre><code>npm run dev</code></pre>
+<p>Tunggu proses kompilasi hingga selesai. Lalu Anda dapat membuka alamat localhost di browser: <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\bcd4f3191de9c7bd.png"></p>
+<p>Jika di browser telah tampil seperti gambar berikut ini, <strong>Selamat!</strong></p>
+<p class="image-container"><img style="width: 444.50px" src="img\\26aa0884f153809f.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 3</strong></h3>
+<p>Gantilah teks pada bagian atas dengan <strong>Nama - NIM</strong> Anda. Contoh seperti gambar berikut:</p>
+<p class="image-container"><img style="width: 438.50px" src="img\\3c14f8d789f2a51a.png"></p>
+<p>Jawaban dibuktikan dengan hasil screenshot.</p>
+<p>Ketika Anda telah berhasil mengganti teks tersebut, Anda tidak perlu menjalankan perintah <code>npm run dev</code> dan tidak juga diperlukan me-<em>reload</em> halaman di browser. Tiba-tiba perubahan itu tampil, Mengapa terjadi demikian? Jelaskan!</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="60">
+        <ol type="1" start="1">
+<li>Buatlah repository di akun GitHub Anda dengan nama <strong>#02-react-hello-world </strong>kemudian kumpulkan link tersebut ke dosen pengampu sesuai media yang disepakati.</li>
+<li>Hapus isi file <code>README.md</code> yang ada di project <code>hello-world</code> tersebut, kemudian isi dengan jawaban praktikum mulai dari soal 1 hingga 3.</li>
+<li>Jangan lupa push project dan jawaban Anda melalui VS Code dengan pesan commit &#34;<code>Week 02: belajar react</code>&#34;</li>
+</ol>
+
 
       </google-codelab-step>
     
@@ -92,6 +187,10 @@
 <li><a href="https://www.taniarascia.com/getting-started-with-react/" target="_blank">React Tutorial: An Overview and Walkthrough</a></li>
 </ul>
 <h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://id.react.dev/learn/start-a-new-react-project#" target="_blank">https://id.react.dev/learn/start-a-new-react-project#</a> </li>
+<li><a href="https://github.com/arisetyo/belajar-react" target="_blank">https://github.com/arisetyo/belajar-react</a> </li>
+</ul>
 
 
       </google-codelab-step>

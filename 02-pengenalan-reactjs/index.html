@@ -58,8 +58,9 @@
       <google-codelab-step label="Apa itu ReactJS ?" duration="50">
         <h2 is-upgraded><strong>Pengenalan ReactJS Framework</strong></h2>
 <p>React adalah sebuah library JavaScript yang dikembangkan dan dikelola oleh Facebook dan Instagram untuk menampilkan data dan membuat komponen-komponen User Interface. Menurut layanan analitik Libscore, saat ini React digunakan oleh Netflix, Imgur, Bleacher Report, Feedly, Airbnb, SeatGeek, HelloSign, Walmart, dan lain-lain (Wikipedia).</p>
-<p><strong>Konsep </strong><strong><em>Atomic Design Methodology</em>(ADM)</strong></p>
-<p></p>
+<p><strong>Konsep </strong></p>
+<p><strong><em>Atomic Design Methodology </em></strong></p>
+<p><strong>(ADM)</strong></p>
 <aside class="special"><p><em>We&#39;re not designing pages, we&#39;re designing systems of components</em>. —Stephen Hay</p>
 </aside>
 <p>Dalam konsep ADM, komponen dapat diumpakan sebagai atom. Kita menggabunkan atom-atom menjadi molekul, molekul menjadi organisme, organisme menjadi template, template menjadi halaman-halaman. React sangat cocok diaplikasikan ke dalam konsep pengembangan ADM karena dalam React kita memulai dari mengembangkan komponen-komponen yang kita gabungkan untuk membentuk sebuah halaman.</p>
@@ -173,6 +174,95 @@
 <li>Jangan lupa push project dan jawaban Anda melalui VS Code dengan pesan commit &#34;<code>Week 02: belajar react</code>&#34;</li>
 <li>Cobalah buat project react lainnya dengan menggunakan framework <strong>Remix </strong>dan <strong>Gatsby</strong>. Ini tidak perlu di push, cukup screenshot dan jelaskan perbedaannya diantara ketiga framework tersebut (termasuk <strong>Next.js</strong>) di file <code>README</code> nomor 1.</li>
 </ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Komponen React" duration="30">
+        <p>Aplikasi React dibuat dari komponen. Komponen adalah bagian dari UI (user interface, antarmuka pengguna) yang memiliki logika dan tampilan tersendiri. Sebuah komponen dapat berukuran sekecil tombol, atau sebesar seluruh halaman.</p>
+<p>Komponen React adalah fungsi JavaScript yang mengembalikan markup:</p>
+<pre><code>function MyButton() {
+  return (
+    &lt;button&gt;Saya adalah tombol&lt;/button&gt;
+  );
+}</code></pre>
+<p>Sekarang setelah Anda mendeklarasikan <code>MyButton</code>, Anda dapat menyarangkannya ke dalam komponen lain:</p>
+<pre><code>export default function MyApp() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Selamat datang di aplikasi saya&lt;/h1&gt;
+      &lt;MyButton /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Perhatikan bahwa <code><MyButton /></code> dimulai dengan huruf kapital. Dengan cara itulah Anda mengetahui bahwa itu adalah sebuah komponen React. <strong>Nama komponen React harus selalu dimulai dengan huruf kapital</strong>, sedangkan tag HTML harus menggunakan huruf kecil.</p>
+<p>Kata kunci <code>export default</code> menentukan komponen utama di dalam berkas (file). Jika Anda tidak terbiasa dengan beberapa bagian dari sintaksis JavaScript, <a href="https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export" target="_blank">MDN </a>dan <a href="https://javascript.info/import-export" target="_blank">javascript.info</a> memiliki referensi yang bagus.</p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 4</strong></h3>
+<p>Buatlah komponen <code>MyTextNimName()</code> berdasarkan kode dari soal nomor 3 sebelumnya. Lalu panggillah komponen tersebut. Apakah ada perubahan tampilan ? Mengapa demikian ?</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Menulis markup dengan JSX" duration="0">
+        <p>Sintaksis markup yang Anda lihat di atas disebut dengan JSX. JSX ini opsional, tetapi sebagian besar proyek React menggunakan JSX untuk kenyamanannya. Semua alat yang kami rekomendasikan untuk pengembangan lokal mendukung JSX secara langsung.</p>
+<p>JSX lebih ketat daripada HTML. Anda harus menutup tag seperti &lt;br /&gt;. Komponen Anda juga tidak boleh mengembalikan beberapa tag JSX. Anda harus membungkusnya menjadi induk bersama (shared parent), seperti &lt;div&gt;...&lt;/div&gt; atau sebuah pembungkus kosong &lt;&gt;...&lt;/&gt;:</p>
+<pre><code>function AboutPage() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Tentang&lt;/h1&gt;
+      &lt;p&gt;Halo.&lt;br /&gt;Apa kabar?&lt;/p&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+<p>Jika Anda memiliki banyak HTML untuk dipindahkan (port) ke JSX, Anda dapat menggunakan <a href="https://transform.tools/html-to-jsx" target="_blank">konverter online</a>.</p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 5</strong></h3>
+<p>Buatlah komponen <code>MyPage()</code> berdasarkan project praktikum 1 ini yang berisi kode-kode HTML dari fungsi <code>Home()</code>. Lalu panggillah komponen tersebut. Apakah ada perubahan tampilan ? Mengapa demikian ?</p>
+</aside>
+<h2 is-upgraded><strong>Menampilkan data dengan JSX</strong></h2>
+<p>JSX memungkinkan Anda memasukkan markup ke dalam JavaScript. Kurung kurawal (<em>curly braces</em>) memungkinkan Anda &#34;kembali&#34; (<em>escape back</em>) ke dalam JavaScript sehingga Anda dapat menanamkan (<em>embed</em>) beberapa variabel dari kode Anda dan menampilkannya kepada pengguna. Sebagai contoh, ini akan menampilkan <code>user.name</code>:</p>
+<pre><code>return (
+  &lt;h1&gt;
+    {user.name}
+  &lt;/h1&gt;
+);</code></pre>
+<p>Anda juga dapat &#34;kembali ke JavaScript&#34; dari atribut JSX, tetapi Anda harus menggunakan tanda kurung kurawal daripada tanda kutip (quotes). Sebagai contoh, <code>className="avatar"</code> mengoper string <code>"avatar"</code> sebagai kelas CSS (CSS class), tetapi <code>src={user.imageUrl}</code> membaca nilai variabel JavaScript <code>user.imageUrl</code>, dan kemudian mengoper nilai tersebut sebagai atribut <code>src</code>:</p>
+<pre><code>return (
+  &lt;img
+    className=&#34;avatar&#34;
+    src={user.imageUrl}
+  /&gt;
+);</code></pre>
+<p>Anda dapat menaruh ekspresi yang lebih kompleks (<em>complex expressions</em>) di dalam kurung kurawal JSX juga, contohnya, <a href="https://javascript.info/operators#string-concatenation-with-binary" target="_blank">penggabungan string</a> (<em>string concatenation</em>):</p>
+<h3 is-upgraded><strong>Kode JSX image</strong></h3>
+<pre><code>const user = {
+  name: &#39;Fulanah bin Fulan&#39;,
+  imageUrl: &#39;https://i.imgur.com/yXOvdOSs.jpg&#39;,
+  imageSize: 90,
+};
+
+export default function Profile() {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;{user.name}&lt;/h1&gt;
+      &lt;img
+        className=&#34;avatar&#34;
+        src={user.imageUrl}
+        alt={&#39;Foto &#39; + user.name}
+        style=&#123;&#123;
+          width: user.imageSize,
+          height: user.imageSize
+        }}
+      /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+<p><strong>Hasilnya:</strong></p>
+<p class="image-container"><img style="width: 254.00px" src="img\\d2b4450fcd848ac0.png"></p>
+<p>Pada contoh di atas, <code>style=&#123;&#123;}}</code> bukanlah sintaksis khusus, melainkan objek <code>{}</code> biasa di dalam kurung kurawal JSX. Anda dapat menggunakan atribut <code>style</code> ketika <em>styles </em>Anda bergantung pada variabel JavaScript.</p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 6</strong></h3>
+<p>Gunakanlah Kode JSX image tersebut, ganti dengan NIM, Nama Anda beserta link gambar ganti dengan foto Anda (bisa dari link medsos atau lainnya). Push codenya dan screenshot hasilnya.</p>
+</aside>
 
 
       </google-codelab-step>

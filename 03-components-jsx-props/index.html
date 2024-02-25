@@ -59,7 +59,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Pengenalan Komponen" duration="15">
-        <p>Komponen merupakan salah satu konsep inti dari React. Komponen adalah pondasi di mana Anda bangun antarmuka pengguna (UI). Anda dapat membayangkan komponen sebagai balok-balok lego yang menyusun UI. Di dalam web, HTML memungkinkan kita membuat dokumen-dokumen terstruktur yang kaya dengan kumpulan tag bawaannya seperti <code><h1></code> dan <code><li></code> seperti berikut ini:</p>
+        <p>Komponen merupakan salah satu konsep inti dari React. Komponen adalah pondasi di mana Anda bangun antarmuka pengguna (UI). Anda dapat membayangkan komponen sebagai balok-balok lego yang menyusun UI. Di dalam web, HTML memungkinkan kita membuat dokumen-dokumen terstruktur yang kaya dengan kumpulan tag bawaannya seperti <code>h1</code> dan <code>li</code> seperti berikut ini:</p>
 <pre><code>&lt;article&gt;
   &lt;h1&gt;Komponen Pertama Saya&lt;/h1&gt;
   &lt;ol&gt;
@@ -68,8 +68,8 @@
     &lt;li&gt;Menggunakan suatu Komponen&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/article&gt;</code></pre>
-<p>Markup ini merepresentasikan artikel <code><article></code>, heading <code><h1></code> dan daftar isi (yang disingkat) sebagai daftar yang tersusun <code><ol></code>. Markup seperti ini, digabung dengan CSS untuk style, dan JavaScript untuk interaktivitas, berada di belakang setiap <em>sidebar, avatar, modal, dropdown</em>—setiap potongan UI yang Anda liat di dalam web.</p>
-<p>React memungkinkan Anda menggabung markup, CSS, dan JavaScript Anda menjadi &#34;komponen&#34; yang dibuat khusus, <strong>elemen UI yang dapat digunakan kembali untuk aplikasi Anda</strong>. Daftar isi yang Anda lihat di atas dapat diubah menjadi sebuah komponen <code><TableOfContents /></code> yang dapat Anda render pada setiap halaman. Dari belakang, itu tetap menggunakan tag HTML yang sama seperti <code><article></code>, <code>h1</code>, dan lain-lain.</p>
+<p>Markup ini merepresentasikan artikel <code>article</code>, heading <code>h1</code> dan daftar isi (yang disingkat) sebagai daftar yang tersusun <code>ol</code>. Markup seperti ini, digabung dengan CSS untuk style, dan JavaScript untuk interaktivitas, berada di belakang setiap <em>sidebar, avatar, modal, dropdown</em>—setiap potongan UI yang Anda liat di dalam web.</p>
+<p>React memungkinkan Anda menggabung markup, CSS, dan JavaScript Anda menjadi &#34;komponen&#34; yang dibuat khusus, <strong>elemen UI yang dapat digunakan kembali untuk aplikasi Anda</strong>. Daftar isi yang Anda lihat di atas dapat diubah menjadi sebuah komponen <code>TableOfContents</code> yang dapat Anda render pada setiap halaman. Dari belakang, itu tetap menggunakan tag HTML yang sama seperti <code>article</code>, <code>h1</code>, dan lain-lain.</p>
 <p>Sama seperti tag HTML, Anda dapat menggabung, mengurut, dan menyusun bertingkat komponen untuk mendesain halaman penuh. Misalnya, halaman yang terdapat komponen-komponen React seperti berikut ini:</p>
 <pre><code>&lt;PageLayout&gt;
   &lt;NavigationHeader&gt;
@@ -82,7 +82,7 @@
     &lt;DocumentationText /&gt;
   &lt;/PageContent&gt;
 &lt;/PageLayout&gt;</code></pre>
-<p>Seiring berkembangnya proyek, Anda dapat memperhatikan bahwa banyak desain yang bisa dikomposisi dengan menggunakan ulang komponen-komponen yang sudah Anda buat, mempercepat pengembangan proyek Anda. Daftar isi di atas bisa disertakan pada layar apa pun dengan <code><TableOfContents /></code>. Anda bisa memulai proyek dengan cepat menggunakan ribuan komponen-komponen siap pakai yang dibagi oleh komunitas <em>open source</em> React seperti <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a> dan <a href="https://material-ui.com/" target="_blank">Material UI</a>.</p>
+<p>Seiring berkembangnya proyek, Anda dapat memperhatikan bahwa banyak desain yang bisa dikomposisi dengan menggunakan ulang komponen-komponen yang sudah Anda buat, mempercepat pengembangan proyek Anda. Daftar isi di atas bisa disertakan pada layar apa pun dengan <code>TableOfContents</code>. Anda bisa memulai proyek dengan cepat menggunakan ribuan komponen-komponen siap pakai yang dibagi oleh komunitas <em>open source</em> React seperti <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a> dan <a href="https://material-ui.com/" target="_blank">Material UI</a>.</p>
 
 
       </google-codelab-step>
@@ -280,7 +280,7 @@ export function Gallery() {
       <google-codelab-step label="Aturan JSX" duration="0">
         <h2 is-upgraded><strong>1. Hanya mengembalikan satu elemen </strong></h2>
 <p>Untuk mengembalikan lebih dari satu elemen, <strong>bungkus mereka dengan satu tag parent</strong>.</p>
-<p>Contohnya, anda dapat menggunakan tag <code><div></code>:</p>
+<p>Contohnya, anda dapat menggunakan tag <code>div</code></p>
 <pre><code>&lt;div&gt;
   &lt;h1&gt;Daftar Tugas Putri&lt;/h1&gt;
   &lt;img 
@@ -292,7 +292,7 @@ export function Gallery() {
     ...
   &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
-<p>Jika anda tidak ingin menambahkan <code><div></code> pada markup, anda dapat menggunakan tag kosong saja seperti berikut:</p>
+<p>Jika anda tidak ingin menambahkan <code>div</code> pada markup, anda dapat menggunakan tag kosong saja seperti berikut:</p>
 <pre><code>&lt;&gt;
   &lt;h1&gt;Daftar Tugas Putri&lt;/h1&gt;
   &lt;img 

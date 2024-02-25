@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-06-24T23:14:36Z",
-  "id": "03-konsep-reactjs",
-  "duration": 70,
-  "title": "#03 | Konsep ReactJs",
+  "updated": "2024-02-25T14:18:30Z",
+  "id": "03-components-jsx-props",
+  "duration": 130,
+  "title": "#03 | Components, JSX, dan Props",
   "authors": "Habibie Ed Dien",
-  "summary": "Pada codelab ini, Anda akan belajar tentang dasar-dasar dalam penggunaan ReactJS.",
+  "summary": "Pada codelab ini, Anda akan belajar tentang komponen, JSX, dan props di ReactJS.",
   "source": "1s4I3XIEOjtH1reIT0NvyiykqplFdeti_5O06dg5YjLg",
   "theme": "web",
   "status": [
@@ -18,12 +18,9 @@
     "web"
   ],
   "tags": [
-    "konsep",
-    "pemrograman-berbasis-framework",
-    "reactjs",
     "web"
   ],
   "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
   "ga": "G-H7507PFEJB",
-  "url": "03-konsep-reactjs"
+  "url": "03-components-jsx-props"
 }

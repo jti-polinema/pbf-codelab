@@ -1,0 +1,374 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#03 | Components, JSX, dan Props</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="03-components-jsx-props"
+                  title="#03 | Components, JSX, dan Props"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p class="image-container"><img style="width: 366.50px" src="img\\564a63242a21010d.png"></p>
+<p><strong>Terakhir diperbarui:</strong> 2024-02-25</p>
+<h2 is-upgraded><strong>Components, JSX, dan Props</strong></h2>
+<p>Konsep dalam penggunaan ReactJS untuk antarmuka pengguna ada beberapa yang penting, diantaranya tentang komponen, JavaScript XML (JSX), membuat component dan penggunaan props.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Komponen di React</li>
+<li>Impor dan Ekspor Komponen</li>
+<li>Menulis markup dengan JSX</li>
+<li>Mengoper Props ke Komponen</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pengenalan Komponen" duration="15">
+        <p>Komponen merupakan salah satu konsep inti dari React. Komponen adalah pondasi di mana Anda bangun antarmuka pengguna (UI). Anda dapat membayangkan komponen sebagai balok-balok lego yang menyusun UI. Di dalam web, HTML memungkinkan kita membuat dokumen-dokumen terstruktur yang kaya dengan kumpulan tag bawaannya seperti <code><h1></code> dan <code><li></code> seperti berikut ini:</p>
+<pre><code>&lt;article&gt;
+  &lt;h1&gt;Komponen Pertama Saya&lt;/h1&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Komponen: Pembangun Balok UI&lt;/li&gt;
+    &lt;li&gt;Mendefinisikan suatu Komponen&lt;/li&gt;
+    &lt;li&gt;Menggunakan suatu Komponen&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/article&gt;</code></pre>
+<p>Markup ini merepresentasikan artikel <code><article></code>, heading <code><h1></code> dan daftar isi (yang disingkat) sebagai daftar yang tersusun <code><ol></code>. Markup seperti ini, digabung dengan CSS untuk style, dan JavaScript untuk interaktivitas, berada di belakang setiap <em>sidebar, avatar, modal, dropdown</em>—setiap potongan UI yang Anda liat di dalam web.</p>
+<p>React memungkinkan Anda menggabung markup, CSS, dan JavaScript Anda menjadi &#34;komponen&#34; yang dibuat khusus, <strong>elemen UI yang dapat digunakan kembali untuk aplikasi Anda</strong>. Daftar isi yang Anda lihat di atas dapat diubah menjadi sebuah komponen <code><TableOfContents /></code> yang dapat Anda render pada setiap halaman. Dari belakang, itu tetap menggunakan tag HTML yang sama seperti <code><article></code>, <code>h1</code>, dan lain-lain.</p>
+<p>Sama seperti tag HTML, Anda dapat menggabung, mengurut, dan menyusun bertingkat komponen untuk mendesain halaman penuh. Misalnya, halaman yang terdapat komponen-komponen React seperti berikut ini:</p>
+<pre><code>&lt;PageLayout&gt;
+  &lt;NavigationHeader&gt;
+    &lt;SearchBar /&gt;
+    &lt;Link to=&#34;/docs&#34;&gt;Docs&lt;/Link&gt;
+  &lt;/NavigationHeader&gt;
+  &lt;Sidebar /&gt;
+  &lt;PageContent&gt;
+    &lt;TableOfContents /&gt;
+    &lt;DocumentationText /&gt;
+  &lt;/PageContent&gt;
+&lt;/PageLayout&gt;</code></pre>
+<p>Seiring berkembangnya proyek, Anda dapat memperhatikan bahwa banyak desain yang bisa dikomposisi dengan menggunakan ulang komponen-komponen yang sudah Anda buat, mempercepat pengembangan proyek Anda. Daftar isi di atas bisa disertakan pada layar apa pun dengan <code><TableOfContents /></code>. Anda bisa memulai proyek dengan cepat menggunakan ribuan komponen-komponen siap pakai yang dibagi oleh komunitas <em>open source</em> React seperti <a href="https://chakra-ui.com/" target="_blank">Chakra UI</a> dan <a href="https://material-ui.com/" target="_blank">Material UI</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Mendefinisikan Komponen" duration="30">
+        <p>Setelah dari codelab atau pertemuan kedua, Anda telah mulai membuat project pertama. Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda pada setiap soal yang ada di beberapa langkah praktikum ini.</p>
+<aside class="warning"><p><strong>Perhatian:</strong> Diasumsikan Anda telah berhasil melakukan setup environment VS Code, Git dan NodeJS pada pertemuan pertama.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 1: Buat Folder Baru</strong></h2>
+<p>Buatlah folder baru bernama <code>03-belajar-komponen</code> lalu di dalam folder tersebut, jalankan terminal dengan mengetikkan perintah berikut:</p>
+<pre><code>npx create-next-app</code></pre>
+<aside class="warning"><p><strong>Perhatian:</strong> Anda perlu membuat repo baru di GitHub dengan nama yang sama yaitu <code>03-belajar-komponen</code>.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 2: Buat Komponen Baru</strong></h2>
+<p>Buatlah folder baru dan file baru di <code>src/components/profile.tsx</code> lalu ketik kode berikut ini.</p>
+<pre><code>import Image from &#34;next/image&#34;;
+
+export default function Profile() {
+    return (
+      &lt;Image
+        src=&#34;https://i.imgur.com/MK3eW3Am.jpg&#34;
+        alt=&#34;Katherine Johnson&#34;
+        width={100}
+        height={100}
+        style=&#123;&#123;
+          maxWidth: &#34;100%&#34;,
+          height: &#34;auto&#34;,
+          margin: &#34;13px&#34;
+        }}
+      /&gt;
+    );
+  }</code></pre>
+<p>Kode tersebut menggunakan komponen <code>Image</code> bawaan dari Next.js.</p>
+<aside class="special"><p>Komponen React adalah fungsi JavaScript biasa, tetapi <strong>nama mereka harus dimulai dengan huruf kapital</strong> atau tidak akan berfungsi!</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 3: Import Komponen</strong></h2>
+<p>Lakukan import komponen <code>Profile</code> ke <code>src/app/page.tsx</code></p>
+<pre><code>import Profile from &#34;../components/profile&#34;;</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 1</strong></h3>
+<p>Ubah isi kode <code>Home()</code> sehingga dapat tampil seperti berikut dengan memanfaatkan komponen <code>Profile()</code> yang tadi sudah dibuat dari langkah 1 tersebut!</p>
+<p class="image-container"><img style="width: 610.00px" src="img\\7fd928fdd66a5bf0.png"></p>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana Anda solve error tersebut?</p>
+<p><strong>Catatan:</strong></p>
+<p>Jika terjadi error, Anda dapat mengakses tautan ini sebagai petunjuk solusinya: <a href="https://nextjs.org/docs/app/building-your-application/optimizing/images#remote-images" target="_blank">https://nextjs.org/docs/app/building-your-application/optimizing/images#remote-images</a> </p>
+</aside>
+<h2 is-upgraded><strong>Menyusun secara bertingkat dan mengorganisir komponen </strong></h2>
+<p>Komponen adalah fungsi JavaScript biasa, sehingga Anda bisa menjaga beberapa komponen di dalam file yang sama. Ini nyaman ketika komponen-komponen relatif kecil atau saling terkait secara erat. Jika file ini mulai memiliki sangat banyak komponen, Anda bisa memindahkan komponen Profile ke suatu file yang berbeda. Anda akan belajar bagaimana cara melakukan ini segera pada bagian codelab ini berikutnya.</p>
+<p>Karena komponen-komponen <code>Profile</code> di-<em>render</em> di dalam <code>Gallery</code>—bahkan beberapa kali!—kita dapat mengatakan bahwa <code>Gallery</code> adalah sebuah komponen induk, yang me-<em>render</em> setiap <code>Profile</code> sebagai sebuah &#34;anak&#34;. Ini merupakan bagian ajaib dari React: Anda bisa mendefinisikan suatu komponen sekali, kemudian digunakan di banyak tempat dan sebanyak yang Anda suka.</p>
+<aside class="warning"><p><strong>Perhatian!</strong></p>
+<p>Komponen dapat me-render komponen lain, tetapi Anda tidak boleh menyusun definisinya secara bertingkat (bersarang):</p>
+<p><strong><code>export default function Gallery() {</code></strong></p>
+<p><strong><code>  // 🔴 Jangan mendefinisi suatu komponen di dalam komponen lain!</code></strong></p>
+<p><strong><code>  function Profile() {</code></strong></p>
+<p><strong><code>    // ...</code></strong></p>
+<p><strong><code>  }</code></strong></p>
+<p><strong><code>  // ...</code></strong></p>
+<p><strong><code>}</code></strong></p>
+<p>Potongan kode di atas <a href="https://id.react.dev/learn/preserving-and-resetting-state#different-components-at-the-same-position-reset-state" target="_blank">sangat lambat dan mengakibatkan bug</a>. Sebagai gantinya, definisikan setiap komponen di tingkat atas atau di luar fungsi komponen lainnya:</p>
+<p><strong><code>export default function Gallery() {</code></strong></p>
+<p><strong><code>  // ...</code></strong></p>
+<p><strong><code>}</code></strong></p>
+<p><strong><code>// ✅ Deklarasikan komponen di tingkat atas</code></strong></p>
+<p><strong><code>function Profile() {</code></strong></p>
+<p><strong><code>  // ...</code></strong></p>
+<p><strong><code>}</code></strong></p>
+<p>Ketika suatu komponen anak membutuhkan data dari suatu induk, <a href="https://id.react.dev/learn/passing-props-to-a-component" target="_blank">operkan data melalui props</a> daripada menyusun definisinya secara bertingkat.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Mengimpor dan Mengekspor Komponen" duration="20">
+        <p>Keajaiban komponen terletak pada kemampuannya yang dapat digunakan kembali. Anda dapat membuat komponen yang disusun dengan komponen lain. Namun, ketika Anda menyusun komponen-komponen yang semakin banyak, seringkali lebih masuk akal untuk mulai membaginya ke dalam file-file yang berbeda. Dengan ini Anda menjaga file Anda agar tetap mudah dipindai dan digunakan kembali di banyak tempat.</p>
+<p>Misalnya di dalam komponen <code>Gallery</code> terdapat banyak komponen <code>Profile</code>. Bagaimana jika Anda ingin mengubah landing screen di masa depan dan memasukkan daftar buku sains di sana? Atau meletakkan semua profil di tempat lain? Maka sebaiknya memindahkan komponen <code>Gallery</code> dan <code>Profile</code> dari file komponen root. Ini akan membuat lebih modular dan dapat digunakan kembali di file lain. Secara umum, Anda dapat memindahkan sebuah komponen dengan tiga langkah berikut ini:</p>
+<ol type="1" start="1">
+<li><strong>Buat </strong>sebuah file <code>.js</code> atau <code>.tsx</code> baru untuk memasukkan komponen. Sebaiknya semua komponen diletakkan dalam folder yang sama yaitu <code>components</code>.</li>
+<li><strong>Ekspor </strong>function component Anda dari file tersebut (baik menggunakan <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export" target="_blank">default </a>atau <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports" target="_blank">named</a> eskpor).</li>
+<li><strong>Impor</strong> dimana Anda akan menggunakan komponen tersebut (menggunakan teknik yang sesuai untuk mengimpor <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults" target="_blank">default</a> atau <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module" target="_blank">named</a> ekspor).</li>
+</ol>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Anda mungkin menemukan file tanpa ekstensi <code>.js</code> atau <code>.tsx</code> seperti ini:</p>
+<p><code>import Gallery from './Gallery';</code></p>
+<p>Penulisan impor seperti ini  <code>'./Gallery.tsx'</code> atau <code>'./Gallery'</code> akan tetap berfungsi dengan React, meskipun yang pertama lebih mirip dengan bagaimana <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules" target="_blank">native ES Modules</a> bekerja.</p>
+</aside>
+<h2 is-upgraded><strong>Default vs named ekspor</strong></h2>
+<p>Ada dua cara utama untuk mengekspor nilai dengan JavaScript: <strong>default exports</strong> dan <strong>named exports</strong>. Sejauh ini, contoh kita hanya menggunakan <strong>default exports</strong>. Tapi Anda dapat menggunakan satu atau keduanya pada file yang sama. <strong>Sebuah file dapat menggunakan tidak lebih dari satu default export, tapi dapat menggunakan named exports sebanyak yang Anda suka</strong>.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\d580570457d4cd3e.png"></p>
+<p>Teknik untuk mengekspor komponen Anda harus sesuai dengan cara mengimpornya. Anda akan mendapatkan error jika Anda mencoba untuk mengimpor <strong>default exports</strong> dengan cara yang sama Anda menggunakan <strong>named exports</strong>. Tabel ini akan membantu Anda untuk memahaminya:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Sintaksis</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Pernyataan Expor</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Pernyataan Impor</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Default</p>
+</td><td colspan="1" rowspan="1"><p><code>export default function Button() {}</code></p>
+</td><td colspan="1" rowspan="1"><p><code>import Button from './Button.js';</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Named</p>
+</td><td colspan="1" rowspan="1"><p><code>export function Button() {}</code></p>
+</td><td colspan="1" rowspan="1"><p><code>import { Button } from './Button.js';</code></p>
+</td></tr>
+</table>
+<p>Ketika Anda menulis <strong>default imports</strong>, Anda dapat memberi nama apa saja setelah <code>import</code>. Contoh, Anda dapat menulis <code>import Banana from './Button.js'</code> dan itu akan tetap ketika Anda menggunakan <code>export default</code> yang sama. Sebaliknya, dengan <strong>named imports</strong>, nama harus sama di kedua sisi. Itulah mengapa disebut <strong>named imports</strong>!</p>
+<p>Kebanyakan developer seringkali menggunakan <code>default exports</code> <strong>jika file yang diekspor hanya satu komponen</strong>, <strong>dan menggunakan </strong></p>
+<p><strong><code>named exports</code></strong></p>
+<p><strong> jika mengekspor beberapa komponen dan nilai</strong>. Bagaimanapun gaya koding yang Anda gunakan, selalu beri nama yang berarti pada fungsi komponen Anda dan isi file tersebut. Komponen tanpa nama, seperti <code>export default ()=>{}</code>, tidak disarankan karena membuat proses debug lebih sulit.</p>
+<aside class="special"><p><strong>Catatan:</strong></p>
+<p>Anda tidak dapat memiliki <strong>dua </strong><strong><code>default exports</code></strong><strong> dalam satu file</strong>. Anda dapat membuat file baru dengan <strong>default exports</strong>, atau Anda dapat menambahkan sebuah <strong>named exports</strong> untuk komponen lain dalam satu file. <strong>Sebuah file hanya dapat memiliki satu </strong><strong><code>default exports</code></strong>, tapi dapat memiliki banyak <strong><code>named exports</code></strong>.</p>
+<p>Untuk mengurangi potensi kebingunan antara <strong>default </strong>dan <strong>named exports</strong>, beberapa tim memilih untuk berpegang pada satu gaya penulisan (<strong>default</strong> atau <strong>named</strong>), atau menghindari mencampurnya dalam satu file. Maka pilihlah kebiasaan terbaik untuk Anda!</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Mengimpor dan Mengekspor Komponen" duration="15">
+        <p>Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda pada setiap soal yang ada di beberapa langkah praktikum ini.</p>
+<aside class="warning"><p><strong>Perhatian:</strong> Melanjutkan project praktikum 1.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 1: Buat Komponen Baru</strong></h2>
+<p>Buatlah file baru di <code>src/components/gallery.tsx</code> berisi kode seperti berikut:</p>
+<pre><code>import Profile from &#34;./profile&#34;;
+
+export function Gallery() {
+    return (
+        &lt;div className=&#34;columns-3&#34;&gt;
+            &lt;Profile /&gt;
+            &lt;Profile /&gt;
+            &lt;Profile /&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+<h2 is-upgraded><strong>Langkah 2: Impor Komponen</strong></h2>
+<p>Lakukan impor komponen di <code>src/app/page.tsx</code> seperti berikut ini. Hapus kode komponen lama <code>Profile</code>, lalu sesuaikan dengan komponen baru <code>Gallery</code> yang telah dibuat.</p>
+<pre><code>import { Gallery } from &#34;@/components/gallery&#34;;
+
+...</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 2</strong></h3>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Menulis Markup dengan JSX" duration="30">
+        <h2 is-upgraded><strong>Kenapa JSX ?</strong></h2>
+<p>React menggunakan logika rendering UI yang menakjubkan secara bersamaan, diantaranya ketika event di-handle, perubahan state, dan penyiapan data untuk ditampilkan pada halaman web.</p>
+<p>React tidak mewajibkan untuk menggunakan JSX, tetapi paling banyak digunakan oleh developer karena sangat membantu secara visual ketika bekerja dengan UI bersama kode JavaScript. Selain itu juga mendukung React untuk menunjukkan jika terjadi error dan pesan warning.</p>
+<p><strong>JSX</strong> adalah perpanjangan sintaksis untuk menulis kode seperti HTML dalam file JavaScript. Meskipun ada beberapa cara lain, JSX lebih dipilih oleh sebagian besar developer React dan codebase karena kepadatannya.</p>
+<h2 is-upgraded><strong>JSX: Meletakkan markup ke JavaScript</strong></h2>
+<p>Website selama ini dibuat dari HTML, CSS, dan JavaScript. Selama bertahun-tahun, pengembang website menaruh konten di HTML, desain di CSS, dan logika di JavaScript—tidak jarang di file yang berbeda. Konten dibangun di HTML sedangkan logika halaman disimpan secara terpisah dalam JavaScript seperti kode berikut:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 261.50px" src="img\\fe462b4f4e2bc633.png"></p>
+<p>HTML</p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img style="width: 273.50px" src="img\\6d941dd394a3c281.png"></p>
+<p>JavaScript</p>
+</td></tr>
+</table>
+<p>Namun, seiring dengan situs yang makin interaktif, logika semakin menentukan konten. JavaScript mengatur HTML, Inilah mengapa <strong>dalam React, logika render dan markup berada di satu tempat yang sama—komponen</strong>.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\1d8fc2fb9ea83d14.png"></p>
+<p>Menggabungkan logika render dan markup untuk sebuah tombol memastikan mereka tersinkronasi dengan satu sama lain pada tiap perubahan. Sebaliknya, detil yang tidak berhubungan, markup untuk tombol dan sidebar, juga tidak terhubung dengan satu sama lain, membuat perubahan masing-masing menjadi lebih aman.</p>
+<p>Masing-masing komponen React adalah fungsi JavaScript yang bisa memiliki markup yang di-render oleh React ke peramban. Komponen React menggunakan ekstensi sitaksis yang bernama JSX untuk merepresentasikan markup tersebut. JSX terlihat sangat mirip dengan HTML, namun lebih ketat dan dapat menampilkan informasi secara dinamis. Cara terbaik untuk memahami JSX adalah dengan langsung mengubah beberapa markup HTML menjadi JSX.</p>
+<aside class="special"><p><strong>Catatan:</strong></p>
+<p>JSX dan React adalah dua hal yang berbeda. Mereka masing-masing digunakan secara bersama, namun anda dapat <a href="https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform" target="_blank">menggunakannya sendiri secara independen</a>.</p>
+<p>JSX merupakan ekstensi sintaks, sedangkan React adalah <em>library </em>JavaScript.</p>
+</aside>
+<h2 is-upgraded><strong>Mengubah HTML menjadi JSX </strong></h2>
+<p>Anggap anda memiliki HTML yang valid seperti kode berikut:</p>
+<pre><code>&lt;h1&gt;Daftar Tugas Putri&lt;/h1&gt;
+&lt;img 
+  src=&#34;https://i.imgur.com/yXOvdOSs.jpg&#34; 
+  alt=&#34;Putri&#34; 
+  class=&#34;photo&#34;
+&gt;
+&lt;ul&gt;
+    &lt;li&gt;Mengerjakan PR
+    &lt;li&gt;Pergi belanja
+    &lt;li&gt;Minum vitamin
+&lt;/ul&gt;</code></pre>
+<p>Dan anda ingin meletakkannya di komponen:</p>
+<pre><code>export default function TodoList() {
+  return (
+    // ???
+  )
+}</code></pre>
+<p>Jika anda salin dan tempel secara langsung, maka dia tidak akan bekerja:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\1fee712d628f7b1e.png"></p>
+<p>Ini dikarenakan JSX lebih ketat dan memiliki banyak peraturan dibandingkan HTML! Jika anda membaca pesan error yang tertera, pesan tersebut akan mengarahkanmu untuk memperbaiki markup, atau anda bisa mengikuti panduan berikut.</p>
+<aside class="special"><p><strong>Catatan:</strong></p>
+<p>Umumnya, pesan error pada React akan memandu anda mencari sumber masalah yang ada di kode. Jangan lupa membaca pesan error jika anda <em>stuck</em>!</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Aturan JSX" duration="0">
+        <h2 is-upgraded><strong>1. Hanya mengembalikan satu elemen </strong></h2>
+<p>Untuk mengembalikan lebih dari satu elemen, <strong>bungkus mereka dengan satu tag parent</strong>.</p>
+<p>Contohnya, anda dapat menggunakan tag <code><div></code>:</p>
+<pre><code>&lt;div&gt;
+  &lt;h1&gt;Daftar Tugas Putri&lt;/h1&gt;
+  &lt;img 
+    src=&#34;https://i.imgur.com/yXOvdOSs.jpg&#34; 
+    alt=&#34;Putri&#34; 
+    class=&#34;photo&#34;
+  &gt;
+  &lt;ul&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+<p>Jika anda tidak ingin menambahkan <code><div></code> pada markup, anda dapat menggunakan tag kosong saja seperti berikut:</p>
+<pre><code>&lt;&gt;
+  &lt;h1&gt;Daftar Tugas Putri&lt;/h1&gt;
+  &lt;img 
+    src=&#34;https://i.imgur.com/yXOvdOSs.jpg&#34; 
+    alt=&#34;Putri&#34; 
+    class=&#34;photo&#34;
+  &gt;
+  &lt;ul&gt;
+    ...
+  &lt;/ul&gt;
+&lt;/&gt;</code></pre>
+<p>Tag kosong di atas disebut <a href="https://id.react.dev/reference/react/Fragment" target="_blank">Fragment</a>. Fragments dapat menggabungkan beberapa tag tanpa memasukkan tag tersebut ke bagian dari HTML.</p>
+<aside class="special"><p><strong>Mengapa beberapa tag JSX perlu dibungkus?</strong></p>
+<p>JSX mirip dengan HTML, namun di balik layar, mereka berubah menjadi objek <em>literal </em>JavaScript. Anda tidak bisa mengembalikan dua objek dari sebuah fungsi tanpa membungkus mereka ke sebuah senarai. Inilah mengapa anda juga tidak bisa mengembalikan dua <em>tag </em>JSX tanpa membungkus mereka menjadi sebuah <em>fragment</em>.</p>
+</aside>
+<h2 is-upgraded><strong>2. Tutup semua tag </strong></h2>
+<p>Semua tag JSX harus dapat ditutup tag tunggal seperti <code>< img ></code> harus ditulis <code>< img /></code>, dan tag ganda seperti <code>< li > oranges</code> harus ditulis <code>< li > oranges < / li ></code>.</p>
+<p>Berikut adalah kode dan daftar tugas Putri dengan tag ganda:</p>
+<pre><code>&lt;&gt;
+  &lt;img 
+    src=&#34;https://i.imgur.com/yXOvdOSs.jpg&#34; 
+    alt=&#34;Putri&#34; 
+    class=&#34;photo&#34;
+   /&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Mengerjakan PR&lt;/li&gt;
+    &lt;li&gt;Pergi Belanja&lt;/li&gt;
+    &lt;li&gt;Minum vitamin&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/&gt;</code></pre>
+<h2 is-upgraded>3. Ubah sebagian menjadi <em>camelCase</em><strong>! </strong></h2>
+<p>JSX berubah menjadi JavaScript dan atribut yang ditulis di JSX menjadi key pada objek di JavaScript. Dalam komponen, atribut akan lebih mudah dibaca sebagai variable. Namun JavaScript memiliki beberapa batasan dalam menamai variabel. Contohnya, nama variabel tidak boleh terdiri dari karakter minus dan tidak boleh menggunakan nama pesanan tertentu seperti <code>class</code>.</p>
+<p>Inilah mengapa di React, banyak atribut HTML dan SVG ditulis secara <strong>camelCase</strong>. Contohnya, <code>stroke-width</code> dapat ditulis sebagai <code>strokeWidth</code>. Dan karena class merupakan nama pesanan, di React kita menulisnya sebagai <code>className</code>, dinamakan sesuai dengan <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className" target="_blank">versi DOM-nya</a>:</p>
+<pre><code>&lt;img 
+  src=&#34;https://i.imgur.com/yXOvdOSs.jpg&#34; 
+  alt=&#34;Putri&#34; 
+  className=&#34;photo&#34;
+/&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Components dan Props" duration="20">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Beberapa konsep ReactJS yang lain akan dipelajari pada pertemuan berikutnya.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://reactjs.org/community/courses.html" target="_blank">Free Courses and Paid Courses</a></li>
+<li><a href="https://reactfordesigners.com/" target="_blank">React for Designers</a></li>
+<li><a href="https://www.robinwieruch.de/javascript-fundamentals-react-requirements" target="_blank">JavaScript fundamentals before learning React</a></li>
+<li><a href="https://www.taniarascia.com/getting-started-with-react/" target="_blank">React Tutorial: An Overview and Walkthrough</a></li>
+</ul>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://id.react.dev/learn/your-first-component" target="_blank">https://id.react.dev/learn/your-first-component</a> </li>
+<li><a href="https://id.react.dev/learn/importing-and-exporting-components" target="_blank">https://id.react.dev/learn/importing-and-exporting-components</a> </li>
+<li><a href="https://id.react.dev/learn/writing-markup-with-jsx" target="_blank">https://id.react.dev/learn/writing-markup-with-jsx</a> </li>
+<li><a href="https://id.react.dev/learn/javascript-in-jsx-with-curly-braces" target="_blank">https://id.react.dev/learn/javascript-in-jsx-with-curly-braces</a> </li>
+<li><a href="https://id.react.dev/learn/passing-props-to-a-component" target="_blank">https://id.react.dev/learn/passing-props-to-a-component</a> </li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -186,9 +186,7 @@ export default function Profile() {
 </td></tr>
 </table>
 <p>Ketika Anda menulis <strong>default imports</strong>, Anda dapat memberi nama apa saja setelah <code>import</code>. Contoh, Anda dapat menulis <code>import Banana from './Button.js'</code> dan itu akan tetap ketika Anda menggunakan <code>export default</code> yang sama. Sebaliknya, dengan <strong>named imports</strong>, nama harus sama di kedua sisi. Itulah mengapa disebut <strong>named imports</strong>!</p>
-<p>Kebanyakan developer seringkali menggunakan <code>default exports</code> <strong>jika file yang diekspor hanya satu komponen</strong>, <strong>dan menggunakan </strong></p>
-<p><strong><code>named exports</code></strong></p>
-<p><strong> jika mengekspor beberapa komponen dan nilai</strong>. Bagaimanapun gaya koding yang Anda gunakan, selalu beri nama yang berarti pada fungsi komponen Anda dan isi file tersebut. Komponen tanpa nama, seperti <code>export default ()=>{}</code>, tidak disarankan karena membuat proses debug lebih sulit.</p>
+<p>Kebanyakan developer seringkali menggunakan <code>default exports</code> <strong>jika file yang diekspor hanya satu komponen</strong>, <strong>dan menggunakan </strong><code>named exports</code> <strong>jika mengekspor beberapa komponen dan nilai</strong>. Bagaimanapun gaya koding yang Anda gunakan, selalu beri nama yang berarti pada fungsi komponen Anda dan isi file tersebut. Komponen tanpa nama, seperti <code>export default ()=>{}</code>, tidak disarankan karena membuat proses debug lebih sulit.</p>
 <aside class="special"><p><strong>Catatan:</strong></p>
 <p>Anda tidak dapat memiliki <strong>dua </strong><strong><code>default exports</code></strong><strong> dalam satu file</strong>. Anda dapat membuat file baru dengan <strong>default exports</strong>, atau Anda dapat menambahkan sebuah <strong>named exports</strong> untuk komponen lain dalam satu file. <strong>Sebuah file hanya dapat memiliki satu </strong><strong><code>default exports</code></strong>, tapi dapat memiliki banyak <strong><code>named exports</code></strong>.</p>
 <p>Untuk mengurangi potensi kebingunan antara <strong>default </strong>dan <strong>named exports</strong>, beberapa tim memilih untuk berpegang pada satu gaya penulisan (<strong>default</strong> atau <strong>named</strong>), atau menghindari mencampurnya dalam satu file. Maka pilihlah kebiasaan terbaik untuk Anda!</p>
@@ -226,7 +224,7 @@ export function Gallery() {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Menulis Markup dengan JSX" duration="30">
+      <google-codelab-step label="Menulis Markup dengan JSX" duration="50">
         <h2 is-upgraded><strong>Kenapa JSX ?</strong></h2>
 <p>React menggunakan logika rendering UI yang menakjubkan secara bersamaan, diantaranya ketika event di-handle, perubahan state, dan penyiapan data untuk ditampilkan pada halaman web.</p>
 <p>React tidak mewajibkan untuk menggunakan JSX, tetapi paling banyak digunakan oleh developer karena sangat membantu secara visual ketika bekerja dengan UI bersama kode JavaScript. Selain itu juga mendukung React untuk menunjukkan jika terjadi error dan pesan warning.</p>
@@ -331,6 +329,104 @@ export function Gallery() {
   alt=&#34;Putri&#34; 
   className=&#34;photo&#34;
 /&gt;</code></pre>
+<p>Anda dapat <a href="https://id.react.dev/reference/react-dom/components/common" target="_blank">mencari semua atribut pada list DOM component berikut</a>. Jika ada yang salah, jangan takut—React akan menampilkan pesan dengan koreksi ke <a href="https://developer.mozilla.org/docs/Tools/Browser_Console" target="_blank">konsol browser</a>.</p>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Untuk beberapa alasan, atribut <code>aria-*</code> dan <code>data-*</code> ditulis menggunakan tanda minus.</p>
+</aside>
+<h2 is-upgraded><strong>Tip: Gunakan JSX Converter </strong></h2>
+<p>Mengubah atribut di markup yang sudah ada bisa menjadi membosankan. Disarankan untuk menggunakan <a href="https://transform.tools/html-to-jsx" target="_blank">converter</a> untuk mengubah HTML dan SVG-mu menjadi JSX. Konverter sangat berguna dalam praktiknya, namun tetap ada baiknya Anda perlu memahami kodenya sehingga Anda dapat menulis JSX sendiri dengan nyaman.</p>
+<p>Berikut hasil jadinya:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\b52636c0a45583c7.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 3</strong></h3>
+<p>Silakan perbaiki kode JSX berikut ini. Anda boleh menggunakan konverter atau perbaiki secara manual.</p>
+<p class="image-container"><img style="width: 414.00px" src="img\\2d3e8e6735445678.png"></p>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan mengapa error itu bisa terjadi?</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="JavaScript di JSX Menggunakan Kurung Kurawal" duration="0">
+        <p>JSX memungkinkan Anda menulis markup mirip HTML di dalam file JavaScript, sehingga membuat logika rendering dan konten berada pada satu tempat yang sama. Terkadang Anda akan ingin menambahkan sedikit logika JavaScript atau merujuk pada properti yang dinamis di dalam markup tersebut. Dalam situasi ini, Anda dapat menggunakan tanda kurung kurawal pada JSX untuk membuka akses ke JavaScript.</p>
+<h2 is-upgraded><strong>Mengoper string dengan tanda kutip </strong></h2>
+<p>Ketika Anda ingin oper atribut string ke JSX, Anda memasukkannya ke dalam tanda kutip tunggal atau ganda. Perhatikan kode berikut.</p>
+<pre><code>export default function Avatar() {
+  return (
+    &lt;img
+      className=&#34;avatar&#34;
+      src=&#34;https://i.imgur.com/7vQD0fPs.jpg&#34;
+      alt=&#34;Gregorio Y. Zara&#34;
+    /&gt;
+  );
+}</code></pre>
+<p>Di sini kode tersebut, <code>"https://i.imgur.com/7vQD0fPs.jpg"</code> dan <code>"Gregorio Y. Zara"</code> sedang dioper sebagai string.</p>
+<p>Namun bagaimana jika Anda ingin secara dinamis menentukan teks <code>src</code> atau <code>alt</code> ? Anda dapat menggunakan nilai dari JavaScript dengan mengganti kode seperti berikut:</p>
+<pre><code>export default function Avatar() {
+  const avatar = &#39;https://i.imgur.com/7vQD0fPs.jpg&#39;;
+  const description = &#39;Gregorio Y. Zara&#39;;
+  return (
+    &lt;img
+      className=&#34;avatar&#34;
+      src={avatar}
+      alt={description}
+    /&gt;
+  );
+}</code></pre>
+<p>Perhatikan perbedaan antara <code>className="avatar"</code>, yang menentukan nama kelas CSS <code>"avatar"</code> yang membuat gambar bulat, dan <code>src={avatar}</code> yang membaca nilai variabel JavaScript disebut avatar. Hal itu terjadi karena kurung kurawal memungkinkan Anda bekerja dengan JavaScript langsung di markup Anda.</p>
+<h2 is-upgraded><strong>Menggunakan kurung kurawal: Jendela ke dunia JavaScript </strong></h2>
+<p>JSX merupakan cara khusus dalam menulis JavaScript. Artinya, memungkinkan untuk menggunakan JavaScript di dalamnya - dengan kurung kurawal <code>{ }</code>. Contohnya di bawah ini pertama perlu mendeklarasikan sebuah nama untuk ilmuwan, name, kemudian menyematkannya dengan kurung kurawal di dalam <code>h1</code>:</p>
+<pre><code>export default function TodoList() {
+  const name = &#39;Gregorio Y. Zara&#39;;
+  return (
+    &lt;h1&gt;{name}&#39;s To Do List&lt;/h1&gt;
+  );
+}</code></pre>
+<p>Sekarang kita ubah nilai <code>name</code> dari <code>'Gregorio Y. Zara'</code> menjadi <code>'Hedy Lamarr'</code>. Lihat bagaimana judul daftar berubah?</p>
+<p>Setiap ekspresi JavaScript akan berfungsi di antara kurung kurawal, termasuk fungsi seperti  <code>formatDate()</code>, perhatikan kode berikut:</p>
+<pre><code>const today = new Date();
+
+function formatDate(date) {
+  return new Intl.DateTimeFormat(
+    &#39;en-US&#39;,
+    { weekday: &#39;long&#39; }
+  ).format(date);
+}
+
+export default function TodoList() {
+  return (
+    &lt;h1&gt;To Do List for {formatDate(today)}&lt;/h1&gt;
+  );
+}</code></pre>
+<h2 is-upgraded><strong>Dimana dapat menggunakan kurung kurawal? </strong></h2>
+<p>Anda hanya dapat menggunakan kurung kurawal (<em>curly braces</em>) dalam dua cara di dalam JSX:</p>
+<ol type="1" start="1">
+<li><strong>Sebagai teks</strong> langsung di dalam tag JSX: <code>< h1 >Daftar Tugas {name}</ h1 ></code> berfungsi, tetapi <code>< {tag} >Daftar Tugas Gregorio Y. Zara</ {tag} ></code> tidak akan berhasil.</li>
+<li><strong>Sebagai atribut</strong> yang mengikuti tanda dengan <code>src={avatar}</code> akan membaca variabel <code>avatar</code>, tetapi <code>src="{avatar}"</code> akan mengoper sebagai string <code>"{avatar}"</code>.</li>
+</ol>
+<h2 is-upgraded><strong>Menggunakan &#34;kurung kurawal ganda&#34;: CSS dan objek lain di JSX </strong></h2>
+<p>Selain string, angka, dan ekspresi JavaScript lainnya, Anda bahkan dapat mengoper objek dalam JSX. Objek juga ditandai dengan kurung kurawal, seperti <code>{ name: "Hedy Lamarr", inventions: 5 }</code>. Oleh karena itu, untuk mengoper objek JavaScript di JSX, Anda harus membungkus objek tersebut dalam sepasang kurung kurawal lainnya seperti ini: <code>person=&#123;&#123; name: "Hedy Lamarr", inventions: 5 }}</code>.</p>
+<p>Anda mungkin melihat ini pada gaya CSS inline dalam JSX. React tidak mengharuskan Anda untuk menggunakan gaya inline (kelas CSS berfungsi lebih baik untuk kebanyakan kasus). Namun, ketika Anda membutuhkan gaya inline, Anda dapat mengoper objek ke atribut <code>style</code> seperti kode berikut:</p>
+<pre><code>export default function TodoList() {
+  return (
+    &lt;ul style=&#123;&#123;
+      backgroundColor: &#39;black&#39;,
+      color: &#39;pink&#39;
+    }}&gt;
+      &lt;li&gt;Improve the videophone&lt;/li&gt;
+      &lt;li&gt;Prepare aeronautics lectures&lt;/li&gt;
+      &lt;li&gt;Work on the alcohol-fuelled engine&lt;/li&gt;
+    &lt;/ul&gt;
+  );
+}</code></pre>
+<p>Sekarang kita ubah nilai dari <code>backgroundColor</code> dan <code>color</code>.</p>
+<p>Anda dapat melihat objek JavaScript di dalam kurung kurawal dengan jelas ketika Anda menulisnya seperti ini:</p>
+<pre><code>&lt;ul style={
+  {
+    backgroundColor: &#39;black&#39;,
+    color: &#39;pink&#39;
+  }
+}&gt;</code></pre>
+<p>Ketika Anda melihat <code>&#123;&#123;</code> dan <code>}}</code> di dalam JSX, Anda akan tahu bahwa itu tidak lebih dari objek di dalam kurung kurawal JSX.</p>
 
 
       </google-codelab-step>

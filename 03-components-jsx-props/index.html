@@ -29,7 +29,7 @@
     
       <google-codelab-step label="Pengantar" duration="0">
         <p class="image-container"><img style="width: 366.50px" src="img\\564a63242a21010d.png"></p>
-<p><strong>Terakhir diperbarui:</strong> 2024-02-25</p>
+<p><strong>Terakhir diperbarui:</strong> 2024-02-26</p>
 <h2 is-upgraded><strong>Components, JSX, dan Props</strong></h2>
 <p>Konsep dalam penggunaan ReactJS untuk antarmuka pengguna ada beberapa yang penting, diantaranya tentang komponen, JavaScript XML (JSX), membuat component dan penggunaan props.</p>
 <h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
@@ -125,6 +125,7 @@ export default function Profile() {
 <p>Ubah isi kode <code>Home()</code> sehingga dapat tampil seperti berikut dengan memanfaatkan komponen <code>Profile()</code> yang tadi sudah dibuat dari langkah 1 tersebut!</p>
 <p class="image-container"><img style="width: 610.00px" src="img\\7fd928fdd66a5bf0.png"></p>
 <p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana Anda solve error tersebut?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 1"</code>.</p>
 <p><strong>Catatan:</strong></p>
 <p>Jika terjadi error, Anda dapat mengakses tautan ini sebagai petunjuk solusinya: <a href="https://nextjs.org/docs/app/building-your-application/optimizing/images#remote-images" target="_blank">https://nextjs.org/docs/app/building-your-application/optimizing/images#remote-images</a> </p>
 </aside>
@@ -219,6 +220,7 @@ export function Gallery() {
 ...</code></pre>
 <aside class="warning"><h3 is-upgraded><strong>Soal 2</strong></h3>
 <p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 2"</code>.</p>
 </aside>
 
 
@@ -341,6 +343,7 @@ export function Gallery() {
 <p>Silakan perbaiki kode JSX berikut ini. Anda boleh menggunakan konverter atau perbaiki secara manual.</p>
 <p class="image-container"><img style="width: 414.00px" src="img\\2d3e8e6735445678.png"></p>
 <p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan mengapa error itu bisa terjadi?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 3"</code>.</p>
 </aside>
 
 
@@ -427,12 +430,510 @@ export default function TodoList() {
   }
 }&gt;</code></pre>
 <p>Ketika Anda melihat <code>&#123;&#123;</code> dan <code>}}</code> di dalam JSX, Anda akan tahu bahwa itu tidak lebih dari objek di dalam kurung kurawal JSX.</p>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Properti style dalam bentuk inline ditulis menggunakan gaya <em>camelCase </em>di dalam JSX. Sebagai contoh, jika pada HTML Anda menuliskan <code>< ul style="background-color: black" ></code>, maka pada komponen React Anda harus menulisnya seperti ini <code>< ul style=&#123;&#123; backgroundColor: 'black' }} ></code>.</p>
+</aside>
+<p>Anda dapat memasukkan beberapa ekspresi ke dalam satu objek, dan merujuk pada objek tersebut di dalam JSX menggunakan kurung kurawal. Sebagai contoh perhatikan kode berikut:</p>
+<pre><code>const person = {
+  name: &#39;Gregorio Y. Zara&#39;,
+  theme: {
+    backgroundColor: &#39;black&#39;,
+    color: &#39;pink&#39;
+  }
+};
+
+export default function TodoList() {
+  return (
+    &lt;div style={person.theme}&gt;
+      &lt;h1&gt;{person.name}&#39;s Todos&lt;/h1&gt;
+      &lt;img
+        className=&#34;avatar&#34;
+        src=&#34;https://i.imgur.com/7vQD0fPs.jpg&#34;
+        alt=&#34;Gregorio Y. Zara&#34;
+      /&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Improve the videophone&lt;/li&gt;
+        &lt;li&gt;Prepare aeronautics lectures&lt;/li&gt;
+        &lt;li&gt;Work on the alcohol-fuelled engine&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Pada contoh kode tersebut, objek JavaScript <code>person</code> berisi sebuah string <code>name</code> dan sebuah objek <code>theme</code>:</p>
+<pre><code>const person = {
+  name: &#39;Gregorio Y. Zara&#39;,
+  theme: {
+    backgroundColor: &#39;black&#39;,
+    color: &#39;pink&#39;
+  }
+};</code></pre>
+<p>Komponen dapat menggunakan nilai-nilai dari objek <code>person</code> seperti ini:</p>
+<pre><code>&lt;div style={person.theme}&gt;
+  &lt;h1&gt;{person.name}&#39;s Todos&lt;/h1&gt;</code></pre>
+<p>JSX sangat sederhana sebagai bahasa templating karena memungkinkan Anda untuk mengorganisir data dan logika menggunakan JavaScript.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Components dan Props" duration="20">
-        
+      <google-codelab-step label="Praktikum 3: Menggunakan JSX dinamis" duration="50">
+        <p>Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda pada setiap soal yang ada di beberapa langkah praktikum ini.</p>
+<aside class="warning"><p><strong>Perhatian:</strong> Melanjutkan project praktikum 2.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 1: Buat Komponen Baru</strong></h2>
+<p>Buatlah file baru di <code>src/components/todolist.tsx</code> berisi kode seperti berikut:</p>
+<pre><code>const person = {
+  name: &#39;Gregorio Y. Zara&#39;,
+  theme: {
+    backgroundColor: &#39;black&#39;,
+    color: &#39;pink&#39;
+  }
+};
+
+export default function TodoList() {
+  return (
+    &lt;div style={person.theme}&gt;
+      &lt;h1&gt;{person}&#39;s Todos&lt;/h1&gt;
+      &lt;img
+        className=&#34;avatar&#34;
+        src=&#34;https://i.imgur.com/7vQD0fPs.jpg&#34;
+        alt=&#34;Gregorio Y. Zara&#34;
+      /&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Improve the videophone&lt;/li&gt;
+        &lt;li&gt;Prepare aeronautics lectures&lt;/li&gt;
+        &lt;li&gt;Work on the alcohol-fuelled engine&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 4</strong></h3>
+<p>Kode di atas masih terdapat error, silakan diperbaiki.</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 4"</code>.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 2: Impor Komponen</strong></h2>
+<p>Lakukan impor komponen di <code>src/app/page.tsx</code> seperti berikut ini.</p>
+<pre><code>import { Gallery } from &#34;@/components/gallery&#34;;
+import TodoList from &#34;@/components/todolist&#34;;
+
+export default function Home() {
+  return (
+    &lt;section&gt;
+      &lt;h1 className=&#34;font-semibold text-slate-900 truncate pr-20 text-center&#34;&gt;Ilmuwan yang luar biasa&lt;/h1&gt;
+      &lt;hr /&gt;
+      &lt;Gallery /&gt;
+      &lt;hr /&gt;
+      &lt;TodoList /&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 5</strong></h3>
+<p>Buka file <code>src/components/todolist.tsx</code> lakukan ekstrak URL gambar ke dalam objek <code>person</code>.</p>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Apakah ada perbedaan pada tampilan web saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 5"</code>.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 3: Ubah ekspresi URL di src</strong></h2>
+<p>Tetap di file <code>src/components/todolist.tsx</code> ubahlah objek person dan tambah variabel baseUrl seperti di bawah ini. URL lengkap gambar dibagi menjadi empat bagian: URL dasar, <code>imageId</code>, <code>imageSize</code>, dan ekstensi file.</p>
+<p>Kita ingin URL gambar menggabungkan atribut-atribut ini bersama-sama: URL dasar (selalu <code>'https://i.imgur.com/'</code>), <code>imageId ('7vQD0fP')</code>, <code>imageSize ('s')</code>, dan ekstensi file (selalu <code>'.jpg'</code>). Namun, ada yang salah dengan atribut <code>src</code>.</p>
+<p>Bisakah anda memperbaikinya?</p>
+<pre><code>const baseUrl = &#39;https://i.imgur.com/&#39;;
+const person = {
+  name: &#39;Gregorio Y. Zara&#39;,
+  imageId: &#39;7vQD0fP&#39;,
+  imageSize: &#39;s&#39;,
+  theme: {
+    backgroundColor: &#39;black&#39;,
+    color: &#39;pink&#39;
+  }
+};
+
+export default function TodoList() {
+  return (
+    &lt;div style={person.theme}&gt;
+      &lt;h1&gt;{person.name}&#39;s Todos&lt;/h1&gt;
+      &lt;img
+        className=&#34;avatar&#34;
+        src=&#34;{baseUrl}{person.imageId}{person.imageSize}.jpg&#34;
+        alt={person.name}
+      /&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Improve the videophone&lt;/li&gt;
+        &lt;li&gt;Prepare aeronautics lectures&lt;/li&gt;
+        &lt;li&gt;Work on the alcohol-fuelled engine&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 6</strong></h3>
+<p>Perbaiki kode tersebut pada bagian atribut <code>src</code>. Kode lainnya dapat Anda sesuaikan dari jawaban soal sebelumnya. Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 6"</code>.</p>
+<p><strong>Catatan:</strong></p>
+<p>Untuk memeriksa apakah perbaikan Anda berhasil, coba ubah nilai dari <code>imageSize</code> menjadi <code>'b'</code>. Gambar harus menyesuaikan ukuran setelah diubah.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Components dan Props" duration="40">
+        <p>Komponen React menggunakan props untuk berkomunikasi antara satu dengan yang lainnya. Setiap komponen induk bisa mengirim beberapa informasi pada komponen-komponen anaknya dengan memberikan mereka props. Props mungkin akan mengingatkan Anda dengan atribut HTML, namun Anda bisa mengirim nilai JavaScript apa pun melalui itu, termasuk objek, senarai, bahkan fungsi.</p>
+<h2 is-upgraded><strong>Props umum </strong></h2>
+<p>Props adalah informasi yang Anda kirimkan pada tag JSX. Sebagai contoh, <code>className</code>, <code>src</code>, <code>alt</code>, <code>width</code>, dan <code>height</code> adalah beberapa contoh dari props yang bisa Anda kirimkan pada <code>< img ></code> seperti kode berikut:</p>
+<pre><code>function Avatar() {
+  return (
+    &lt;img
+      className=&#34;avatar&#34;
+      src=&#34;https://i.imgur.com/1bX5QH6.jpg&#34;
+      alt=&#34;Lin Lanying&#34;
+      width={100}
+      height={100}
+    /&gt;
+  );
+}
+
+export default function Profile() {
+  return (
+    &lt;Avatar /&gt;
+  );
+}</code></pre>
+<p>Props yang bisa dikirimkan pada tag <code>< img ></code> sudah didefinisikan sebelumnya (ReactDOM menyesuaikan dengan <a href="https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element" target="_blank">standar HTML</a>). Namun Anda bisa mengirimkan props apa pun pada komponen Anda sendiri, Misalnya <code>< Avatar ></code>, untuk dikustomisasi.</p>
+<h2 is-upgraded><strong>Mengoper props ke komponen </strong></h2>
+<p>Pada kode ini, komponen <code>Profile</code> tidak mengirimkan props apa pun pada komponen anaknya, yaitu <code>Avatar</code>:</p>
+<pre><code>export default function Profile() {
+  return (
+    &lt;Avatar /&gt;
+  );
+}</code></pre>
+<p>Anda bisa memberi komponen <code>Avatar</code> beberapa props dalam dua langkah.</p>
+<h3 is-upgraded><strong>Langkah 1: Mengoper props ke komponen anak </strong></h3>
+<p>Pertama-tama, kirimkan beberapa props pada komponen <code>Avatar</code>. Sebagai contoh, mari kirimkan dua props: <code>person</code> (sebuah objek), dan <code>size</code> (sebuah angka):</p>
+<pre><code>export default function Profile() {
+  return (
+    &lt;Avatar
+      person=&#123;&#123; name: &#39;Lin Lanying&#39;, imageId: &#39;1bX5QH6&#39; }}
+      size={100}
+    /&gt;
+  );
+}</code></pre>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Jika dobel kurung kurawal setelah <code>person=</code> membuat Anda bingung, ingatlah bahwa <a href="https://id.react.dev/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx" target="_blank">mereka hanyalah sebuah objek</a> dalam kurung kurawal JSX.</p>
+</aside>
+<p>Sekarang Anda bisa membaca props tersebut di dalam komponen <code>Avatar</code>.</p>
+<h3 is-upgraded><strong>Langkah 2: Membaca props di dalam komponen anak </strong></h3>
+<p>Anda bisa membaca props tersebut dengan mendaftarkan namanya yaitu <code>person</code>, <code>size</code> dengan cara dipisahkan dengan koma di dalam <code>({</code> dan <code>})</code> langsung setelah <code>function Avatar</code>. Hal ini memungkinkan Anda untuk menggunakannya di dalam kode <code>Avatar</code>, sama halnya saat Anda menggunakan variabel.</p>
+<pre><code>function Avatar({ person, size }) {
+  // sekarang person dan size bisa Anda pakai di sini
+}</code></pre>
+<p>Tambahkan beberapa logika pada <code>Avatar</code> yang menggunakan props <code>person</code> dan <code>size</code> untuk di-render, dan selesai.</p>
+<p>Sekarang Anda bisa membuat <code>Avatar</code> untuk di-render dalam banyak cara dan dengan props yang berbeda.</p>
+<pre><code>import { getImageUrl } from &#39;./utils&#39;;
+
+function Avatar({ person, size }) {
+  return (
+    &lt;img
+      className=&#34;avatar&#34;
+      src={getImageUrl(person)}
+      alt={person.name}
+      width={size}
+      height={size}
+    /&gt;
+  );
+}
+
+export default function Profile() {
+  return (
+    &lt;div&gt;
+      &lt;Avatar
+        size={100}
+        person=&#123;&#123; 
+          name: &#39;Katsuko Saruhashi&#39;, 
+          imageId: &#39;YfeOqp2&#39;
+        }}
+      /&gt;
+      &lt;Avatar
+        size={80}
+        person=&#123;&#123;
+          name: &#39;Aklilu Lemma&#39;, 
+          imageId: &#39;OKS67lh&#39;
+        }}
+      /&gt;
+      &lt;Avatar
+        size={50}
+        person=&#123;&#123; 
+          name: &#39;Lin Lanying&#39;,
+          imageId: &#39;1bX5QH6&#39;
+        }}
+      /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<pre><code>export function getImageUrl(person, size = &#39;s&#39;) {
+  return (
+    &#39;https://i.imgur.com/&#39; +
+    person.imageId +
+    size +
+    &#39;.jpg&#39;
+  );
+}</code></pre>
+<p>Hasilnya:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\32a21b16797d63ea.png"></p>
+<p>Props membuat Anda berpikir tentang komponen induk dan komponen anak secara terpisah. Sebagai contoh, Anda bisa mengubah props <code>person</code> atau <code>size</code> di dalam <code>Profile</code> tanpa perlu memikirkan bagaimana <code>Avatar</code> menggunakannya. Begitupun, Anda bisa mengubah bagaimana <code>Avatar</code> menggunakan props tersebut, tanpa menghiraukan <code>Profile</code>.</p>
+<p>Anda bisa menganggap props seperti &#34;kenop&#34; yang bisa disesuaikan. Props berperan sama seperti arguments pada functions—Nyatanya, props adalah satu-satunya <em>argument </em>pada komponen Anda. Komponen fungsi React menerima satu argument, sebuah objek <em>props</em>.</p>
+<pre><code>function Avatar(props) {
+  let person = props.person;
+  let size = props.size;
+  // ...
+}</code></pre>
+<p>Biasanya Anda tidak memerlukan objek props secara utuh, maka Anda dapat memecahnya menjadi props tersendiri.</p>
+<p><strong>Jangan melewatkan pasangan kurung kurawal </strong><code>{</code> dan <code>}</code> di dalam tanda kurung <code>(</code> dan <code>)</code> saat menyatakan props sebagai parameter seperti kode ini:</p>
+<pre><code>function Avatar({ person, size }) {
+  // ...
+}</code></pre>
+<p>Sintaksis ini disebut <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter" target="_blank">&#34;destructuring&#34;</a> dan ini berfungsi untuk membaca properti dari parameter fungsi, maka sebaiknya tulis seperti berikut ini:</p>
+<pre><code>function Avatar(props) {
+  let person = props.person;
+  let size = props.size;
+  // ...
+}</code></pre>
+<h2 is-upgraded><strong>Menentukan nilai bawaaan untuk prop </strong></h2>
+<p>Jika Anda ingin memberi prop nilai bawaan untuk berjaga-jaga saat tidak ada nilai yang ditentukan, Anda bisa melakukannya dengan <em>destructring </em>lalu meletakkan <code>=</code> dan nilai bawaannya tepat setelah parameter seperti kode berikut ini:</p>
+<pre><code>function Avatar({ person, size = 100 }) {
+  // ...
+}</code></pre>
+<p>Sekarang, jika <code>< Avatar person={...} / ></code> di-render tanpa menerima prop <code>size</code>, <code>size</code> akan bernilai <code>100</code>.</p>
+<p>Nilai bawaan hanya akan terpakai jika prop <code>size</code> tidak ada atau jika Anda mengirim <code>size={undefined}</code>. Namun jika Anda mengirim <code>size={null}</code> atau <code>size={0}</code>, nilai bawaan tidak akan terpakai.</p>
+<h2 is-upgraded><strong>Meneruskan props dengan sintaksis spread JSX </strong></h2>
+<p>Terkadang, mengirim props bisa sangat repetitif:</p>
+<pre><code>function Profile({ person, size, isSepia, thickBorder }) {
+  return (
+    &lt;div className=&#34;card&#34;&gt;
+      &lt;Avatar
+        person={person}
+        size={size}
+        isSepia={isSepia}
+        thickBorder={thickBorder}
+      /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Tidak ada salahnya dengan kode yang repetitif—itu membuatnya lebih mudah untuk dibaca. Namun terkadang Anda mungkin lebih menyukai keringkasan. Beberapa komponen meneruskan semua propsnya kepada komponen anaknya, persis seperti yang <code>Profile</code> lakukan dengan <code>Avatar</code>. Karena mereka tidak menggunakan props-nya secara langsung, ini akan masuk akal untuk menggunakan sintaksis <strong>&#34;spread&#34;</strong> yang mana lebih ringkas seperti kode berikut:</p>
+<pre><code>function Profile(props) {
+  return (
+    &lt;div className=&#34;card&#34;&gt;
+      &lt;Avatar {...props} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Ini akan meneruskan semua props milik <code>Profile</code> pada <code>Avatar</code> tanpa menuliskannya satu-persatu.</p>
+<p><strong>Gunakan sintaksis spread dengan batasan</strong>. Jika Anda menggunakannya pada setiap komponen, maka akan ada yang salah. Seringkali, ini menunjukan bahwa Anda perlu memecah komponen Anda dan mengirim anaknya sebagai JSX. Mari kita bahas!</p>
+<h2 is-upgraded><strong>Mengoper JSX sebagai anak </strong></h2>
+<p>Sudah umum untuk menyisipkan tag bawaan pada browser:</p>
+<pre><code>&lt;div&gt;
+  &lt;img /&gt;
+&lt;/div&gt;</code></pre>
+<p>Terkadang Anda ingin menyisipkan komponen Anda dengan cara yang sama:</p>
+<pre><code>&lt;Card&gt;
+  &lt;Avatar /&gt;
+&lt;/Card&gt;</code></pre>
+<p>Saat Anda menyisipkan konten ke dalam tag JSX, komponen induk akan menerima konten tersebut dalam bentuk prop yang disebut <code>children</code>. Sebagai contoh, Komponen <code>Card</code> di bawah akan menerima prop <code>children</code> yang diisi <code>< Avatar / ></code> lalu me-rendernya dengan cara membungkusnya ke dalam <code>div</code>:</p>
+<pre><code>import Avatar from &#39;./Avatar&#39;;
+
+function Card({ children }) {
+  return (
+    &lt;div className=&#34;card&#34;&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+
+export default function Profile() {
+  return (
+    &lt;Card&gt;
+      &lt;Avatar
+        size={100}
+        person=&#123;&#123; 
+          name: &#39;Katsuko Saruhashi&#39;,
+          imageId: &#39;YfeOqp2&#39;
+        }}
+      /&gt;
+    &lt;/Card&gt;
+  );
+}</code></pre>
+<p>Cobalah ubah <code>< Avatar ></code> yang ada di dalam <code>< Card ></code> dengan teks untuk melihat bagaimana komponen <code>Card</code> bisa disisipkan konten apa pun. Komponen tersebut tidak perlu &#34;mengetahui&#34; apa yang di-<em>render</em> di dalamnya. Anda lihat betapa fleksibelnya hal ini.</p>
+<p>Anda bisa menganggap bahwa komponen dengan prop <code>children</code> itu mempunyai &#34;lubang&#34; yang bisa &#34;diisi&#34; oleh komponen induknya dengan JSX secara bebas. Anda akan sering menggunakan prop <code>children</code> sebagai pembungkus: panels, grids, dan lainnya.</p>
+<p class="image-container"><img style="width: 602.00px" src="img\\b9e0b5ada6266366.png"></p>
+<h2 is-upgraded><strong>Bagaimana props berubah seiring waktu </strong></h2>
+<p>Komponen <code>Clock</code> di bawah menerima dua props dari komponen induknya: <code>color</code> dan <code>time</code>. (Kode untuk komponen induknya dihilangkan karena itu menggunakan <a href="https://id.react.dev/learn/state-a-components-memory" target="_blank">state</a>, yang mana belum kita bahas untuk saat ini.)</p>
+<pre><code>export default function Clock({ color, time }) {
+  return (
+    &lt;h1 style=&#123;&#123; color: color }}&gt;
+      {time}
+    &lt;/h1&gt;
+  );
+}</code></pre>
+<p>Hasilnya:</p>
+<p class="image-container"><img style="width: 250.00px" src="img\\2f186388d09285bf.png"></p>
+<p>Contoh ini menggambarkan bahwa <strong>sebuah komponen mungkin menerima props yang berbeda seiring waktu</strong>. Props tidak selalu bersifat tetap! Begini, prop <code>time</code> berubah setiap detik, dan prop <code>color</code> berubah ketika Anda memilih warna lain. Data pada komponen akan ditampilkan props kapan saja, bukan hanya di awal.</p>
+<p>Bagaimanapun, props bersifat <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank">immutable</a>—Sebuah istilah pada ilmu komputer yang berarti &#34;tidak dapat diubah&#34;. Saat sebuah komponen ingin mengubah propsnya (sebagai contoh, untuk merespon interaksi pengguna atau merespon data baru), mereka harus &#34;meminta&#34; komponen induknya untuk mengirim dirinya <strong>props yang lain</strong>—objek baru! Lalu props yang lama akan disingkirkan, dan nantinya mesin JavasCript akan mengambil kembali memori yang dipakai oleh mereka.</p>
+<p><strong>Jangan mencoba untuk &#34;mengubah props&#34;</strong>. Ketika Anda perlu merespon masukan pengguna (misalnya mengubah warna yang dipilih), Anda akan memerlukan &#34;<em>set state</em>&#34;, yang mana akan Anda pelajari pada <a href="https://id.react.dev/learn/state-a-components-memory" target="_blank">State: Memori Milik Komponen</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 4: Menggunakan Props" duration="50">
+        <p>Selesaikan langkah-langkah praktikum berikut ini menggunakan editor Visual Studio Code (VS Code) atau code editor lain kesukaan Anda. Jawablah di laporan praktikum Anda pada setiap soal yang ada di beberapa langkah praktikum ini.</p>
+<aside class="warning"><p><strong>Perhatian:</strong> Melanjutkan project praktikum 3. Jangan lupa untuk menambahkan komponen ke file <code>src/app/page.tsx</code> untuk melihat hasil akhirnya di web.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 1: Buat Komponen Baru</strong></h2>
+<p>Buatlah file baru di <code>src/components/mygallery.tsx</code> berisi kode seperti berikut:</p>
+<pre><code>import { getImageUrl } from &#39;@/utils/utils&#39;;
+
+export default function MyGallery() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Notable Scientists&lt;/h1&gt;
+      &lt;section className=&#34;profile&#34;&gt;
+        &lt;h2&gt;Maria Skłodowska-Curie&lt;/h2&gt;
+        &lt;img
+          className=&#34;avatar&#34;
+          src={getImageUrl(&#39;szV5sdG&#39;)}
+          alt=&#34;Maria Skłodowska-Curie&#34;
+          width={70}
+          height={70}
+        /&gt;
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;b&gt;Profesi: &lt;/b&gt; 
+            Fisikawan dan kimiawan
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;b&gt;Penghargaan: 4 &lt;/b&gt; 
+            (Penghargaan Nobel Fisika, Penghargaan Nobel Kimia, Medali Davy, Medali Matteucci)
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;b&gt;Telah Menemukan: &lt;/b&gt;
+            polonium (unsur kimia)
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/section&gt;
+      &lt;section className=&#34;profile&#34;&gt;
+        &lt;h2&gt;Katsuko Saruhashi&lt;/h2&gt;
+        &lt;img
+          className=&#34;avatar&#34;
+          src={getImageUrl(&#39;YfeOqp2&#39;)}
+          alt=&#34;Katsuko Saruhashi&#34;
+          width={70}
+          height={70}
+        /&gt;
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;b&gt;Profesi: &lt;/b&gt; 
+            Ahli Geokimia
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;b&gt;Penghargaan: 2 &lt;/b&gt; 
+            (Penghargaan Miyake Geokimia, Penghargaan Tanaka)
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;b&gt;Telah Menemukan: &lt;/b&gt;
+            sebuah metode untuk mengukur karbon dioksida pada air laut
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 7</strong></h3>
+<p>Jika kode di atas terdapat error, silakan diperbaiki.</p>
+<p>Komponen <code>MyGallery</code> ini berisi dua markup yang sama persis. Ekstraklah menjadi komponen <code>MyProfile</code> untuk mengurangi duplikasi. Anda perlu memilih props apa saja yang akan dikirimkan.</p>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 7"</code>.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 2: Buat fungsi getImageUrl</strong></h2>
+<p>Buatlah file baru di <code>src/utils/utils.tsx</code> berisi kode seperti berikut:</p>
+<pre><code>export function getImageUrl(imageId, size = &#39;s&#39;) {
+  return (
+    &#39;https://i.imgur.com/&#39; +
+    imageId +
+    size +
+    &#39;.jpg&#39;
+  );
+}</code></pre>
+<h2 is-upgraded><strong>Langkah 3: Buat komponen baru</strong></h2>
+<p>Buatlah file baru di <code>src/components/myprofile.tsx</code> berisi kode seperti berikut:</p>
+<pre><code>import { getImageUrlV2 } from &#39;@/utils/utils&#39;;
+
+function MyAvatar({ person, size }) {
+  return (
+    &lt;img
+      className=&#34;avatar&#34;
+      src={getImageUrl(person, &#39;b&#39;)}
+      alt={person.name}
+      width={size}
+      height={size}
+    /&gt;
+  );
+}
+
+export default function MyProfile() {
+  return (
+    &lt;MyAvatar
+      size={40}
+      person=&#123;&#123; 
+        name: &#39;Gregorio Y. Zara&#39;, 
+        imageId: &#39;7vQD0fP&#39;
+      }}
+    /&gt;
+  );
+}</code></pre>
+<p>Tambahkan fungsi <code>getImageUrlV2</code> seperti berikut di file yang sama yaitu <code>utils.tsx</code></p>
+<p><strong><code>src/utils/utils.tsx</code></strong></p>
+<pre><code>export function getImageUrlV2(person, size) {
+  return (
+    &#39;https://i.imgur.com/&#39; +
+    person.imageId +
+    size +
+    &#39;.jpg&#39;
+  );
+}</code></pre>
+<p>Pada contoh ini, komponen <code>MyAvatar</code> menerima prop <code>size</code> yang berupa angka dan akan digunakan untuk menentukan lebar dan tinggi <code>< img ></code>. Prop <code>size</code> dibuat <code>40</code> pada contoh ini. Bagaimanapun, jika Anda membuka gambar tersebut di web, Anda akan melihat bahwa gambarnya akan lebih besar (<code>160</code> piksel). Ukuran gambar yang sebenarnya ditentukan oleh ukuran thumbnail yang Anda minta.</p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 8</strong></h3>
+<p>Jika kode di atas terdapat error, silakan diperbaiki.</p>
+<p>Ubahlah komponen <code>MyAvatar</code> untuk diolah ukuran gambarnya berdasarkan prop <code>size</code>. Khususnya, jika <code>size</code> kurang dari <code>90</code>, kirimkan <code>'s'</code> (&#34;small&#34;) bukan <code>'b'</code> (&#34;big&#34;) pada fungsi <code>getImageUrl</code>. Pastikan bahwa perubahan yang Anda buat berjalan dengan cara me-render avatars dengan nilai prop <code>size</code> yang berbeda dan buka gambar pada tab baru di browser.</p>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 8"</code>.</p>
+</aside>
+<h2 is-upgraded><strong>Langkah 4: Buat komponen baru MyProfileV2</strong></h2>
+<p>Buatlah file baru di <code>src/components/myprofilev2.tsx</code> berisi kode seperti berikut:</p>
+<pre><code>export default function MyProfileV2() {
+  return (
+    &lt;div&gt;
+      &lt;div className=&#34;card&#34;&gt;
+        &lt;div className=&#34;card-content&#34;&gt;
+          &lt;h1&gt;Foto&lt;/h1&gt;
+          &lt;img
+            className=&#34;avatar&#34;
+            src=&#34;https://i.imgur.com/OKS67lhm.jpg&#34;
+            alt=&#34;Aklilu Lemma&#34;
+            width={70}
+            height={70}
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className=&#34;card&#34;&gt;
+        &lt;div className=&#34;card-content&#34;&gt;
+          &lt;h1&gt;Tentang&lt;/h1&gt;
+          &lt;p&gt;Aklilu Lemma adalah seorang ilmuwan terkemuka dari etiopia yang telah menemukan pengobatan alami untuk skistosomiasis.&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 9</strong></h3>
+<p>Jika kode di atas terdapat error, silakan diperbaiki.</p>
+<p>Buatlah komponen <code>Card</code> dari kode di atas, lalu gunakan prop <code>children</code> untuk mengirimkan JSX yang berbeda.</p>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W03: Jawaban soal 9"</code>.</p>
+</aside>
+
 
       </google-codelab-step>
     

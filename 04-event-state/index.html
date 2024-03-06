@@ -1,0 +1,299 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#04 | Event dan State</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="04-event-state"
+                  title="#04 | Event dan State"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Event" duration="15">
+        <p><em>Event </em>secara bahasa artinya kejadian. Pada Javascript: <em>Event </em>adalah kejadian yang terjadi pada element di halaman web. Kejadian yang dimaksud di sini seperti aktivitas yang dikerjakan pada halaman web. Misalnya seperti:</p>
+<ul>
+<li>Pengguna melakukan scroll pada halaman web</li>
+<li>Pengguna melakukan klik (click) pada elemen tertentu (tombol, link, dll)</li>
+<li><em>Load</em>/<em>Reload </em>halaman web</li>
+<li>Melakukan submit form</li>
+<li>dan sebagainya</li>
+</ul>
+<p>Jadi perlu adanya sebuah mekanisme untuk menangkap <em>event </em>tersebut, dan biasa disebut dengan <strong><em>Event Handler</em></strong>.  Dalam javascript terdapat beberapa event handle diantaranya</p>
+<ul>
+<li><em>onclick </em>= adalah <em>event </em>jika sebuah element html di klik.</li>
+<li><em>onchange </em>= adalah <em>event </em>jika sebuah element html berubah.</li>
+<li><em>onmouseover </em>= adalah <em>event </em>jika sebuah element html diletakkan cursor mouse.</li>
+<li><em>onmouseout </em>= adalah <em>event </em>jika saat <em>cursor mouse</em> meninggalkan element html.</li>
+<li><em>onkeydown </em>= adalah <em>event </em>jika saat di terjadi pengetikan pada elemen html.</li>
+<li><em>onload </em>= adalah event ketika jika saat element atau halaman di buka</li>
+<li>Dan masih banyak lagi</li>
+</ul>
+<p><strong>React </strong>memungkinkan Anda menambahkan <em>event handler</em> ke dalam file JSX. <em>Event handler</em> adalah fungsi-fungsi yang akan dipicu sebagai respons terhadap interaksi seperti mengeklik, mengarahkan kursor, memfokuskan pada input formulir, dan sebagainya.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="React/Nextjs Event Handler" duration="0">
+        <p>React/Nextjs memiliki <em>event handler </em>untuk merespon event yang dilakukan oleh pengguna di sebuah halaman website. Untuk menambahkan <em>event handler</em>, pertama-tama kita akan mendefinisikan sebuah fungsi dan kemudian<a href="https://id.react.dev/learn/passing-props-to-a-component" target="_blank">mengopernya sebagai <em>prop</em></a> ke <em>tag</em> JSX yang sesuai. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Event Handler" duration="30">
+        <p>Pada pertemuan ini, kita buat repository baru dengan nama <strong>04-event-dan-state</strong></p>
+<h2 is-upgraded><strong>Langkah 1</strong></h2>
+<p>Kita mencoba membuat tombol sederhana yang belum bisa melakukan apa-apa alias belum kita buat event handler untuk tombol tersebut. Sebagai contoh, berikut adalah sebuah tombol yang belum melakukan apa pun. Kita buat folder/file baru di <code>src/component/button.tsx</code></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\885cc2657e846393.png"></p>
+<p>Selanjutnya pada file <code>src/app/page.tsx</code> kita ubah menjadi seperti berikut</p>
+<p class="image-container"><img style="width: 409.50px" src="img\\de3ea27f1dd88b7e.png"></p>
+<p>Kemudian kita jalankan perintah <code>"npm run dev"</code> dan kita buka alamat <code>localhost:3000</code> pada browser. Maka akan tampil hasil seperti berikut</p>
+<p class="image-container"><img style="width: 302.50px" src="img\\1176d38419dfa560.png"></p>
+<h2 is-upgraded><strong>Langkah 2</strong></h2>
+<p>Kita bisa menambahkan event pada tombol tersebut. Seperti contoh kita buat ketika tombol di klik, akan memunculkan notif/alert. Kita dapat membuat pesan ketika pengguna mengeklik dengan mengikuti tiga langkah berikut:</p>
+<ol type="1" start="1">
+<li>Deklarasikan sebuah fungsi bernama <code>handleClick</code> di dalam komponen Button kita.</li>
+<li>Implementasikan logika di dalam fungsi tersebut (gunakan <code>alert</code> untuk menampilkan pesan).</li>
+<li>Tambahkan handler <code>onClick={handleClick}</code> ke tag JSX <code>< button ></code></li>
+</ol>
+<p>Perhatikan kode <code>button.tsx</code> berikut</p>
+<p class="image-container"><img style="width: 430.31px" src="img\\8e3a917f014d389d.png"></p>
+<p>Jika terjadi error seperti gambar berikut</p>
+<p class="image-container"><img style="width: 338.50px" src="img\\b3f3ebfe066bf821.png"></p>
+<p>Maka kita butuh mengatur agar komponen yang kita gunakan menjadi komponen client. Untuk menjadikan komponen client, kita cukup memberikan perintah ini  <code>"use client";</code> pada baris pertama file <code>page.tsx</code></p>
+<p class="image-container"><img style="width: 338.50px" src="img\\4e647bbf7df4bed.png"></p>
+<p>Kita mendefinisikan fungsi <code>handleClick</code> dan kemudian<a href="https://id.react.dev/learn/passing-props-to-a-component" target="_blank"> mengopernya sebagai prop</a> ke <code>< button ></code>. Method <code>handleClick</code>  adalah sebuah event handler pada tombol tersebut. </p>
+<p>Nama Method event handler sebaiknya memiliki format tertentu, seperti contoh memiliki nama yang diawali dengan kata <code>handle</code>, diikuti oleh nama event yang akan dilakukan. Contoh </p>
+<ul>
+<li>event handler untuk menangani ketika ada event klik tombol <code>onClick={handleClick}</code>,</li>
+<li>event handler untuk menangani ketika ada event  <code>onMouseEnter={handleMouseEnter}</code>, dan lain sebagainya.</li>
+</ul>
+<p>Selain itu, sebagai alternatif, Kita juga dapat mendefinisikan <em>event handler</em> secara <em>inline</em> dalam JSX secara langsung seperti berikut</p>
+<p class="image-container"><img style="width: 521.50px" src="img\\32a36f3ed4c8ca37.png"></p>
+<h2 is-upgraded><strong>Ingat!</strong></h2>
+<p>Method event handle <strong>HARUS</strong> dioper (ditulis nama fungsinya, tanpa tanda kurung <code>()</code>), bukan dipanggil/<em>call</em> (nama fungsi ditulis dengan tanda kurung <code>()</code>). Contoh:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Fungsi di oper (<strong>benar</strong>)</p>
+</td><td colspan="1" rowspan="1"><p>Fungsi dipanggil/call (<strong>salah</strong>)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>< button onClick={handleClick} ></code></p>
+</td><td colspan="1" rowspan="1"><p><code>< button onClick={handleClick()} ></code></p>
+</td></tr>
+</table>
+<p>Perbedaannya tipis. Pada contoh pertama, fungsi <code>handleClick</code> dioper sebagai event handler <code>onClick</code>. Ini memberitahu React untuk mengingatnya dan hanya memanggil fungsi tersebut ketika pengguna mengeklik tombolnya.</p>
+<p>Pada contoh kedua, tanda () di akhir <code>handleClick()</code> akan menjalankan fungsi tersebut langsung saat<a href="https://id.react.dev/learn/render-and-commit" target="_blank"> proses render</a>, tanpa adanya klik. Ini karena JavaScript di dalam tag<a href="https://id.react.dev/learn/javascript-in-jsx-with-curly-braces" target="_blank"> JSX { dan }</a> dieksekusi secara langsung.</p>
+<p>Silahkan<em> di commit untuk Praktikum 1</em></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Membaca props pada event handler" duration="30">
+        <p>Karena <em>event handler</em> dideklarasikan di dalam komponen, <em>event handler</em> memiliki akses ke <em>props</em> komponen tersebut. Jadi isi dari event handler bisa di definisikan di props. Hal ini mempermudah kita dalam membuat komponen yang isi/kontennya dinamis, menyesuaikan pada layout.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2" duration="0">
+        <p>Kita buat fungsi baru pada component <code>button.tsx</code></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\3ff3465eb3ec81bb.png"></p>
+<h2 is-upgraded><strong>Ingat!</strong></h2>
+<p>Pada component, hanya ada 1 fungsi yang memiliki <code>default</code> !</p>
+<p>Parameter <code>isiPesan</code> dan <code>namaTombol</code> bisa diisi oleh layout yang ada di <code>page.tsx</code> nanti, sehingga komponen <code>Tombol_2</code> bernilai dinamis.</p>
+<p>Sekarang kita modifikasi file <code>page.tsx</code> seperti berikut</p>
+<p class="image-container"><img style="width: 426.63px" src="img\\ac75ae05443dd38d.png"></p>
+<p>Coba cek di browser dan amati apa yang terjadi?</p>
+<p>Jelaskan mengapa bisa seperti itu?</p>
+<p>Silahkan<em> di commit untuk Praktikum 2</em></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Event Propagation" duration="30">
+        <p><em>Event handler</em> akan menangkap <em>event</em> dari <em>child</em> mana pun yang mungkin dimiliki oleh komponen <em>parent</em>. Kita sebut bahwa sebuah event bisa &#34;menggelembung&#34; (<em>bubbles</em>) atau &#34;berpropagasi&#34; ke ata/<em>parent</em>: mulai dari elemen tempat <em>event</em> terjadi, dan bergerak ke atas pada <em>parent element</em>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 3" duration="0">
+        <h2 is-upgraded><strong>Langkah 1 - Propagation</strong></h2>
+<p>Sebagai contoh coba kita modifikasi file <code>button.tsx</code> seperti berikut</p>
+<p class="image-container"><img style="width: 487.26px" src="img\\ea6b56fbd3dfb1ac.png"></p>
+<p>Kemudian kita modifikasi fiile <code>page.tsx </code></p>
+<p class="image-container"><img style="width: 489.50px" src="img\\1001db3fca7aa008.png"></p>
+<p>Kemudian kita jalankan di browser, coba klik <strong><em>Tombol-1</em></strong>, dan amati apa yang terjadi...!!!</p>
+<p>Kita akan disuguhkan dengan pesan/alert sebanyak 2 kali, yaitu Pesan <strong><em>&#34;Child Element : Tombol-1&#34; </em></strong>dan pesan <strong><em>&#34;Parent Element : Div&#34;. </em></strong></p>
+<p>Hal ini terjadi karena baik untuk element <strong>div </strong>maupun <strong>button </strong>memiliki <em>event </em>yang sama yaitu <em>onClick</em>, sehingga ketika button diklik maka <em>event handler </em>untuk <em>onClick </em>pada button akan dijalankan. Kemudian baru <em>event handler </em>dari <em>parent </em>(element div) akan dijalankan.</p>
+<p>Hal ini disebut dengan propagation, dan biasa terjadi pada elemen <em>child </em>dan <em>parent </em>yang memiliki <em>event </em>yang sama.</p>
+<h2 is-upgraded>Menghentikan <strong><em>Propagation</em></strong></h2>
+<p><em>Event handler </em>menerima sebuah <strong>objek event</strong> sebagai satu-satunya argumen/parameter. Berdasarkan konvensi, objek tersebut biasanya ditulis <strong>e</strong> yang merupakan kepanjangan dari <em>&#34;event&#34;</em>. Anda dapat menggunakan objek ini untuk membaca informasi tentang event tersebut.</p>
+<p>Objek event tersebut juga dapat memungkinkan untuk menghentikan propagasi. Jika kita ingin mencegah sebuah event untuk mencapai komponen induknya (<em>propagation</em>), Kita harus memanggil e.stopPropagation() untuk mencegah propagasi.</p>
+<p><strong>Langkah 2 - Stop Propagation</strong></p>
+<p class="image-container"><img style="width: 535.41px" src="img\\9875b5fddd87af92.png"></p>
+<p>Silahkan<em> di commit untuk Praktikum 3</em></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="State" duration="0">
+        <p>Seringkali komponen perlu mengubah tampilan di layar sebagai respons akan terjadinya interaksi dari pengguna. Seperti contoh </p>
+<ul>
+<li>ketika pengguna mengetik di dalam form akan memperbarui kolom masukan (<em>input field</em>), </li>
+<li>Ketika menekan tombol &#34;Selanjutnya&#34; pada slide gambar, maka gambar akan berganti ke gambar berikutnya</li>
+<li>Ketika pengguna menekan tombol &#34;Beli&#34;, maka akan proses menambahkan barang ke dalam keranjang</li>
+<li>dll</li>
+</ul>
+<p>Komponen perlu <em>&#34;mengingat&#34;</em> informasi-informasi yang  telah dilakukan pengguna seperti nilai kolom input, gambar yang dipilih, dan isi keranjang belanja. </p>
+<p>Dalam React, ingatan (<em>memory</em>) yang dimiliki komponen disebut <em>state</em>.</p>
+<h3 is-upgraded><strong>Praktikum 4</strong></h3>
+<p><strong>Langkah 1</strong></p>
+<p>Kita buat file data dummy untuk mencoba state pada <code>src/data/article.js</code> yang berisi seperti berikut</p>
+<pre><code>export const sculptureList = [{
+    name: &#39;Homenaje a la Neurocirugía&#39;,
+    artist: &#39;Marta Colvin Andrade&#39;,
+    description: &#39;Although Colvin is predominantly known for abstract themes that allude to pre-Hispanic symbols, this gigantic sculpture, an homage to neurosurgery, is one of her most recognizable public art pieces.&#39;,
+    url: &#39;https://i.imgur.com/Mx7dA2Y.jpg&#39;,
+    alt: &#39;A bronze statue of two crossed hands delicately holding a human brain in their fingertips.&#39;  
+  }, {
+    name: &#39;Floralis Genérica&#39;,
+    artist: &#39;Eduardo Catalano&#39;,
+    description: &#39;This enormous (75 ft. or 23m) silver flower is located in Buenos Aires. It is designed to move, closing its petals in the evening or when strong winds blow and opening them in the morning.&#39;,
+    url: &#39;https://i.imgur.com/ZF6s192m.jpg&#39;,
+    alt: &#39;A gigantic metallic flower sculpture with reflective mirror-like petals and strong stamens.&#39;
+  }, {
+    name: &#39;Eternal Presence&#39;,
+    artist: &#39;John Woodrow Wilson&#39;,
+    description: &#39;Wilson was known for his preoccupation with equality, social justice, as well as the essential and spiritual qualities of humankind. This massive (7ft. or 2,13m) bronze represents what he described as &#34;a symbolic Black presence infused with a sense of universal humanity.&#34;&#39;,
+    url: &#39;https://i.imgur.com/aTtVpES.jpg&#39;,
+    alt: &#39;The sculpture depicting a human head seems ever-present and solemn. It radiates calm and serenity.&#39;
+  }, {
+    name: &#39;Moai&#39;,
+    artist: &#39;Unknown Artist&#39;,
+    description: &#39;Located on the Easter Island, there are 1,000 moai, or extant monumental statues, created by the early Rapa Nui people, which some believe represented deified ancestors.&#39;,
+    url: &#39;https://i.imgur.com/RCwLEoQm.jpg&#39;,
+    alt: &#39;Three monumental stone busts with the heads that are disproportionately large with somber faces.&#39;
+  }, {
+    name: &#39;Blue Nana&#39;,
+    artist: &#39;Niki de Saint Phalle&#39;,
+    description: &#39;The Nanas are triumphant creatures, symbols of femininity and maternity. Initially, Saint Phalle used fabric and found objects for the Nanas, and later on introduced polyester to achieve a more vibrant effect.&#39;,
+    url: &#39;https://i.imgur.com/Sd1AgUOm.jpg&#39;,
+    alt: &#39;A large mosaic sculpture of a whimsical dancing female figure in a colorful costume emanating joy.&#39;
+  }];</code></pre>
+<p>Kemudian kita coba buat komponen baru di <code>src/component/gallery.tsx</code></p>
+<p class="image-container"><img style="width: 554.78px" src="img\\dfa6b8a9b1711b7.png"></p>
+<p>Kita panggil komponen tersebut pada <code>page.tsx</code></p>
+<p class="image-container"><img style="width: 556.50px" src="img\\48f856ceaef136d3.png"></p>
+<p>Sekarang coba di browser dan klik tombol &#34;Artikel Selanjutnya&#34; dan perhatikan apa yang terjadi...!!!</p>
+<p>Ya, tidak terjadi apa-apa 😀</p>
+<p><em>Event handler </em>handleClick memperbarui nilai variabel index. Namun dua hal mencegah pembaruan tersebut ditampilkan ke pengguna:</p>
+<ol type="1" start="1">
+<li><strong>Variabel lokal tidak dipertahankan antar-</strong><strong><em>render</em></strong><strong>.</strong> Saat React me-<em>render </em>komponen ini untuk kedua kalinya, react membuat ulang dari awal, sehingga index tetap bernilai 0 dan react tidak memperhatikan adanya perubahan ke variabel index tersebut.</li>
+<li><strong>Perubahan terhadap variabel lokal tidak memicu </strong><strong><em>render</em></strong><strong>.</strong> React tidak menyadari kalau dia perlu melakukan <em>render </em>ulang dengan data yang baru.</li>
+</ol>
+<p>Untuk memperbarui komponen dengan data baru, dua hal perlu terjadi:</p>
+<ol type="1" start="1">
+<li><strong>Mempertahankan</strong> data antar-<em>render</em>.</li>
+<li><strong>Memicu</strong> React untuk merender ulang komponennya dengan data baru.</li>
+</ol>
+<p>Dua hal tersebut bisa dicapai dengan Hook<a href="https://id.react.dev/reference/react/useState" target="_blank">useState</a>:</p>
+<ol type="1" start="1">
+<li>Sebuah <strong>variabel state</strong> untuk mempertahankan data antar-<em>render</em>.</li>
+<li>Sebuah <strong>fungsi </strong><strong><em>state</em></strong><strong> setter</strong> untuk memperbarui variabel dan memicu React untuk merender ulang komponen.</li>
+</ol>
+<h2 is-upgraded>Menambahkan variabel <strong><em>state</em></strong></h2>
+<p><strong>Langkah 2</strong></p>
+<p>Untuk menambahkan variabel state, impor useState dari React di paling atas <em>file </em><code>src/components/gallery.tsx</code></p>
+<pre><code> import { useState } from &#39;react&#39;;</code></pre>
+<p>Lalu, ubah baris berikut:</p>
+<p><code>let index = 0;</code></p>
+<p>menjadi</p>
+<p><code>  const [index, setIndex] = useState(0);</code></p>
+<p>index merupakan variabel <em>state</em> dan setIndex adalah fungsi setter.</p>
+<p>Ubah fungsi dalam handleClick menjadi seperti ini</p>
+<p><code>  function handleClick() {</code></p>
+<p><code>    setIndex(index + 1);  // counter index + 1, utk melihat data selanjutnya</code></p>
+<p><code>  }</code></p>
+<p>Maka kode pada <code>gallery.tsx</code> seperti berikut</p>
+<p class="image-container"><img style="width: 528.50px" src="img\\b067e697cae8ab7c.png"></p>
+<p>Jalankan pada browser dan amati apa yang terjadi.</p>
+<p>Silahkan<em> di commit untuk Praktikum 4</em></p>
+<h2 is-upgraded><strong>Mengelola State</strong></h2>
+<p>Seiring berkembangnya aplikasi kita, penting untuk memperhatikan bagaimana <em>state</em> diatur dan memperhatikan bagaimana data mengalir diantara komponen-komponen yang ada. <em>State</em> yang redundan atau duplikat adalah sumber dari <em>bug</em> di kemudian hari. Dalam bab ini, Kita akan belajar bagaimana menata <em>state</em> dengan baik, bagaimana menjaga logika pembaruan <em>state</em> agar mudah dikelola, dan bagaimana dapat berbagi <em>state</em> dengan komponen yang lain.</p>
+<p>Dalam React, kita tidak perlu mengubah kode secara langsung untuk mengubah <em>user interface</em> (UI). Misalnya, tombol <em>submit </em>tidak akan muncul/dinonaktifkan sebelum pengguna menginputkan form secara lengkap.</p>
+<p>Berikut contoh form yang dibangun menggunakan React. Perhatikan bagaimana ia menggunakan variabel <em>state </em>status untuk menentukan apakah tombol kirim diaktifkan atau dinonaktifkan, dan apakah pesan sukses ditampilkan sebagai gantinya.</p>
+<h3 is-upgraded><strong>Praktikum 5</strong></h3>
+<p><strong>Langkah 1</strong></p>
+<p>Kita buat komponen baru <code>src/components/form.tsx</code></p>
+<p class="image-container"><img style="width: 526.74px" src="img\\9a417fd9e4179bf1.png"></p>
+<p class="image-container"><img style="width: 521.50px" src="img\\fe775a8fd6e35226.png"></p>
+<p>Kemudian kita tambahkan kode pada file <code>page.tsx</code> </p>
+<p class="image-container"><img style="width: 474.60px" src="img\\da3d29d1fc3b2948.png"></p>
+<p>Jalankan pada browser, amati dan laporkan apa yang terjadi..!!</p>
+<h2 is-upgraded><strong>Memilih struktur state</strong></h2>
+<p>Mengatur struktur <em>state</em> dengan baik dapat membuat perbedaan antara komponen yang mudah dimodifikasi dan di-<em>debug</em>, dan komponen yang selalu menjadi sumber <em>error</em>. Perlu dicatat bahwa <strong><em>state </em></strong></p>
+<p><strong>tidak boleh </strong>mengandung informasi yang tidak perlu atau duplikat. Karena jika ada <em>state</em> yang tidak perlu, mudah untuk lupa memperbarui <em>state</em> tersebut, yang akhirnya memperkenalkan masalah baru!</p>
+<p>Misalnya, formulir ini memiliki variabel <em>state </em>fullName yang <strong>redundan</strong>:</p>
+<p><strong>Langkah 2</strong></p>
+<p>Kita tambahkan kode berikut pada <code>src/component/form.tsx</code></p>
+<p class="image-container"><img style="width: 503.89px" src="img\\19f4534113172050.png"></p>
+<p>Kemudian tambahkan ke <code>page.tsx</code></p>
+<p class="image-container"><img style="width: 206.50px" src="img\\5b108b4744353e01.png"></p>
+<p>Jalankan pada browser dan amati...!!!</p>
+<p>Kita tahu bahwa state fullName hanya merupakan gabungan string dari state firstName dan lastName. Hal ini membuat state redundan, dan bisa membuat kesalahan/bug pada aplikasi react/nextjs. Untuk itu, state fullName bisa dihapus dan digantikan variable biasa.</p>
+<p>Coba perhatikan dan implementasikan kode berikut pada <code>src/component/form.tsx</code></p>
+<p class="image-container"><img style="width: 378.50px" src="img\\72ae2fba37cf3d51.png"></p>
+<p>Jalankan pada browser dan amati apa yang terjadi.</p>
+<p>Silahkan<em> di commit untuk Praktikum 5</em></p>
+<h2 is-upgraded><strong>Berbagi state antar komponen</strong></h2>
+<p>Terkadang, kita ingin <em>state</em> dari dua komponen yang berbeda selalu berubah bersama. Untuk melakukannya, hapus <em>state</em> dari keduanya, pindahkan <em>state</em> tersebut ke bagian induk (<em>parent</em>) yang paling berdekatan, dan kemudian teruskan ke kedua komponen melalui <em>props</em>. Hal ini dikenal sebagai &#34;<em>lifting state up</em>&#34;, dan ini adalah salah satu hal lumrah saat menulis kode React.</p>
+<p>Pada contoh ini, dalam satu waktu hanya akan ada satu panel yang aktif. Untuk mencapainya, daripada menyimpan <em>state</em> aktif di setiap panel secara individu, komponen induk menyimpan <em>state</em> dan menentukan <em>props</em> untuk anak-anaknya.</p>
+<h3 is-upgraded><strong>Praktikum 6</strong></h3>
+<p><strong>Langkah 1</strong></p>
+<p>Kita buat file komponen pada <code>src/components/accordion.tsx</code></p>
+<p class="image-container"><img style="width: 580.96px" src="img\\4af4a764e5d02cc0.png"></p>
+<p>Lalu kita tambahkan component <code>Accordion</code> ke file <code>page.tsx</code></p>
+<p>Amati dan laporkan apa yang terjadi...!!!</p>
+<h2 is-upgraded><strong>Mempertahankan dan mengatur ulang state</strong></h2>
+<p>Saat kita me-<em>render</em> ulang sebuah komponen, React perlu memutuskan bagian pohon mana yang dipertahankan (dan diperbarui), serta bagian mana yang harus dibuang atau direset seperti awal/semula. Pada kebanyakan kasus, perilaku otomatis React ini sudah cukup baik. Secara <em>default</em>, React akan mempertahankan bagian-bagian pohon yang &#34;cocok&#34; dengan struktur pohon yang sebelumnya telah di-<em>render</em>.</p>
+<p>Namun, ada kalanya hal ini bukan yang kita harapkan. Seperti contoh aplikasi pada chat berikut, dimana ketika kita mengetik pesan ke si-A dan kemudian berpindah chat ke si-B, dan ternyata pesan yang ditulis tidak sesuai. Hal ini bisa membuat pengguna secara tidak sengaja mengirim pesan ke orang yang salah. </p>
+<p><strong>Tahap 2</strong></p>
+<p>Kita buat file di <code>src/components/chat.tsx</code></p>
+<p class="image-container"><img style="width: 463.88px" src="img\\b429d60eb7e06231.png"></p>
+<p class="image-container"><img style="width: 463.83px" src="img\\90443305b73f5f3.png"></p>
+<p>React memungkinkan Anda untuk mengesampingkan perilaku <em>default</em>, dan <em>memaksa</em> sebuah komponen untuk mengatur ulang statusnya (<em>state</em>) dengan memberikan key yang berbeda, seperti &lt;Chat key={email} /&gt;. Hal ini memberitahu <em>React </em>bahwa jika penerima berbeda, itu harus dianggap sebagai komponen Chat yang <em>berbeda</em> yang perlu dibuat kembali dari awal dengan data (dan UI seperti input) yang baru. Sekarang, beralih antara penerima mengatur ulang input - meskipun Anda me-<em>render</em> komponen yang sama.</p>
+<p>Perhatikan fungsi <code>Messenger</code>, dan ubah baris kode ini</p>
+<p><code><Chat</code> <code>contact={to}</code> <code>/></code>  </p>
+<p>Menjadi</p>
+<p><code><Chat</code> <code>key={to.email}</code> <code>contact={to}</code> <code>/></code>  </p>
+<p>Coba jalankan kembali pada browser, amati dan laporkan perbedaannya</p>
+<p>Silahkan<em> di commit untuk Praktikum 6</em></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

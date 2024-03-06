@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-03-06T00:01:44Z",
+  "id": "04-event-state",
+  "duration": 105,
+  "title": "#04 | Event dan State",
+  "authors": "Tim Pengajar PBF",
+  "summary": "Pada codelab ini, Anda akan belajar tentang event dan state di ReactJS.",
+  "source": "1KJ-1qeuMwNmKZXFbxQQ-N0yqM-eHGg-7lw9IM64dIFc",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "04-event-state"
+}

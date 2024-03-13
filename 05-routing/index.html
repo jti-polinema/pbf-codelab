@@ -1,0 +1,260 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#05 | Routing</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="05-routing"
+                  title="#05 | Routing"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p class="image-container"><img style="width: 624.00px" src="img\\fe8f87e2d35a6fa1.png"></p>
+<p><strong>Terakhir diperbarui:</strong> 2024-03-13</p>
+<h2 is-upgraded><strong>Routing</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang pembuatan routing dan navigasi untuk berpindah halaman menggunakan App Router di NextJs.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li>Codelab sebelumnya dari #01sampai #04</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Routing sederhana</li>
+<li>Nested Routing</li>
+<li>Dynamic Routing</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Routing di ReactJS dengan NextJS" duration="50">
+        <p>Di React, anda dapat membuat Single Page Application (SPA) dengan memanfaatkan konsep routing. Routing di React dengan NextJS memanfaatkan susunan filesystem secara hierarkikal dalam folder app (App Router) untuk versi sebelumnya NextJS menggunakan folder pages (Page Router).</p>
+<p>Singkatnya, Anda dapat membuat menu atau tautan di halaman web yang ketika diklik dapat memuat konten tanpa reload atau refresh halaman web. Jadi, seakan-akan kita berada di satu halaman web yang sama, karena itu disebut aplikasi satu halaman (Single Page Application / SPA). Untuk memahaminya lebih lanjut, silakan lakukan praktikum berikut ini.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Membuat routing sederhana" duration="50">
+        <p>Pada praktikum ini, Anda akan membuat 3 halaman yang di-handle oleh router, yaitu halaman <code>home,</code>, halaman <code>about</code>, dan halaman <code>profile</code>. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<ol type="1" start="1">
+<li>Persiapkan project dengan memanfaatkan template repository yang telah dipersiapkan di alamat <a href="https://github.com/dhanifudin/routing-demo" target="_blank">https://github.com/dhanifudin/routing-demo</a> dan gunakan tombol <strong>Use this template </strong>kemudian pilih <strong>Create a new repository</strong>.</li>
+<li>Clone project ke lokal laptop anda dan lakukan instalasi dependencies dengan menjalankan perintah berikut.</li>
+</ol>
+<pre><code>npm install</code></pre>
+<ol type="1" start="3">
+<li>Silahkan buka project tersebut dengan menggunakan VSCode dan perhatikan file yang ada dalam folder app.</li>
+<li>Routing di ReactJS dengan NextJS memanfaatkan organisasi penamaan folder dan file pada folder app. Silahkan tambahkan file page.tsx di dalam folder app, dan buatlah komponen dengan kode berikut.</li>
+</ol>
+<pre><code>export default function Home() {
+  return &lt;h1&gt;Welcome to Home&lt;/h1&gt; ;
+}</code></pre>
+<ol type="1" start="5">
+<li>Jalankan project dengan menggunakan perintah npm run dev di terminal VSCode. Dan silahkan buka browser pada alamat url <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
+<li>Perhatikan pada project di VSCode, akan terdapat sebuah file yang akan digenerate yaitu layout.tsx. File ini akan secara otomatis digenerate jika tidak ditemukan. Perhatikan susunan kode yang ada di dalamnya. Anda akan menemukan susunan html yang di dalamnya terdapat props children. Props children akan direplace oleh komponen sesuai dengan routing.</li>
+<li>Untuk membuat halaman routing /about dengan NextJS, silahkan buat folder /about dalam /app dan buat file dengan nama page.tsx. Kemudian buat function komponen seperti pada kode berikut.</li>
+<li>Lakukan commit ke project setelah menyelesaikan semua Praktikum 1. Jangan lupa untuk mendokumentasikan dengan tangkapan layar dan menyimpan di folder /images di project anda.</li>
+</ol>
+<pre><code>export default function About() {
+  return &lt;h1&gt;Welcome to About&lt;/h1&gt; ;
+}</code></pre>
+<aside class="special"><p><strong>Todo:</strong> Buatlah halaman /profile yang menampilkan isi biodata anda dengan menggunakan routing di NextJS.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Membuat routing bersarang (Nested Routing)" duration="50">
+        <p>Anda dapat membuat routing bersarang, maksudnya ketika suatu link diklik di dalam link tersebut terdapat daftar link atau menu yang dapat diklik juga. Jadi, dalam praktikum ini akan dibuat susunan URL atau link seperti berikut:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Link utama</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Link bersarang</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>/</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>/about</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>/blogs</p>
+</td><td colspan="1" rowspan="1"><p>/blogs/first</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>/blogs</p>
+</td><td colspan="1" rowspan="1"><p>/blogs/second</p>
+</td></tr>
+</table>
+<p>Untuk memahaminya, silakan lakukan langkah-langkah praktikum berikut ini:</p>
+<ol type="1" start="1">
+<li>Dengan menggunakan konsep yang sama pada Praktikum 1, silahkan tambahkan susunan folder /blogs/first dan /blogs/second. Kemudian tambahkan masing-masing untuk setiap folder dengan file page.tsx.</li>
+<li>Pada file /blogs/page.tsx buatlah function component seperti kode berikut atau anda dapat mengkreasikan tampilan dengan selera anda!</li>
+</ol>
+<pre><code>export default function Blog() {
+  return (
+        &lt;h1&gt;Blog&lt;/h1&gt;
+  );
+}</code></pre>
+<ol type="1" start="3">
+<li>Pada file /blogs/first/page.tsx buatlah function component seperti berikut:</li>
+</ol>
+<pre><code>export default function FirstBlog() {
+  return (
+        &lt;h1&gt;First Blog&lt;/h1&gt;
+  );
+}</code></pre>
+<ol type="1" start="4">
+<li>Cobalah akses halaman /blogs dan /blogs/first pada browser anda.</li>
+</ol>
+<aside class="special"><p><strong>Todo:</strong> Lengkapi function component pada /blogs/second/page.tsx</p>
+</aside>
+<ol type="1" start="5">
+<li>Lakukan commit ke project setelah melengkapi semua Praktikum 2 dan dokumentasikan hasil pengerjaan praktikum dengan tangkapan layar.</li>
+</ol>
+<aside class="warning"><p><strong>Pertanyaan:</strong> Apa kekurangan yang mungkin terjadi jika menggunakan pendekatan pada Praktikum 2 untuk menangani routing?</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 3: Membuat routing dinamis (Dynamic Routing)" duration="50">
+        <p>Anda dapat membuat routing secara dinamis, maksudnya ketika suatu link diakses akan ditambahkan dengan suatu url path yang nilainya dapat berubah secara dinamis. Jadi, dalam praktikum ini akan dibuat susunan URL atau link seperti berikut:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Link utama</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Link dinamis</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>/products</p>
+</td><td colspan="1" rowspan="1"><p>/products/1</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>/products</p>
+</td><td colspan="1" rowspan="1"><p>/products/2</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>/products</p>
+</td><td colspan="1" rowspan="1"><p>/products/3</p>
+</td></tr>
+</table>
+<p>Untuk memahaminya, silakan lakukan langkah-langkah praktikum berikut ini:</p>
+<ol type="1" start="1">
+<li>Buatlah file /products/page.tsx yang berisi function component untuk menampilkan list dari products seperti kode berikut.</li>
+</ol>
+<pre><code>export default function ProductList() {
+  return (
+        &lt;div&gt;
+          &lt;h1&gt;Product List&lt;/h1&gt;
+          &lt;h2&gt;Product 1&lt;/h2&gt;
+          &lt;h2&gt;Product 2&lt;/h2&gt;
+          &lt;h2&gt;Product 3&lt;/h2&gt;
+        &lt;/div&gt;
+  );
+}</code></pre>
+<ol type="1" start="2">
+<li>Untuk mendefinisikan url path di NextJs menggunakan konvensi penamaan direktori dengan mengapit nama path dengan simbol [ ]. Sebagai contoh: [productId] menandakan bahwa path dinamis menggunakan variabel productId (Catatan: Anda boleh menuliskan hanya dengan [id], tetapi untuk mempermudah pembacaan konteks sebaiknya jangan gunakan hanya id).</li>
+<li>Kemudian buatlah file page.tsx pada lokasi /app/products/[productId] dan tambahkan kode sebagai berikut.</li>
+</ol>
+<pre><code>type Props = {
+  params: {
+        productId: string
+  }
+}
+
+export default function ProductDetails({ params }: Props) {
+  return (
+        &lt;h1&gt;Details about product {params.productId}&lt;/h1&gt;
+  )
+}</code></pre>
+<ol type="1" start="4">
+<li>Untuk mendapatkan nilai path, anda dapat menggunakan pemanggilan params.productId. Pemanggilan atribut params, disesuaikan dengan pendefinisian nama path.</li>
+<li>Cobalah akses halaman /products dan /products/1 pada browser anda. Ubah nilai productId dengan nilai lainnya.</li>
+</ol>
+<aside class="special"><p><strong>Todo 1:</strong> Perbaiki implementasi Praktikum 2 menggunakan Dynamic Routes</p>
+</aside>
+<aside class="special"><p><strong>Todo 2:</strong> Dengan menggunakan konsep Nested Routes dan Dynamic Routes, buatlah halaman dengan routing /products/[productId]/reviews/[reviewId]</p>
+</aside>
+<ol type="1" start="6">
+<li>Lakukan commit ke project setelah melengkapi semua Praktikum 3 dan dokumentasikan hasil pengerjaan praktikum dengan tangkapan layar.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 4: Navigasi dengan Link Component" duration="50">
+        <p>Pada Praktikum sebelumnya Anda telah berhasil membuat routing, tetapi belum dapat menampilkan link navigasi di dalam Project. Untuk melakukan navigasi, anda dapat menggunakan Link komponen yang disediakan oleh library NextJs.</p>
+<p>Untuk memahaminya, silakan lakukan langkah-langkah praktikum berikut ini:</p>
+<ol type="1" start="1">
+<li>Pada file /app/page.tsx tambahkan import Link komponen seperti kode berikut.</li>
+</ol>
+<pre><code>import Link from &#34;next/link&#34;;</code></pre>
+<ol type="1" start="2">
+<li>Tambahkan penggunaan Link komponen untuk mengakses halaman /profile dan /about</li>
+</ol>
+<pre><code>export default function Home() {
+  return (
+        &lt;div&gt;
+          &lt;h1&gt;Welcome to Home&lt;/h1&gt;
+          &lt;Link href=&#39;/profile&#39;&gt;Profile&lt;/Link&gt;
+          &lt;Link href=&#39;/about&#39;&gt;About&lt;/Link&gt;
+        &lt;/div&gt;
+  );
+}</code></pre>
+<ol type="1" start="3">
+<li>Coba buka browser anda dan cobalah untuk bernavigasi menggunakan Link komponen.</li>
+</ol>
+<aside class="special"><p><strong>Todo:</strong> Tambahkan link yang sebelumnya anda telah kerjakan!</p>
+</aside>
+<ol type="1" start="4">
+<li>Lakukan commit ke project setelah melengkapi semua Praktikum 4 dan dokumentasikan hasil pengerjaan praktikum dengan tangkapan layar.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapat ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://reactjs.org/community/courses.html" target="_blank">Free Courses and Paid Courses</a></li>
+<li><a href="https://reactfordesigners.com/" target="_blank">React for Designers</a></li>
+<li><a href="https://www.robinwieruch.de/javascript-fundamentals-react-requirements" target="_blank">JavaScript fundamentals before learning React</a></li>
+<li><a href="https://www.taniarascia.com/getting-started-with-react/" target="_blank">React Tutorial: An Overview and Walkthrough</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

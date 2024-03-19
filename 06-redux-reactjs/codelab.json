@@ -3,11 +3,11 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2024-02-18T15:06:03Z",
+  "updated": "2024-03-19T22:10:54Z",
   "id": "06-redux-reactjs",
-  "duration": 130,
+  "duration": 260,
   "title": "#06 | React Redux",
-  "authors": "Habibie Ed Dien",
+  "authors": "Tim Pengajar PBF 2024",
   "summary": "Pada codelab ini, Anda akan belajar tentang penggunaan library Redux di ReactJS.",
   "source": "1TZy_FkQNW1zRDVfkdK8orlMlsv-_HHaphoQta8xXFqE",
   "theme": "web",
@@ -18,10 +18,6 @@
     "web"
   ],
   "tags": [
-    "api",
-    "pemrograman-berbasis-framework",
-    "react-redux",
-    "reactjs",
     "web"
   ],
   "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",

@@ -28,7 +28,8 @@
                   feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
     
       <google-codelab-step label="Pengantar" duration="0">
-        <p><strong>Terakhir diperbarui:</strong> 2024-03-26</p>
+        <p class="image-container"><img style="width: 366.50px" src="img\\564a63242a21010d.png"></p>
+<p><strong>Terakhir diperbarui:</strong> 2024-03-26</p>
 <p><strong>Penulis</strong>: Tim PBF 2024</p>
 <h2 is-upgraded><strong>Context di ReactJS dengan Next.js</strong></h2>
 <p>Pada codelab ini Anda akan mempelajari tentang penggunaan Context di ReactJS dengan Next.js.</p>
@@ -190,20 +191,106 @@ export default function MainPage() {
 <p>Jika terjadi error, silakan perbaiki, Mengapa hal itu bisa terjadi? Jelaskan!</p>
 <p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W07: Jawaban soal 2"</code>.</p>
 </aside>
+<h2 is-upgraded><strong>Langkah 6: Menggunakan dan menyediakan context dari komponen yang sama</strong></h2>
+<p>Saat ini, Anda masih harus menentukan setiap <code>level section</code> secara manual, karena context memungkinan Anda membaca informasi dari komponen di atasnya, setiap <code>Section</code> dapat membaca <code>level</code> dari <code>Section</code> di atasnya, dan mengoper <code>level + 1</code> ke bawah secara otomatis. Berikut adalah bagaimana Anda dapat melakukannya dengan mengubah sedikit kode pada komponen <code>Section</code>:</p>
+<p class="image-container"><img style="width: 560.00px" src="img\\9c91cd3ab699dd66.png"></p>
+<p>Dengan perubahan ini, Anda tidak perlu mengoper prop level baik ke <code>< Section ></code> atau ke <code>< Heading ></code>:</p>
+<p class="image-container"><img style="width: 496.00px" src="img\\5be29331bb3ce6a4.png"></p>
+<p class="image-container"><img style="width: 564.00px" src="img\\81384a9eed438f41.png"></p>
+<p>Sekarang keduanya <code>Heading</code> dan <code>Section</code> membaca <code>LevelContext</code> untuk mencari tahu seberapa &#34;dalam&#34; mereka. Dan <code>Section</code> membungkus anaknya ke dalam <code>LevelContext</code> untuk menentukan bahwa apa pun yang ada di dalamnya berada pada <em>level</em> yang &#34;lebih dalam&#34;.</p>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Pada praktikum ini menggunakan <strong>heading levels</strong> karena mereka menunjukkan secara visual bagaimana komponen bersarang dapat menimpa context. Tapi context juga berguna untuk banyak kasus penggunaan lainnya. Anda dapat mengoper ke bawah informasi apa pun yang dibutuhkan oleh seluruh sub-pohon (tree): tema warna saat ini, pengguna yang sedang masuk, dan seterusnya.</p>
+</aside>
+<aside class="warning"><h3 is-upgraded><strong>Soal 3</strong></h3>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W07: Jawaban soal 3"</code>.</p>
+</aside>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Praktikum 2: Membuat Tema Aplikasi Sederhana" duration="50">
-        <p>Pada praktikum ini, kita akan membuat aplikasi sederhana yang dapat mengubah.. </p>
+      <google-codelab-step label="Praktikum 2: Membuat Context melewati komponen perantara" duration="50">
+        <p>Anda dapat menyisipkan sebanyak mungkin komponen di antara komponen yang menyediakan context dan komponen yang menggunakannya. Ini termasuk komponen bawaan seperti <code>< div ></code> dan komponen yang mungkin Anda buat sendiri.</p>
+<p>Di praktikum berikut, komponen <code>Post</code> yang sama (dengan batas putus-putus) diberikan pada dua tingkat sarang yang berbeda. Perhatikan bahwa <code>< Heading ></code> di dalamnya mendapatkan level-nya secara otomatis dari <code>< Section ></code> terdekat.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\5263824106a60bb3.png"></p>
+<p>Anda tidak perlu melakukan sesuatu yang khusus untuk praktikum ini. <code>Section</code> menentukan <code>context</code> untuk pohon (<em>tree</em>) di dalamnya, jadi Anda dapat menyisipkan <code>< Heading ></code> di mana saja, dan akan memiliki ukuran yang benar.</p>
+<h2 is-upgraded><strong>Langkah 1: Buat komponen atom baru</strong></h2>
+<p>Buatlah file baru di <code>src\components\atoms\section2.tsx</code> berisi kode sebagai berikut.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\a77108398fd91fb6.png"></p>
+<p>Lalu buatlah file baru di <code>src\components\atoms\post.tsx</code> dengan kode berikut.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\2441553fa3fca339.png"></p>
+<p>Selanjutnya kita buat molecules di <code>src\components\molecules\recentpost.tsx</code> dengan kode berikut.</p>
+<p class="image-container"><img style="width: 464.00px" src="img\\63b4daf40beb68b7.png"></p>
+<p>Kemudian buat organisms di <code>src\components\organisms\allpost.tsx</code> dengan kode berikut.</p>
+<p class="image-container"><img style="width: 433.00px" src="img\\25793bba2357357.png"></p>
+<p>Terakhir kita buat templates di <code>src\components\templates\profile_page.tsx</code> dengan kode berikut.</p>
+<p class="image-container"><img style="width: 455.00px" src="img\\3548fbc30a50e0a1.png"></p>
+<h2 is-upgraded>Langkah 2: Tambahkan <code>ProfilePage </code>ke <code>page.tsx</code><strong> lalu run</strong></h2>
+<p>Tambahkan komponen <code>ProfilePage</code> seperti kode berikut.</p>
+<p class="image-container"><img style="width: 487.00px" src="img\\112ed1fb84e04cd6.png"></p>
+<p>Hapus bagian <code>theme</code> pada file <code>tailwind.config.ts</code> seperti kode berikut.</p>
+<p class="image-container"><img style="width: 413.00px" src="img\\6c3c495903c9a805.png"></p>
+<p>Hapus semua style CSS di file <code>src\app\globals.css</code> lalu ganti dengan kode berikut.</p>
+<p class="image-container"><img style="width: 204.00px" src="img\\842ba34393b6b2d9.png"></p>
+<p>Ketika Anda run dengan <code>npm run dev</code> maka di browser akan tampil seperti berikut.</p>
+<p class="image-container"><img style="width: 485.00px" src="img\\126d2757390e3900.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 4</strong></h3>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Tambahkan teks Nama dan NIM pada bagian komponen <code>Post</code> agar menunjukkan itu hasil kerja Anda!</p>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W07: Jawaban soal 4"</code>.</p>
+</aside>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Selamat" duration="0">
+      <google-codelab-step label="Kesimpulan" duration="50">
+        <p><strong><em>Context </em></strong></p>
+<p><strong>memungkinkan Anda untuk menulis komponen yang &#34;beradaptasi dengan sekitar mereka&#34; dan menampilkan diri mereka secara berbeda tergantung di mana (atau, dalam kata lain, dalam </strong></p>
+<p><strong><em>context </em></strong></p>
+<p><strong>apa) mereka akan diberikan.</strong></p>
+<p>Cara kerja context mungkin mengingatkan Anda pada <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance" target="_blank">pewarisan properti CSS</a>. Pada CSS, Anda dapat menentukan <code>color: blue</code> untuk <code>< div ></code>, dan simpul DOM apa pun di dalamnya, tidak peduli seberapa dalam, akan mewarisi warna tersebut kecuali ada simpul DOM lain di tengahnya yang menimpanya dengan <code>color: green</code>. Demikian pula, dalam React, satu-satunya cara untuk menimpa beberapa context yang berasal dari atas adalah dengan membungkus anaknya ke dalam penyedia context dengan nilai yang berbeda.</p>
+<p>Pada CSS, properti berbeda seperti <code>color</code> dan <code>background-color</code> tidak akan menimpa satu sama lain. Anda dapat mengatur semua <code>color < div ></code>  ke merah tanpa berdampak pada <code>background-color</code>. Demikian pula, <strong>React contexts yang berbeda tidak akan menimpa satu sama lain</strong>. Tiap context yang Anda buat dengan <code>createContext()</code> benar-benar terpisah dari yang lain, dan menyatukan komponen-komponen yang menggunakan dan menyediakan context tertentu. Satu komponen dapat menggunakan atau menyediakan banyak <em>context</em> yang berbeda tanpa masalah.</p>
+<h2 is-upgraded><strong>Pertimbangkan sebelum Anda menggunakan Context</strong></h2>
+<p>Context sangat menggoda untuk digunakan. Namun, ini juga terlalu mudah untuk menggunakannya secara berlebihan. <strong>Hanya karena Anda membutuhkan untuk mengoper beberapa props beberapa tingkat lebih dalam bukan berarti Anda memasukkan informasi tersebut ke dalam context</strong>.</p>
+<p>Ini adalah beberapa alternatif yang harus Anda pertimbangkan sebelum menggunakan context:</p>
+<ol type="1" start="1">
+<li><strong>Mulai dengan </strong><a href="https://id.react.dev/learn/passing-props-to-a-component" target="_blank">mengoper props</a>. Jika komponen Anda tidak sepele, bukan hal yang aneh jika Anda mengoper selusin props melalui selusin komponen. Ini mungkin terasa seperti pekerjaan berat, tapi membuatnya sangat jelas komponen yang mana menggunakan data yang mana! Orang yang mengelola kode Anda akan senang Anda telah membuat aliran data eksplisit dengan props.</li>
+<li><strong>Ekstrak komponen dan </strong><a href="https://id.react.dev/learn/passing-props-to-a-component#passing-jsx-as-children" target="_blank">oper JSX sebagai children</a>. Jika Anda mengoper beberapa data melewati banyak lapisan komponen perantara yang tidak menggunakan data tersebut (dan hanya mengopernya lebih jauh ke bawah), ini sering kali Anda lupa mengekstrak beberapa komponen di sepanjang jalan. Contohnya, mungkin Anda mengoper data props seperti <code>posts</code> ke komponen visual yang tidak menggunakannya secara langsung, seperti <code>< Layout posts={posts} / ></code>. Sebagai gantinya, buat <code>Layout</code> mengambil <code>children</code> sebagai prop, dan berikan <code>< Layout > < Posts posts={posts} / >< / Layout ></code>. Hal ini mengurangi jumlah lapisan antara komponen yang menentukan data dan komponen yang membutuhkannya.</li>
+</ol>
+<p>Jika tidak satu pun dari pendekatan ini yang cocok untuk Anda, pertimbangkan dalam menggunakan <code>context</code>.</p>
+<h2 is-upgraded><strong>Kapan menggunakan context yang cocok?</strong></h2>
+<ul>
+<li><strong>Tema</strong>: Jika aplikasi Anda memungkinkan pengguna mengganti penampilannya (misalnya mode gelap), Anda dapat menempatkan penyedia context di paling atas aplikasi Anda, dan menggunakan konteksnya di komponen yang membutuhkan untuk menyesuaikan tampilan visual mereka.</li>
+<li><strong>Akun saat ini</strong>: Banyak komponen yang mungkin perlu mengetahui pengguna yang sedang masuk. Menempatkannya dalam konteks akan memudahkan untuk membacanya di mana saja di dalam pohon (tree). Beberapa aplikasi memungkinkan Anda mengoperasikan beberapa akun pada saat yang sama (misalnya untuk memberikan komentar sebagai pengguna yang berbeda). Dalam kasus tersebut, akan lebih mudah untuk membungkus bagian dari UI ke dalam penyedia bersarang dengan nilai akun saat ini yang berbeda.</li>
+<li><strong>Routing</strong>: Sebagian besar solusi routing menggunakan context secara internal untuk menyimpan rute saat ini. Dengan cara inilah setiap link &#34;mengetahui&#34; apakah ia aktif atau tidak. Jika Anda membuat router anda sendiri, Anda mungkin ingin melakukannya juga.</li>
+<li><strong>Mengelola state</strong>: Seiring pertumbuhan aplikasi Anda, Anda mungkin akan menempatkan banyak state yang lebih dekat ke bagian atas aplikasi Anda. Banyak komponen yang jauh di bawahnya mungkin ingin untuk mengubahnya. Ini adalah hal yang umum untuk <a href="https://id.react.dev/learn/scaling-up-with-reducer-and-context" target="_blank">menggunakan reducer bersama dengan context</a> untuk mengelola state yang kompleks dan mengopernya ke komponen yang jauh ke bawah tanpa terlalu banyak kerumitan.</li>
+</ul>
+<p>Context tidak terbatas pada nilai statis. Jika anda memberikan nilai yang berbeda pada render berikutnya, React akan memperbarui semua komponen yang membacanya di bawahnya! Inilah sebabnya mengapa context sering digunakan bersama degan state.</p>
+<p>Pada umumnya, jika beberapa informasi dibutuhkan oleh komponen yang jauh di beberapa bagian pohon (tree), ini adalah indikasi yang bagus bahwa context akan membantu Anda.</p>
+<ul>
+<li><em>Context </em>memungkinkan komponen menyediakan beberapa informasi ke keseluruhan pohon (<em>tree</em>) di bawahnya.</li>
+<li>Untuk mengoper <em>context</em>:</li>
+</ul>
+<ol type="1" start="1">
+<li>Buat dan ekspor ia dengan <code>export const MyContext = createContext(defaultValue)</code>.</li>
+<li>Oper ke <code>useContext(MyContext)</code> Hook untuk membacanya di komponen anak manapun, tidak peduli seberapa dalam.</li>
+<li>Bungkus anak ke <code>< MyContext.Provider value={...} ></code> untuk menyediakannya dari induk.</li>
+</ol>
+<ul>
+<li>Context melewati komponen apa pun di tengahnya.</li>
+<li>Context memungkinkan Anda menulis komponen yang &#34;beradaptasi dengan sekitar komponen&#34;.</li>
+<li>Sebelum Anda menggunakan <em>context</em>, coba oper props atau oper JSX sebagai <code>children</code>.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selesai" duration="0">
         <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
 <h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
 <p>Silakan cek beberapa sumber belajar lainnya...</p>
+<ul>
+<li><a href="https://drive.google.com/file/d/1rcI1icsuh77B_VaznNe3PA67Ls7X28uI/view" target="_blank">E-book Real World Next.js, Michele Riva (2022)</a></li>
+</ul>
 <h2 is-upgraded><strong>Referensi</strong></h2>
 <ul>
 <li><a href="https://id.react.dev/learn/passing-data-deeply-with-context" target="_blank">https://id.react.dev/learn/passing-data-deeply-with-context</a> </li>

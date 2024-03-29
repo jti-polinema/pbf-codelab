@@ -1,0 +1,225 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#07 | Context</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="07-context"
+                  title="#07 | Context"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2024-03-26</p>
+<p><strong>Penulis</strong>: Tim PBF 2024</p>
+<h2 is-upgraded><strong>Context di ReactJS dengan Next.js</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang penggunaan Context di ReactJS dengan Next.js.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di ReactJS dengan Next.js</li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li>Telah menyelesaikan Codelab #01 sampai #06</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Konsep Context dan manfaatnya</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Context" duration="30">
+        <h2 is-upgraded><strong>Apa itu Context ?</strong></h2>
+<p>Di ReactJS, context merupakan fitur yang menyediakan cara untuk mengirim data melalui pohon komponen tanpa harus melalui props secara manual pada setiap level atau tingkatan.</p>
+<p>Biasanya aplikasi React mengirim data dengan formasi <em>top-down</em> (parent ke child) melalui <code>props</code>, tetapi penggunaannya dapat menjadi rumit untuk beberapa jenis props (seperti pengaturan bahasa, tema UI) yang melibatkan banyak komponen dalam sebuah aplikasi. <code>Context</code> menyediakan cara untuk berbagi value antar komponen tanpa melalui props pada setiap level dari komponen.</p>
+<p>Mengoper props bisa menjadi bertele-tele dan merepotkan jika Anda harus mengopernya melalui banyak komponen di tengah-tengah, atau jika banyak komponen di aplikasi Anda membutuhkan informasi yang sama. <code>Context</code> memungkinkan komponen induk untuk membuat beberapa informasi tersedia di komponen lain dalam sebuah pohon (<em>tree</em>) di bawahnya—tidak peduli seberapa dalam—tanpa mengopernya secara eksplisit melalui <code>props</code>.</p>
+<h2 is-upgraded><strong>Kapan menggunakan Context ?</strong></h2>
+<p>Context dirancang untuk berbagi data secara &#34;global&#34; ke berbagai komponen React, seperti data autentikasi pengguna yang sedang aktif, tema, atau pengaturan bahasa. </p>
+<h2 is-upgraded><strong>Perhatikan, Sebelum Anda menggunakan Context</strong></h2>
+<p>Context terutama digunakan ketika beberapa data dibutuhkan untuk diakses oleh <strong>banyak</strong> komponen pada setiap tingkatan (<em>nesting levels</em>). Gunakanlah dengan bijak karena itu akan mempersulit penggunaan kembali (<em>reuse</em>) komponen yang ada.</p>
+<h2 is-upgraded><strong>Masalah ketika mengoper props </strong></h2>
+<p><a href="https://id.react.dev/learn/passing-props-to-a-component" target="_blank">Mengoper props</a> adalah cara yang bagus untuk menyalurkan data secara eksplisit melalui pohon (tree) UI Anda ke komponen yang menggunakanya.</p>
+<p>Tapi mengoper props bisa menjadi bertele-tele dan tidak nyaman ketika Anda perlu mengoper beberapa prop secara mendalam melalui pohon (<em>tree</em>), atau jika banyak komponen membutuhkan prop yang sama. Bisa jadi jauh dari komponen yang membutuhkan data, dan memindahkan state ke atas dapat menyebabkan yang disebut &#34;<em>prop drilling</em>&#34;.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\f55bd458d6209e54.png"></p>
+<p>Bukankah lebih bagus jika ada cara untuk &#34;memindahkan&#34; data ke komponen di dalam pohon (<em>tree</em>) yang membutuhkannya tanpa harus mengoper props? Dengan fitur <code>context</code> React, ternyata ada!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Membuat Variasi Ukuran Teks Heading dengan Context" duration="100">
+        <p>Pada praktikum ini, Anda akan mempelajari cara menggunakan <code>context</code> dengan diakses oleh komponen <em>child </em>didalamnya. <code>Context</code> memungkinkan sebuah komponen induk menyediakan data untuk seluruh pohon (<em>tree</em>) di bawahnya. Ada banyak kegunaan dari <code>context</code>. Berikut ini salah satu contohnya. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<h2 is-upgraded><strong>Langkah 1: Buat project baru dan repo baru di GitHub</strong></h2>
+<p>Silakan buat project baru seperti berikut dan repo baru dengan nama <strong>#07-belajar-context-nextjs</strong></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\3d20681f150df703.png"></p>
+<h2 is-upgraded>Langkah 2: Buat struktur folder dengan prinsip <a href="https://bradfrost.com/blog/post/atomic-web-design" target="_blank">atomic design</a></h2>
+<p>Buatlah folder baru di <code>src/components</code> seperti berikut ini</p>
+<p class="image-container"><img style="width: 125.00px" src="img\\2c08e37f78e7edc9.png"></p>
+<h2 is-upgraded><strong>Langkah 3: Buat komponen atom baru</strong></h2>
+<p>Buat file baru di <code>src/components/atoms/heading.tsx</code> berisi kode sebagai berikut.</p>
+<pre><code>export default function Heading({ level, children }: { level: number; children: any }) {
+    switch (level) {
+        case 1:
+            return &lt;h1&gt;{children}&lt;/h1&gt;;
+        case 2:
+            return &lt;h2&gt;{children}&lt;/h2&gt;;
+        case 3:
+            return &lt;h3&gt;{children}&lt;/h3&gt;;
+        case 4:
+            return &lt;h4&gt;{children}&lt;/h4&gt;;
+        case 5:
+            return &lt;h5&gt;{children}&lt;/h5&gt;;
+        case 6:
+            return &lt;h6&gt;{children}&lt;/h6&gt;;
+        default:
+            throw Error(&#39;Unknown level: &#39; + level);
+    }
+}</code></pre>
+<p>Kemudian buat file baru di <code>src\components\atoms\section.tsx</code> berisi kode berikut.</p>
+<pre><code>export default function Section({ children }: { children: any }) {
+    return (
+        &lt;section className=&#34;section&#34;&gt;
+            {children}
+        &lt;/section&gt;
+    );
+}</code></pre>
+<p>Lalu bagian <code>MainPage</code> buat file baru di <code>src\components\templates\main_page.tsx</code> berisi kode sebagai berikut.</p>
+<pre><code>import Heading from &#34;../atoms/heading&#34;;
+import Section from &#34;../atoms/section&#34;;
+
+export default function MainPage() {
+    return (
+        &lt;Section&gt;
+            &lt;Heading level={1}&gt;Title&lt;/Heading&gt;
+            &lt;Section&gt;
+                &lt;Heading level={2}&gt;Heading&lt;/Heading&gt;
+                &lt;Heading level={2}&gt;Heading&lt;/Heading&gt;
+                &lt;Heading level={2}&gt;Heading&lt;/Heading&gt;
+                &lt;Section&gt;
+                    &lt;Heading level={3}&gt;Sub-heading&lt;/Heading&gt;
+                    &lt;Heading level={3}&gt;Sub-heading&lt;/Heading&gt;
+                    &lt;Heading level={3}&gt;Sub-heading&lt;/Heading&gt;
+                    &lt;Section&gt;
+                        &lt;Heading level={4}&gt;Sub-sub-heading&lt;/Heading&gt;
+                        &lt;Heading level={4}&gt;Sub-sub-heading&lt;/Heading&gt;
+                        &lt;Heading level={4}&gt;Sub-sub-heading&lt;/Heading&gt;
+                    &lt;/Section&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+        &lt;/Section&gt;
+    );
+}</code></pre>
+<p>Perhatikan komponen <code>Heading</code> tersebut yang menerima <code>level</code> untuk ukurannya.</p>
+<h2 is-upgraded><strong>Langkah 4: Ubah isi kode page.tsx dan run</strong></h2>
+<p>Ubahlah kode di <code>src\app\page.tsx</code> seperti berikut. Lalu run dan lihat hasilnya di browser Anda.</p>
+<p class="image-container"><img style="width: 471.00px" src="img\\400d539d260f79d7.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 1</strong></h3>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jangan lupa push dengan pesan commit: <code>"W07: Jawaban soal 1"</code>.</p>
+</aside>
+<p>Katakanlah Anda ingin beberapa judul dalam <code>Section</code> yang sama selalu memiliki ukuran yang sama.</p>
+<p>Saat ini, Anda mengoper <code>level</code> <em>props </em>ke tiap <code>< Heading ></code> secara terpisah:</p>
+<p class="image-container"><img style="width: 322.00px" src="img\\86a377e6b2366d8d.png"></p>
+<p>Akan lebih baik jika Anda dapat mengoper prop level ke komponen <code>< Section ></code> dan menghapusnya dari komponen <code>< Heading ></code> Dengan cara ini Anda dapat menerapkan bahwa semua judul di bagian yang sama memiliki ukuran yang sama:</p>
+<p class="image-container"><img style="width: 230.00px" src="img\\b1bf0b1cff3518ae.png"></p>
+<p>Tapi bagaimana komponen <code>< Heading ></code> dapat mengetahui level <code>< Section ></code> yang terdekat?<strong> Hal ini akan membutuhkan suatu cara untuk &#34;meminta&#34; data dari suatu tempat di atas pohon (tree)</strong>.</p>
+<p>Anda tidak bisa melakukannya dengan props sendirian. Di sinilah <code>context</code> berperan penting. Anda akan melakukannya dalam tiga langkah:</p>
+<ol type="1" start="1">
+<li><strong>Buat sebuah context</strong>. (Anda dapat menamainya <code>LevelContext</code>, karena ini untuk level judul.)</li>
+<li><strong>Gunakan context</strong> tersebut dari komponen yang membutuhkan data. (<code>Heading</code> akan menggunakan <code>LevelContext</code>.)</li>
+<li><strong>Sediakan context</strong> tersebut dari komponen yang menentukan data. (<code>Section</code> akan menyediakan <code>LevelContext</code>.)</li>
+</ol>
+<p>Context memungkinkan sebuah induk—bahkan yang jauh sekalipun!—menyediakan beberapa data kepada seluruh komponen pohon (<em>tree</em>) di dalamnya.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\57b0f2cd40a1c038.png"></p>
+<h2 is-upgraded><strong>Langkah 5.1: Buat Context</strong></h2>
+<p>Pertama, Anda perlu membuat <code>context</code>. Anda harus mengekspornya dari sebuah file sehingga komponen Anda dapat menggunakannya. Buatlah file baru di <code>src\utilities\context\mycontext.tsx</code> yang berisi kode sebagai berikut:</p>
+<p class="image-container"><img style="width: 387.00px" src="img\\b4d2e76b16259b1e.png"></p>
+<p>Satu-satunya argumen untuk <code>createContext</code> adalah nilai <em>default</em>. Disini, <code>1</code> merujuk pada level heading terbesar, tapi Anda dapat mengoper nilai apa pun (bahkan sebuah objek). Anda akan melihat pentingnya nilai default di langkah selanjutnya.</p>
+<h2 is-upgraded><strong>Langkah 5.2: Gunakan context</strong></h2>
+<p>Ubahlah isi kode komponen <code>Heading</code> dengan Impor <code>useContext</code> Hook dari React dan context Anda:</p>
+<p class="image-container"><img style="width: 507.00px" src="img\\7f9cf8620a802a7d.png"></p>
+<p>Saat ini, komponen <code>Heading</code> membaca <code>level</code> dari props. Sebagai gantinya, hapus prop <code>level</code> dan baca nilai dari context yang baru saja Anda impor, <code>LevelContext</code>:</p>
+<p class="image-container"><img style="width: 553.00px" src="img\\5135e1477c6207ec.png"></p>
+<p><code>useContext</code> adalah sebuah Hook. Sama seperti <code>useState</code> dan <code>useReducer</code>, Anda hanya dapat memanggil sebuah Hook secara langsung di dalam komponen React (bukan di dalam pengulangan atau pengkondisian). <code>useContext</code><strong> memberitahu React bahwa komponen </strong></p>
+<p><strong><code>Heading</code></strong></p>
+<p><strong> mau membaca </strong></p>
+<p><strong><code>LevelContext</code></strong>.</p>
+<p>Sekarang komponen <code>Heading</code> tidak membutuhkan sebuah prop <code>level</code>, Anda tidak perlu mengoper level prop ke <code>Heading</code> di JSX Anda. Sebagai gantinya Perbarui JSX sehingga <code>Section</code> yang dapat menerimanya:</p>
+<p class="image-container"><img style="width: 411.00px" src="img\\330c39b24e1e46fb.png"></p>
+<p>Perhatikan contoh ini masih belum berfungsi dengan baik! Semua judul memiliki ukuran yang sama karena <strong>meskipun Anda menggunakan context, Anda belum menyediakannya</strong>. React tidak tahu darimana untuk mendapatkannya!</p>
+<p>Jika Anda tidak menyediakan context, React akan menggunakan nilai default yang sudah Anda tentukan di langkah sebelumnya. Di contoh ini, Anda menentukan <code>1</code> sebagai argumen <code>createContext</code>, jadi <code>useContext(LevelContext)</code> mengembalikan <code>1</code>, mengatur semua headings ke <code>< h1 ></code>. Ayo kita perbaiki masalah ini dengan membuat setiap <code>Section</code> menyediakan context-nya sendiri.</p>
+<h2 is-upgraded><strong>Langkah 5.3: Sediakan context</strong></h2>
+<p>Komponen Section saat ini merenders anaknya, bungkus mereka semua dengan sebuah context provider untuk menyediakan LevelContext kepada mereka seperti kode berikut:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\788b3b52cd15e89b.png"></p>
+<p>Ini memberitahu React: &#34;jika ada komponen di dalam <code>< Section ></code> ini yang meminta <code>LevelContext</code>, berikan level ini.&#34; Komponen akan menggunakan nilai dari <code>< LevelContext.Provider ></code> terdekat di pohon UI (tree) di atasnya.</p>
+<p>Hasilnya sama dengan kode aslinya, tapi Anda tidak perlu mengoper prop <code>level</code> ke setiap komponen <code>Heading</code>! Sebagai gantinya, ia &#34;mencari tahu&#34; level heading-nya dengan meminta <code>Section</code> terdekat di atasnya:</p>
+<ol type="1" start="1">
+<li>Anda mengoper prop <code>level</code> ke <code>< Section ></code>.</li>
+<li><code>Section</code> membungkus anaknya dengan <code>< LevelContext.Provider value={level} ></code>.</li>
+<li><code>Heading</code> meminta nilai terdekat dari <code>LevelContext</code> di atasnya dengan <code>useContext(LevelContext)</code>.</li>
+</ol>
+<aside class="warning"><h3 is-upgraded><strong>Soal 2</strong></h3>
+<p>Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini?</p>
+<p>Jika terjadi error, silakan perbaiki, Mengapa hal itu bisa terjadi? Jelaskan!</p>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W07: Jawaban soal 2"</code>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Membuat Tema Aplikasi Sederhana" duration="50">
+        <p>Pada praktikum ini, kita akan membuat aplikasi sederhana yang dapat mengubah.. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded>Apa selanjutnya<strong>?</strong></h2>
+<p>Silakan cek beberapa sumber belajar lainnya...</p>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://id.react.dev/learn/passing-data-deeply-with-context" target="_blank">https://id.react.dev/learn/passing-data-deeply-with-context</a> </li>
+<li><a href="https://bradfrost.com/blog/post/atomic-web-design" target="_blank">https://bradfrost.com/blog/post/atomic-web-design</a> </li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

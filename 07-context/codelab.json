@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-03-29T02:10:15Z",
+  "id": "07-context",
+  "duration": 180,
+  "title": "#07 | Context",
+  "authors": "Tim PBF 2024",
+  "summary": "Pada codelab ini, Anda akan belajar tentang context di ReactJS.",
+  "source": "1q9JIibFlxdqS4CrBYUDMtI2NWHUHHv7BMN6CAKPB4JU",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "07-context"
+}

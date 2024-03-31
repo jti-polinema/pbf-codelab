@@ -278,10 +278,7 @@ export default function MainPage() {
       </google-codelab-step>
     
       <google-codelab-step label="Kesimpulan" duration="50">
-        <p><strong><code>Context</code></strong></p>
-<p><strong> memungkinkan Anda untuk menulis komponen yang &#34;beradaptasi dengan sekitar mereka&#34; dan menampilkan diri mereka secara berbeda tergantung di mana (atau, dalam kata lain, dalam </strong></p>
-<p><strong><code>context</code></strong></p>
-<p><strong> apa) mereka akan diberikan.</strong></p>
+        <p><strong>Context memungkinkan Anda untuk menulis komponen yang &#34;beradaptasi dengan sekitar mereka&#34; dan menampilkan diri mereka secara berbeda tergantung di mana (atau, dalam kata lain, dalam context apa) mereka akan diberikan.</strong></p>
 <p>Cara kerja context mungkin mengingatkan Anda pada <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance" target="_blank">pewarisan properti CSS</a>. Pada CSS, Anda dapat menentukan <code>color: blue</code> untuk <code>< div ></code>, dan simpul DOM apa pun di dalamnya, tidak peduli seberapa dalam, akan mewarisi warna tersebut kecuali ada simpul DOM lain di tengahnya yang menimpanya dengan <code>color: green</code>. Demikian pula, dalam React, satu-satunya cara untuk menimpa beberapa context yang berasal dari atas adalah dengan membungkus anaknya ke dalam penyedia context dengan nilai yang berbeda.</p>
 <p>Pada CSS, properti berbeda seperti <code>color</code> dan <code>background-color</code> tidak akan menimpa satu sama lain. Anda dapat mengatur semua <code>color < div ></code>  ke merah tanpa berdampak pada <code>background-color</code>. Demikian pula, <strong>React contexts yang berbeda tidak akan menimpa satu sama lain</strong>. Tiap context yang Anda buat dengan <code>createContext()</code> benar-benar terpisah dari yang lain, dan menyatukan komponen-komponen yang menggunakan dan menyediakan context tertentu. Satu komponen dapat menggunakan atau menyediakan banyak <em>context</em> yang berbeda tanpa masalah.</p>
 <h2 is-upgraded><strong>Pertimbangkan sebelum Anda menggunakan Context</strong></h2>

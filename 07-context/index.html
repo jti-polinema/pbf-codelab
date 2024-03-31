@@ -168,10 +168,7 @@ export default function MainPage() {
 <p class="image-container"><img style="width: 507.00px" src="img\\7f9cf8620a802a7d.png"></p>
 <p>Saat ini, komponen <code>Heading</code> membaca <code>level</code> dari props. Sebagai gantinya, hapus prop <code>level</code> dan baca nilai dari context yang baru saja Anda impor, <code>LevelContext</code>:</p>
 <p class="image-container"><img style="width: 553.00px" src="img\\5135e1477c6207ec.png"></p>
-<p><code>useContext</code> adalah sebuah Hook. Sama seperti <code>useState</code> dan <code>useReducer</code>, Anda hanya dapat memanggil sebuah Hook secara langsung di dalam komponen React (bukan di dalam pengulangan atau pengkondisian). <code>useContext</code><strong> memberitahu React bahwa komponen </strong></p>
-<p><strong><code>Heading</code></strong></p>
-<p><strong> mau membaca </strong></p>
-<p><strong><code>LevelContext</code></strong>.</p>
+<p><code>useContext</code> adalah sebuah Hook. Sama seperti <code>useState</code> dan <code>useReducer</code>, Anda hanya dapat memanggil sebuah Hook secara langsung di dalam komponen React (bukan di dalam pengulangan atau pengkondisian). <code>useContext</code><strong> memberitahu React bahwa komponen </strong><code>Heading</code><strong> mau membaca </strong><code>LevelContext</code>.</p>
 <p>Sekarang komponen <code>Heading</code> tidak membutuhkan sebuah prop <code>level</code>, Anda tidak perlu mengoper level prop ke <code>Heading</code> di JSX Anda. Sebagai gantinya Perbarui JSX sehingga <code>Section</code> yang dapat menerimanya:</p>
 <p class="image-container"><img style="width: 411.00px" src="img\\330c39b24e1e46fb.png"></p>
 <p>Perhatikan contoh ini masih belum berfungsi dengan baik! Semua judul memiliki ukuran yang sama karena <strong>meskipun Anda menggunakan context, Anda belum menyediakannya</strong>. React tidak tahu darimana untuk mendapatkannya!</p>
@@ -242,11 +239,49 @@ export default function MainPage() {
 
       </google-codelab-step>
     
+      <google-codelab-step label="Praktikum 3: Membuat Context Tema Light/Dark" duration="50">
+        <p>Pada praktikum kali ini, Anda akan membuat tema web yang bisa diubah menjadi mode light atau dark. Tampilan aplikasi web seperti berikut ini (Anda dapat berkreasi dengan konten dan style yang lain sesuai selera Anda).</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\1423ced658e041ba.png"></p>
+<h2 is-upgraded><strong>Langkah 1: Membuat variabel tema</strong></h2>
+<p>Buatlah file dan folder baru di <code>src\utilities\themes\mythemes.tsx</code> yang berisi kode berikut.</p>
+<p class="image-container"><img style="width: 270.00px" src="img\\e66f95838873043c.png"></p>
+<p>Kemudian buatlah contextnya di file <code>src\utilities\contexts\mycontext.tsx</code></p>
+<p class="image-container"><img style="width: 390.00px" src="img\\4a450d98b3b9c95a.png"></p>
+<h2 is-upgraded><strong>Langkah 2: Buat komponen atom NavBar</strong></h2>
+<p>Buatlah file baru di <code>src\components\atoms\navbar.tsx</code></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\80f1fc79d69a21fb.png"></p>
+<h2 is-upgraded><strong>Langkah 3: Buat Provider</strong></h2>
+<p>Buatlah provider di <code>src\components\atoms\myapp.tsx</code></p>
+<p class="image-container"><img style="width: 624.00px" src="img\\186ed3503157d317.png"></p>
+<h2 is-upgraded><strong>Langkah 4: Buat masing-masing page</strong></h2>
+<p>Pindahkan komponen ProfilePage ke file <code>src\components\templates\profile_page.tsx</code></p>
+<p class="image-container"><img style="width: 454.00px" src="img\\4eff0eac96e3f5d2.png"></p>
+<p>Sehingga struktur folder di <code>templates</code> menjadi seperti berikut. Anda dapat berkreasi dengan konten pada <code>About</code> dan <code>Contacts</code>.</p>
+<p class="image-container"><img style="width: 140.00px" src="img\\d48c477101aa72ec.png"></p>
+<h2 is-upgraded><strong>Langkah 5: Buat routing</strong></h2>
+<p>Buatlah folder dan file baru di dalam <code>app</code> agar routing page masing-masing dapat diakses seperti berikut.</p>
+<p class="image-container"><img style="width: 121.00px" src="img\\243e96beb5bb6395.png"></p>
+<p>Gantilah isi kode pada <code>src\app\page.tsx</code> menjadi seperti berikut.</p>
+<p class="image-container"><img style="width: 491.00px" src="img\\c0973ce0127cb7bf.png"></p>
+<p>Termasuk di masing-masing page <code>src\app\profile\page.tsx</code>, untuk page About dan Contacs silakan Anda sesuaikan.</p>
+<p class="image-container"><img style="width: 558.00px" src="img\\48eab0cf6b52595d.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 5</strong></h3>
+<p>Silakan save semua dan lakukan running di browser Anda. Capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Tambahkan teks Nama dan NIM pada setiap page routing agar menunjukkan itu hasil kerja Anda sendiri!</p>
+<ol type="1" start="1">
+<li>Apakah <code>toggle button</code> tema sudah berfungsi ? jika belum, silakan perbaiki!</li>
+<li>Mengapa ketika refresh atau berpindah halaman tema tidak permanen ? Buatlah menjadi permanen walaupun page sudah direfresh dan pindah halaman!</li>
+</ol>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W07: Jawaban soal 5"</code>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Kesimpulan" duration="50">
-        <p><strong><em>Context </em></strong></p>
-<p><strong>memungkinkan Anda untuk menulis komponen yang &#34;beradaptasi dengan sekitar mereka&#34; dan menampilkan diri mereka secara berbeda tergantung di mana (atau, dalam kata lain, dalam </strong></p>
-<p><strong><em>context </em></strong></p>
-<p><strong>apa) mereka akan diberikan.</strong></p>
+        <p><strong><code>Context</code></strong></p>
+<p><strong> memungkinkan Anda untuk menulis komponen yang &#34;beradaptasi dengan sekitar mereka&#34; dan menampilkan diri mereka secara berbeda tergantung di mana (atau, dalam kata lain, dalam </strong></p>
+<p><strong><code>context</code></strong></p>
+<p><strong> apa) mereka akan diberikan.</strong></p>
 <p>Cara kerja context mungkin mengingatkan Anda pada <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance" target="_blank">pewarisan properti CSS</a>. Pada CSS, Anda dapat menentukan <code>color: blue</code> untuk <code>< div ></code>, dan simpul DOM apa pun di dalamnya, tidak peduli seberapa dalam, akan mewarisi warna tersebut kecuali ada simpul DOM lain di tengahnya yang menimpanya dengan <code>color: green</code>. Demikian pula, dalam React, satu-satunya cara untuk menimpa beberapa context yang berasal dari atas adalah dengan membungkus anaknya ke dalam penyedia context dengan nilai yang berbeda.</p>
 <p>Pada CSS, properti berbeda seperti <code>color</code> dan <code>background-color</code> tidak akan menimpa satu sama lain. Anda dapat mengatur semua <code>color < div ></code>  ke merah tanpa berdampak pada <code>background-color</code>. Demikian pula, <strong>React contexts yang berbeda tidak akan menimpa satu sama lain</strong>. Tiap context yang Anda buat dengan <code>createContext()</code> benar-benar terpisah dari yang lain, dan menyatukan komponen-komponen yang menggunakan dan menyediakan context tertentu. Satu komponen dapat menggunakan atau menyediakan banyak <em>context</em> yang berbeda tanpa masalah.</p>
 <h2 is-upgraded><strong>Pertimbangkan sebelum Anda menggunakan Context</strong></h2>

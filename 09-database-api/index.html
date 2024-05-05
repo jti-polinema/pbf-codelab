@@ -1,0 +1,222 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#09 | Setup Database dan Fetching Data</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="09-database-api"
+                  title="#09 | Setup Database dan Fetching Data"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pendahuluan" duration="0">
+        <p><strong>Terakhir diperbarui:</strong> 2024-05-01</p>
+<p><strong>Penulis</strong>: Tim PBF 2024</p>
+<p class="image-container"><img style="width: 130.32px" src="img\\dd6e7d294fd07d6.png">    </p>
+<h2 is-upgraded><strong>Setup Database dan Fetching Data (API) di ReactJS</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang setup database dan fetching data (API) di ReactJS.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di <a href="https://reactjs.org/docs/create-a-new-react-app.html" target="_blank">ReactJS</a></li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Setup database</li>
+<li>Fetching data (API)</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setup Database dan Fecthing Data di NextJS" duration="10">
+        <p>Untuk membangun aplikasi web yang tangguh dan responsif, Vercel menjadi pilihan terdepan bagi pengembang. Dengan infrastruktur yang kuat dan kemampuan deployment yang cepat, Vercel memungkinkan kita untuk dengan mudah menerapkan aplikasi NextJS kita ke dalam produksi dengan kecepatan dan keandalan yang tinggi. Dalam codelab ini, kita akan menggali lebih dalam tentang bagaimana mengintegrasikan aplikasi NextJS dengan Vercel untuk mengelola dan memperbarui aplikasi dengan lancar.</p>
+<p>Selain itu, codelab ini akan memandu Anda melalui proses mengatur database PostgreSQL untuk aplikasi NextJS Anda. Database PostgreSQL adalah salah satu sistem manajemen basis data relasional (RDBMS) yang populer dan tangguh. Dengan kemampuannya yang kuat dalam menyimpan dan mengelola data terstruktur, PostgreSQL menjadi pilihan yang cocok untuk berbagai jenis aplikasi, mulai dari aplikasi sederhana hingga yang kompleks.</p>
+<p>Di dalam codelab ini, kita akan mempelajari langkah-langkah detail tentang cara menghubungkan aplikasi NextJS dengan database PostgreSQL, mulai dari konfigurasi hingga pengambilan data. Dengan memahami cara ini, Anda akan dapat mengembangkan aplikasi web yang lebih dinamis dan interaktif, dengan kemampuan untuk menyimpan dan menampilkan data dari database dengan lancar. Dengan gabungan kekuatan NextJS, Vercel, dan database PostgreSQL, Anda akan memiliki fondasi yang kuat untuk membangun aplikasi web yang tangguh dan responsif.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Setup Database" duration="50">
+        <p>Pada praktikum ini, Anda akan menggunakan starter code yang sudah ada, lalu melakukan setup database dengan PostgreSQL menggunakan library <code>@vercel/postgres</code>. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<h2 is-upgraded><strong>Membuat project baru dengan templat</strong></h2>
+<ol type="1" start="1">
+<li>Mulailah membuat repo berdasarkan templat starter code ini: <a href="https://github.com/jti-polinema/09-nextjs-database" target="_blank">https://github.com/jti-polinema/09-nextjs-database</a> (klik pada <code>Use this template</code>) kemudian beri nama repo: <code>09-nextjs-database</code> pada akun GitHub Anda.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\d839b5d3e36cbddf.png"></p>
+<h2 is-upgraded><strong>Membuat Akun Vercel</strong></h2>
+<ol type="1" start="2">
+<li>Selanjutnya buat akun vercel (jika Anda belum memilikinya) di tautan ini <a href="https://vercel.com/signup" target="_blank">https://vercel.com/signup</a> </li>
+<li>Pilih <strong>plan free &#34;hobby&#34;</strong> dan isi dengan nama Anda.</li>
+</ol>
+<p class="image-container"><img style="width: 501.00px" src="img\\b4713148d03c252a.png"></p>
+<ol type="1" start="4">
+<li>Kemudian pilih <strong>Continue with GitHub</strong> untuk terkoneksi dengan akun Vercel.</li>
+</ol>
+<p class="image-container"><img style="width: 419.00px" src="img\\eb04ad537ca0dddb.png"></p>
+<h2 is-upgraded><strong>Koneksikan dan Deploy project Anda</strong></h2>
+<ol type="1" start="5">
+<li>Selanjutnya, Anda akan diarahkan screen berikut untuk memilih repo dan impor dari GitHub yang telah Anda buat pada langkah nomor 1 tadi.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\94ddb60e7c7ad10a.png"></p>
+<ol type="1" start="6">
+<li>Beri nama project Anda dan klik <strong>Deploy</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\d0d9b26e05587873.png"></p>
+<ol type="1" start="7">
+<li>Tunggu proses deploy selama ± 1 menit.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\325dbd6b931927ad.png"></p>
+<ol type="1" start="8">
+<li>Hooray! 🥳 Project Anda sekarang sudah berhasil deploy di server Vercel.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\8418b84119550e56.png"></p>
+<aside class="special"><p><strong>Catatan</strong>: Dengan menghubungkan repositori GitHub Anda, setiap kali Anda melakukan perubahan ke main branch Anda, Vercel akan secara otomatis menerapkan ulang aplikasi Anda tanpa memerlukan konfigurasi. Saat membuka pull requests, Anda juga akan memiliki <a href="https://vercel.com/docs/deployments/preview-deployments#preview-urls" target="_blank">pratinjau instan</a> yang memungkinkan Anda mengetahui kesalahan penerapan lebih awal dan membagikan pratinjau proyek Anda dengan anggota tim untuk mendapatkan masukan.</p>
+</aside>
+<aside class="warning"><h3 is-upgraded><strong>Soal 1</strong></h3>
+<p>Capture hasil deploy project Anda dan buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari?</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 1</code>&#34;.</p>
+</aside>
+<h2 is-upgraded><strong>Membuat basis data Postgres</strong></h2>
+<ol type="1" start="1">
+<li>Selanjutnya untuk setup database, klik <strong>Continue to Dashboard</strong> dan pilih tab <strong>Storage </strong>pada dashboard project Anda. Lalu pilih <strong>Create </strong>pada basis data <strong>Postgres</strong>.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\cb547c9dcc6c4a6a.png"></p>
+<ol type="1" start="2">
+<li>Setujui terms, beri nama basis data, dan pastikan region basis data di set ke <strong>Washington D.C (iad1)</strong> - ini merupakan <a href="https://vercel.com/docs/functions/serverless-functions/regions#select-a-default-serverless-region" target="_blank">default region</a> untuk semua project baru di Vercel. Meletakkan basis data pada region yang sama atau semakin dekat dengan kode aplikasi, Anda dapat mengurangi <a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Understanding_latency" target="_blank">latency</a> pada tiap request data.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\f26f481c239d1582.png"></p>
+<aside class="special"><p><strong>Catatan</strong>: Anda tidak dapat mengubah region basis data ketika sudah proses inisialisasi. Jika Anda ingin menggunakan <a href="https://vercel.com/docs/storage/vercel-postgres/limits#supported-regions" target="_blank">region</a> yang berbeda, Anda harus pilih sebelum mulai membuat basis data.</p>
+</aside>
+<ol type="1" start="3">
+<li>Setelah berhasil terhubung, arahkan pada tab <code>.env.local</code>, klik <strong>Show secret</strong> dan <strong>Copy Snippet</strong> seperti pada gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\ea15b6b166bdd874.png"></p>
+<ol type="1" start="4">
+<li>Buat file baru <code>.env</code> pada root project Anda, lalu <strong>paste </strong>hasil <strong>Copy Snippet</strong> tersebut.</li>
+</ol>
+<aside class="warning"><p><strong>Penting:</strong> Buka file <code>.gitignore</code> dan pastikan file <code>.env</code> tercantum didalamnya agar konfigurasi rahasia basis data tidak terekspos ketika melakukan push ke GitHub.</p>
+</aside>
+<ol type="1" start="5">
+<li>Akhirnya, jalankan perintah berikut di terminal untuk install <a href="https://vercel.com/docs/storage/vercel-postgres/sdk" target="_blank">Vercel Postgres SDK</a>.</li>
+</ol>
+<pre><code>npm i --save @vercel/postgres</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 2</strong></h3>
+<p>Capture hasil basis data Anda dan buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari?</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 2</code>&#34;.</p>
+</aside>
+<h2 is-upgraded><strong>Melakukan seed ke basis data</strong></h2>
+<ol type="1" start="1">
+<li>Sekarang database Anda telah dibuat, mari kita isi dengan beberapa data awal. Ini akan memungkinkan Anda memiliki beberapa data untuk digunakan.</li>
+<li>Di folder <code>src/seeder</code> proyek Anda, ada file bernama <code>seed.js</code>. Skrip ini berisi instruksi untuk membuat dan menyemai tabel <code>invoices</code>, <code>customers</code>, <code>user</code>, <code>revenue</code>.</li>
+<li>Jangan khawatir jika Anda tidak memahami semua yang ada dalam kode tersebut, tetapi untuk memberi Anda gambaran umum, skrip itu menggunakan SQL untuk membuat tabel, dan data dari file <code>src/seeder/data.js</code> untuk mengisinya setelah tabel tersebut selesai dibuat.</li>
+<li>Selanjutnya, di file <code>package.json</code> Anda, tambahkan baris skrip <code>seed</code> seperti berikut:</li>
+</ol>
+<p class="image-container"><img style="width: 494.00px" src="img\\e87cf30315c21962.png"></p>
+<ol type="1" start="5">
+<li>Perintah tersebut akan mengeksekusi file <code>seed.js</code>. Sekarang jalankan perintah berikut di terminal:</li>
+</ol>
+<pre><code>npm run seed</code></pre>
+<ol type="1" start="6">
+<li>Apa yang terjadi ? <code>error</code> atau berhasil insert data ke database Postgre ?</li>
+</ol>
+<aside class="special"><p><strong>Troubleshooting: </strong></p>
+<ul>
+<li>Jika Anda mengalami error karena module <code>dotenv</code> tidak ada, silakan Anda dapat menginstallnya terlebih dahulu dengan perintah <code>npm i --save dotenv</code></li>
+<li>Jika terjadi error karena module <code>bcrypt</code> tidak ditemukan, silakan install dengan perintah <code>npm i --save bcrypt</code></li>
+<li>Jika terjadi error karena <code>data.js</code> tidak ditemukan, silakan ubah kode di <code>seed.js</code> menjadi seperti ini: <code>require('./data.js')</code></li>
+</ul>
+</aside>
+<p>Jika berhasil melakukan seeding data ke database Postgre Vercel, maka akan tampil seperti gambar berikut.</p>
+<p class="image-container"><img style="width: 553.00px" src="img\\51c93aa5b2da1045.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 3</strong></h3>
+<p>Capture hasil <code>npm run seed</code> Anda dan buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari ?</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 3</code>&#34;.</p>
+</aside>
+<h2 is-upgraded><strong>Menjelajah Basis Data</strong></h2>
+<ol type="1" start="1">
+<li>Buka akun vercel Anda, cek pada sidenav klik <strong>Data </strong>seperti gambar di bawah ini.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\573f17a4bef45c8b.png"></p>
+<ol type="1" start="2">
+<li>Pada bagian Browser, Anda akan melihat tabel baru terdiri dari: users, customers, invoices, dan revenue.</li>
+</ol>
+<ol type="1" start="3">
+<li>Dengan memilih setiap tabel tersebut, pastikan data telah sesuai seperti pada file <code>src/seeder/data.js</code></li>
+</ol>
+<ol type="1" start="4">
+<li>Anda dapat melakukan query SQL dengan klik tab <strong>Query</strong>.</li>
+<li>Cobalah eksekusi query berikut ini.</li>
+</ol>
+<pre><code>SELECT invoices.amount, customers.name
+FROM invoices
+JOIN customers ON invoices.customer_id = customers.id
+WHERE invoices.amount = 666;</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 4</strong></h3>
+<p>Capture hasil <code>query</code> Anda dan buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari ? Cobalah eksekusi query SQL yang lain sesuai kreasi Anda, capture hasilnya dan jelaskan!</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 4</code>&#34;.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Fetching Data (API)" duration="50">
+        <p>Pada praktikum ini, </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="50">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selamat" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://nextjs.org/learn/dashboard-app/setting-up-your-database" target="_blank">https://nextjs.org/learn/dashboard-app/setting-up-your-database</a> </li>
+<li><a href="https://nextjs.org/learn/dashboard-app/fetching-data" target="_blank">https://nextjs.org/learn/dashboard-app/fetching-data</a> </li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

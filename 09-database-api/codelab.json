@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-05-05T03:34:21Z",
+  "id": "09-database-api",
+  "duration": 160,
+  "title": "#09 | Setup Database dan Fetching Data",
+  "authors": "Tim PBF 2024",
+  "summary": "Pada codelab ini, Anda akan belajar tentang setup database dan fetching data di ReactJS.",
+  "source": "1v4ur3OYwiEI5sBWg-vBzmz_3H-S1t755HqR0k0iugLU",
+  "theme": "web",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "https://github.com/jti-polinema/pbf-codelab/issues",
+  "ga": "G-H7507PFEJB",
+  "url": "09-database-api"
+}

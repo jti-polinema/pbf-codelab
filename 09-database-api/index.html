@@ -42,8 +42,11 @@
 </ul>
 <h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
 <ul>
-<li>Setup database</li>
+<li>Setup database dengan Postgre di Vercel</li>
 <li>Fetching data (API)</li>
+<li>Bagaimana Komponen Server dapat membantu Anda mengakses sumber daya back-end dengan lebih aman.</li>
+<li>Network waterfalls</li>
+<li>Cara menerapkan fetching data paralel menggunakan JavaScript Pattern.</li>
 </ul>
 <h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
 <ul>
@@ -188,14 +191,728 @@ WHERE invoices.amount = 666;</code></pre>
 
       </google-codelab-step>
     
+      <google-codelab-step label="Fetching Data (API) di NextJS" duration="50">
+        <p>Sekarang setelah Anda membuat dan menyemai database Anda, mari kita bahas berbagai cara mengambil data untuk aplikasi Anda, dan membuat halaman dasbor Anda.</p>
+<h2 is-upgraded><strong>Memilih cara ambil data (fetch data)</strong></h2>
+<h3 is-upgraded><strong>API layer</strong></h3>
+<p>API adalah lapisan perantara antara kode aplikasi dan database Anda. Ada beberapa kasus di mana Anda mungkin menggunakan API:</p>
+<ul>
+<li>Jika Anda menggunakan layanan pihak ketiga yang menyediakan API.</li>
+<li>Jika Anda mengambil data dari klien, Anda ingin memiliki lapisan API yang berjalan di server untuk menghindari rahasia database Anda terekspos ke klien.</li>
+</ul>
+<p>Di Next.js, Anda dapat membuat endpoints API menggunakan <a href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers" target="_blank">Route Handler</a>.</p>
+<h3 is-upgraded><strong>Query Database</strong></h3>
+<p>Saat Anda membuat aplikasi full-stack, Anda juga perlu menulis logika untuk berinteraksi dengan database Anda. Untuk <a href="https://aws.amazon.com/relational-database/" target="_blank">database relasional</a> seperti Postgres, Anda dapat melakukannya dengan SQL, atau <a href="https://vercel.com/docs/storage/vercel-postgres/using-an-orm#" target="_blank">ORM </a>seperti <a href="https://www.prisma.io/" target="_blank">Prisma</a>.</p>
+<p>Ada beberapa kasus di mana Anda harus menulis query database:</p>
+<ul>
+<li>Saat membuat endpoints API, Anda perlu menulis logika untuk berinteraksi dengan database Anda.</li>
+<li>Jika Anda menggunakan React Server Components (mengambil data di server), Anda dapat melewati lapisan API, dan melakukan query database Anda secara langsung tanpa risiko rahasia database Anda terekspos ke klien.</li>
+</ul>
+<h3 is-upgraded><strong>Menggunakan React Server Components untuk fetch data</strong></h3>
+<p>Secara default, aplikasi Next.js menggunakan <strong>React Server Components</strong>. Mengambil data dengan Komponen Server adalah pendekatan yang relatif baru dan ada beberapa manfaat menggunakannya:</p>
+<ul>
+<li><code>Server Components</code> mendukung fitur <code>promises</code>, memberikan solusi yang lebih sederhana untuk tugas asinkron seperti pengambilan data. Anda dapat menggunakan sintaks <code>async/await</code> tanpa menggunakan sintaks <code>useEffect</code>, <code>useState</code>, atau library pihak ketiga.</li>
+<li><code>Server Components</code> dijalankan di server, sehingga Anda dapat menyimpan proses pengambilan data dan logika di server dan hanya mengirimkan hasilnya ke klien.</li>
+<li>Seperti disebutkan sebelumnya, karena <code>Server Components</code> dijalankan di server, Anda dapat melakukan kueri database secara langsung tanpa lapisan API tambahan.</li>
+</ul>
+<h3 is-upgraded><strong>Menggunakan SQL</strong></h3>
+<p>Untuk proyek dasbor Anda, Anda akan menulis kueri database menggunakan <a href="https://vercel.com/docs/storage/vercel-postgres/sdk" target="_blank">Vercel Postgres SDK</a> dan SQL. Ada beberapa alasan mengapa kita akan menggunakan SQL:</p>
+<ul>
+<li>SQL adalah standar industri untuk menanyakan database relasional (misalnya ORM menghasilkan SQL).</li>
+<li>Memiliki pemahaman dasar tentang SQL dapat membantu Anda memahami dasar-dasar database relasional, memungkinkan Anda menerapkan pengetahuan Anda ke alat lain.</li>
+<li>SQL bersifat serbaguna, memungkinkan Anda mengambil dan memanipulasi data tertentu.</li>
+<li>Vercel Postgres SDK memberikan perlindungan terhadap <a href="https://vercel.com/docs/storage/vercel-postgres/sdk#preventing-sql-injections" target="_blank">injeksi SQL</a>.</li>
+</ul>
+<p>Jangan khawatir jika Anda belum pernah menggunakan SQL sebelumnya karena kode query akan disediakan untuk Anda.</p>
+<p>Berikut adalah contoh mengimpor fungsi <a href="https://vercel.com/docs/storage/vercel-postgres/sdk#sql" target="_blank">sql</a> dari <code>@vercel/postgres</code>. Fungsi ini memungkinkan Anda untuk melakukan query ke database Anda:</p>
+<pre><code>import { sql } from &#39;@vercel/postgres&#39;;
+ 
+// ...</code></pre>
+<p>Anda dapat memanggil sql di dalam <code>Server Component</code> mana pun. Namun agar Anda dapat menavigasi komponen dengan lebih mudah, nanti dalam praktikum 2 akan membuat fungsi semua kueri data di file <code>query.tsx</code>, dan Anda dapat mengimpornya ke dalam komponen lain.</p>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Praktikum 2: Fetching Data (API)" duration="50">
-        <p>Pada praktikum ini, </p>
+        <p>Pada praktikum ini, Anda dapat melanjutkan project dari praktikum 1 sebelumnya. Silakan lakukan langkah-langkah berikut ini.</p>
+<h2 is-upgraded><strong>Membuat Global Query (Model)</strong></h2>
+<ol type="1" start="1">
+<li>Pertama, siapkan struktur folder project Anda seperti pada gambar berikut ini.</li>
+</ol>
+<p class="image-container"><img style="width: 249.00px" src="img\\7bf1c3f78635a52d.png"></p>
+<ol type="1" start="2">
+<li>Selanjutnya buat 2 file di dalam folder <code>model</code> yaitu <code>definitions.tsx</code> dan <code>query.tsx</code>. Kemudian salin kode berikut ini.</li>
+</ol>
+<p><code>src/model/definitions.tsx</code></p>
+<pre><code>// This file contains type definitions for your data.
+// It describes the shape of the data, and what data type each property should accept.
+// For simplicity of teaching, we&#39;re manually defining these types.
+// However, these types are generated automatically if you&#39;re using an ORM such as Prisma.
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+};
+
+export type Customer = {
+    id: string;
+    name: string;
+    email: string;
+    image_url: string;
+};
+
+export type Invoice = {
+    id: string;
+    customer_id: string;
+    amount: number;
+    date: string;
+    // In TypeScript, this is called a string union type.
+    // It means that the &#34;status&#34; property can only be one of the two strings: &#39;pending&#39; or &#39;paid&#39;.
+    status: &#39;pending&#39; | &#39;paid&#39;;
+};
+
+export type Revenue = {
+    month: string;
+    revenue: number;
+};
+
+export type LatestInvoice = {
+    id: string;
+    name: string;
+    image_url: string;
+    email: string;
+    amount: string;
+};
+
+// The database returns a number for amount, but we later format it to a string with the formatCurrency function
+export type LatestInvoiceRaw = Omit&lt;LatestInvoice, &#39;amount&#39;&gt; &amp; {
+    amount: number;
+};
+
+export type InvoicesTable = {
+    id: string;
+    customer_id: string;
+    name: string;
+    email: string;
+    image_url: string;
+    date: string;
+    amount: number;
+    status: &#39;pending&#39; | &#39;paid&#39;;
+};
+
+export type CustomersTableType = {
+    id: string;
+    name: string;
+    email: string;
+    image_url: string;
+    total_invoices: number;
+    total_pending: number;
+    total_paid: number;
+};
+
+export type FormattedCustomersTable = {
+    id: string;
+    name: string;
+    email: string;
+    image_url: string;
+    total_invoices: number;
+    total_pending: string;
+    total_paid: string;
+};
+
+export type CustomerField = {
+    id: string;
+    name: string;
+};
+
+export type InvoiceForm = {
+    id: string;
+    customer_id: string;
+    amount: number;
+    status: &#39;pending&#39; | &#39;paid&#39;;
+};</code></pre>
+<p><code>src/model/query.tsx</code></p>
+<pre><code>import { sql } from &#39;@vercel/postgres&#39;;
+import {
+    CustomerField,
+    CustomersTableType,
+    InvoiceForm,
+    InvoicesTable,
+    LatestInvoiceRaw,
+    User,
+    Revenue,
+} from &#39;./definitions&#39;;
+import { formatCurrency } from &#39;../utils/utils&#39;;
+import { unstable_noStore as noStore } from &#39;next/cache&#39;;
+
+export async function fetchRevenue() {
+    // Add noStore() here to prevent the response from being cached.
+    // This is equivalent to in fetch(..., {cache: &#39;no-store&#39;}).
+    noStore();
+    try {
+        // Artificially delay a response for demo purposes.
+        // Don&#39;t do this in production :)
+
+        // console.log(&#39;Fetching revenue data...&#39;);
+        // await new Promise((resolve) =&gt; setTimeout(resolve, 3000));
+
+        const data = await sql&lt;Revenue&gt;`SELECT * FROM revenue`;
+
+        // console.log(&#39;Data fetch completed after 3 seconds.&#39;);
+
+        return data.rows;
+    } catch (error) {
+        console.error(&#39;Database Error:&#39;, error);
+        throw new Error(&#39;Failed to fetch revenue data.&#39;);
+    }
+}
+
+export async function fetchLatestInvoices() {
+    noStore();
+    try {
+        const data = await sql&lt;LatestInvoiceRaw&gt;`
+      SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
+      FROM invoices
+      JOIN customers ON invoices.customer_id = customers.id
+      ORDER BY invoices.date DESC
+      LIMIT 5`;
+
+        const latestInvoices = data.rows.map((invoice) =&gt; ({
+            ...invoice,
+            amount: formatCurrency(invoice.amount),
+        }));
+        return latestInvoices;
+    } catch (error) {
+        console.error(&#39;Database Error:&#39;, error);
+        throw new Error(&#39;Failed to fetch the latest invoices.&#39;);
+    }
+}
+
+export async function fetchCardData() {
+    noStore();
+    try {
+        // You can probably combine these into a single SQL query
+        // However, we are intentionally splitting them to demonstrate
+        // how to initialize multiple queries in parallel with JS.
+        const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
+        const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
+        const invoiceStatusPromise = sql`SELECT
+         SUM(CASE WHEN status = &#39;paid&#39; THEN amount ELSE 0 END) AS &#34;paid&#34;,
+         SUM(CASE WHEN status = &#39;pending&#39; THEN amount ELSE 0 END) AS &#34;pending&#34;
+         FROM invoices`;
+
+        const data = await Promise.all([
+            invoiceCountPromise,
+            customerCountPromise,
+            invoiceStatusPromise,
+        ]);
+
+        const numberOfInvoices = Number(data[0].rows[0].count ?? &#39;0&#39;);
+        const numberOfCustomers = Number(data[1].rows[0].count ?? &#39;0&#39;);
+        const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? &#39;0&#39;);
+        const totalPendingInvoices = formatCurrency(data[2].rows[0].pending ?? &#39;0&#39;);
+
+        return {
+            numberOfCustomers,
+            numberOfInvoices,
+            totalPaidInvoices,
+            totalPendingInvoices,
+        };
+    } catch (error) {
+        console.error(&#39;Database Error:&#39;, error);
+        throw new Error(&#39;Failed to fetch card data.&#39;);
+    }
+}
+
+const ITEMS_PER_PAGE = 6;
+export async function fetchFilteredInvoices(
+    query: string,
+    currentPage: number,
+) {
+    noStore();
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+    try {
+        const invoices = await sql&lt;InvoicesTable&gt;`
+      SELECT
+        invoices.id,
+        invoices.amount,
+        invoices.date,
+        invoices.status,
+        customers.name,
+        customers.email,
+        customers.image_url
+      FROM invoices
+      JOIN customers ON invoices.customer_id = customers.id
+      WHERE
+        customers.name ILIKE ${`%${query}%`} OR
+        customers.email ILIKE ${`%${query}%`} OR
+        invoices.amount::text ILIKE ${`%${query}%`} OR
+        invoices.date::text ILIKE ${`%${query}%`} OR
+        invoices.status ILIKE ${`%${query}%`}
+      ORDER BY invoices.date DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+
+        return invoices.rows;
+    } catch (error) {
+        console.error(&#39;Database Error:&#39;, error);
+        throw new Error(&#39;Failed to fetch invoices.&#39;);
+    }
+}
+
+export async function fetchInvoicesPages(query: string) {
+    noStore();
+    try {
+        const count = await sql`SELECT COUNT(*)
+    FROM invoices
+    JOIN customers ON invoices.customer_id = customers.id
+    WHERE
+      customers.name ILIKE ${`%${query}%`} OR
+      customers.email ILIKE ${`%${query}%`} OR
+      invoices.amount::text ILIKE ${`%${query}%`} OR
+      invoices.date::text ILIKE ${`%${query}%`} OR
+      invoices.status ILIKE ${`%${query}%`}
+  `;
+
+        const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+        return totalPages;
+    } catch (error) {
+        console.error(&#39;Database Error:&#39;, error);
+        throw new Error(&#39;Failed to fetch total number of invoices.&#39;);
+    }
+}
+
+export async function fetchInvoiceById(id: string) {
+    noStore();
+    try {
+        const data = await sql&lt;InvoiceForm&gt;`
+      SELECT
+        invoices.id,
+        invoices.customer_id,
+        invoices.amount,
+        invoices.status
+      FROM invoices
+      WHERE invoices.id = ${id};
+    `;
+
+        const invoice = data.rows.map((invoice) =&gt; ({
+            ...invoice,
+            // Convert amount from cents to dollars
+            amount: invoice.amount / 100,
+        }));
+
+        return invoice[0];
+    } catch (error) {
+        console.error(&#39;Database Error:&#39;, error);
+        throw new Error(&#39;Failed to fetch invoice.&#39;);
+    }
+}
+
+export async function fetchCustomers() {
+    try {
+        const data = await sql&lt;CustomerField&gt;`
+      SELECT
+        id,
+        name
+      FROM customers
+      ORDER BY name ASC
+    `;
+
+        const customers = data.rows;
+        return customers;
+    } catch (err) {
+        console.error(&#39;Database Error:&#39;, err);
+        throw new Error(&#39;Failed to fetch all customers.&#39;);
+    }
+}
+
+export async function fetchFilteredCustomers(query: string) {
+    noStore();
+    try {
+        const data = await sql&lt;CustomersTableType&gt;`
+                SELECT
+                  customers.id,
+                  customers.name,
+                  customers.email,
+                  customers.image_url,
+                  COUNT(invoices.id) AS total_invoices,
+                  SUM(CASE WHEN invoices.status = &#39;pending&#39; THEN invoices.amount ELSE 0 END) AS total_pending,
+                  SUM(CASE WHEN invoices.status = &#39;paid&#39; THEN invoices.amount ELSE 0 END) AS total_paid
+                FROM customers
+                LEFT JOIN invoices ON customers.id = invoices.customer_id
+                WHERE
+                  customers.name ILIKE ${`%${query}%`} OR
+        customers.email ILIKE ${`%${query}%`}
+                GROUP BY customers.id, customers.name, customers.email, customers.image_url
+                ORDER BY customers.name ASC
+          `;
+
+        const customers = data.rows.map((customer) =&gt; ({
+            ...customer,
+            total_pending: formatCurrency(customer.total_pending),
+            total_paid: formatCurrency(customer.total_paid),
+        }));
+
+        return customers;
+    } catch (err) {
+        console.error(&#39;Database Error:&#39;, err);
+        throw new Error(&#39;Failed to fetch customer table.&#39;);
+    }
+}
+
+export async function getUser(email: string) {
+    try {
+        const user = await sql`SELECT * FROM users WHERE email=${email}`;
+        return user.rows[0] as User;
+    } catch (error) {
+        console.error(&#39;Failed to fetch user:&#39;, error);
+        throw new Error(&#39;Failed to fetch user.&#39;);
+    }
+}</code></pre>
+<ol type="1" start="3">
+<li>Kemudian buat file <code>utils.tsx</code> di dalam folder <code>utils</code> dengan berisi kode berikut.</li>
+</ol>
+<p><code>src/utils/utils.tsx</code></p>
+<pre><code>import { Revenue } from &#39;../model/definitions&#39;;
+
+export const formatCurrency = (amount: number) =&gt; {
+  return (amount / 100).toLocaleString(&#39;en-US&#39;, {
+    style: &#39;currency&#39;,
+    currency: &#39;USD&#39;,
+  });
+};
+
+export const formatDateToLocal = (
+  dateStr: string,
+  locale: string = &#39;en-US&#39;,
+) =&gt; {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    day: &#39;numeric&#39;,
+    month: &#39;short&#39;,
+    year: &#39;numeric&#39;,
+  };
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(date);
+};
+
+export const generateYAxis = (revenue: Revenue[]) =&gt; {
+  // Calculate what labels we need to display on the y-axis
+  // based on highest record and in 1000s
+  const yAxisLabels = [];
+  const highestRecord = Math.max(...revenue.map((month) =&gt; month.revenue));
+  const topLabel = Math.ceil(highestRecord / 1000) * 1000;
+
+  for (let i = topLabel; i &gt;= 0; i -= 1000) {
+    yAxisLabels.push(`$${i / 1000}K`);
+  }
+
+  return { yAxisLabels, topLabel };
+};
+
+export const generatePagination = (currentPage: number, totalPages: number) =&gt; {
+  // If the total number of pages is 7 or less,
+  // display all pages without any ellipsis.
+  if (totalPages &lt;= 7) {
+    return Array.from({ length: totalPages }, (_, i) =&gt; i + 1);
+  }
+
+  // If the current page is among the first 3 pages,
+  // show the first 3, an ellipsis, and the last 2 pages.
+  if (currentPage &lt;= 3) {
+    return [1, 2, 3, &#39;...&#39;, totalPages - 1, totalPages];
+  }
+
+  // If the current page is among the last 3 pages,
+  // show the first 2, an ellipsis, and the last 3 pages.
+  if (currentPage &gt;= totalPages - 2) {
+    return [1, 2, &#39;...&#39;, totalPages - 2, totalPages - 1, totalPages];
+  }
+
+  // If the current page is somewhere in the middle,
+  // show the first page, an ellipsis, the current page and its neighbors,
+  // another ellipsis, and the last page.
+  return [
+    1,
+    &#39;...&#39;,
+    currentPage - 1,
+    currentPage,
+    currentPage + 1,
+    &#39;...&#39;,
+    totalPages,
+  ];
+};</code></pre>
+<h2 is-upgraded><strong>Membuat Komponen Atom</strong></h2>
+<ol type="1" start="4">
+<li>Lalu isi folder atoms dengan file fonts.tsx dengan kode berikut.</li>
+</ol>
+<p><code>src\app\components\atoms\fonts.tsx</code></p>
+<pre><code>import { Inter, Lusitana } from &#39;next/font/google&#39;;
+
+export const inter = Inter({ subsets: [&#39;latin&#39;] });
+
+export const lusitana = Lusitana({
+  weight: [&#39;400&#39;, &#39;700&#39;],
+  subsets: [&#39;latin&#39;],
+});</code></pre>
+<ol type="1" start="5">
+<li>Buat komponen <code>molecules</code>, ada 3 file yaitu <code>card.tsx</code>, <code>latest-invoices.tsx</code>, dan <code>revenue-chart.tsx</code>.</li>
+</ol>
+<p><code>card.tsx</code></p>
+<pre><code>import {
+    BanknotesIcon,
+    ClockIcon,
+    UserGroupIcon,
+    InboxIcon,
+} from &#39;@heroicons/react/24/outline&#39;;
+import { lusitana } from &#39;@/app/components/atoms/fonts&#39;;
+import { fetchCardData } from &#39;@/model/query&#39;;
+
+const iconMap = {
+    collected: BanknotesIcon,
+    customers: UserGroupIcon,
+    pending: ClockIcon,
+    invoices: InboxIcon,
+};
+
+export default async function CardWrapper() {
+    const {
+        numberOfInvoices,
+        numberOfCustomers,
+        totalPaidInvoices,
+        totalPendingInvoices,
+    } = await fetchCardData();
+
+    return (
+        &lt;&gt;
+            &lt;Card title=&#34;Collected&#34; value={totalPaidInvoices} type=&#34;collected&#34; /&gt;
+            &lt;Card title=&#34;Pending&#34; value={totalPendingInvoices} type=&#34;pending&#34; /&gt;
+            &lt;Card title=&#34;Total Invoices&#34; value={numberOfInvoices} type=&#34;invoices&#34; /&gt;
+            &lt;Card
+                title=&#34;Total Customers&#34;
+                value={numberOfCustomers}
+                type=&#34;customers&#34;
+            /&gt;
+        &lt;/&gt;
+    );
+}
+
+export function Card({
+    title,
+    value,
+    type,
+}: {
+    title: string;
+    value: number | string;
+    type: &#39;invoices&#39; | &#39;customers&#39; | &#39;pending&#39; | &#39;collected&#39;;
+}) {
+    const Icon = iconMap[type];
+
+    return (
+        &lt;div className=&#34;rounded-xl bg-gray-50 p-2 shadow-sm&#34;&gt;
+            &lt;div className=&#34;flex p-4&#34;&gt;
+                {Icon ? &lt;Icon className=&#34;h-5 w-5 text-gray-700&#34; /&gt; : null}
+                &lt;h3 className=&#34;ml-2 text-sm font-medium&#34;&gt;{title}&lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;p
+                className={`${lusitana.className}
+            truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
+            &gt;
+                {value}
+            &lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+<p><code>latest-invoices.tsx</code></p>
+<pre><code>import { ArrowPathIcon } from &#39;@heroicons/react/24/outline&#39;;
+import clsx from &#39;clsx&#39;;
+import Image from &#39;next/image&#39;;
+import { lusitana } from &#39;@/app/components/atoms/fonts&#39;;
+import { fetchLatestInvoices } from &#39;@/model/query&#39;;
+
+export default async function LatestInvoices() {
+    const latestInvoices = await fetchLatestInvoices();
+
+    return (
+        &lt;div className=&#34;flex w-full flex-col md:col-span-4&#34;&gt;
+            &lt;h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}&gt;
+                Latest Invoices
+            &lt;/h2&gt;
+            &lt;div className=&#34;flex grow flex-col justify-between rounded-xl bg-gray-50 p-4&#34;&gt;
+                &lt;div className=&#34;bg-white px-6&#34;&gt;
+                    {latestInvoices.map((invoice, i) =&gt; {
+                        return (
+                            &lt;div
+                                key={invoice.id}
+                                className={clsx(
+                                    &#39;flex flex-row items-center justify-between py-4&#39;,
+                                    {
+                                        &#39;border-t&#39;: i !== 0,
+                                    },
+                                )}
+                            &gt;
+                                &lt;div className=&#34;flex items-center&#34;&gt;
+                                    &lt;Image
+                                        src={invoice.image_url}
+                                        alt={`${invoice.name}&#39;s profile picture`}
+                                        className=&#34;mr-4 rounded-full&#34;
+                                        width={32}
+                                        height={32}
+                                    /&gt;
+                                    &lt;div className=&#34;min-w-0&#34;&gt;
+                                        &lt;p className=&#34;truncate text-sm font-semibold md:text-base&#34;&gt;
+                                            {invoice.name}
+                                        &lt;/p&gt;
+                                        &lt;p className=&#34;hidden text-sm text-gray-500 sm:block&#34;&gt;
+                                            {invoice.email}
+                                        &lt;/p&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;p
+                                    className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
+                                &gt;
+                                    {invoice.amount}
+                                &lt;/p&gt;
+                            &lt;/div&gt;
+                        );
+                    })}
+                &lt;/div&gt;
+                &lt;div className=&#34;flex items-center pb-2 pt-6&#34;&gt;
+                    &lt;ArrowPathIcon className=&#34;h-5 w-5 text-gray-500&#34; /&gt;
+                    &lt;h3 className=&#34;ml-2 text-sm text-gray-500 &#34;&gt;Updated just now&lt;/h3&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+<p><code>revenue-chart.tsx</code></p>
+<pre><code>import { generateYAxis } from &#39;@/utils/utils&#39;;
+import { CalendarIcon } from &#39;@heroicons/react/24/outline&#39;;
+import { lusitana } from &#39;@/app/components/atoms/fonts&#39;;
+import { fetchRevenue } from &#39;@/model/query&#39;;
+
+// This component is representational only.
+// For data visualization UI, check out:
+// https://www.tremor.so/
+// https://www.chartjs.org/
+// https://airbnb.io/visx/
+
+export default async function RevenueChart() {
+    const revenue = await fetchRevenue();
+
+    const chartHeight = 350;
+    const { yAxisLabels, topLabel } = generateYAxis(revenue);
+
+    if (!revenue || revenue.length === 0) {
+        return &lt;p className=&#34;mt-4 text-gray-400&#34;&gt;No data available.&lt;/p&gt;;
+    }
+
+    return (
+        &lt;div className=&#34;w-full md:col-span-4&#34;&gt;
+            &lt;h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}&gt;
+                Recent Revenue
+            &lt;/h2&gt;
+            &lt;div className=&#34;rounded-xl bg-gray-50 p-4&#34;&gt;
+                &lt;div className=&#34;mt-0 grid grid-cols-12 items-end gap-2 rounded-md bg-white p-4 sm:grid-cols-13 md:gap-4&#34;&gt;
+                    {/* y-axis */}
+                    &lt;div
+                        className=&#34;mb-6 hidden flex-col justify-between text-sm text-gray-400 sm:flex&#34;
+                        style=&#123;&#123; height: `${chartHeight}px` }}
+                    &gt;
+                        {yAxisLabels.map((label) =&gt; (
+                            &lt;p key={label}&gt;{label}&lt;/p&gt;
+                        ))}
+                    &lt;/div&gt;
+
+                    {revenue.map((month) =&gt; (
+                        &lt;div key={month.month} className=&#34;flex flex-col items-center gap-2&#34;&gt;
+                            {/* bars */}
+                            &lt;div
+                                className=&#34;w-full rounded-md bg-blue-300&#34;
+                                style=&#123;&#123;
+                                    height: `${(chartHeight / topLabel) * month.revenue}px`,
+                                }}
+                            &gt;&lt;/div&gt;
+                            {/* x-axis */}
+                            &lt;p className=&#34;-rotate-90 text-sm text-gray-400 sm:rotate-0&#34;&gt;
+                                {month.month}
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    ))}
+                &lt;/div&gt;
+                &lt;div className=&#34;flex items-center pb-2 pt-6&#34;&gt;
+                    &lt;CalendarIcon className=&#34;h-5 w-5 text-gray-500&#34; /&gt;
+                    &lt;h3 className=&#34;ml-2 text-sm text-gray-500 &#34;&gt;Last 12 months&lt;/h3&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+<aside class="special"><p><strong>Troubleshooting: </strong></p>
+<ul>
+<li>Jika Anda mengalami error karena beberapa modul tidak ditemukan, silakan Anda dapat menginstallnya terlebih dahulu dengan perintah berikut:</li>
+<li><code>npm i --save @heroicons/react</code></li>
+<li><code>npm i --save clsx</code></li>
+</ul>
+</aside>
+<p>Kemudian perhatikan pada file <code>package.json</code> akan ada tambahan dependensi library yang telah berhasil ter-instal.</p>
+<ol type="1" start="6">
+<li>Terakhir, ganti semua kode di <code>src/app/page.tsx</code> dengan kode berikut.</li>
+</ol>
+<pre><code>import { Card } from &#39;@/app/components/molecules/card&#39;;
+import RevenueChart from &#39;@/app/components/molecules/revenue-chart&#39;;
+import LatestInvoices from &#39;@/app/components/molecules/latest-invoices&#39;;
+import { lusitana } from &#39;@/app/components/atoms/fonts&#39;;
+
+export default async function Page() {
+  return (
+    &lt;main&gt;
+      &lt;h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}&gt;
+        Dashboard
+      &lt;/h1&gt;
+      &lt;div className=&#34;grid gap-6 sm:grid-cols-2 lg:grid-cols-4&#34;&gt;
+        {/* &lt;Card title=&#34;Collected&#34; value={totalPaidInvoices} type=&#34;collected&#34; /&gt; */}
+        {/* &lt;Card title=&#34;Pending&#34; value={totalPendingInvoices} type=&#34;pending&#34; /&gt; */}
+        {/* &lt;Card title=&#34;Total Invoices&#34; value={numberOfInvoices} type=&#34;invoices&#34; /&gt; */}
+        {/* &lt;Card
+          title=&#34;Total Customers&#34;
+          value={numberOfCustomers}
+          type=&#34;customers&#34;
+        /&gt; */}
+      &lt;/div&gt;
+      &lt;div className=&#34;mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8&#34;&gt;
+        {/* &lt;RevenueChart revenue={revenue}  /&gt; */}
+        {/* &lt;LatestInvoices latestInvoices={latestInvoices} /&gt; */}
+      &lt;/div&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+<p>Penjelasan kode di atas:</p>
+<ul>
+<li>Halaman tersebut adalah sebuah <strong>async</strong> component. Ini menandakan bahwa Anda bisa menggunakan sintaks <code>await</code> untuk melakukan fetch data.</li>
+<li>Ada 3 komponen yang akan menerima data: <code>Card</code>, <code>RevenueChart</code>, dan <code>LatestInvoices</code>. Saat ini dalam kondisi di-<em>comment</em> agar terhindar dari error pada aplikasi.</li>
+</ul>
+<aside class="warning"><h3 is-upgraded><strong>Soal 5</strong></h3>
+<p>Lakukan push, kemudian perhatikan di akun dashboard Vercel project Anda. Capture dan lampirkan link aplikasi Anda yang telah berhasil di deploy, kemudian buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari ?</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 5</code>&#34;.</p>
+</aside>
+<h2 is-upgraded>Fetching Data untuk komponen <strong><code>RevenueChart</code></strong></h2>
+<ol type="1" start="7">
+<li>Untuk melakukan fetch data ke komponen <code>RevenueChart</code>, imporlah fungsi <code>fetchRevenue</code> dari file <code>query.tsx</code> dan panggil di dalam komponen seperti berikut:</li>
+</ol>
+<ol type="1" start="8">
+<li>Kemudian ...</li>
+</ol>
+<p>On progress 🙂</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Tugas Praktikum" duration="50">
-        
+        <p>Coming soon ... 🙂</p>
+
 
       </google-codelab-step>
     

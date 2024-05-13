@@ -28,7 +28,7 @@
                   feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
     
       <google-codelab-step label="Pendahuluan" duration="0">
-        <p><strong>Terakhir diperbarui:</strong> 2024-05-01</p>
+        <p><strong>Terakhir diperbarui:</strong> 13 Mei 2024</p>
 <p><strong>Penulis</strong>: Tim PBF 2024</p>
 <p class="image-container"><img style="width: 130.32px" src="img\\dd6e7d294fd07d6.png">    </p>
 <h2 is-upgraded><strong>Setup Database dan Fetching Data (API) di ReactJS</strong></h2>
@@ -883,8 +883,8 @@ export default async function Page() {
         /&gt; */}
       &lt;/div&gt;
       &lt;div className=&#34;mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8&#34;&gt;
-        {/* &lt;RevenueChart revenue={revenue}  /&gt; */}
-        {/* &lt;LatestInvoices latestInvoices={latestInvoices} /&gt; */}
+        {/* &lt;RevenueChart /&gt; */}
+        {/* &lt;LatestInvoices /&gt; */}
       &lt;/div&gt;
     &lt;/main&gt;
   );
@@ -900,18 +900,54 @@ export default async function Page() {
 </aside>
 <h2 is-upgraded>Fetching Data untuk komponen <strong><code>RevenueChart</code></strong></h2>
 <ol type="1" start="7">
-<li>Untuk melakukan fetch data ke komponen <code>RevenueChart</code>, imporlah fungsi <code>fetchRevenue</code> dari file <code>query.tsx</code> dan panggil di dalam komponen seperti berikut:</li>
+<li>Buka file <code>src\app\page.tsx</code></li>
+<li>Kemudian hapus <code>comment</code> pada komponen <code>RevenueChart</code></li>
+<li>Coba running localhost atau langsung deploy ke Vercel dengan cara push.</li>
+<li>Amati apa yang terjadi ? Jika error atau ada tampilan grafik yang kurang baik, silakan Anda dapat perbaiki.</li>
 </ol>
-<ol type="1" start="8">
-<li>Kemudian ...</li>
+<p class="image-container"><img style="width: 382.00px" src="img\\a692c914040c9655.png"></p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 6</strong></h3>
+<p>Lakukan capture dan push hasilnya, kemudian buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari ?</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 6</code>&#34;.</p>
+</aside>
+<h2 is-upgraded>Fetching Data untuk komponen <strong><code>LatestInvoices</code></strong></h2>
+<p>Untuk komponen <code>LatestInvoices</code>, kita butuh 5 invoices terakhir yang diurutkan berdasarkan tanggal.</p>
+<p>Anda dapat mengambil semua invoices dan memilahnya menggunakan JavaScript. Hal ini tidak menjadi masalah karena data saat ini masih sedikit, namun seiring berkembangnya aplikasi Anda, hal ini dapat meningkatkan jumlah data yang ditransfer secara signifikan pada setiap permintaan dan JavaScript yang diperlukan untuk memilahnya.</p>
+<p>Daripada memilah-milah invoices terbaru di memori, Anda bisa menggunakan kueri SQL untuk mengambil hanya 5 invoices terakhir. Misalnya, ini adalah kueri SQL dari file <code>query.tsx</code>:</p>
+<pre><code>// Fetch the last 5 invoices, sorted by date
+const data = await sql&lt;LatestInvoiceRaw&gt;`
+  SELECT invoices.amount, customers.name, customers.image_url, customers.email
+  FROM invoices
+  JOIN customers ON invoices.customer_id = customers.id
+  ORDER BY invoices.date DESC
+  LIMIT 5`;</code></pre>
+<ol type="1" start="11">
+<li>Buka <code>src\app\page.tsx</code> kemudian lakukan import komponen <code>LatestInvoices</code>, lalu hapus comment pada komponen <code>LatestInvoices</code> di dalam fungsi <code>Page()</code>.</li>
+<li>Jika Anda cek pada localhost, Anda akan melihat 5 data yang diambil dari basis data (bagian <strong>Latest Invoices</strong>).</li>
 </ol>
-<p>On progress 🙂</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\94904125d5b04ac4.png"></p>
+<aside class="special"><p><strong>Troubleshooting: </strong></p>
+<ul>
+<li>Jika Anda melihat tidak ada gambar profil yang tampil, Anda dapat memperbaikinya dengan melengkapi aset gambar yang hilang pada project. Anda dapat browsing di internet dengan gambar apapun, agar ringan saat loading, sebaiknya file gambar tidak lebih dari 20KB atau berukuran 30x30 piksel.</li>
+<li>Kemudian letakkan dalam path seperti ini: <code>public\customers\delba-de-oliveira.png</code></li>
+</ul>
+</aside>
+<aside class="warning"><h3 is-upgraded><strong>Soal 7</strong></h3>
+<p>Lakukan capture dan push hasilnya, kemudian buatlah laporan di file <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari ?</p>
+<p>Jangan lupa push dengan pesan commit: &#34;<code>W09: Jawaban soal 7</code>&#34;.</p>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Tugas Praktikum" duration="50">
-        <p>Coming soon ... 🙂</p>
+        <ol type="1" start="1">
+<li>Jika Anda perhatikan pada file <code>src\app\page.tsx</code> untuk komponen <code>Card</code> sebenarnya telah dibuat sebagai molecules pada file <code>src\app\components\molecules\card.tsx</code> yaitu komponen <code>CardWrapper</code>. Silakan Anda sesuaikan sehingga dapat tampil seperti gambar berikut.</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\761e3ff655bd6f37.png"></p>
+<ol type="1" start="2">
+<li>Perhatikan fungsi <code>fetchCardData()</code> (pada file <code>src\model\query.tsx</code>) dari soal nomor 1. Jelaskan maksud kode dan kueri yang dilakukan dalam fungsi tersebut!</li>
+</ol>
 
 
       </google-codelab-step>

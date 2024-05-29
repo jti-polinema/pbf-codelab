@@ -1,0 +1,499 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>#10 | Authentication</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-H7507PFEJB"
+                  id="10-authentication"
+                  title="#10 | Authentication"
+                  environment="web"
+                  feedback-link="https://github.com/jti-polinema/pbf-codelab/issues">
+    
+      <google-codelab-step label="Pengantar" duration="0">
+        <p class="image-container"><img style="width: 366.50px" src="img\\b72dabfe77b6f35a.png"></p>
+<p><strong>Terakhir diperbarui:</strong> 2024-05-17</p>
+<p><strong>Penulis</strong>: Tim PBF 2024</p>
+<h2 is-upgraded><strong>Authentication di ReactJS dengan Next.js</strong></h2>
+<p>Pada codelab ini Anda akan mempelajari tentang authentication di ReactJS dengan Next.js.</p>
+<h2 is-upgraded><strong>Pengetahun yang Anda harus miliki</strong></h2>
+<p>Sebelum memulai codelab ini, sebaiknya Anda memiliki pengetahuan dasar tentang:</p>
+<ul>
+<li>Pemrograman dasar dengan <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML, CSS, dan JavaScript</a></li>
+<li>Cara membuat project baru di ReactJS dengan Next.js</li>
+<li>Konsep <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">DOM (Document Object Model)</a></li>
+<li>Telah menyelesaikan Codelab #01 sampai #09</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda akan pelajari</strong></h2>
+<ul>
+<li>Apa itu authentication</li>
+<li>Bagaimana menambah authentication pada aplikasi menggunakan NextAuth</li>
+<li>Bagaimana menggunakan middleware untuk redirect pengguna dan melindungi route</li>
+<li>Bagaimana menggunakan <code>useFormStatus</code> dan <code>useFormState</code> untuk menangani pending states dan error pada form</li>
+</ul>
+<h2 is-upgraded><strong>Apa yang Anda perlu persiapkan</strong></h2>
+<ul>
+<li>Laptop/PC</li>
+<li>Koneksi internet yang stabil</li>
+<li>Node.js telah ter-install dan dikenali secara global dalam sistem</li>
+<li>VS Code sebagai editor</li>
+<li>Chrome browser</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Apa itu authentication" duration="30">
+        <p>Otentikasi (<em>authentication</em>) adalah bagian penting dari banyak aplikasi web saat ini. Begitulah cara sistem memeriksa apakah pengguna memang sesuai dengan yang sebenarnya atau bukan.</p>
+<p>Situs web yang aman sering kali menggunakan berbagai cara untuk memeriksa identitas pengguna. Misalnya, setelah memasukkan nama pengguna dan kata sandi, situs mungkin mengirimkan kode verifikasi ke perangkat Anda atau menggunakan aplikasi eksternal seperti Google Authenticator. Otentikasi 2 faktor (2FA) ini membantu meningkatkan keamanan. Meskipun seseorang mengetahui kata sandi Anda, mereka tidak dapat mengakses akun Anda tanpa token unik Anda.</p>
+<h2 is-upgraded><strong>Authentication vs. Authorization</strong></h2>
+<p>Dalam pengembangan web, otentikasi dan otorisasi mempunyai peran yang berbeda:</p>
+<ul>
+<li><strong>Otentikasi </strong>adalah tentang memastikan pengguna adalah siapa yang mereka katakan. Anda membuktikan identitas Anda dengan sesuatu yang Anda miliki seperti nama pengguna dan kata sandi.</li>
+<li><strong>Otorisasi </strong>adalah langkah berikutnya. Setelah identitas pengguna dikonfirmasi, otorisasi memutuskan bagian mana dari aplikasi yang boleh mereka gunakan.</li>
+</ul>
+<p>Jadi, autentikasi memeriksa siapa Anda, dan otorisasi menentukan apa yang dapat Anda lakukan atau akses dalam aplikasi.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 1: Membuat route login" duration="100">
+        <p>Pada praktikum ini, Anda dapat melanjutkan project dari <a href="https://jti-polinema.github.io/pbf-codelab/09-database-api/" target="_blank">Codelab #09</a> sebelumnya. Silakan lakukan langkah-langkah praktikum berikut ini.</p>
+<h2 is-upgraded><strong>Langkah 1: Buat halaman Login</strong></h2>
+<p>Buat route baru dengan nama <code>/login</code> dan paste kode berikut:</p>
+<p><code>/app/login/page.tsx</code></p>
+<pre><code>import AcmeLogo from &#39;@/app/ui/acme-logo&#39;;
+import LoginForm from &#39;@/app/ui/login-form&#39;;
+ 
+export default function LoginPage() {
+  return (
+    &lt;main className=&#34;flex items-center justify-center md:h-screen&#34;&gt;
+      &lt;div className=&#34;relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32&#34;&gt;
+        &lt;div className=&#34;flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36&#34;&gt;
+          &lt;div className=&#34;w-32 text-white md:w-36&#34;&gt;
+            &lt;AcmeLogo /&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;LoginForm /&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+<p>Anda akan melihat error pada impor <code>LoginForm</code> dan <code>AcmeLogo</code>, yang akan Anda perbarui nanti di akhir praktikum ini.</p>
+<h3 is-upgraded><strong>NextAuth.js</strong></h3>
+<p>Kita akan menggunakan <a href="https://nextjs.authjs.dev/" target="_blank">NextAuth.js</a> untuk menambahkan otentikasi ke aplikasi Anda. NextAuth.js mengabstraksi sebagian besar kerumitan yang terlibat dalam pengelolaan sesi, proses masuk dan keluar, serta aspek autentikasi lainnya. Meskipun Anda dapat menerapkan fitur-fitur ini secara manual, prosesnya dapat memakan waktu dan rawan kesalahan. <code>NextAuth.js</code> menyederhanakan proses, memberikan solusi terpadu untuk autentikasi di aplikasi Next.js.</p>
+<h2 is-upgraded><strong>Langkah 2: Konfigurasi NextAuth.js</strong></h2>
+<p>Install <code>NextAuth</code> versi terakhir dengan cara running perintah berikut di terminal:</p>
+<pre><code>npm i --save next-auth@beta</code></pre>
+<h2 is-upgraded><strong>Langkah 3: Generate secret key</strong></h2>
+<p>Selanjutnya, kita generate secret key. Ini digunakan untuk enkripsi cookies, memastikan keamanan terhadap session pengguna. Anda dapat menjalankan perintah berikut.</p>
+<pre><code>openssl rand -base64 32</code></pre>
+<p>Jika di komputer Anda belum terpasang <code>openssl</code>, Anda dapat menggunakan versi online di <a href="https://generate-random.org/encryption-key-generator" target="_blank">https://generate-random.org/encryption-key-generator</a> </p>
+<p>Kemudian tambahkan baris kode berikut pada file <code>.env</code> dan paste secret key tersebut.</p>
+<pre><code>AUTH_SECRET=&#34;your-secret-key&#34;</code></pre>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Agar autentikasi berfungsi dalam mode produksi, Anda juga perlu memperbarui variabel lingkungan di proyek Vercel Anda. Lihat <a href="https://vercel.com/docs/projects/environment-variables" target="_blank">panduan ini</a> tentang cara menambahkan variabel lingkungan di Vercel.</p>
+</aside>
+<h2 is-upgraded>Langkah 4: Tambah <strong><code>auth.config</code></strong></h2>
+<p>Buat file <code>auth.config.ts</code> pada root project Anda. File ini berisi konfigurasi untuk <code>NextAuth.js</code>.</p>
+<p><code>/auth.config.ts</code></p>
+<pre><code>import type { NextAuthConfig } from &#39;next-auth&#39;;
+ 
+export const authConfig = {
+  pages: {
+    signIn: &#39;/login&#39;,
+  },
+};</code></pre>
+<p>Anda dapat menggunakan opsi <code>pages</code> untuk menentukan <em>route custom</em> seperti login, logout, dan halaman error. Hal ini tidak wajib, tetapi dengan menambahkan route pada <code>signIn</code>: &#39;<code>/login</code>&#39; ke dalam opsi <code>pages</code>, pengguna akan diarahkan ke halaman login yang dibuat custom, bukan halaman default NextAuth.js.</p>
+<h2 is-upgraded><strong>Langkah 5: Melindungi route dengan Middleware</strong></h2>
+<p>Selanjutnya, tambahkan logic untuk melindungi route Anda. Ini akan mencegah user mengakses halaman beranda kita kecuali user telah melakukan login.</p>
+<p><code>/auth.config.ts</code></p>
+<pre><code>import type { NextAuthConfig } from &#39;next-auth&#39;;
+ 
+export const authConfig = {
+  pages: {
+    signIn: &#39;/login&#39;,
+  },
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnDashboard = nextUrl.pathname.startsWith(&#39;/&#39;);
+      if (isOnDashboard) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL(&#39;/&#39;, nextUrl));
+      }
+      return true;
+    },
+  },
+  providers: [], // Add providers with an empty array for now
+} satisfies NextAuthConfig;</code></pre>
+<p>Callback <code>authorized</code> digunakan untuk memverifikasi apakah permintaan diotorisasi untuk mengakses halaman melalui <a href="https://nextjs.org/docs/app/building-your-application/routing/middleware" target="_blank">Next.js Middleware</a>. Itu dipanggil sebelum permintaan diselesaikan, dan menerima objek dengan properti <code>auth</code> dan <code>request</code>. Properti <code>auth</code> berisi sesi pengguna, dan properti <code>request</code> berisi permintaan masuk.</p>
+<p>Bagian <code>providers</code> adalah sebuah larik tempat Anda mencantumkan opsi login yang berbeda. Untuk saat ini, bagian larik ini biarkan kosong untuk memenuhi konfigurasi NextAuth. Anda akan mempelajarinya lebih lanjut setelah langkah ini.</p>
+<p>Selanjutnya, Anda perlu mengimpor objek <code>authConfig</code> ke dalam file <code>Middleware</code>. Di root proyek Anda, buat file bernama <code>middleware.ts</code> dan ketik kode seperti berikut:</p>
+<p><code>/middleware.ts</code></p>
+<pre><code>import NextAuth from &#39;next-auth&#39;;
+import { authConfig } from &#39;./auth.config&#39;;
+ 
+export default NextAuth(authConfig).auth;
+ 
+export const config = {
+  // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
+  matcher: [&#39;/((?!api|_next/static|_next/image|.*\\.png$).*)&#39;],
+};</code></pre>
+<p>Di sini Anda menginisialisasi NextAuth.js dengan objek <code>authConfig</code> dan mengekspor properti <code>auth</code>. Anda juga menggunakan opsi <code>matcher</code> dari Middleware untuk menentukan bahwa opsi tersebut harus dijalankan pada jalur tertentu.</p>
+<p>Keuntungan menggunakan Middleware adalah rute yang dilindungi tidak akan mulai dirender sampai Middleware memverifikasi otentikasi, sehingga dapat meningkatkan keamanan dan kinerja aplikasi Anda.</p>
+<h2 is-upgraded><strong>Langkah 6: Password hashing</strong></h2>
+<p>Merupakan praktik yang baik untuk meng-<em>hash</em> kata sandi sebelum menyimpannya ke dalam database. Hashing mengubah kata sandi menjadi serangkaian karakter dengan panjang tetap, yang tampak acak, memberikan lapisan keamanan bahkan jika data pengguna terekspos.</p>
+<p>Di file <code>src/seeder/seed.js</code> pada project codelab sebelumnya, Anda menggunakan paket bernama <code>bcrypt</code> untuk meng-<em>hash</em> kata sandi pengguna sebelum menyimpannya ke database. Anda akan menggunakannya lagi nanti pada praktikum ini untuk membandingkan bahwa kata sandi yang dimasukkan oleh pengguna cocok dengan yang ada di database. Namun, Anda perlu membuat file terpisah untuk paket <code>bcrypt</code>. Ini karena <code>bcrypt</code> bergantung pada <code>API Node.js</code> yang tidak tersedia di <code>Middleware Next.js</code>.</p>
+<p>Buat file baru bernama <code>auth.ts</code> pada root project dengan berisi kode berikut:</p>
+<pre><code>import NextAuth from &#39;next-auth&#39;;
+import { authConfig } from &#39;./auth.config&#39;;
+ 
+export const { auth, signIn, signOut } = NextAuth({
+  ...authConfig,
+});</code></pre>
+<h2 is-upgraded><strong>Langkah 7: Tambahkan Provider Credentials</strong></h2>
+<p>Selanjutnya, Anda perlu menambahkan <code>providers</code> untuk <code>NextAuth.js</code>. <code>Providers</code> adalah larik tempat Anda mencantumkan opsi masuk yang berbeda seperti Google atau GitHub. Untuk praktikum ini, kami akan fokus menggunakan <a href="https://authjs.dev/getting-started/providers/credentials-tutorial" target="_blank"><code>Credentials provider</code></a> saja.</p>
+<p><code>Credentials provider</code> memungkinkan pengguna untuk masuk dengan nama pengguna dan kata sandi. Tambahkan kode pada file <code>auth.ts</code> di baris 3 dan 7 seperti berikut.</p>
+<p class="image-container"><img style="width: 517.00px" src="img\\d76aa0617fab6caa.png"></p>
+<aside class="special"><p><strong>Catatan</strong></p>
+<p>Meskipun pada praktikum ini menggunakan <code>Credentials provider</code>, umumnya disarankan untuk menggunakan penyedia alternatif seperti <code>providers</code> <a href="https://authjs.dev/getting-started/providers/oauth-tutorial" target="_blank">OAuth</a> atau <a href="https://authjs.dev/getting-started/providers/email-tutorial" target="_blank">email</a>. Lihat <a href="https://authjs.dev/getting-started/providers" target="_blank">dokumentasi NextAuth.js</a> untuk daftar opsi lengkapnya.</p>
+</aside>
+<h2 is-upgraded>Langkah 8: Tambahkan fungsi <strong><em>sign in</em></strong></h2>
+<p>Install dependensi yang dibutuhkan dengan perintah berikut di terminal.</p>
+<pre><code>npm i --save zod</code></pre>
+<p>Anda dapat menggunakan fungsi <code>authorize</code> untuk menangani logika otentikasi. Mirip dengan <code>Server Actions</code>, Anda dapat menggunakan library <code>zod</code> untuk memvalidasi penulisan email dan kata sandi sebelum memeriksa apakah pengguna ada di database. Tambahkan kode pada baris 4 dan baris 9-15 seperti berikut:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\806b0ffa78120457.png"></p>
+<p>Setelah memvalidasi kredensial, buat fungsi <code>getUser</code> baru yang dapat melakukan query pengguna dari database.</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\1b5a98e5b9f20f40.png"></p>
+<p>Lalu, panggil <code>bcrypt.compare</code> untuk memeriksa apakah kata sandinya cocok:</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\88870b8556d5dff7.png"></p>
+<p>Terakhir, jika kata sandi cocok, kembalikan pengguna, jika tidak, kembalikan nilai <code>null</code> untuk mencegah pengguna masuk.</p>
+<aside class="warning"><h3 is-upgraded><strong>Soal 1</strong></h3>
+<p>Coba running di localhost, capture hasilnya dan buatlah laporan di <strong>README.md</strong>. Jelaskan apa yang telah Anda pelajari dan bagaimana tampilannya saat ini? Apakah ada error ?</p>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W10: Jawaban soal 1"</code>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 2: Memperbarui Form Login" duration="50">
+        <p>Melanjutkan dari praktikum sebelumnya, sekarang Anda perlu persiapkan untuk tampilan form login dan fungsi sign in. Silakan lakukan langkah-langkah berikut ini.</p>
+<h2 is-upgraded>Langkah 1: Tambah fungsi <strong><code>actions authenticate</code></strong></h2>
+<p>Sekarang Anda perlu menghubungkan logika autentikasi dengan formulir login Anda. Di file <code>src/model/actions.tsx</code> Anda, buat <code>action</code> baru yang disebut <code>authenticate</code>. Actions ini harus mengimpor fungsi <code>signIn</code> dari file <code>auth.ts</code>:</p>
+<pre><code>import { signIn } from &#39;@/auth&#39;;
+import { AuthError } from &#39;next-auth&#39;;
+ 
+// ...
+ 
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn(&#39;credentials&#39;, formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case &#39;CredentialsSignin&#39;:
+          return &#39;Invalid credentials.&#39;;
+        default:
+          return &#39;Something went wrong.&#39;;
+      }
+    }
+    throw error;
+  }
+}</code></pre>
+<p>Jika terjadi error <code>'CredentialsSignin'</code>, Anda dapat menampilkan pesan error yang sesuai. Anda dapat mempelajari <code>error NextAuth.js</code> dengan akses <a href="https://errors.authjs.dev/" target="_blank">dokumentasi</a>.</p>
+<h2 is-upgraded>Langkah 2: Buat file <strong><code>login-form.tsx</code></strong></h2>
+<p>Berikutnya, buatlah file baru pada path <code>src/app/components/molecules/login-form.tsx</code>, Anda dapat menggunakan <code>useFormState</code> React untuk memanggil action server dan menangani error pada login form, dan menggunakan <code>useFormStatus</code> untuk menangani <code>state</code> pada login form:</p>
+<pre><code>&#39;use client&#39;;
+
+import { lusitana } from &#39;@/app/components/atoms/fonts&#39;;
+import {
+    AtSymbolIcon,
+    KeyIcon,
+    ExclamationCircleIcon,
+} from &#39;@heroicons/react/24/outline&#39;;
+import { ArrowRightIcon } from &#39;@heroicons/react/20/solid&#39;;
+import { Button } from &#39;@/app/components/atoms/button&#39;;
+import { useFormState, useFormStatus } from &#39;react-dom&#39;;
+import { authenticate } from &#39;@/model/actions&#39;;
+
+export default function LoginForm() {
+    const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+
+    return (
+        &lt;form action={dispatch} className=&#34;space-y-3&#34;&gt;
+            &lt;div className=&#34;flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8&#34;&gt;
+                &lt;h1 className={`${lusitana.className} mb-3 text-2xl`}&gt;
+                    Please log in to continue.
+                &lt;/h1&gt;
+                &lt;div className=&#34;w-full&#34;&gt;
+                    &lt;div&gt;
+                        &lt;label
+                            className=&#34;mb-3 mt-5 block text-xs font-medium text-gray-900&#34;
+                            htmlFor=&#34;email&#34;
+                        &gt;
+                            Email
+                        &lt;/label&gt;
+                        &lt;div className=&#34;relative&#34;&gt;
+                            &lt;input
+                                className=&#34;peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500&#34;
+                                id=&#34;email&#34;
+                                type=&#34;email&#34;
+                                name=&#34;email&#34;
+                                placeholder=&#34;Enter your email address&#34;
+                                required
+                            /&gt;
+                            &lt;AtSymbolIcon className=&#34;pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900&#34; /&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&#34;mt-4&#34;&gt;
+                        &lt;label
+                            className=&#34;mb-3 mt-5 block text-xs font-medium text-gray-900&#34;
+                            htmlFor=&#34;password&#34;
+                        &gt;
+                            Password
+                        &lt;/label&gt;
+                        &lt;div className=&#34;relative&#34;&gt;
+                            &lt;input
+                                className=&#34;peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500&#34;
+                                id=&#34;password&#34;
+                                type=&#34;password&#34;
+                                name=&#34;password&#34;
+                                placeholder=&#34;Enter password&#34;
+                                required
+                                minLength={6}
+                            /&gt;
+                            &lt;KeyIcon className=&#34;pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900&#34; /&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;LoginButton /&gt;
+                &lt;div
+                    className=&#34;flex h-8 items-end space-x-1&#34;
+                    aria-live=&#34;polite&#34;
+                    aria-atomic=&#34;true&#34;
+                &gt;
+                    {errorMessage &amp;&amp; (
+                        &lt;&gt;
+                            &lt;ExclamationCircleIcon className=&#34;h-5 w-5 text-red-500&#34; /&gt;
+                            &lt;p className=&#34;text-sm text-red-500&#34;&gt;{errorMessage}&lt;/p&gt;
+                        &lt;/&gt;
+                    )}
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    );
+}
+
+function LoginButton() {
+    const { pending } = useFormStatus();
+
+    return (
+        &lt;Button className=&#34;mt-4 w-full&#34; aria-disabled={pending}&gt;
+            Log in &lt;ArrowRightIcon className=&#34;ml-auto h-5 w-5 text-gray-50&#34; /&gt;
+        &lt;/Button&gt;
+    );
+}</code></pre>
+<p>Buat komponen atom <code>button</code> dengan kode berikut:</p>
+<p><code>src\app\components\atoms\button.tsx</code></p>
+<pre><code>import clsx from &#39;clsx&#39;;
+
+interface ButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
+    children: React.ReactNode;
+}
+
+export function Button({ children, className, ...rest }: ButtonProps) {
+    return (
+        &lt;button
+            {...rest}
+            className={clsx(
+                &#39;flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50&#39;,
+                className,
+            )}
+        &gt;
+            {children}
+        &lt;/button&gt;
+    );
+}</code></pre>
+<aside class="warning"><h3 is-upgraded><strong>Soal 2</strong></h3>
+<p>Capture hasil form login yang telah dibuat dan buatlah laporan di <strong>README.md</strong>.</p>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W10: Jawaban soal 2"</code>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Praktikum 3: Menambah Fungsi Logout" duration="50">
+        <p>Pada praktikum ini, Anda akan menambahkan fungsi Logout, silakan lakukan langkah-langkah berikut ini.</p>
+<h2 is-upgraded>Langkah 1: Buat komponen atom <strong><code>sidenav</code></strong></h2>
+<p>Untuk menambahkan fungsionalitas logout ke <code>SideNav</code>, panggil fungsi <code>signOut</code> dari <code>auth.ts</code> di elemen <code>form</code> Anda seperti kode berikut:</p>
+<p><code>src\app\components\atoms\sidenav.tsx</code></p>
+<pre><code>import Link from &#39;next/link&#39;;
+import NavLinks from &#39;./nav-links&#39;;
+import AcmeLogo from &#39;./acme-logo&#39;;
+import { PowerIcon } from &#39;@heroicons/react/24/outline&#39;;
+import { signOut } from &#39;../../../../auth&#39;;
+
+export default function SideNav() {
+  return (
+    &lt;div className=&#34;flex h-full flex-col px-3 py-4 md:px-2&#34;&gt;
+      &lt;Link
+        className=&#34;mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-40&#34;
+        href=&#34;/&#34;
+      &gt;
+        &lt;div className=&#34;w-32 text-white md:w-40&#34;&gt;
+          &lt;AcmeLogo /&gt;
+        &lt;/div&gt;
+      &lt;/Link&gt;
+      &lt;div className=&#34;flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2&#34;&gt;
+        &lt;NavLinks /&gt;
+        &lt;div className=&#34;hidden h-auto w-full grow rounded-md bg-gray-50 md:block&#34;&gt;&lt;/div&gt;
+        &lt;form
+          action={async () =&gt; {
+            &#39;use server&#39;;
+            await signOut();
+          }}
+        &gt;
+          &lt;button className=&#34;flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3&#34;&gt;
+            &lt;PowerIcon className=&#34;w-6&#34; /&gt;
+            &lt;div className=&#34;hidden md:block&#34;&gt;Sign Out&lt;/div&gt;
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<h2 is-upgraded><strong>Langkah 2: Buat komponen atom nav-links</strong></h2>
+<p>Selanjutnya buat komponen atom <code>nav-links</code> agar kode di langkah 1 tidak error.</p>
+<p><code>src\app\components\atoms\nav-links.tsx</code></p>
+<pre><code>&#39;use client&#39;;
+
+import {
+    UserGroupIcon,
+    HomeIcon,
+    DocumentDuplicateIcon,
+} from &#39;@heroicons/react/24/outline&#39;;
+import Link from &#39;next/link&#39;;
+import { usePathname } from &#39;next/navigation&#39;;
+import clsx from &#39;clsx&#39;;
+
+// Map of links to display in the side navigation.
+// Depending on the size of the application, this would be stored in a database.
+const links = [
+    { name: &#39;Home&#39;, href: &#39;/&#39;, icon: HomeIcon },
+    {
+        name: &#39;Invoices&#39;,
+        href: &#39;/invoices&#39;,
+        icon: DocumentDuplicateIcon,
+    },
+    { name: &#39;Customers&#39;, href: &#39;/customers&#39;, icon: UserGroupIcon },
+];
+
+export default function NavLinks() {
+    const pathname = usePathname();
+
+    return (
+        &lt;&gt;
+            {links.map((link) =&gt; {
+                const LinkIcon = link.icon;
+                return (
+                    &lt;Link
+                        key={link.name}
+                        href={link.href}
+                        className={clsx(
+                            &#39;flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3&#39;,
+                            {
+                                &#39;bg-sky-100 text-blue-600&#39;: pathname === link.href,
+                            },
+                        )}
+                    &gt;
+                        &lt;LinkIcon className=&#34;w-6&#34; /&gt;
+                        &lt;p className=&#34;hidden md:block&#34;&gt;{link.name}&lt;/p&gt;
+                    &lt;/Link&gt;
+                );
+            })}
+        &lt;/&gt;
+    );
+}</code></pre>
+<h2 is-upgraded>Langkah 3: Buat komponen atom <strong><code>acme-logo</code></strong></h2>
+<p>Langkah berikutnya buatlah komponen atom <code>acme-logo</code> dengan kode berikut:</p>
+<p><code>src\app\components\atoms\acme-logo.tsx</code></p>
+<pre><code>import { GlobeAltIcon } from &#39;@heroicons/react/24/outline&#39;;
+import { lusitana } from &#39;./fonts&#39;;
+
+export default function AcmeLogo() {
+  return (
+    &lt;div
+      className={`${lusitana.className} flex flex-row items-center leading-none text-white`}
+    &gt;
+      &lt;GlobeAltIcon className=&#34;h-12 w-12 rotate-[15deg]&#34; /&gt;
+      &lt;p className=&#34;text-[44px] &#34;&gt;Acme&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<h2 is-upgraded><strong>Langkah 4: Eksperimen</strong></h2>
+<p>Sekarang, cobalah. Anda harus dapat masuk dan keluar dari aplikasi Anda menggunakan kredensial berikut:</p>
+<ul>
+<li>Email: <code>user@nextmail.com</code></li>
+<li>Password: <code>123456</code></li>
+</ul>
+<aside class="warning"><h3 is-upgraded><strong>Soal 3</strong></h3>
+<p>Silakan save semua dan lakukan running di browser Anda. Capture hasilnya dan buatlah laporan di <strong>README.md</strong>.</p>
+<ol type="1" start="1">
+<li>Apakah ada error atau fitur yang belum berfungsi ? jika belum, silakan perbaiki!</li>
+<li>Apakah ketika mengakses path URL root ( <code>/</code> ) dialihkan ke halaman login ? jika belum, silakan perbaiki!</li>
+</ol>
+<p><strong>Jangan lupa push dengan pesan commit</strong>: <code>"W10: Jawaban soal 3"</code>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Tugas Praktikum" duration="100">
+        <p>Tambahkan fungsi <code>authentication</code> dan <code>authorization</code> pada project kelompok UAS Anda !</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Selesai" duration="0">
+        <p>Selamat, Anda telah berhasil menyelesaikan codelab ini. Semoga mendapatkan ilmu yang bermanfaat.</p>
+<h2 is-upgraded><strong>Referensi</strong></h2>
+<ul>
+<li><a href="https://nextjs.org/learn/dashboard-app/adding-authentication" target="_blank">https://nextjs.org/learn/dashboard-app/adding-authentication</a> </li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
